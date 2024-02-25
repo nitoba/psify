@@ -13,7 +13,7 @@ describe('Phone', () => {
     expect(phone.isRight()).toBe(true)
 
     if (phone.isRight()) {
-      expect(phone.value.value).toEqual('1234567890')
+      expect(phone.value.getValue).toEqual('1234567890')
     }
   })
 
@@ -21,7 +21,7 @@ describe('Phone', () => {
     const phone = Phone.create('12345678901')
     expect(phone.isRight()).toBeTruthy()
     if (phone.isRight()) {
-      expect(phone.value.value).toEqual('12345678901')
+      expect(phone.value.getValue).toEqual('12345678901')
     }
   })
 

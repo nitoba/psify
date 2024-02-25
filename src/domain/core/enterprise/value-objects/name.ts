@@ -8,6 +8,10 @@ type NameProps = {
 }
 
 export class Name extends ValueObject<NameProps> {
+  get getValue(): string {
+    return this.props.value
+  }
+
   static create(name: string): Either<InvalidResource, Name> {
     if (!this.validate(name)) {
       return left(new InvalidResource('Invalid name'))

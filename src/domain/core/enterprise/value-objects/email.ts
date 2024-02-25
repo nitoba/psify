@@ -8,6 +8,10 @@ type Props = {
 }
 
 export class Email extends ValueObject<Props> {
+  get getValue(): string {
+    return this.props.value
+  }
+
   static create(value: string): Either<InvalidResource, Email> {
     if (!this.validate(value)) {
       return left(new InvalidResource('Invalid email'))

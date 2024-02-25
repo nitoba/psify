@@ -8,7 +8,7 @@ type PhoneProps = {
 }
 
 export class Phone extends ValueObject<PhoneProps> {
-  get value(): string {
+  get getValue(): string {
     return this.props.value
   }
 
