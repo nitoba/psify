@@ -3,7 +3,7 @@ import { Specialty } from './specialty'
 
 describe('Specialty', () => {
   it('should not create Specialty with invalid value', () => {
-    const invalidSpecialty = ''.repeat(300)
+    const invalidSpecialty = 'a'.repeat(300)
     const result = Specialty.create(invalidSpecialty)
 
     expect(result.isLeft()).toBeTruthy()
