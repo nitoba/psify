@@ -20,6 +20,6 @@ export class Specialty extends ValueObject<SpecialtyProps> {
   }
 
   private static validate(specialty: string): boolean {
-    return specialty.length <= 255
+    return specialty.length <= 255 && specialty.length >= 10
   }
 }

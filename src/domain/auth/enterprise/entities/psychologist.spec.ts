@@ -3,6 +3,7 @@ import { CRP } from '@/domain/core/enterprise/value-objects/crp'
 import { Email } from '@/domain/core/enterprise/value-objects/email'
 import { Name } from '@/domain/core/enterprise/value-objects/name'
 import { Phone } from '@/domain/core/enterprise/value-objects/phone'
+import { Specialty } from '@/domain/core/enterprise/value-objects/specialty'
 
 import { Psychologist } from './psychologist'
 
@@ -12,12 +13,14 @@ describe('Psychologist', () => {
     const email = Email.create('john@doe.com').value as Email
     const phone = Phone.create('(11) 987654321').value as Phone
     const crp = CRP.create('1234567').value as CRP
+    const specialty = Specialty.create('Cardiology').value as Specialty
 
     const psychologist = Psychologist.create({
       name,
       email,
       phone,
       crp,
+      specialty,
       password: 'password123',
     })
 
@@ -34,12 +37,14 @@ describe('Psychologist', () => {
     const email = Email.create('jane@doe.com').value as Email
     const phone = Phone.create('(22) 976543210').value as Phone
     const crp = CRP.create('7654321').value as CRP
+    const specialty = Specialty.create('Cardiology').value as Specialty
 
     const psychologist = Psychologist.create({
       name,
       email,
       phone,
       crp,
+      specialty,
       password: 'password456',
     })
 
@@ -52,12 +57,14 @@ describe('Psychologist', () => {
     const email = Email.create('jim@doe.com').value as Email
     const phone = Phone.create('(33) 965432109').value as Phone
     const crp = CRP.create('9876543').value as CRP
+    const specialty = Specialty.create('Cardiology').value as Specialty
 
     const psychologist = Psychologist.create({
       name,
       email,
       phone,
       crp,
+      specialty,
       password: 'password789',
       createdAt,
     })
@@ -71,12 +78,14 @@ describe('Psychologist', () => {
     const email = Email.create('jill@doe.com').value as Email
     const phone = Phone.create('(44) 954321098').value as Phone
     const crp = CRP.create('8765432').value as CRP
+    const specialty = Specialty.create('Cardiology').value as Specialty
 
     const psychologist = Psychologist.create(
       {
         name,
         email,
         phone,
+        specialty,
         crp,
         password: 'password101112',
       },

@@ -25,6 +25,7 @@ describe('RegisterPsychologistUseCase', () => {
     phone: '(88) 987654321',
     crp: '12345678901',
     password: 'password',
+    specialty: 'Cardiology',
   }
 
   it('should return invalid resource error if email is invalid', async () => {
@@ -65,6 +66,17 @@ describe('RegisterPsychologistUseCase', () => {
     }
 
     const result = await useCase.execute(invalidCRPRequest)
+
+    expect(result).toEqual(left(expect.any(InvalidResource)))
+  })
+
+  it('should return invalid resource error if specialty is invalid', async () => {
+    const invalidSpecialtyRequest = {
+      ...request,
+      specialty: 'a',
+    }
+
+    const result = await useCase.execute(invalidSpecialtyRequest)
 
     expect(result).toEqual(left(expect.any(InvalidResource)))
   })
