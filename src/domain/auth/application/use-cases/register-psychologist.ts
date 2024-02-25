@@ -5,7 +5,6 @@ import { CRP } from '@/domain/core/enterprise/value-objects/crp'
 import { Email } from '@/domain/core/enterprise/value-objects/email'
 import { Name } from '@/domain/core/enterprise/value-objects/name'
 import { Phone } from '@/domain/core/enterprise/value-objects/phone'
-import { Specialty } from '@/domain/core/enterprise/value-objects/specialty'
 
 import { Psychologist } from '../../enterprise/entities/psychologist'
 import { HashGenerator } from '../cryptography/hash-generator'
@@ -17,7 +16,6 @@ type RegisterPsychologistUseCaseRequest = {
   phone: string
   password: string
   crp: string
-  specialty: string
 }
 
 type RegisterPsychologistUseCaseResponse = Either<
@@ -36,7 +34,6 @@ export class RegisterPsychologistUseCase {
     email,
     phone,
     crp,
-    specialty,
     password,
   }: RegisterPsychologistUseCaseRequest): Promise<RegisterPsychologistUseCaseResponse> {
     const psychologistExists =
@@ -50,7 +47,6 @@ export class RegisterPsychologistUseCase {
     const nameVo = Name.create(name)
     const phoneVo = Phone.create(phone)
     const crpVo = CRP.create(crp)
-    const specialtyVo = Specialty.create(specialty)
 
     if (emailVo.isLeft()) {
       return left(emailVo.value)
@@ -68,10 +64,6 @@ export class RegisterPsychologistUseCase {
       return left(crpVo.value)
     }
 
-    if (specialtyVo.isLeft()) {
-      return left(specialtyVo.value)
-    }
-
     const hashedPassword = await this.hasher.hash(password)
 
     const psychologist = Psychologist.create({
@@ -79,7 +71,6 @@ export class RegisterPsychologistUseCase {
       email: emailVo.value,
       phone: phoneVo.value,
       crp: crpVo.value,
-      specialty: specialtyVo.value,
       password: hashedPassword,
     })
 

@@ -70,17 +70,6 @@ describe('RegisterPsychologistUseCase', () => {
     expect(result).toEqual(left(expect.any(InvalidResource)))
   })
 
-  it('should return invalid resource error if specialty is invalid', async () => {
-    const invalidSpecialtyRequest = {
-      ...request,
-      specialty: 'a',
-    }
-
-    const result = await useCase.execute(invalidSpecialtyRequest)
-
-    expect(result).toEqual(left(expect.any(InvalidResource)))
-  })
-
   it('should return resource not found error if psychologist already exists', async () => {
     const psychologist = makeAuthPsychologist({
       email: Email.create(request.email).value as Email,

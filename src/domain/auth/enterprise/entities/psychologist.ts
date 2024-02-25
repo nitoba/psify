@@ -2,11 +2,9 @@ import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { Optional } from '@/core/types/optional'
 import { User, type UserProps } from '@/domain/core/enterprise/entities/user'
 import { CRP } from '@/domain/core/enterprise/value-objects/crp'
-import { Specialty } from '@/domain/core/enterprise/value-objects/specialty'
 
 export type PsychologistProps = UserProps & {
   crp: CRP
-  specialty: Specialty
   createdAt: Date
 }
 
@@ -27,10 +25,6 @@ export class Psychologist extends User<PsychologistProps> {
     return this.props.crp
   }
 
-  get specialty(): string {
-    return this.props.specialty.value
-  }
-
   get password(): string {
     return this.props.password
   }
@@ -45,7 +39,6 @@ export class Psychologist extends User<PsychologistProps> {
       email,
       phone,
       crp,
-      specialty,
       password,
       createdAt,
     }: Optional<PsychologistProps, 'createdAt'>,
@@ -57,7 +50,6 @@ export class Psychologist extends User<PsychologistProps> {
         email,
         phone,
         crp,
-        specialty,
         password,
         createdAt: createdAt ?? new Date(),
       },
