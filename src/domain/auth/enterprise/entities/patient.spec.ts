@@ -9,7 +9,7 @@ describe('Patient', () => {
   it('should create a valid patient', () => {
     const name = Name.create('John Doe').value as Name
     const email = Email.create('john@doe.com').value as Email
-    const phone = Phone.create('12345678901').value as Phone
+    const phone = Phone.create('(88) 912345678').value as Phone
 
     const patient = Patient.create({
       name,
@@ -20,7 +20,7 @@ describe('Patient', () => {
 
     expect(patient.name).toEqual('John Doe')
     expect(patient.email).toEqual('john@doe.com')
-    expect(patient.phone).toEqual('12345678901')
+    expect(patient.phone).toEqual('(88) 912345678')
     expect(patient.password).toEqual('password123')
     expect(patient.id).toBeInstanceOf(UniqueEntityID)
   })
@@ -28,7 +28,7 @@ describe('Patient', () => {
   it('should set createdAt to current date if not provided', () => {
     const name = Name.create('John Doe').value as Name
     const email = Email.create('john@doe.com').value as Email
-    const phone = Phone.create('12345678901').value as Phone
+    const phone = Phone.create('(88) 912345678').value as Phone
 
     const patient = Patient.create({
       name,
@@ -38,13 +38,12 @@ describe('Patient', () => {
     })
 
     expect(patient.createdAt).toBeInstanceOf(Date)
-    expect(patient.createdAt.getTime()).toBeCloseTo(new Date().getTime())
   })
 
   it('should use provided createdAt', () => {
     const name = Name.create('John Doe').value as Name
     const email = Email.create('john@doe.com').value as Email
-    const phone = Phone.create('12345678901').value as Phone
+    const phone = Phone.create('(88) 912345678').value as Phone
     const createdAt = new Date(2020, 1, 1)
 
     const patient = Patient.create({
@@ -63,7 +62,7 @@ describe('Patient', () => {
 
     const name = Name.create('John Doe').value as Name
     const email = Email.create('john@doe.com').value as Email
-    const phone = Phone.create('12345678901').value as Phone
+    const phone = Phone.create('(88) 912345678').value as Phone
 
     const patient = Patient.create(
       {

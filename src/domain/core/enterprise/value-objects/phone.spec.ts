@@ -9,19 +9,11 @@ describe('Phone', () => {
   })
 
   it('should create a phone with 10 digits', () => {
-    const phone = Phone.create('1234567890')
+    const phone = Phone.create('(86) 923456789')
     expect(phone.isRight()).toBe(true)
 
     if (phone.isRight()) {
-      expect(phone.value.getValue).toEqual('1234567890')
-    }
-  })
-
-  it('should create a phone with 11 digits', () => {
-    const phone = Phone.create('12345678901')
-    expect(phone.isRight()).toBeTruthy()
-    if (phone.isRight()) {
-      expect(phone.value.getValue).toEqual('12345678901')
+      expect(phone.value.getValue).toEqual('(86) 923456789')
     }
   })
 

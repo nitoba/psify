@@ -20,6 +20,6 @@ export class Phone extends ValueObject<PhoneProps> {
   }
 
   private static validate(phone: string): boolean {
-    return /^([0-9]{10,11})$/.test(phone)
+    return /^\(\d{2}\) 9\d{8}$/.test(phone)
   }
 }

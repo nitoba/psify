@@ -2,7 +2,7 @@ import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { Optional } from '@/core/types/optional'
 import { User, type UserProps } from '@/domain/core/enterprise/entities/user'
 
-type PatientProps = UserProps & {
+export type PatientProps = UserProps & {
   createdAt: Date
 }
 
