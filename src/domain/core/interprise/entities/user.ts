@@ -1,7 +1,7 @@
 import { Entity } from '@/core/entities/entity'
 
-import { Email } from './value-objects/email'
-import { Name } from './value-objects/name'
+import { Email } from '../value-objects/email'
+import { Name } from '../value-objects/name'
 
 type UserProps = {
   name: Name
