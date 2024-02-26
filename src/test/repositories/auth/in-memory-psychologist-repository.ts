@@ -5,6 +5,10 @@ export class InMemoryAuthPsychologistRepository
   implements AuthPsychologistRepository
 {
   psychologists: Psychologist[] = []
+  async findById(id: string): Promise<Psychologist | null> {
+    const psychologist = this.psychologists.find((p) => p.id.toString() === id)
+    return psychologist ?? null
+  }
 
   async findByEmail(email: string): Promise<Psychologist | null> {
     const psychologist = this.psychologists.find((p) => p.email === email)

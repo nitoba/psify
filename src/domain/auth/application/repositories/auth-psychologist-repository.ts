@@ -1,6 +1,7 @@
-import { Patient } from '../../enterprise/entities/patient'
+import { Repository } from '@/domain/core/application/repositories/repository'
 
-export abstract class AuthPsychologistRepository {
-  abstract findByEmail(email: string): Promise<Patient | null>
-  abstract create(patient: Patient): Promise<void>
+import { Psychologist } from '../../enterprise/entities/psychologist'
+
+export abstract class AuthPsychologistRepository extends Repository<Psychologist> {
+  abstract findByEmail(email: string): Promise<Psychologist | null>
 }
