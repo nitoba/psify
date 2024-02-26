@@ -8,12 +8,14 @@ import { Phone } from '@/domain/core/enterprise/value-objects/phone'
 import { Specialty } from '@/domain/core/enterprise/value-objects/specialty'
 import { Time } from '@/domain/core/enterprise/value-objects/time'
 
-type PsychologistProps = {
+import { SpecialtyList } from './specialty-list'
+
+export type PsychologistProps = {
   name: Name
   email: Email
   phone: Phone
   crp: CRP
-  specialty: Specialty[]
+  specialties: SpecialtyList
   availableTimes: Time[]
   createdAt: Date
 }
@@ -35,8 +37,8 @@ export class Psychologist extends AggregateRoot<PsychologistProps> {
     return this.props.crp
   }
 
-  get specialty(): Specialty[] {
-    return this.props.specialty
+  get specialties(): SpecialtyList {
+    return this.props.specialties
   }
 
   get availableTimes(): Time[] {
@@ -45,6 +47,10 @@ export class Psychologist extends AggregateRoot<PsychologistProps> {
 
   get createdAt(): Date {
     return this.props.createdAt
+  }
+
+  updateSpecialties(specialties: Specialty[]): void {
+    this.props.specialties.update(specialties)
   }
 
   static create(
