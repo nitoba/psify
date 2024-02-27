@@ -23,6 +23,7 @@ export function makePsychologist(
       phone: Phone.create('(88) 987654321').value as Phone,
       availableTimes: new AvailableTimesList([]),
       specialties: new SpecialtyList([]),
+      scheduledAppointments: [],
       crp: CRP.create('12345678901234').value as CRP,
       ...override,
     },
