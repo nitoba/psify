@@ -1,5 +1,6 @@
 import { PaginationParams } from '@/core/repositories/pagination-params'
 import { PsychologistRepository } from '@/domain/psychologist/application/repositories/psychology-repository'
+import { AvailableTimesList } from '@/domain/psychologist/enterprise/entities/available-times-list'
 import { Psychologist } from '@/domain/psychologist/enterprise/entities/psychologist'
 import { SpecialtyList } from '@/domain/psychologist/enterprise/entities/specialty-list'
 
@@ -71,6 +72,36 @@ export class InMemoryPsychologistRepository implements PsychologistRepository {
       this.psychologists[psychologistIndex].specialties.update(
         specialties.getItems(),
       )
+    }
+  }
+
+  async updateAvailableTimes(
+    availableTimes: AvailableTimesList,
+    id: string,
+  ): Promise<void> {
+    const psychologistIndex = this.psychologists.findIndex(
+      (p) => p.id.toString() === id,
+    )
+
+    if (psychologistIndex !== -1) {
+      if (availableTimes.getNewItems().length > 0) {
+        for (const availableTime of availableTimes.getNewItems()) {
+          this.psychologists[psychologistIndex].availableTimes.add(
+            availableTime,
+          )
+        }
+      }
+
+      if (availableTimes.getRemovedItems().length > 0) {
+        for (const availableTime of availableTimes.getRemovedItems()) {
+          this.psychologists[psychologistIndex].availableTimes.remove(
+            availableTime,
+          )
+        }
+      }
+      // this.psychologists[psychologistIndex].availableTimes.update(
+      //   availableTimes.getItems(),
+      // )
     }
   }
 

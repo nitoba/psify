@@ -5,6 +5,7 @@ import { CRP } from '@/domain/core/enterprise/value-objects/crp'
 import { Email } from '@/domain/core/enterprise/value-objects/email'
 import { Name } from '@/domain/core/enterprise/value-objects/name'
 import { Phone } from '@/domain/core/enterprise/value-objects/phone'
+import { AvailableTimesList } from '@/domain/psychologist/enterprise/entities/available-times-list'
 import {
   Psychologist,
   PsychologistProps,
@@ -20,7 +21,7 @@ export function makePsychologist(
       name: Name.create(faker.person.fullName()).value as Name,
       email: Email.create(faker.internet.email()).value as Email,
       phone: Phone.create('(88) 987654321').value as Phone,
-      availableTimes: [],
+      availableTimes: new AvailableTimesList([]),
       specialties: new SpecialtyList([]),
       crp: CRP.create('12345678901234').value as CRP,
       ...override,
