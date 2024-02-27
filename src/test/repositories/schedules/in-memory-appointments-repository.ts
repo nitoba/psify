@@ -24,6 +24,49 @@ export class InMemoryAppointmentsRepository implements AppointmentsRepository {
     return appointment ?? null
   }
 
+  async findManyByPatientId(
+    filter: {
+      status?: AppointmentStatuses
+      period?: { from: Date; to: Date }
+    },
+    { page }: PaginationParams,
+    patientId: UniqueEntityID,
+  ): Promise<Appointment[]> {
+    const offset = (page - 1) * 10
+
+    const appointmentsFromPsychologist = this.appointments.filter((ap) => {
+      if (!filter.period && !filter.status) {
+        return (
+          differenceInDays(new Date(), ap.scheduledTo) <= 7 &&
+          ap.patientId.equals(patientId)
+        )
+      }
+
+      if (!filter.period && filter.status) {
+        return (
+          ap.status === filter.status &&
+          differenceInDays(new Date(), ap.scheduledTo) <= 7 &&
+          ap.patientId.equals(patientId)
+        )
+      }
+
+      // scheduled to: 12-03-2024
+      // from: 10-03-2024
+      // to: 17-03-2024
+      if (!filter.status && filter.period) {
+        return (
+          ap.scheduledTo > filter.period.from &&
+          ap.scheduledTo < filter.period.to &&
+          ap.patientId.equals(patientId)
+        )
+      }
+
+      return false
+    })
+
+    return appointmentsFromPsychologist.slice(offset, offset + 10)
+  }
+
   async findManyByPsychologistId(
     filter: {
       status?: AppointmentStatuses | undefined

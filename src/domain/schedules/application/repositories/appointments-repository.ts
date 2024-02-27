@@ -23,6 +23,18 @@ export abstract class AppointmentsRepository {
     psychologistId: UniqueEntityID,
   ): Promise<Appointment[]>
 
+  abstract findManyByPatientId(
+    filter: {
+      status?: AppointmentStatuses
+      period?: {
+        from: Date
+        to: Date
+      }
+    },
+    params: PaginationParams,
+    patientId: UniqueEntityID,
+  ): Promise<Appointment[]>
+
   abstract findById(
     params: FindByAppointmentIdAndPsychologyIdParams,
   ): Promise<Appointment | null>

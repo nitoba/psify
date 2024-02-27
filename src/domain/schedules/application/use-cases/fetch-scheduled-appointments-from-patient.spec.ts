@@ -1,23 +1,23 @@
 import { addDays } from 'date-fns'
 
 import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
-import { makePsychologist } from '@/test/factories/psychologist/make-psychologist'
+import { makePatient } from '@/test/factories/patient/make-patient'
 import { makeAppointment } from '@/test/factories/schedules/make-appointment'
-import { InMemoryPsychologistRepository } from '@/test/repositories/psychologist/in-memory-psychologist-repository'
+import { InMemoryPatientRepository } from '@/test/repositories/patient/in-memory-patient-repository'
 import { InMemoryAppointmentsRepository } from '@/test/repositories/schedules/in-memory-appointments-repository'
 
-import { FetchScheduledAppointmentsFromPsychologistUseCase } from './fetch-scheduled-appointments-from-psychologist'
+import { FetchScheduledAppointmentsFromPatientUseCase } from './fetch-scheduled-appointments-from-patient'
 
-let useCase: FetchScheduledAppointmentsFromPsychologistUseCase
-let psychologistRepository: InMemoryPsychologistRepository
+let useCase: FetchScheduledAppointmentsFromPatientUseCase
+let patientRepository: InMemoryPatientRepository
 let appointmentsRepository: InMemoryAppointmentsRepository
 
-describe('FetchScheduledAppointmentsFromPsychologistUseCase', () => {
+describe('FetchScheduledAppointmentsFromPatientUseCase', () => {
   beforeEach(() => {
-    psychologistRepository = new InMemoryPsychologistRepository()
+    patientRepository = new InMemoryPatientRepository()
     appointmentsRepository = new InMemoryAppointmentsRepository()
-    useCase = new FetchScheduledAppointmentsFromPsychologistUseCase(
-      psychologistRepository,
+    useCase = new FetchScheduledAppointmentsFromPatientUseCase(
+      patientRepository,
       appointmentsRepository,
     )
     vi.useFakeTimers({
@@ -30,17 +30,17 @@ describe('FetchScheduledAppointmentsFromPsychologistUseCase', () => {
     vi.useRealTimers()
   })
 
-  it('should return scheduled appointments for valid psychologist', async () => {
-    const psychologist = makePsychologist()
-    psychologistRepository.create(psychologist)
+  it('should return scheduled appointments for valid patient', async () => {
+    const patient = makePatient()
+    patientRepository.patients.push(patient)
 
-    const appointment1 = makeAppointment({ psychologistId: psychologist.id })
-    const appointment2 = makeAppointment({ psychologistId: psychologist.id })
+    const appointment1 = makeAppointment({ patientId: patient.id })
+    const appointment2 = makeAppointment({ patientId: patient.id })
 
     appointmentsRepository.appointments.push(appointment1, appointment2)
 
     const result = await useCase.execute({
-      psychologistId: psychologist.id.toString(),
+      patientId: patient.id.toString(),
       page: 1,
     })
 
@@ -54,17 +54,17 @@ describe('FetchScheduledAppointmentsFromPsychologistUseCase', () => {
     }
   })
 
-  it('should return scheduled appointments for valid psychologist paginated', async () => {
-    const psychologist = makePsychologist()
-    psychologistRepository.create(psychologist)
+  it('should return scheduled appointments for valid patient paginated', async () => {
+    const patient = makePatient()
+    patientRepository.patients.push(patient)
 
     for (let i = 0; i < 12; i++) {
-      const appointment = makeAppointment({ psychologistId: psychologist.id })
+      const appointment = makeAppointment({ patientId: patient.id })
       appointmentsRepository.appointments.push(appointment)
     }
 
     const result = await useCase.execute({
-      psychologistId: psychologist.id.toString(),
+      patientId: patient.id.toString(),
       page: 2,
     })
 
@@ -78,22 +78,22 @@ describe('FetchScheduledAppointmentsFromPsychologistUseCase', () => {
   it('should filter appointments by period when is valid period', async () => {
     const date = new Date(2024, 3, 10, 13)
     vi.setSystemTime(date)
-    const psychologist = makePsychologist()
-    psychologistRepository.create(psychologist)
+    const patient = makePatient()
+    patientRepository.patients.push(patient)
 
     const appointment1 = makeAppointment({
-      psychologistId: psychologist.id,
+      patientId: patient.id,
       scheduledTo: new Date('03-12-2024'),
     })
     const appointment2 = makeAppointment({
-      psychologistId: psychologist.id,
+      patientId: patient.id,
       scheduledTo: addDays(new Date('03-12-2024'), 15),
     })
 
     appointmentsRepository.appointments.push(appointment1, appointment2)
 
     const result = await useCase.execute({
-      psychologistId: psychologist.id.toString(),
+      patientId: patient.id.toString(),
       page: 1,
       period: {
         from: new Date('03-10-2024'),
@@ -108,11 +108,11 @@ describe('FetchScheduledAppointmentsFromPsychologistUseCase', () => {
   })
 
   it('should return left with invalid period error for invalid period', async () => {
-    const psychologist = makePsychologist()
-    psychologistRepository.create(psychologist)
+    const patient = makePatient()
+    patientRepository.patients.push(patient)
 
     const result = await useCase.execute({
-      psychologistId: psychologist.id.toString(),
+      patientId: patient.id.toString(),
       page: 1,
       period: {
         from: new Date('03-10-2024'),
@@ -123,9 +123,9 @@ describe('FetchScheduledAppointmentsFromPsychologistUseCase', () => {
     expect(result.isLeft()).toBeTruthy()
   })
 
-  it('should return left with not found error if invalid psychologist', async () => {
+  it('should return left with not found error if invalid patient', async () => {
     const result = await useCase.execute({
-      psychologistId: 'invalid',
+      patientId: 'invalid',
       page: 1,
     })
 
@@ -134,28 +134,28 @@ describe('FetchScheduledAppointmentsFromPsychologistUseCase', () => {
   })
 })
 
-describe('FetchScheduledAppointmentsFromPsychologistUseCase filter status', () => {
+describe('FetchScheduledAppointmentsFromPatientUseCase filter status', () => {
   beforeEach(() => {
-    psychologistRepository = new InMemoryPsychologistRepository()
+    patientRepository = new InMemoryPatientRepository()
     appointmentsRepository = new InMemoryAppointmentsRepository()
-    useCase = new FetchScheduledAppointmentsFromPsychologistUseCase(
-      psychologistRepository,
+    useCase = new FetchScheduledAppointmentsFromPatientUseCase(
+      patientRepository,
       appointmentsRepository,
     )
   })
   it('should filter scheduled appointments by status finished', async () => {
-    const psychologist = makePsychologist()
+    const patient = makePatient()
     const finishedAppointment = makeAppointment({
       status: 'finished',
-      psychologistId: psychologist.id,
+      patientId: patient.id,
     })
-    const appointment = makeAppointment({ psychologistId: psychologist.id })
+    const appointment = makeAppointment({ patientId: patient.id })
 
-    psychologistRepository.create(psychologist)
+    patientRepository.patients.push(patient)
     appointmentsRepository.appointments = [finishedAppointment, appointment]
 
     const result = await useCase.execute({
-      psychologistId: psychologist.id.toString(),
+      patientId: patient.id.toString(),
       status: 'finished',
       page: 1,
     })
@@ -168,18 +168,18 @@ describe('FetchScheduledAppointmentsFromPsychologistUseCase filter status', () =
   })
 
   it('should return empty list if no appointments match filter', async () => {
-    const psychologist = makePsychologist()
+    const patient = makePatient()
     const finishedAppointment = makeAppointment({
       status: 'canceled',
-      psychologistId: psychologist.id,
+      patientId: patient.id,
     })
-    const appointment = makeAppointment({ psychologistId: psychologist.id })
+    const appointment = makeAppointment({ patientId: patient.id })
 
-    psychologistRepository.create(psychologist)
+    patientRepository.patients.push(patient)
     appointmentsRepository.appointments = [finishedAppointment, appointment]
 
     const result = await useCase.execute({
-      psychologistId: psychologist.id.toString(),
+      patientId: patient.id.toString(),
       status: 'finished',
       page: 1,
     })

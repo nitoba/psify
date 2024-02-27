@@ -1,18 +1,19 @@
 import { differenceInDays } from 'date-fns'
 
 import { Either, left, right } from '@/core/either'
+import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
 import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resource'
+import { PatientRepository } from '@/domain/patient/application/repositories/patient-repository'
 import {
   Appointment,
   AppointmentStatuses,
 } from '@/domain/schedules/enterprise/entities/appointment'
 
-import { PsychologistRepository } from '../../../psychologist/application/repositories/psychology-repository'
 import { AppointmentsRepository } from '../repositories/appointments-repository'
 
-type FetchScheduledAppointmentsFromPsychologistUseCaseRequest = {
-  psychologistId: string
+type FetchScheduledAppointmentsFromPatientUseCaseRequest = {
+  patientId: string
   page: number
   status?: AppointmentStatuses
   period?: {
@@ -21,29 +22,30 @@ type FetchScheduledAppointmentsFromPsychologistUseCaseRequest = {
   }
 }
 
-type FetchScheduledAppointmentsFromPsychologistUseCaseResponse = Either<
+type FetchScheduledAppointmentsFromPatientUseCaseResponse = Either<
   ResourceNotFound | InvalidResource,
   {
     scheduledAppointments: Appointment[]
   }
 >
 
-export class FetchScheduledAppointmentsFromPsychologistUseCase {
+export class FetchScheduledAppointmentsFromPatientUseCase {
   constructor(
-    private readonly psychologistRepository: PsychologistRepository,
+    private readonly patientRepository: PatientRepository,
     private readonly appointmentsRepository: AppointmentsRepository,
   ) {}
 
   async execute({
     page,
-    psychologistId,
+    patientId,
     period,
     status,
-  }: FetchScheduledAppointmentsFromPsychologistUseCaseRequest): Promise<FetchScheduledAppointmentsFromPsychologistUseCaseResponse> {
-    const psychologist =
-      await this.psychologistRepository.findById(psychologistId)
+  }: FetchScheduledAppointmentsFromPatientUseCaseRequest): Promise<FetchScheduledAppointmentsFromPatientUseCaseResponse> {
+    const patient = await this.patientRepository.findById(
+      new UniqueEntityID(patientId),
+    )
 
-    if (!psychologist) {
+    if (!patient) {
       return left(new ResourceNotFound('Psychologist not found'))
     }
 
@@ -60,13 +62,13 @@ export class FetchScheduledAppointmentsFromPsychologistUseCase {
     }
 
     const scheduledAppointments =
-      await this.appointmentsRepository.findManyByPsychologistId(
+      await this.appointmentsRepository.findManyByPatientId(
         {
           status,
           period,
         },
         { page },
-        psychologist.id,
+        patient.id,
       )
 
     return right({
