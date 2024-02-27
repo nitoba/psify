@@ -8,8 +8,8 @@ import {
   AppointmentStatuses,
 } from '@/domain/schedules/enterprise/entities/appointment'
 
-import { AppointmentsRepository } from '../../../schedules/application/repositories/appointments-repository'
-import { PsychologistRepository } from '../repositories/psychology-repository'
+import { PsychologistRepository } from '../../../psychologist/application/repositories/psychology-repository'
+import { AppointmentsRepository } from '../repositories/appointments-repository'
 
 type FetchScheduledAppointmentsUseCaseRequest = {
   psychologistId: string
