@@ -39,7 +39,7 @@ describe('UpdateSpecialtyUseCase', () => {
     )
   })
 
-  it.only('should update new specialties to a psychologist', async () => {
+  it('should update new specialties to a psychologist', async () => {
     const specialties = ['specialty1', 'specialty2']
 
     const psychologist = makePsychologist({
