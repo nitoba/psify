@@ -6,7 +6,6 @@ import { AppointmentsRepository } from '@/domain/schedules/application/repositor
 
 type FinishScheduledAppointmentUsecaseRequest = {
   scheduleAppointmentId: string
-  psychologistId: string
 }
 
 type FinishScheduledAppointmentUsecaseResponse = Either<
@@ -20,14 +19,11 @@ export class FinishScheduledAppointmentUsecase {
   ) {}
 
   async execute({
-    psychologistId,
     scheduleAppointmentId,
   }: FinishScheduledAppointmentUsecaseRequest): Promise<FinishScheduledAppointmentUsecaseResponse> {
-    const scheduleAppointment =
-      await this.appointmentsRepository.findByAppointmentIdAndPsychologyId({
-        appointmentId: new UniqueEntityID(scheduleAppointmentId),
-        psychologyId: new UniqueEntityID(psychologistId),
-      })
+    const scheduleAppointment = await this.appointmentsRepository.findById({
+      appointmentId: new UniqueEntityID(scheduleAppointmentId),
+    })
 
     if (!scheduleAppointment) {
       return left(new ResourceNotFound('Scheduled Appointment not found'))

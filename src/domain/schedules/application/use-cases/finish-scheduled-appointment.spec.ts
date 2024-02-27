@@ -20,7 +20,6 @@ describe('FinishScheduledAppointmentUsecase', () => {
     repository.appointments.push(appointment)
 
     const result = await useCase.execute({
-      psychologistId: appointment.psychologistId.toString(),
       scheduleAppointmentId: appointment.id.toString(),
     })
 
@@ -31,7 +30,6 @@ describe('FinishScheduledAppointmentUsecase', () => {
 
   it('should return left if appointment not found', async () => {
     const result = await useCase.execute({
-      psychologistId: '123',
       scheduleAppointmentId: '456',
     })
 
@@ -51,7 +49,6 @@ describe('FinishScheduledAppointmentUsecase', () => {
     repository.appointments.push(appointment, appointment2)
 
     const result = await useCase.execute({
-      psychologistId: appointment.psychologistId.toString(),
       scheduleAppointmentId: appointment.id.toString(),
     })
 
@@ -59,7 +56,6 @@ describe('FinishScheduledAppointmentUsecase', () => {
     expect(result.value).toBeInstanceOf(InvalidResource)
 
     const result2 = await useCase.execute({
-      psychologistId: appointment2.psychologistId.toString(),
       scheduleAppointmentId: appointment2.id.toString(),
     })
 

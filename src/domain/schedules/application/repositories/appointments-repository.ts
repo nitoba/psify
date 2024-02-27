@@ -7,7 +7,6 @@ import {
 } from '../../enterprise/entities/appointment'
 
 export type FindByAppointmentIdAndPsychologyIdParams = {
-  psychologyId: UniqueEntityID
   appointmentId: UniqueEntityID
 }
 
@@ -24,7 +23,7 @@ export abstract class AppointmentsRepository {
     psychologistId: UniqueEntityID,
   ): Promise<Appointment[]>
 
-  abstract findByAppointmentIdAndPsychologyId(
+  abstract findById(
     params: FindByAppointmentIdAndPsychologyIdParams,
   ): Promise<Appointment | null>
 

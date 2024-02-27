@@ -14,13 +14,11 @@ import {
 export class InMemoryAppointmentsRepository implements AppointmentsRepository {
   appointments: Appointment[] = []
 
-  async findByAppointmentIdAndPsychologyId({
+  async findById({
     appointmentId,
-    psychologyId,
   }: FindByAppointmentIdAndPsychologyIdParams): Promise<Appointment | null> {
-    const appointment = this.appointments.find(
-      (ap) =>
-        ap.id.equals(appointmentId) && ap.psychologistId.equals(psychologyId),
+    const appointment = this.appointments.find((ap) =>
+      ap.id.equals(appointmentId),
     )
 
     return appointment ?? null

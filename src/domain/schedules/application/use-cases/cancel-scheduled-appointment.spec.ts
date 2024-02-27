@@ -20,7 +20,6 @@ describe('CancelScheduledAppointmentUsecase', () => {
     repository.appointments.push(appointment)
 
     const result = await useCase.execute({
-      psychologistId: appointment.psychologistId.toString(),
       scheduleAppointmentId: appointment.id.toString(),
     })
 
@@ -31,7 +30,6 @@ describe('CancelScheduledAppointmentUsecase', () => {
 
   it('should return left if appointment not found', async () => {
     const result = await useCase.execute({
-      psychologistId: '123',
       scheduleAppointmentId: '456',
     })
 
@@ -47,7 +45,6 @@ describe('CancelScheduledAppointmentUsecase', () => {
     repository.appointments.push(appointment)
 
     const result = await useCase.execute({
-      psychologistId: appointment.psychologistId.toString(),
       scheduleAppointmentId: appointment.id.toString(),
     })
 

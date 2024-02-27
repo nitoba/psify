@@ -6,7 +6,7 @@ import { makeAppointment } from '@/test/factories/schedules/make-appointment'
 import { InMemoryPsychologistRepository } from '@/test/repositories/psychologist/in-memory-psychologist-repository'
 import { InMemoryAppointmentsRepository } from '@/test/repositories/schedules/in-memory-appointments-repository'
 
-import { FetchScheduledAppointmentsUseCase } from './fetch-scheduled-appointments'
+import { FetchScheduledAppointmentsUseCase } from './fetch-scheduled-appointments-from-psychologist'
 
 let useCase: FetchScheduledAppointmentsUseCase
 let psychologistRepository: InMemoryPsychologistRepository
