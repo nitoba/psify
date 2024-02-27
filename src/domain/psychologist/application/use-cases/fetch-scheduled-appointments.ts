@@ -3,12 +3,12 @@ import { differenceInDays } from 'date-fns'
 import { Either, left, right } from '@/core/either'
 import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
 import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resource'
-
 import {
   Appointment,
   AppointmentStatuses,
-} from '../../enterprise/entities/appointment'
-import { AppointmentsRepository } from '../repositories/appointments-repository'
+} from '@/domain/schedules/enterprise/entities/appointment'
+
+import { AppointmentsRepository } from '../../../schedules/application/repositories/appointments-repository'
 import { PsychologistRepository } from '../repositories/psychology-repository'
 
 type FetchScheduledAppointmentsUseCaseRequest = {

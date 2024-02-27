@@ -2,7 +2,7 @@ import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import {
   Appointment,
   AppointmentProps,
-} from '@/domain/psychologist/enterprise/entities/appointment'
+} from '@/domain/schedules/enterprise/entities/appointment'
 
 export function makeAppointment(
   override: Partial<AppointmentProps> = {},

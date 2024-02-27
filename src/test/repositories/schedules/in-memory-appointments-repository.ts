@@ -1,11 +1,11 @@
 import { differenceInDays } from 'date-fns'
 
 import { PaginationParams } from '@/core/repositories/pagination-params'
-import { AppointmentsRepository } from '@/domain/psychologist/application/repositories/appointments-repository'
+import { AppointmentsRepository } from '@/domain/schedules/application/repositories/appointments-repository'
 import {
   Appointment,
   AppointmentStatuses,
-} from '@/domain/psychologist/enterprise/entities/appointment'
+} from '@/domain/schedules/enterprise/entities/appointment'
 
 export class InMemoryAppointmentsRepository implements AppointmentsRepository {
   appointments: Appointment[] = []

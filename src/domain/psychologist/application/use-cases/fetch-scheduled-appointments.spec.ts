@@ -1,10 +1,10 @@
 import { addDays } from 'date-fns'
 
 import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
-import { makeAppointment } from '@/test/factories/psychologist/make-appointment'
 import { makePsychologist } from '@/test/factories/psychologist/make-psychologist'
-import { InMemoryAppointmentsRepository } from '@/test/repositories/psychologist/in-memory-appointments-repository'
+import { makeAppointment } from '@/test/factories/schedules/make-appointment'
 import { InMemoryPsychologistRepository } from '@/test/repositories/psychologist/in-memory-psychologist-repository'
+import { InMemoryAppointmentsRepository } from '@/test/repositories/schedules/in-memory-appointments-repository'
 
 import { FetchScheduledAppointmentsUseCase } from './fetch-scheduled-appointments'
 
