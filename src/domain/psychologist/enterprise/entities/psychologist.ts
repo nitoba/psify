@@ -58,6 +58,10 @@ export class Psychologist extends AggregateRoot<PsychologistProps> {
     this.props.availableTimes.update(availableTimes)
   }
 
+  addAvailableTime(availableTime: AvailableTime): void {
+    this.props.availableTimes.add(availableTime)
+  }
+
   static create(
     props: Optional<PsychologistProps, 'createdAt'>,
     id?: UniqueEntityID,
