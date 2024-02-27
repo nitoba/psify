@@ -56,7 +56,6 @@ export class Psychologist extends AggregateRoot<PsychologistProps> {
 
   updateAvailableTimes(availableTimes: AvailableTime[]): void {
     this.props.availableTimes.update(availableTimes)
-    console.log(this.props.availableTimes)
   }
 
   static create(
