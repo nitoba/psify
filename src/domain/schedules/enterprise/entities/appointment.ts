@@ -2,7 +2,11 @@ import { Entity } from '@/core/entities/entity'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { Optional } from '@/core/types/optional'
 
-export type AppointmentStatuses = 'confirmed' | 'canceled' | 'finished'
+export type AppointmentStatuses =
+  | 'pending'
+  | 'scheduled'
+  | 'canceled'
+  | 'finished'
 
 export type AppointmentProps = {
   psychologistId: UniqueEntityID
@@ -56,7 +60,7 @@ export class Appointment extends Entity<AppointmentProps> {
     return new Appointment(
       {
         ...props,
-        status: status ?? 'confirmed',
+        status: status ?? 'pending',
         createdAt: createdAt ?? new Date(),
       },
       id,

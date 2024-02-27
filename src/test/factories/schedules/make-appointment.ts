@@ -13,7 +13,7 @@ export function makeAppointment(
       patientId: new UniqueEntityID(),
       psychologistId: new UniqueEntityID(),
       scheduledTo: new Date(),
-      status: 'confirmed',
+      status: 'pending',
       ...override,
     },
     id,

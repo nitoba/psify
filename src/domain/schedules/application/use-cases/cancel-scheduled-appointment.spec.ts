@@ -3,15 +3,15 @@ import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resourc
 import { makeAppointment } from '@/test/factories/schedules/make-appointment'
 import { InMemoryAppointmentsRepository } from '@/test/repositories/schedules/in-memory-appointments-repository'
 
-import { CancelScheduledAppointmentUsecase } from './cancel-scheduled-appointment'
+import { CancelScheduledAppointmentUseCase } from './cancel-scheduled-appointment'
 
-describe('CancelScheduledAppointmentUsecase', () => {
-  let useCase: CancelScheduledAppointmentUsecase
+describe('CancelScheduledAppointmentUseCaseRequest', () => {
+  let useCase: CancelScheduledAppointmentUseCase
   let repository: InMemoryAppointmentsRepository
 
   beforeEach(() => {
     repository = new InMemoryAppointmentsRepository()
-    useCase = new CancelScheduledAppointmentUsecase(repository)
+    useCase = new CancelScheduledAppointmentUseCase(repository)
   })
 
   it('should cancel a confirmed appointment', async () => {

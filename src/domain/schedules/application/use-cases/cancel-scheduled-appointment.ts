@@ -4,23 +4,23 @@ import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
 import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resource'
 import { AppointmentsRepository } from '@/domain/schedules/application/repositories/appointments-repository'
 
-type CancelScheduledAppointmentUsecaseRequest = {
+type CancelScheduledAppointmentUseCaseRequest = {
   scheduleAppointmentId: string
 }
 
-type CancelScheduledAppointmentUsecaseResponse = Either<
+type CancelScheduledAppointmentUseCaseResponse = Either<
   ResourceNotFound | InvalidResource,
   void
 >
 
-export class CancelScheduledAppointmentUsecase {
+export class CancelScheduledAppointmentUseCase {
   constructor(
     private readonly appointmentsRepository: AppointmentsRepository,
   ) {}
 
   async execute({
     scheduleAppointmentId,
-  }: CancelScheduledAppointmentUsecaseRequest): Promise<CancelScheduledAppointmentUsecaseResponse> {
+  }: CancelScheduledAppointmentUseCaseRequest): Promise<CancelScheduledAppointmentUseCaseResponse> {
     const scheduleAppointment = await this.appointmentsRepository.findById({
       appointmentId: new UniqueEntityID(scheduleAppointmentId),
     })
@@ -29,7 +29,7 @@ export class CancelScheduledAppointmentUsecase {
       return left(new ResourceNotFound('Scheduled Appointment not found'))
     }
 
-    if (scheduleAppointment.status !== 'confirmed') {
+    if (!['pending', 'scheduled'].includes(scheduleAppointment.status)) {
       return left(
         new InvalidResource('This scheduled appointment could not be canceled'),
       )
