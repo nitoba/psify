@@ -6,7 +6,7 @@ import { SpecialtyList } from '@/domain/psychologist/enterprise/entities/special
 
 export class InMemoryPsychologistRepository implements PsychologistRepository {
   psychologists: Psychologist[] = []
-  async fetchAll(
+  async findMany(
     filter: { name?: string; specialties?: string[] },
     { page }: PaginationParams,
   ): Promise<Psychologist[]> {

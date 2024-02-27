@@ -30,7 +30,7 @@ export class FetchPsychologistsUseCase {
       specialties,
     }
 
-    const psychologists = await this.repository.fetchAll(filter, { page })
+    const psychologists = await this.repository.findMany(filter, { page })
 
     return right({ psychologists })
   }

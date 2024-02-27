@@ -17,7 +17,7 @@ export abstract class PsychologistRepository extends Repository<Psychologist> {
     id: string,
   ): Promise<void>
 
-  abstract fetchAll(
+  abstract findMany(
     filter: {
       name?: string
       specialties?: string[]
