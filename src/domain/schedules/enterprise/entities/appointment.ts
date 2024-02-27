@@ -41,6 +41,10 @@ export class Appointment extends Entity<AppointmentProps> {
     this.props.status = 'canceled'
   }
 
+  finish() {
+    this.props.status = 'finished'
+  }
+
   static create(
     {
       status,
