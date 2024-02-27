@@ -1,7 +1,11 @@
 import { differenceInDays } from 'date-fns'
 
+import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { PaginationParams } from '@/core/repositories/pagination-params'
-import { AppointmentsRepository } from '@/domain/schedules/application/repositories/appointments-repository'
+import {
+  AppointmentsRepository,
+  type FindByAppointmentIdAndPsychologyIdParams,
+} from '@/domain/schedules/application/repositories/appointments-repository'
 import {
   Appointment,
   AppointmentStatuses,
@@ -10,13 +14,25 @@ import {
 export class InMemoryAppointmentsRepository implements AppointmentsRepository {
   appointments: Appointment[] = []
 
+  async findByAppointmentIdAndPsychologyId({
+    appointmentId,
+    psychologyId,
+  }: FindByAppointmentIdAndPsychologyIdParams): Promise<Appointment | null> {
+    const appointment = this.appointments.find(
+      (ap) =>
+        ap.id.equals(appointmentId) && ap.psychologistId.equals(psychologyId),
+    )
+
+    return appointment ?? null
+  }
+
   async findManyByPsychologistId(
     filter: {
       status?: AppointmentStatuses | undefined
       period?: { from: Date; to: Date } | undefined
     },
     { page }: PaginationParams,
-    psychologistId: string,
+    psychologistId: UniqueEntityID,
   ): Promise<Appointment[]> {
     const offset = (page - 1) * 10
 
@@ -24,7 +40,7 @@ export class InMemoryAppointmentsRepository implements AppointmentsRepository {
       if (!filter.period && !filter.status) {
         return (
           differenceInDays(new Date(), ap.scheduledTo) <= 7 &&
-          ap.psychologistId.toString() === psychologistId
+          ap.psychologistId.equals(psychologistId)
         )
       }
 
@@ -32,7 +48,7 @@ export class InMemoryAppointmentsRepository implements AppointmentsRepository {
         return (
           ap.status === filter.status &&
           differenceInDays(new Date(), ap.scheduledTo) <= 7 &&
-          ap.psychologistId.toString() === psychologistId
+          ap.psychologistId.equals(psychologistId)
         )
       }
 
@@ -43,7 +59,7 @@ export class InMemoryAppointmentsRepository implements AppointmentsRepository {
         return (
           ap.scheduledTo > filter.period.from &&
           ap.scheduledTo < filter.period.to &&
-          ap.psychologistId.toString() === psychologistId
+          ap.psychologistId.equals(psychologistId)
         )
       }
 
@@ -51,5 +67,13 @@ export class InMemoryAppointmentsRepository implements AppointmentsRepository {
     })
 
     return appointmentsFromPsychologist.slice(offset, offset + 10)
+  }
+
+  async update(appointment: Appointment): Promise<void> {
+    const appointmentIndex = this.appointments.findIndex((ap) =>
+      ap.id.equals(appointment.id),
+    )
+
+    this.appointments[appointmentIndex] = appointment
   }
 }

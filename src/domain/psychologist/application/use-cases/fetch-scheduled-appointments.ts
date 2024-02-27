@@ -66,7 +66,7 @@ export class FetchScheduledAppointmentsUseCase {
           period,
         },
         { page },
-        psychologistId,
+        psychologist.id,
       )
 
     return right({
