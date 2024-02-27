@@ -20,6 +20,14 @@ describe('FetchScheduledAppointmentsUseCase', () => {
       psychologistRepository,
       appointmentsRepository,
     )
+    vi.useFakeTimers({
+      now: new Date(),
+    })
+  })
+
+  afterEach(() => {
+    // restoring date after each test run
+    vi.useRealTimers()
   })
 
   it('should return scheduled appointments for valid psychologist', async () => {
@@ -68,6 +76,8 @@ describe('FetchScheduledAppointmentsUseCase', () => {
   })
 
   it('should filter appointments by period when is valid period', async () => {
+    const date = new Date(2024, 3, 10, 13)
+    vi.setSystemTime(date)
     const psychologist = makePsychologist()
     psychologistRepository.create(psychologist)
 

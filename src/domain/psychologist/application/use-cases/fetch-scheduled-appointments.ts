@@ -49,7 +49,8 @@ export class FetchScheduledAppointmentsUseCase {
 
     // validate if period has a valid dates
     if (period) {
-      const isValidPeriod = differenceInDays(period.to, period.from) <= 7
+      const isValidPeriod =
+        period.to < new Date() && differenceInDays(period.to, period.from) <= 7
 
       if (!isValidPeriod) {
         return left(
