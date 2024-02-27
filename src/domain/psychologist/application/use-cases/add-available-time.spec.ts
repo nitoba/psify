@@ -20,8 +20,7 @@ describe('AddAvailableTimeUseCase', () => {
 
     const result = await useCase.execute({
       psychologistId: psychologist.id.toString(),
-      weekday: 1,
-      time: '09:00',
+      availableTimes: [{ weekday: 1, time: '09:00' }],
     })
 
     expect(result.isRight()).toBeTruthy()
@@ -40,8 +39,7 @@ describe('AddAvailableTimeUseCase', () => {
   it('should return left if psychologist not found', async () => {
     const result = await useCase.execute({
       psychologistId: '123',
-      weekday: 1,
-      time: '09:00',
+      availableTimes: [{ weekday: 1, time: '09:00' }],
     })
 
     expect(result.isLeft()).toBeTruthy()
@@ -55,8 +53,7 @@ describe('AddAvailableTimeUseCase', () => {
 
     const result = await useCase.execute({
       psychologistId: psychologist.id.toString(),
-      weekday: 7,
-      time: '09:00',
+      availableTimes: [{ weekday: 8, time: '09:00' }],
     })
 
     expect(result.isLeft()).toBeTruthy()
@@ -70,8 +67,7 @@ describe('AddAvailableTimeUseCase', () => {
 
     const result = await useCase.execute({
       psychologistId: psychologist.id.toString(),
-      weekday: 1,
-      time: 'invalid',
+      availableTimes: [{ weekday: 1, time: 'invalid' }],
     })
 
     expect(result.isLeft()).toBeTruthy()

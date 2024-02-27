@@ -7,8 +7,10 @@ import { PsychologistRepository } from '../repositories/psychology-repository'
 
 type AddAvailableTimeUseCaseRequest = {
   psychologistId: string
-  weekday: number
-  time: string
+  availableTimes: {
+    weekday: number
+    time: string
+  }[]
 }
 
 type AddAvailableTimeUseCaseResponse = Either<Error, void>
@@ -18,8 +20,7 @@ export class AddAvailableTimeUseCase {
 
   async execute({
     psychologistId,
-    time,
-    weekday,
+    availableTimes,
   }: AddAvailableTimeUseCaseRequest): Promise<AddAvailableTimeUseCaseResponse> {
     const psychologist = await this.repository.findById(psychologistId)
 
@@ -27,23 +28,23 @@ export class AddAvailableTimeUseCase {
       return left(new ResourceNotFound('Psychologist not found'))
     }
 
-    const timeVo = Time.create(time)
+    for (const availableTime of availableTimes) {
+      const timeVo = Time.create(availableTime.time)
 
-    if (timeVo.isLeft()) {
-      return left(timeVo.value)
+      if (timeVo.isLeft()) {
+        return left(timeVo.value)
+      }
+
+      if (availableTime.weekday < 0 || availableTime.weekday > 6) {
+        return left(new ResourceNotFound('Weekday not found'))
+      }
+      const availableTimeToAdd = AvailableTime.create({
+        time: timeVo.value,
+        weekday: availableTime.weekday,
+        psychologistId: psychologist.id,
+      })
+      psychologist.addAvailableTime(availableTimeToAdd)
     }
-
-    if (weekday < 0 || weekday > 6) {
-      return left(new ResourceNotFound('Weekday not found'))
-    }
-
-    const availableTime = AvailableTime.create({
-      time: timeVo.value,
-      weekday,
-      psychologistId: psychologist.id,
-    })
-
-    psychologist.addAvailableTime(availableTime)
 
     await this.repository.updateAvailableTimes(
       psychologist.availableTimes,
