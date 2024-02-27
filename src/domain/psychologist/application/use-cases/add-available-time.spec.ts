@@ -1,7 +1,11 @@
+import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
+import { Time } from '@/domain/core/enterprise/value-objects/time'
 import { makePsychologist } from '@/test/factories/psychologist/make-psychologist'
 import { InMemoryPsychologistRepository } from '@/test/repositories/psychologist/in-memory-psychologist-repository'
 
+import { AvailableTime } from '../../enterprise/entities/available-time'
+import { AvailableTimesList } from '../../enterprise/entities/available-times-list'
 import { AddAvailableTimeUseCase } from './add-available-time'
 
 describe('AddAvailableTimeUseCase', () => {
@@ -25,6 +29,40 @@ describe('AddAvailableTimeUseCase', () => {
 
     expect(result.isRight()).toBeTruthy()
     expect(repository.psychologists).toHaveLength(1)
+    expect(repository.psychologists[0].availableTimes.getItems()).toHaveLength(
+      1,
+    )
+    expect(
+      repository.psychologists[0].availableTimes.getItems()[0].time.value,
+    ).toBe('09:00')
+    expect(
+      repository.psychologists[0].availableTimes.getItems()[0].weekday,
+    ).toBe(1)
+  })
+
+  it('should not be able add available time for existing psychologist if exists one', async () => {
+    const psychologistId = new UniqueEntityID()
+    const psychologist = makePsychologist(
+      {
+        availableTimes: new AvailableTimesList([
+          AvailableTime.create({
+            weekday: 1,
+            time: Time.create('09:00').value as Time,
+            psychologistId,
+          }),
+        ]),
+      },
+      psychologistId,
+    )
+
+    repository.create(psychologist)
+
+    const result = await useCase.execute({
+      psychologistId: psychologist.id.toString(),
+      availableTimes: [{ weekday: 1, time: '09:00' }],
+    })
+
+    expect(result.isLeft()).toBeTruthy()
     expect(repository.psychologists[0].availableTimes.getItems()).toHaveLength(
       1,
     )

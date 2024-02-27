@@ -1,5 +1,6 @@
 import { Either, left, right } from '@/core/either'
 import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
+import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resource'
 import { Time } from '@/domain/core/enterprise/value-objects/time'
 
 import { AvailableTime } from '../../enterprise/entities/available-time'
@@ -13,7 +14,10 @@ type AddAvailableTimeUseCaseRequest = {
   }[]
 }
 
-type AddAvailableTimeUseCaseResponse = Either<Error, void>
+type AddAvailableTimeUseCaseResponse = Either<
+  ResourceNotFound | InvalidResource,
+  void
+>
 
 export class AddAvailableTimeUseCase {
   constructor(private readonly repository: PsychologistRepository) {}
@@ -38,6 +42,20 @@ export class AddAvailableTimeUseCase {
       if (availableTime.weekday < 0 || availableTime.weekday > 6) {
         return left(new ResourceNotFound('Weekday not found'))
       }
+
+      // Verify if already exists an available time with the same time and weekday
+      const availableTimeExists = psychologist.availableTimes
+        .getItems()
+        .find(
+          (at) =>
+            at.time.equals(timeVo.value) &&
+            at.weekday === availableTime.weekday,
+        )
+
+      if (availableTimeExists) {
+        return left(new InvalidResource('Available time already exists'))
+      }
+
       const availableTimeToAdd = AvailableTime.create({
         time: timeVo.value,
         weekday: availableTime.weekday,
