@@ -39,6 +39,28 @@ describe('UpdateSpecialtyUseCase', () => {
     )
   })
 
+  it.only('should update new specialties to a psychologist', async () => {
+    const specialties = ['specialty1', 'specialty2']
+
+    const psychologist = makePsychologist({
+      specialties: new SpecialtyList([
+        Specialty.create('specialty3').value as Specialty,
+      ]),
+    })
+
+    repository.create(psychologist)
+
+    const result = await useCase.execute({
+      psychologistId: psychologist.id.toString(),
+      specialties,
+    })
+
+    expect(result.isRight()).toBeTruthy()
+    expect(repository.psychologists[0].specialties.getNewItems()).toHaveLength(
+      2,
+    )
+  })
+
   it('should not add duplicate specialties', async () => {
     const existingSpecialty = 'specialty1'
     const newSpecialty = 'specialty2'

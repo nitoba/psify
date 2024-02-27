@@ -67,11 +67,16 @@ export class InMemoryPsychologistRepository implements PsychologistRepository {
     const psychologistIndex = this.psychologists.findIndex(
       (p) => p.id.toString() === id,
     )
+    for (const specialty of specialties.getNewItems()) {
+      if (psychologistIndex !== -1) {
+        this.psychologists[psychologistIndex].specialties.add(specialty)
+      }
+    }
 
-    if (psychologistIndex !== -1) {
-      this.psychologists[psychologistIndex].specialties.update(
-        specialties.getItems(),
-      )
+    for (const specialty of specialties.getRemovedItems()) {
+      if (psychologistIndex !== -1) {
+        this.psychologists[psychologistIndex].specialties.remove(specialty)
+      }
     }
   }
 
