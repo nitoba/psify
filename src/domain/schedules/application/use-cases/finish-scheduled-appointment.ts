@@ -29,17 +29,11 @@ export class FinishScheduledAppointmentUseCase {
       return left(new ResourceNotFound('Scheduled Appointment not found'))
     }
 
-    const isInvalidStatus = ['finished', 'canceled'].includes(
-      scheduledAppointment.status,
-    )
+    const result = scheduledAppointment.finish()
 
-    if (isInvalidStatus) {
-      return left(
-        new InvalidResource('This scheduled appointment could not be finished'),
-      )
+    if (result.isLeft()) {
+      return left(result.value)
     }
-
-    scheduledAppointment.finish()
 
     this.appointmentsRepository.save(scheduledAppointment)
 

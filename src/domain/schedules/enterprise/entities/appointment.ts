@@ -1,6 +1,8 @@
+import { Either, left, right } from '@/core/either'
 import { AggregateRoot } from '@/core/entities/aggregate-root'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { Optional } from '@/core/types/optional'
+import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resource'
 
 export type AppointmentStatuses =
   | 'pending'
@@ -41,12 +43,29 @@ export class Appointment extends AggregateRoot<AppointmentProps> {
     this.props.status = status
   }
 
-  cancel() {
+  cancel(): Either<InvalidResource, void> {
+    if (['canceled', 'finished'].includes(this.status)) {
+      return left(
+        new InvalidResource('This scheduled appointment could not be canceled'),
+      )
+    }
+
     this.props.status = 'canceled'
+
+    return right(undefined)
   }
 
-  finish() {
+  finish(): Either<InvalidResource, void> {
+    const isInvalidStatus = ['finished', 'canceled'].includes(this.status)
+
+    if (isInvalidStatus) {
+      return left(
+        new InvalidResource('This scheduled appointment could not be finished'),
+      )
+    }
     this.props.status = 'finished'
+
+    return right(undefined)
   }
 
   static create(

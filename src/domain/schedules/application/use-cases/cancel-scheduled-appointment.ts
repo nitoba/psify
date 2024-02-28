@@ -29,15 +29,13 @@ export class CancelScheduledAppointmentUseCase {
       return left(new ResourceNotFound('Scheduled Appointment not found'))
     }
 
-    if (['canceled', 'finished'].includes(scheduleAppointment.status)) {
-      return left(
-        new InvalidResource('This scheduled appointment could not be canceled'),
-      )
+    const result = scheduleAppointment.cancel()
+
+    if (result.isLeft()) {
+      return left(result.value)
     }
 
-    scheduleAppointment.cancel()
-
-    this.appointmentsRepository.update(scheduleAppointment)
+    this.appointmentsRepository.save(scheduleAppointment)
 
     return right(undefined)
   }
