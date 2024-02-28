@@ -55,6 +55,22 @@ export class Appointment extends AggregateRoot<AppointmentProps> {
     return right(undefined)
   }
 
+  schedule(): Either<InvalidResource, void> {
+    if (this.status !== 'pending') {
+      return left(
+        new InvalidResource(
+          'This scheduled appointment could not be scheduled',
+        ),
+      )
+    }
+
+    this.props.status = 'scheduled'
+
+    // TODO: add domain event that this appointment was scheduled
+
+    return right(undefined)
+  }
+
   finish(): Either<InvalidResource, void> {
     const isInvalidStatus = ['finished', 'canceled'].includes(this.status)
 
@@ -64,6 +80,8 @@ export class Appointment extends AggregateRoot<AppointmentProps> {
       )
     }
     this.props.status = 'finished'
+
+    // TODO: add domain event that this appointment was finished
 
     return right(undefined)
   }
@@ -76,8 +94,7 @@ export class Appointment extends AggregateRoot<AppointmentProps> {
     }: Optional<AppointmentProps, 'createdAt' | 'status'>,
     id?: UniqueEntityID,
   ): Appointment {
-    // TODO: Add domain event to create appointment
-    return new Appointment(
+    const appointment = new Appointment(
       {
         ...props,
         status: status ?? 'pending',
@@ -85,5 +102,9 @@ export class Appointment extends AggregateRoot<AppointmentProps> {
       },
       id,
     )
+
+    // TODO: Add domain event to create appointment
+
+    return appointment
   }
 }
