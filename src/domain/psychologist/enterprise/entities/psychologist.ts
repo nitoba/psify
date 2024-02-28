@@ -1,10 +1,10 @@
 import { AggregateRoot } from '@/core/entities/aggregate-root'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { Optional } from '@/core/types/optional'
-import { CRP } from '@/domain/psychologist/enterprise/value-objects/crp'
 import { Email } from '@/domain/core/enterprise/value-objects/email'
 import { Name } from '@/domain/core/enterprise/value-objects/name'
 import { Phone } from '@/domain/core/enterprise/value-objects/phone'
+import { CRP } from '@/domain/psychologist/enterprise/value-objects/crp'
 import { Specialty } from '@/domain/psychologist/enterprise/value-objects/specialty'
 import { Appointment } from '@/domain/schedules/enterprise/entities/appointment'
 
