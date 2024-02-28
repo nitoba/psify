@@ -34,5 +34,6 @@ describe('On Appointment Requested Handler', () => {
     await waitFor(() => {
       expect(createOrderUseCaseSpy).toHaveBeenCalled()
     })
+    expect(orderRepository.orders).toHaveLength(1)
   })
 })
