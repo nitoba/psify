@@ -29,7 +29,7 @@ export class CancelScheduledAppointmentUseCase {
       return left(new ResourceNotFound('Scheduled Appointment not found'))
     }
 
-    if (!['pending', 'scheduled'].includes(scheduleAppointment.status)) {
+    if (['canceled', 'finished'].includes(scheduleAppointment.status)) {
       return left(
         new InvalidResource('This scheduled appointment could not be canceled'),
       )
