@@ -15,7 +15,9 @@ type RequestScheduleAppointmentUseCaseRequest = {
 
 type RequestScheduleAppointmentUseCaseResponse = Either<
   InvalidResource | ResourceNotFound,
-  void
+  {
+    appointment: Appointment
+  }
 >
 
 export class RequestScheduleAppointmentUseCase {
@@ -89,6 +91,8 @@ export class RequestScheduleAppointmentUseCase {
 
     await this.appointmentRepository.create(appointment)
 
-    return right(undefined)
+    return right({
+      appointment,
+    })
   }
 }

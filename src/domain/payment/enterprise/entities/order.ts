@@ -74,6 +74,10 @@ export class Order extends AggregateRoot<OrderProps> {
     return right(undefined)
   }
 
+  get isAvailableToApprove(): boolean {
+    return this.props.status === 'pending' && this.props.orderItems.length > 0
+  }
+
   static create(
     {
       status,
