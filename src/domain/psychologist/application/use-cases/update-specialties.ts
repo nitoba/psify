@@ -1,6 +1,6 @@
 import { Either, left, right } from '@/core/either'
 import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
-import { Specialty } from '@/domain/core/enterprise/value-objects/specialty'
+import { Specialty } from '@/domain/psychologist/enterprise/value-objects/specialty'
 
 import { PsychologistRepository } from '../repositories/psychology-repository'
 

@@ -1,4 +1,4 @@
-import { InvalidResource } from '../errors/invalid-resource'
+import { InvalidResource } from '../../../core/enterprise/errors/invalid-resource'
 import { Specialty } from './specialty'
 
 describe('Specialty', () => {

@@ -1,6 +1,6 @@
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
-import { Time } from '@/domain/core/enterprise/value-objects/time'
+import { Time } from '@/domain/psychologist/enterprise/value-objects/time'
 import { makePsychologist } from '@/test/factories/psychologist/make-psychologist'
 import { InMemoryPsychologistRepository } from '@/test/repositories/psychologist/in-memory-psychologist-repository'
 

@@ -1,5 +1,5 @@
 import { Name } from '@/domain/core/enterprise/value-objects/name'
-import { Specialty } from '@/domain/core/enterprise/value-objects/specialty'
+import { Specialty } from '@/domain/psychologist/enterprise/value-objects/specialty'
 import { makePsychologist } from '@/test/factories/psychologist/make-psychologist'
 import { InMemoryPsychologistRepository } from '@/test/repositories/psychologist/in-memory-psychologist-repository'
 

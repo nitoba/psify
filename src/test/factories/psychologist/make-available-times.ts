@@ -1,9 +1,9 @@
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
-import { Time } from '@/domain/core/enterprise/value-objects/time'
 import {
   AvailableTime,
   AvailableTimeProps,
 } from '@/domain/psychologist/enterprise/entities/available-time'
+import { Time } from '@/domain/psychologist/enterprise/value-objects/time'
 
 export function makeAvailableTime(
   override: Partial<AvailableTimeProps> = {},

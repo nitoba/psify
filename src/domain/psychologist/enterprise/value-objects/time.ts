@@ -1,7 +1,7 @@
 import { Either, left, right } from '@/core/either'
 import { ValueObject } from '@/core/entities/value-objects'
 
-import { InvalidResource } from '../errors/invalid-resource'
+import { InvalidResource } from '../../../core/enterprise/errors/invalid-resource'
 
 type TimeProps = {
   value: string

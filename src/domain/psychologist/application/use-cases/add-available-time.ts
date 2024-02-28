@@ -1,7 +1,7 @@
 import { Either, left, right } from '@/core/either'
 import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
 import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resource'
-import { Time } from '@/domain/core/enterprise/value-objects/time'
+import { Time } from '@/domain/psychologist/enterprise/value-objects/time'
 
 import { AvailableTime } from '../../enterprise/entities/available-time'
 import { PsychologistRepository } from '../repositories/psychology-repository'

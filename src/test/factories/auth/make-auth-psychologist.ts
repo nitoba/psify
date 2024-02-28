@@ -5,7 +5,7 @@ import {
   Psychologist,
   PsychologistProps,
 } from '@/domain/auth/enterprise/entities/psychologist'
-import { CRP } from '@/domain/core/enterprise/value-objects/crp'
+import { CRP } from '@/domain/psychologist/enterprise/value-objects/crp'
 import { Email } from '@/domain/core/enterprise/value-objects/email'
 import { Name } from '@/domain/core/enterprise/value-objects/name'
 import { Phone } from '@/domain/core/enterprise/value-objects/phone'

@@ -1,5 +1,5 @@
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
-import { Time } from '@/domain/core/enterprise/value-objects/time'
+import { Time } from '@/domain/psychologist/enterprise/value-objects/time'
 import { Appointment } from '@/domain/schedules/enterprise/entities/appointment'
 import { makePsychologist } from '@/test/factories/psychologist/make-psychologist'
 import { InMemoryPsychologistRepository } from '@/test/repositories/psychologist/in-memory-psychologist-repository'

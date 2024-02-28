@@ -1,7 +1,7 @@
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { Optional } from '@/core/types/optional'
 import { User, type UserProps } from '@/domain/core/enterprise/entities/user'
-import { CRP } from '@/domain/core/enterprise/value-objects/crp'
+import { CRP } from '@/domain/psychologist/enterprise/value-objects/crp'
 
 export type PsychologistProps = UserProps & {
   crp: CRP
