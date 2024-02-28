@@ -1,4 +1,4 @@
-import { Entity } from '@/core/entities/entity'
+import { AggregateRoot } from '@/core/entities/aggregate-root'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { Optional } from '@/core/types/optional'
 
@@ -16,7 +16,7 @@ export type AppointmentProps = {
   createdAt: Date
 }
 
-export class Appointment extends Entity<AppointmentProps> {
+export class Appointment extends AggregateRoot<AppointmentProps> {
   get psychologistId() {
     return this.props.psychologistId
   }
