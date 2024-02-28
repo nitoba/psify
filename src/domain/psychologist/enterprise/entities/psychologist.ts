@@ -76,7 +76,7 @@ export class Psychologist extends AggregateRoot<PsychologistProps> {
     const currentAvailableTimes = this.availableTimes.getItems()
     const scheduledAppointments = this.scheduledAppointments
 
-    // filter availableTimes to response only times more than current date now
+    // filter availableTimes to response only times more than current date now and not scheduled yet
     const availableTimes = currentAvailableTimes.filter((at) => {
       const [hourFromTime, minutesFromTime] = at.time.getHoursAndMinutes()
 
