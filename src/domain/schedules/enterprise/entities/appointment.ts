@@ -4,6 +4,8 @@ import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { Optional } from '@/core/types/optional'
 import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resource'
 
+import { AppointmentRequested } from '../events/appointment-requested'
+
 export type AppointmentStatuses =
   | 'pending'
   | 'scheduled'
@@ -108,7 +110,7 @@ export class Appointment extends AggregateRoot<AppointmentProps> {
       id,
     )
 
-    // TODO: Add domain event to create appointment
+    appointment.addDomainEvent(new AppointmentRequested(appointment))
 
     return appointment
   }

@@ -10,13 +10,14 @@ describe('Appointment', () => {
       psychologistId: new UniqueEntityID(),
       patientId: new UniqueEntityID(),
       scheduledTo: new Date(),
-      status: 'confirmed',
+      status: 'pending',
+      costInCents: 10000,
       createdAt: new Date(),
     })
   })
 
-  test('should create a confirmed appointment', () => {
-    expect(appointment.status).toBe('confirmed')
+  test('should create a pending appointment', () => {
+    expect(appointment.status).toBe('pending')
   })
 
   test('should update appointment status', () => {
