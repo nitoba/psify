@@ -23,6 +23,7 @@ describe('MarkAppointmentAsScheduledUseCase', () => {
 
     expect(result.isRight()).toBeTruthy()
     expect(repository.appointments[0].status).toEqual('scheduled')
+    expect(repository.appointments[0].id.equals(appointment.id)).toBeTruthy()
   })
 
   it('should return left if schedule operation is invalid', async () => {

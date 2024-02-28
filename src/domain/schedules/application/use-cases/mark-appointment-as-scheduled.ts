@@ -18,19 +18,21 @@ export class MarkAppointmentAsScheduledUseCase {
   async execute({
     scheduleAppointmentId,
   }: MarkAppointmentAsScheduledUseCaseRequest): Promise<MarkAppointmentAsScheduledUseCaseResponse> {
-    const scheduledAppointment = await this.appointmentsRepository.findById({
+    const appointment = await this.appointmentsRepository.findById({
       appointmentId: new UniqueEntityID(scheduleAppointmentId),
     })
 
-    if (!scheduledAppointment) {
+    if (!appointment) {
       return left(new ResourceNotFound('Scheduled Appointment not found'))
     }
 
-    const result = scheduledAppointment.schedule()
+    const result = appointment.schedule()
 
     if (result.isLeft()) {
       return left(result.value)
     }
+
+    await this.appointmentsRepository.save(appointment)
 
     return right(undefined)
   }
