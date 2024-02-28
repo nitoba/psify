@@ -21,16 +21,16 @@ export class FinishScheduledAppointmentUseCase {
   async execute({
     scheduleAppointmentId,
   }: FinishScheduledAppointmentUseCaseRequest): Promise<FinishScheduledAppointmentUseCaseResponse> {
-    const scheduleAppointment = await this.appointmentsRepository.findById({
+    const scheduledAppointment = await this.appointmentsRepository.findById({
       appointmentId: new UniqueEntityID(scheduleAppointmentId),
     })
 
-    if (!scheduleAppointment) {
+    if (!scheduledAppointment) {
       return left(new ResourceNotFound('Scheduled Appointment not found'))
     }
 
     const isInvalidStatus = ['finished', 'canceled'].includes(
-      scheduleAppointment.status,
+      scheduledAppointment.status,
     )
 
     if (isInvalidStatus) {
@@ -39,9 +39,9 @@ export class FinishScheduledAppointmentUseCase {
       )
     }
 
-    scheduleAppointment.finish()
+    scheduledAppointment.finish()
 
-    this.appointmentsRepository.update(scheduleAppointment)
+    this.appointmentsRepository.update(scheduledAppointment)
 
     return right(undefined)
   }
