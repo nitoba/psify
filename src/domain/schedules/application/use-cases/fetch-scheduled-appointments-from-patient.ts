@@ -1,7 +1,6 @@
 import { differenceInDays } from 'date-fns'
 
 import { Either, left, right } from '@/core/either'
-import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
 import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resource'
 import { PatientRepository } from '@/domain/patient/application/repositories/patient-repository'
@@ -41,9 +40,7 @@ export class FetchScheduledAppointmentsFromPatientUseCase {
     period,
     status,
   }: FetchScheduledAppointmentsFromPatientUseCaseRequest): Promise<FetchScheduledAppointmentsFromPatientUseCaseResponse> {
-    const patient = await this.patientRepository.findById(
-      new UniqueEntityID(patientId),
-    )
+    const patient = await this.patientRepository.findById(patientId)
 
     if (!patient) {
       return left(new ResourceNotFound('Psychologist not found'))
