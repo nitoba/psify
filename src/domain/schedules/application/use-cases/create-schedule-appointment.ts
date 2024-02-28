@@ -56,8 +56,9 @@ export class CreateScheduleAppointmentUseCase {
     }
 
     // validate if psychologist is available to schedule appointment
-    const availableTimes = psychologist.getAvailableTimes()
-    const isAvailable = availableTimes.some((at) => {
+    const availableTimesToSchedules =
+      psychologist.getAvailableTimesToSchedules()
+    const isAvailable = availableTimesToSchedules.some((at) => {
       const [hourFromTime, minutesFromTime] = at.time.getHoursAndMinutes()
 
       const scheduledDate = new Date(

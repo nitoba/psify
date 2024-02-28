@@ -72,7 +72,7 @@ export class Psychologist extends AggregateRoot<PsychologistProps> {
     this.props.availableTimes.remove(availableTime)
   }
 
-  getAvailableTimes(): AvailableTime[] {
+  getAvailableTimesToSchedules(): AvailableTime[] {
     const currentAvailableTimes = this.availableTimes.getItems()
     const scheduleAppointments = this.scheduleAppointments
 

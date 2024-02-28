@@ -30,7 +30,7 @@ export class FetchAvailableTimesUseCase {
       return left(new ResourceNotFound('Psychologist not found'))
     }
 
-    const availableTimes = psychologist.getAvailableTimes()
+    const availableTimes = psychologist.getAvailableTimesToSchedules()
 
     return right({
       availableTimes,
