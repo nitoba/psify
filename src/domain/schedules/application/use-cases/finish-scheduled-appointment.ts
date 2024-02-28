@@ -4,23 +4,23 @@ import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
 import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resource'
 import { AppointmentsRepository } from '@/domain/schedules/application/repositories/appointments-repository'
 
-type FinishScheduledAppointmentUsecaseRequest = {
+type FinishScheduledAppointmentUseCaseRequest = {
   scheduleAppointmentId: string
 }
 
-type FinishScheduledAppointmentUsecaseResponse = Either<
+type FinishScheduledAppointmentUseCaseResponse = Either<
   ResourceNotFound | InvalidResource,
   void
 >
 
-export class FinishScheduledAppointmentUsecase {
+export class FinishScheduledAppointmentUseCase {
   constructor(
     private readonly appointmentsRepository: AppointmentsRepository,
   ) {}
 
   async execute({
     scheduleAppointmentId,
-  }: FinishScheduledAppointmentUsecaseRequest): Promise<FinishScheduledAppointmentUsecaseResponse> {
+  }: FinishScheduledAppointmentUseCaseRequest): Promise<FinishScheduledAppointmentUseCaseResponse> {
     const scheduleAppointment = await this.appointmentsRepository.findById({
       appointmentId: new UniqueEntityID(scheduleAppointmentId),
     })

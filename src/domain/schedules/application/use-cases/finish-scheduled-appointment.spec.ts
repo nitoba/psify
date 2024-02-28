@@ -3,15 +3,15 @@ import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resourc
 import { makeAppointment } from '@/test/factories/schedules/make-appointment'
 import { InMemoryAppointmentsRepository } from '@/test/repositories/schedules/in-memory-appointments-repository'
 
-import { FinishScheduledAppointmentUsecase } from './finish-scheduled-appointment'
+import { FinishScheduledAppointmentUseCase } from './finish-scheduled-appointment'
 
-describe('FinishScheduledAppointmentUsecase', () => {
-  let useCase: FinishScheduledAppointmentUsecase
+describe('FinishScheduledAppointmentUseCase', () => {
+  let useCase: FinishScheduledAppointmentUseCase
   let repository: InMemoryAppointmentsRepository
 
   beforeEach(() => {
     repository = new InMemoryAppointmentsRepository()
-    useCase = new FinishScheduledAppointmentUsecase(repository)
+    useCase = new FinishScheduledAppointmentUseCase(repository)
   })
 
   it('should finish a appointment', async () => {
