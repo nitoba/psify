@@ -4,6 +4,7 @@ import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { Optional } from '@/core/types/optional'
 import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resource'
 
+import { OrderApproved } from '../events/order-approved'
 import { OrderRejected } from '../events/order-rejected'
 import { PaymentMethod } from '../value-objects/payment-method'
 import { OrderItem } from './order-item'
@@ -67,6 +68,8 @@ export class Order extends AggregateRoot<OrderProps> {
     }
 
     this.props.status = 'approved'
+
+    this.addDomainEvent(new OrderApproved(this))
 
     return right(undefined)
   }
