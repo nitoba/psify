@@ -56,6 +56,18 @@ export class Order extends AggregateRoot<OrderProps> {
     return right(undefined)
   }
 
+  approve(): Either<InvalidResource, void> {
+    if (this.props.status !== 'pending' || this.props.orderItems.length === 0) {
+      return left(
+        new InvalidResource('Order can only be approved if it is pending'),
+      )
+    }
+
+    this.props.status = 'approved'
+
+    return right(undefined)
+  }
+
   static create(
     {
       status,
