@@ -41,7 +41,7 @@ export class FinishScheduledAppointmentUseCase {
 
     scheduledAppointment.finish()
 
-    this.appointmentsRepository.update(scheduledAppointment)
+    this.appointmentsRepository.save(scheduledAppointment)
 
     return right(undefined)
   }

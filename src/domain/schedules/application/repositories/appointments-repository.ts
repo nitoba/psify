@@ -41,5 +41,5 @@ export abstract class AppointmentsRepository {
     params: FindByAppointmentIdAndPsychologyIdParams,
   ): Promise<Appointment | null>
 
-  abstract update(appointment: Appointment): Promise<void>
+  abstract save(appointment: Appointment): Promise<void>
 }

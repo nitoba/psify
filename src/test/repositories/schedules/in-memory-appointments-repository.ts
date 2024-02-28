@@ -114,7 +114,7 @@ export class InMemoryAppointmentsRepository implements AppointmentsRepository {
     return appointmentsFromPsychologist.slice(offset, offset + 10)
   }
 
-  async update(appointment: Appointment): Promise<void> {
+  async save(appointment: Appointment): Promise<void> {
     const appointmentIndex = this.appointments.findIndex((ap) =>
       ap.id.equals(appointment.id),
     )
