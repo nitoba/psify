@@ -1,3 +1,4 @@
+import { DomainEvents } from '@/core/events/domain-events'
 import { OrderRepository } from '@/domain/payment/application/repositories/order-repository'
 import { Order } from '@/domain/payment/enterprise/entities/order'
 
@@ -26,5 +27,7 @@ export class InMemoryOrderRepository implements OrderRepository {
       (o) => o.id.toString() === order.id.toString(),
     )
     this.orders[index] = order
+
+    DomainEvents.dispatchEventsForAggregate(order.id)
   }
 }

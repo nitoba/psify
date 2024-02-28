@@ -7,7 +7,9 @@ import { MarkAppointmentAsScheduledUseCase } from '../use-cases/mark-appointment
 export class OnOrderApproved implements EventHandler {
   constructor(
     private readonly markAsScheduledUseCase: MarkAppointmentAsScheduledUseCase,
-  ) {}
+  ) {
+    this.setupSubscriptions()
+  }
 
   setupSubscriptions(): void {
     DomainEvents.register(this.markAsScheduled.bind(this), OrderApproved.name)

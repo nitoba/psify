@@ -80,7 +80,7 @@ export class Appointment extends AggregateRoot<AppointmentProps> {
   }
 
   inactivate(): Either<InvalidResource, void> {
-    if (['pending', 'inactive'].includes(this.status)) {
+    if (this.status === 'inactive') {
       return left(
         new InvalidResource(
           'This scheduled appointment could not be inactivated',

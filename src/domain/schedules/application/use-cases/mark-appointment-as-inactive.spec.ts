@@ -26,23 +26,6 @@ describe('MarkAppointmentAsInactiveUseCase', () => {
     expect(repository.appointments[0].id.equals(appointment.id)).toBeTruthy()
   })
 
-  it('should return left if status is pending', async () => {
-    const appointment = makeAppointment({ status: 'pending' })
-    repository.appointments.push(appointment)
-
-    const result = await useCase.execute({
-      scheduleAppointmentId: appointment.id.toString(),
-    })
-
-    expect(result.isLeft()).toBeTruthy()
-    expect(result.value).toEqual(
-      new InvalidResource(
-        'This scheduled appointment could not be inactivated',
-      ),
-    )
-    expect(repository.appointments[0].status).toEqual('pending')
-  })
-
   it('should return left if status is inactive', async () => {
     const appointment = makeAppointment({ status: 'inactive' })
     repository.appointments.push(appointment)
