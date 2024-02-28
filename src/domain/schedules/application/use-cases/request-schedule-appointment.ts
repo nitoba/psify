@@ -83,6 +83,7 @@ export class RequestScheduleAppointmentUseCase {
       patientId: patient.id,
       psychologistId: psychologist.id,
       status: 'pending',
+      costInCents: psychologist.consultationPriceInCents,
       scheduledTo,
     })
 
