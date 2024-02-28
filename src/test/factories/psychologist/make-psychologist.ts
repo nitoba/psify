@@ -1,7 +1,6 @@
 import { faker } from '@faker-js/faker'
 
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
-import { CRP } from '@/domain/psychologist/enterprise/value-objects/crp'
 import { Email } from '@/domain/core/enterprise/value-objects/email'
 import { Name } from '@/domain/core/enterprise/value-objects/name'
 import { Phone } from '@/domain/core/enterprise/value-objects/phone'
@@ -11,6 +10,7 @@ import {
   PsychologistProps,
 } from '@/domain/psychologist/enterprise/entities/psychologist'
 import { SpecialtyList } from '@/domain/psychologist/enterprise/entities/specialty-list'
+import { CRP } from '@/domain/psychologist/enterprise/value-objects/crp'
 
 export function makePsychologist(
   override: Partial<PsychologistProps> = {},
@@ -25,6 +25,7 @@ export function makePsychologist(
       specialties: new SpecialtyList([]),
       scheduledAppointments: [],
       crp: CRP.create('12345678901234').value as CRP,
+      consultationPriceInCents: 100 * 100, // 100 moneys
       ...override,
     },
     id,

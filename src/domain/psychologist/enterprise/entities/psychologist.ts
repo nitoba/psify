@@ -1,6 +1,8 @@
+import { Either, left, right } from '@/core/either'
 import { AggregateRoot } from '@/core/entities/aggregate-root'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { Optional } from '@/core/types/optional'
+import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resource'
 import { Email } from '@/domain/core/enterprise/value-objects/email'
 import { Name } from '@/domain/core/enterprise/value-objects/name'
 import { Phone } from '@/domain/core/enterprise/value-objects/phone'
@@ -18,6 +20,7 @@ export type PsychologistProps = {
   phone: Phone
   crp: CRP
   specialties: SpecialtyList
+  consultationPriceInCents: number
   availableTimes: AvailableTimesList
   scheduledAppointments: Appointment[]
   createdAt: Date
@@ -52,6 +55,10 @@ export class Psychologist extends AggregateRoot<PsychologistProps> {
     return this.props.scheduledAppointments
   }
 
+  get consultationPriceInCents(): number {
+    return this.props.consultationPriceInCents
+  }
+
   get createdAt(): Date {
     return this.props.createdAt
   }
@@ -62,6 +69,18 @@ export class Psychologist extends AggregateRoot<PsychologistProps> {
 
   updateAvailableTimes(availableTimes: AvailableTime[]): void {
     this.props.availableTimes.update(availableTimes)
+  }
+
+  updateConsultationPrice(price: number): Either<InvalidResource, void> {
+    if (price <= 0) {
+      return left(
+        new InvalidResource('consultation price must be positive number'),
+      )
+    }
+
+    this.props.consultationPriceInCents = price
+
+    return right(undefined)
   }
 
   addAvailableTime(availableTime: AvailableTime): void {
