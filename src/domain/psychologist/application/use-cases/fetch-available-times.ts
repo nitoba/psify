@@ -31,6 +31,7 @@ export class FetchAvailableTimesUseCase {
     }
 
     const currentAvailableTimes = psychologist.availableTimes.getItems()
+    const scheduleAppointments = psychologist.scheduleAppointments
 
     // filter availableTimes to response only times more than current date now
     const availableTimes = currentAvailableTimes.filter((at) => {
@@ -41,7 +42,11 @@ export class FetchAvailableTimesUseCase {
       const dateToCompare = new Date()
       dateToCompare.setHours(hourFromTime, minutesFromTime)
 
-      return Date.now() <= dateToCompare.getTime()
+      const isTimeNotScheduled = scheduleAppointments.every((sp) => {
+        return sp.scheduledTo.getTime() !== dateToCompare.getTime()
+      })
+
+      return Date.now() <= dateToCompare.getTime() && isTimeNotScheduled
     })
 
     return right({

@@ -1,5 +1,6 @@
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { Time } from '@/domain/core/enterprise/value-objects/time'
+import { Appointment } from '@/domain/schedules/enterprise/entities/appointment'
 import { makePsychologist } from '@/test/factories/psychologist/make-psychologist'
 import { InMemoryPsychologistRepository } from '@/test/repositories/psychologist/in-memory-psychologist-repository'
 
@@ -52,6 +53,48 @@ describe('FetchAvailableTimesUseCase', () => {
 
     if (result.isRight()) {
       expect(result.value.availableTimes).toEqual(availableTimes)
+    }
+  })
+
+  it('should return only available times that not scheduled', async () => {
+    vi.useFakeTimers().setSystemTime(new Date(2024, 1, 25, 8))
+    const psychologistId = new UniqueEntityID()
+    const availableTimes = [
+      AvailableTime.create({
+        psychologistId,
+        weekday: 0,
+        time: Time.create('09:00').value as Time,
+      }),
+      AvailableTime.create({
+        psychologistId,
+        weekday: 1,
+        time: Time.create('12:00').value as Time,
+      }),
+    ]
+    const psychologist = makePsychologist(
+      {
+        scheduledAppointments: [
+          Appointment.create({
+            patientId: new UniqueEntityID(),
+            psychologistId,
+            scheduledTo: new Date(2024, 1, 25, 9),
+          }),
+        ],
+        availableTimes: new AvailableTimesList(availableTimes),
+      },
+      psychologistId,
+    )
+
+    repository.create(psychologist)
+
+    const result = await useCase.execute({
+      psychologistId: psychologist.id.toString(),
+    })
+
+    expect(result.isRight()).toBeTruthy()
+
+    if (result.isRight()) {
+      expect(result.value.availableTimes).toEqual([availableTimes[1]])
     }
   })
 
