@@ -14,6 +14,7 @@ export function makeAppointment(
       psychologistId: new UniqueEntityID(),
       scheduledTo: new Date(),
       status: 'pending',
+      costInCents: 100 * 100, // 100 moneys
       ...override,
     },
     id,

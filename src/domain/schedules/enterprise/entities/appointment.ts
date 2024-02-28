@@ -13,6 +13,7 @@ export type AppointmentStatuses =
 export type AppointmentProps = {
   psychologistId: UniqueEntityID
   patientId: UniqueEntityID
+  costInCents: number
   scheduledTo: Date
   status: AppointmentStatuses
   createdAt: Date
@@ -29,6 +30,10 @@ export class Appointment extends AggregateRoot<AppointmentProps> {
 
   get scheduledTo(): Date {
     return this.props.scheduledTo
+  }
+
+  get costInCents(): number {
+    return this.props.costInCents
   }
 
   get status(): AppointmentStatuses {
