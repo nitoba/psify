@@ -84,3 +84,7 @@
     * Ocorre quando um paciente ou psicólogo cancela uma consulta.
 * **Consulta Concluída:**
     * Ocorre quando um psicólogo marca uma consulta como concluída.
+  
+
+## Fluxo da aplicação
+<img src="./.github/flow.svg" width="700px"/>
