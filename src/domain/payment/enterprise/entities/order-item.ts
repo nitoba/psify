@@ -1,5 +1,6 @@
 import { Entity } from '@/core/entities/entity'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
+import { Optional } from '@/core/types/optional'
 
 type OrderItemProps = {
   name: string
@@ -33,5 +34,20 @@ export class OrderItem extends Entity<OrderItemProps> {
 
   get createdAt(): Date {
     return this.props.createdAt
+  }
+
+  static create(
+    { createdAt, ...props }: Optional<OrderItemProps, 'createdAt'>,
+    id?: UniqueEntityID,
+  ) {
+    const orderItem = new OrderItem(
+      {
+        ...props,
+        createdAt: createdAt ?? new Date(),
+      },
+      id,
+    )
+
+    return orderItem
   }
 }

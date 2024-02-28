@@ -6,4 +6,8 @@ type PaymentMethodProps = {
   value: Source
 }
 
-export class PaymentMethod extends ValueObject<PaymentMethodProps> {}
+export class PaymentMethod extends ValueObject<PaymentMethodProps> {
+  static create(props: PaymentMethodProps) {
+    return new PaymentMethod(props)
+  }
+}

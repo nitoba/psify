@@ -1,5 +1,6 @@
 import { AggregateRoot } from '@/core/entities/aggregate-root'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
+import { Optional } from '@/core/types/optional'
 
 import { PaymentMethod } from '../value-objects/payment-method'
 import { OrderItem } from './order-item'
@@ -35,5 +36,36 @@ export class Order extends AggregateRoot<OrderProps> {
 
   get paymentMethod(): PaymentMethod {
     return this.props.paymentMethod
+  }
+
+  addOrderItems(orderItems: OrderItem[]) {
+    this.props.orderItems = orderItems
+  }
+
+  static create(
+    {
+      status,
+      orderItems,
+      createdAt,
+      updatedAt,
+      ...props
+    }: Optional<
+      OrderProps,
+      'createdAt' | 'updatedAt' | 'status' | 'orderItems'
+    >,
+    id?: UniqueEntityID,
+  ) {
+    const order = new Order(
+      {
+        ...props,
+        orderItems: orderItems ?? [],
+        status: status ?? 'pending',
+        createdAt: createdAt ?? new Date(),
+        updatedAt: updatedAt ?? new Date(),
+      },
+      id,
+    )
+
+    return order
   }
 }
