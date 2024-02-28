@@ -1,6 +1,7 @@
 import { differenceInDays } from 'date-fns'
 
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
+import { DomainEvents } from '@/core/events/domain-events'
 import { PaginationParams } from '@/core/repositories/pagination-params'
 import { AppointmentsRepository } from '@/domain/schedules/application/repositories/appointments-repository'
 import {
@@ -13,6 +14,7 @@ export class InMemoryAppointmentsRepository implements AppointmentsRepository {
 
   async create(appointment: Appointment): Promise<void> {
     this.appointments.push(appointment)
+    DomainEvents.dispatchEventsForAggregate(appointment.id)
   }
 
   async findById(id: string): Promise<Appointment | null> {

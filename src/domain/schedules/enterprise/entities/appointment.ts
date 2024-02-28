@@ -110,7 +110,11 @@ export class Appointment extends AggregateRoot<AppointmentProps> {
       id,
     )
 
-    appointment.addDomainEvent(new AppointmentRequested(appointment))
+    const isNewAppointment = !id
+
+    if (isNewAppointment) {
+      appointment.addDomainEvent(new AppointmentRequested(appointment))
+    }
 
     return appointment
   }
