@@ -72,6 +72,27 @@ export class Psychologist extends AggregateRoot<PsychologistProps> {
     this.props.availableTimes.remove(availableTime)
   }
 
+  getAvailableTimes(): AvailableTime[] {
+    const currentAvailableTimes = this.availableTimes.getItems()
+    const scheduleAppointments = this.scheduleAppointments
+
+    // filter availableTimes to response only times more than current date now
+    const availableTimes = currentAvailableTimes.filter((at) => {
+      const [hourFromTime, minutesFromTime] = at.time.getHoursAndMinutes()
+
+      const dateToCompare = new Date()
+      dateToCompare.setHours(hourFromTime, minutesFromTime)
+
+      const isTimeNotScheduled = scheduleAppointments.every((sp) => {
+        return sp.scheduledTo.getTime() !== dateToCompare.getTime()
+      })
+
+      return Date.now() <= dateToCompare.getTime() && isTimeNotScheduled
+    })
+
+    return availableTimes
+  }
+
   static create(
     props: Optional<PsychologistProps, 'createdAt'>,
     id?: UniqueEntityID,

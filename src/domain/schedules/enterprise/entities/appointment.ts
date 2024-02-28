@@ -57,6 +57,7 @@ export class Appointment extends Entity<AppointmentProps> {
     }: Optional<AppointmentProps, 'createdAt' | 'status'>,
     id?: UniqueEntityID,
   ): Appointment {
+    // TODO: Add domain event to create appointment
     return new Appointment(
       {
         ...props,

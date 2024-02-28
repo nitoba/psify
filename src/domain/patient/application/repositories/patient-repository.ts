@@ -1,7 +1,5 @@
-import { UniqueEntityID } from '@/core/entities/unique-entity-id'
+import { Repository } from '@/domain/core/application/repositories/repository'
 
 import { Patient } from '../../enterprise/entities/patient'
 
-export abstract class PatientRepository {
-  abstract findById(id: UniqueEntityID): Promise<Patient | null>
-}
+export abstract class PatientRepository extends Repository<Patient> {}

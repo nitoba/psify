@@ -19,6 +19,11 @@ export class Time extends ValueObject<TimeProps> {
     return right(new Time({ value: time }))
   }
 
+  getHoursAndMinutes(): [number, number] {
+    const [hours, minutes] = this.value.split(':').map(Number)
+    return [hours, minutes]
+  }
+
   private static validate(time: string): boolean {
     return /^([0-1][0-9]|2[0-3]):[0-5][0-9]$/.test(time)
   }

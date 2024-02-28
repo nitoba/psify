@@ -14,6 +14,10 @@ import {
 export class InMemoryAppointmentsRepository implements AppointmentsRepository {
   appointments: Appointment[] = []
 
+  async create(appointment: Appointment): Promise<void> {
+    this.appointments.push(appointment)
+  }
+
   async findById({
     appointmentId,
   }: FindByAppointmentIdAndPsychologyIdParams): Promise<Appointment | null> {

@@ -11,6 +11,8 @@ export type FindByAppointmentIdAndPsychologyIdParams = {
 }
 
 export abstract class AppointmentsRepository {
+  abstract create(appointment: Appointment): Promise<void>
+
   abstract findManyByPsychologistId(
     filter: {
       status?: AppointmentStatuses
