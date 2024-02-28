@@ -14,7 +14,9 @@ export class OnAppointmentCreatedHandler implements EventHandler {
     private readonly createOrderUseCase: CreateIntentOrderUseCase,
     private readonly appointmentRepository: AppointmentsRepository,
     private readonly orderRepository: OrderRepository,
-  ) {}
+  ) {
+    this.setupSubscriptions()
+  }
 
   setupSubscriptions(): void {
     DomainEvents.register(
@@ -47,8 +49,7 @@ export class OnAppointmentCreatedHandler implements EventHandler {
         {
           itemId: appointment.id.toString(),
           name: 'Consultation',
-          //   priceInCents: appointment.cost,
-          priceInCents: 100 * 100, // TODO: get this value from the appointment
+          priceInCents: appointment.costInCents,
         },
       ],
     })
