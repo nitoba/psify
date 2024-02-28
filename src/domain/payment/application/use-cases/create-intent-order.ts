@@ -4,7 +4,7 @@ import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { Order } from '../../enterprise/entities/order'
 import { OrderItem } from '../../enterprise/entities/order-item'
 import { PaymentMethod } from '../../enterprise/value-objects/payment-method'
-import { PaymentRepository } from '../repositories/payment-repository'
+import { OrderRepository } from '../repositories/order-repository'
 
 type CreateIntentOrderUseCaseRequest = {
   costumerId: string
@@ -17,14 +17,16 @@ type CreateIntentOrderUseCaseRequest = {
   }[]
 }
 
+type CreateIntentOrderUseCaseResponse = Either<Error, void>
+
 export class CreateIntentOrderUseCase {
-  constructor(private readonly paymentRepository: PaymentRepository) {}
+  constructor(private readonly orderRepository: OrderRepository) {}
 
   async execute({
     costumerId,
     sellerId,
     orderItems,
-  }: CreateIntentOrderUseCaseRequest): Promise<Either<Error, void>> {
+  }: CreateIntentOrderUseCaseRequest): Promise<CreateIntentOrderUseCaseResponse> {
     const order = Order.create({
       costumerId: new UniqueEntityID(costumerId),
       sellerId: new UniqueEntityID(sellerId),
@@ -45,7 +47,7 @@ export class CreateIntentOrderUseCase {
 
     order.addOrderItems(items)
 
-    await this.paymentRepository.create(order)
+    await this.orderRepository.create(order)
 
     return right(undefined)
   }

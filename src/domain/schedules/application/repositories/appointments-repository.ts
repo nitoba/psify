@@ -1,18 +1,13 @@
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { PaginationParams } from '@/core/repositories/pagination-params'
+import { Repository } from '@/domain/core/application/repositories/repository'
 
 import {
   Appointment,
   AppointmentStatuses,
 } from '../../enterprise/entities/appointment'
 
-export type FindByAppointmentIdAndPsychologyIdParams = {
-  appointmentId: UniqueEntityID
-}
-
-export abstract class AppointmentsRepository {
-  abstract create(appointment: Appointment): Promise<void>
-
+export abstract class AppointmentsRepository extends Repository<Appointment> {
   abstract findManyByPsychologistId(
     filter: {
       status?: AppointmentStatuses
@@ -36,10 +31,6 @@ export abstract class AppointmentsRepository {
     params: PaginationParams,
     patientId: UniqueEntityID,
   ): Promise<Appointment[]>
-
-  abstract findById(
-    params: FindByAppointmentIdAndPsychologyIdParams,
-  ): Promise<Appointment | null>
 
   abstract save(appointment: Appointment): Promise<void>
 }

@@ -2,10 +2,7 @@ import { differenceInDays } from 'date-fns'
 
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { PaginationParams } from '@/core/repositories/pagination-params'
-import {
-  AppointmentsRepository,
-  type FindByAppointmentIdAndPsychologyIdParams,
-} from '@/domain/schedules/application/repositories/appointments-repository'
+import { AppointmentsRepository } from '@/domain/schedules/application/repositories/appointments-repository'
 import {
   Appointment,
   AppointmentStatuses,
@@ -18,12 +15,8 @@ export class InMemoryAppointmentsRepository implements AppointmentsRepository {
     this.appointments.push(appointment)
   }
 
-  async findById({
-    appointmentId,
-  }: FindByAppointmentIdAndPsychologyIdParams): Promise<Appointment | null> {
-    const appointment = this.appointments.find((ap) =>
-      ap.id.equals(appointmentId),
-    )
+  async findById(id: string): Promise<Appointment | null> {
+    const appointment = this.appointments.find((ap) => ap.id.toString() === id)
 
     return appointment ?? null
   }

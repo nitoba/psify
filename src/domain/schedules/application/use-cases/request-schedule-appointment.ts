@@ -7,18 +7,18 @@ import { PsychologistRepository } from '@/domain/psychologist/application/reposi
 import { Appointment } from '../../enterprise/entities/appointment'
 import { AppointmentsRepository } from '../repositories/appointments-repository'
 
-type CreateScheduleAppointmentUseCaseRequest = {
+type RequestScheduleAppointmentUseCaseRequest = {
   psychologistId: string
   patientId: string
   scheduledTo: Date
 }
 
-type CreateScheduleAppointmentUseCaseResponse = Either<
+type RequestScheduleAppointmentUseCaseResponse = Either<
   InvalidResource | ResourceNotFound,
   void
 >
 
-export class CreateScheduleAppointmentUseCase {
+export class RequestScheduleAppointmentUseCase {
   constructor(
     private readonly patientRepository: PatientRepository,
     private readonly psychologistRepository: PsychologistRepository,
@@ -29,7 +29,7 @@ export class CreateScheduleAppointmentUseCase {
     patientId,
     psychologistId,
     scheduledTo,
-  }: CreateScheduleAppointmentUseCaseRequest): Promise<CreateScheduleAppointmentUseCaseResponse> {
+  }: RequestScheduleAppointmentUseCaseRequest): Promise<RequestScheduleAppointmentUseCaseResponse> {
     const psychologist =
       await this.psychologistRepository.findById(psychologistId)
     const patient = await this.patientRepository.findById(patientId)

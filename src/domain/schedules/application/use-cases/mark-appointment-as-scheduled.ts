@@ -1,5 +1,4 @@
 import { Either, left, right } from '@/core/either'
-import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
 
 import { AppointmentsRepository } from '../repositories/appointments-repository'
@@ -18,9 +17,9 @@ export class MarkAppointmentAsScheduledUseCase {
   async execute({
     scheduleAppointmentId,
   }: MarkAppointmentAsScheduledUseCaseRequest): Promise<MarkAppointmentAsScheduledUseCaseResponse> {
-    const appointment = await this.appointmentsRepository.findById({
-      appointmentId: new UniqueEntityID(scheduleAppointmentId),
-    })
+    const appointment = await this.appointmentsRepository.findById(
+      scheduleAppointmentId,
+    )
 
     if (!appointment) {
       return left(new ResourceNotFound('Scheduled Appointment not found'))

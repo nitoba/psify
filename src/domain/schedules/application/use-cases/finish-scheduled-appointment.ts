@@ -1,5 +1,4 @@
 import { Either, left, right } from '@/core/either'
-import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
 import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resource'
 import { AppointmentsRepository } from '@/domain/schedules/application/repositories/appointments-repository'
@@ -21,9 +20,9 @@ export class FinishScheduledAppointmentUseCase {
   async execute({
     scheduleAppointmentId,
   }: FinishScheduledAppointmentUseCaseRequest): Promise<FinishScheduledAppointmentUseCaseResponse> {
-    const scheduledAppointment = await this.appointmentsRepository.findById({
-      appointmentId: new UniqueEntityID(scheduleAppointmentId),
-    })
+    const scheduledAppointment = await this.appointmentsRepository.findById(
+      scheduleAppointmentId,
+    )
 
     if (!scheduledAppointment) {
       return left(new ResourceNotFound('Scheduled Appointment not found'))

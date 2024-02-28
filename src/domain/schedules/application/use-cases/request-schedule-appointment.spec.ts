@@ -13,10 +13,10 @@ import { InMemoryPsychologistRepository } from '@/test/repositories/psychologist
 import { InMemoryAppointmentsRepository } from '@/test/repositories/schedules/in-memory-appointments-repository'
 
 import { Appointment } from '../../enterprise/entities/appointment'
-import { CreateScheduleAppointmentUseCase } from './create-schedule-appointment'
+import { RequestScheduleAppointmentUseCase } from './request-schedule-appointment'
 
-describe('CreateScheduleAppointmentUseCase', () => {
-  let useCase: CreateScheduleAppointmentUseCase
+describe('RequestScheduleAppointmentUseCase', () => {
+  let useCase: RequestScheduleAppointmentUseCase
   let patientRepository: InMemoryPatientRepository
   let psychologistRepository: InMemoryPsychologistRepository
   let appointmentRepository: InMemoryAppointmentsRepository
@@ -26,7 +26,7 @@ describe('CreateScheduleAppointmentUseCase', () => {
     psychologistRepository = new InMemoryPsychologistRepository()
     appointmentRepository = new InMemoryAppointmentsRepository()
 
-    useCase = new CreateScheduleAppointmentUseCase(
+    useCase = new RequestScheduleAppointmentUseCase(
       patientRepository,
       psychologistRepository,
       appointmentRepository,
