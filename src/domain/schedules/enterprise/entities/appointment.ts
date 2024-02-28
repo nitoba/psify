@@ -11,6 +11,7 @@ export type AppointmentStatuses =
   | 'scheduled'
   | 'canceled'
   | 'finished'
+  | 'inactive'
 
 export type AppointmentProps = {
   psychologistId: UniqueEntityID
@@ -74,6 +75,20 @@ export class Appointment extends AggregateRoot<AppointmentProps> {
     this.props.status = 'scheduled'
 
     // TODO: add domain event that this appointment was scheduled
+
+    return right(undefined)
+  }
+
+  inactivate(): Either<InvalidResource, void> {
+    if (['pending', 'inactive'].includes(this.status)) {
+      return left(
+        new InvalidResource(
+          'This scheduled appointment could not be inactivated',
+        ),
+      )
+    }
+
+    this.props.status = 'inactive'
 
     return right(undefined)
   }
