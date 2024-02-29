@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  postgres:
+    container_name: psify_pg
+    image: bitnami/postgresql:latest
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: psify
+      PGDATA: /bitnami/postgresql
+    volumes:
+      - ./data/pg:/bitnami/postgresql
