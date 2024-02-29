@@ -1,3 +1,4 @@
+import fastifyCookie from '@fastify/cookie'
 import { NestFactory } from '@nestjs/core'
 import {
   FastifyAdapter,
@@ -13,11 +14,12 @@ async function bootstrap() {
     AppModule,
     new FastifyAdapter(),
   )
+  await app.register(fastifyCookie)
+
+  app.useGlobalFilters(new ZodFilter())
 
   const configService = app.get(EnvService)
   const port = configService.get('PORT')
-
-  app.useGlobalFilters(new ZodFilter())
 
   await app.listen(port, '0.0.0.0')
 }

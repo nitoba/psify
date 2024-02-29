@@ -4,9 +4,11 @@ import { PassportModule } from '@nestjs/passport'
 
 import { EnvModule } from '../env/env.module'
 import { EnvService } from '../env/env.service'
+import { JwtStrategy } from './jwt.strategy'
 
 @Module({
   imports: [
+    EnvModule,
     PassportModule,
     JwtModule.registerAsync({
       imports: [EnvModule],
@@ -18,7 +20,6 @@ import { EnvService } from '../env/env.service'
         return {
           signOptions: {
             algorithm: 'RS256',
-            expiresIn: '1d',
           },
           privateKey: Buffer.from(privateKey, 'base64'),
           publicKey: Buffer.from(publicKey, 'base64'),
@@ -26,5 +27,6 @@ import { EnvService } from '../env/env.service'
       },
     }),
   ],
+  providers: [JwtStrategy],
 })
 export class AuthModule {}

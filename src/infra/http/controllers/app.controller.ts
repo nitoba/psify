@@ -1,5 +1,6 @@
-import { Body, Controller, Post } from '@nestjs/common'
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
+import { AuthGuard } from '@nestjs/passport'
 import { z } from 'zod'
 
 import { ZodValidationPipe } from '../pipes/zod-validation-pipe'
@@ -17,10 +18,33 @@ export class AppController {
 
   @Post()
   async hello(@Body(new ZodValidationPipe(schema)) body: CreateBodySchema) {
-    const token = await this.jwt.signAsync(body)
+    const token = await this.jwt.signAsync(
+      {
+        sub: body.email,
+      },
+      {
+        expiresIn: '1d',
+      },
+    )
+
+    const refreshToken = await this.jwt.signAsync(
+      { token },
+      {
+        expiresIn: '7d',
+      },
+    )
 
     return {
       token,
+      refreshToken,
+    }
+  }
+
+  @Get()
+  @UseGuards(AuthGuard('jwt'))
+  test() {
+    return {
+      ok: true,
     }
   }
 }

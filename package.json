@@ -20,6 +20,7 @@
     "studio": "drizzle-kit studio"
   },
   "dependencies": {
+    "@fastify/cookie": "^9.3.1",
     "@knaadh/nestjs-drizzle-pg": "^1.0.0",
     "@nestjs/common": "^10.0.0",
     "@nestjs/config": "^3.2.0",
@@ -33,6 +34,7 @@
     "drizzle-kit": "^0.20.14",
     "drizzle-orm": "^0.29.4",
     "fastify": "^4.26.1",
+    "passport-jwt": "^4.0.1",
     "pg": "^8.11.3",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1",
@@ -49,6 +51,7 @@
     "@types/bcrypt": "^5.0.2",
     "@types/express": "^4.17.17",
     "@types/node": "^20.11.20",
+    "@types/passport-jwt": "^4.0.1",
     "@types/pg": "^8.11.2",
     "@types/supertest": "^6.0.0",
     "eslint": "^8.57.0",
