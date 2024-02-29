@@ -6,6 +6,7 @@ import {
 
 import { AppModule } from './app.module'
 import { EnvService } from './env/env.service'
+import { ZodFilter } from './http/filters/zod-error-filter'
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -15,6 +16,8 @@ async function bootstrap() {
 
   const configService = app.get(EnvService)
   const port = configService.get('PORT')
+
+  app.useGlobalFilters(new ZodFilter())
 
   await app.listen(port, '0.0.0.0')
 }

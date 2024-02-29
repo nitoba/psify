@@ -1,18 +1,23 @@
-import { Controller, Get } from '@nestjs/common'
+import { Body, Controller, Post } from '@nestjs/common'
+import { z } from 'zod'
 
 import { DrizzleService } from '@/infra/database/drizzle/drizzle.service'
+
+import { ZodValidationPipe } from '../pipes/zod-validation-pipe'
+
+const schema = z.object({
+  name: z.string().min(1),
+  email: z.string().email().min(1),
+})
+
+type CreateBodySchema = z.infer<typeof schema>
 
 @Controller()
 export class AppController {
   constructor(private readonly drizzle: DrizzleService) {}
 
-  @Get()
-  async hello() {
-    return await this.drizzle.client.query.psychologist.findMany({
-      columns: {
-        id: true,
-        name: true,
-      },
-    })
+  @Post()
+  async hello(@Body(new ZodValidationPipe(schema)) body: CreateBodySchema) {
+    console.log(body)
   }
 }
