@@ -20,6 +20,7 @@ export const psychologist = pgTable('psychologists', {
   crm: text('crm').notNull().unique(),
   consultationPriceInCents: decimal('consultation_price_in_cents'),
   specialties: text('specialties').array().notNull(),
+  authUserId: uuid('auth_user_id').notNull().unique(),
   createdAt: timestamp('created_at').defaultNow(),
   updatedAt: timestamp('updated_at').defaultNow(),
 })
@@ -28,7 +29,9 @@ export const availableTimes = pgTable('available_times', {
   id: uuid('id').primaryKey().notNull().defaultRandom(),
   time: varchar('time', { length: 256 }).notNull(),
   weekday: integer('weekday').notNull(),
-  psychologistId: uuid('psychologist_id').references(() => psychologist.id),
+  psychologistId: uuid('psychologist_id')
+    .references(() => psychologist.id)
+    .notNull(),
 })
 
 export const psychologistRelations = relations(psychologist, ({ many }) => ({

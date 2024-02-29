@@ -9,6 +9,7 @@ export const patient = pgTable('patients', {
   email: varchar('email', { length: 256 }).notNull().unique(),
   phone: varchar('phone', { length: 256 }).notNull(),
   password: text('password').notNull(),
+  authUserId: uuid('auth_user_id').notNull().unique(),
   createdAt: timestamp('created_at').defaultNow(),
   updatedAt: timestamp('updated_at').defaultNow(),
 })
