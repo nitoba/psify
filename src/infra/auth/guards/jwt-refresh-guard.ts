@@ -1,11 +1,12 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common'
-import { JwtService } from '@nestjs/jwt'
 import { FastifyRequest } from 'fastify'
 import { Observable } from 'rxjs'
 
+import { Encrypter } from '@/domain/auth/application/cryptography/encrypter'
+
 @Injectable()
 export class JwtRefreshAuthGuard implements CanActivate {
-  constructor(private jwtService: JwtService) {}
+  constructor(private jwtEncrypter: Encrypter) {}
 
   canActivate(
     context: ExecutionContext,
@@ -18,7 +19,7 @@ export class JwtRefreshAuthGuard implements CanActivate {
       return false
     }
 
-    const result = this.jwtService.verifyAsync(refreshToken)
+    const result = this.jwtEncrypter.verify(refreshToken)
 
     if (!result) {
       return false
