@@ -31,9 +31,9 @@ export const accounts = pgTable(
     expires_at: integer('expires_at'),
     token_type: text('token_type'),
   },
-  (account) => ({
+  (accounts) => ({
     compoundKey: primaryKey({
-      columns: [accounts.provider, account.providerAccountId],
+      columns: [accounts.provider, accounts.providerAccountId],
     }),
   }),
 )

@@ -1,3 +1,5 @@
+import { randomUUID } from 'node:crypto'
+
 import { Injectable } from '@nestjs/common'
 
 import { AuthPatientRepository } from '@/domain/auth/application/repositories/auth-patient-repository'
@@ -5,7 +7,7 @@ import { Patient } from '@/domain/auth/enterprise/entities/patient'
 
 import { DrizzleService } from '../drizzle.service'
 import { toAuthDomain } from '../mappers/patient-mapper'
-import { patient, users } from '../schemas'
+import { accounts, patient, users } from '../schemas'
 
 @Injectable()
 export class DrizzleAuthPatientRepository implements AuthPatientRepository {
@@ -22,13 +24,21 @@ export class DrizzleAuthPatientRepository implements AuthPatientRepository {
   }
 
   async create(entity: Patient): Promise<void> {
-    const user = await this.db.client
+    // TODO: execute with transactions
+    const [user] = await this.db.client
       .insert(users)
       .values({
         email: entity.email,
         name: entity.name,
       })
       .returning()
+
+    await this.db.client.insert(accounts).values({
+      provider: 'credentials',
+      type: 'email',
+      userId: user.id,
+      providerAccountId: randomUUID(),
+    })
 
     await this.db.client.insert(patient).values({
       id: entity.id.toString(),
@@ -37,7 +47,7 @@ export class DrizzleAuthPatientRepository implements AuthPatientRepository {
       password: entity.password,
       phone: entity.phone,
       createdAt: entity.createdAt,
-      authUserId: user[0].id,
+      authUserId: user.id,
     })
   }
 
