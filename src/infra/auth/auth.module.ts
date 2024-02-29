@@ -18,6 +18,7 @@ import { EnvService } from '../env/env.service'
         return {
           signOptions: {
             algorithm: 'RS256',
+            expiresIn: '1d',
           },
           privateKey: Buffer.from(privateKey, 'base64'),
           publicKey: Buffer.from(publicKey, 'base64'),
