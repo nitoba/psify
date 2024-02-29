@@ -1,0 +1,55 @@
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Post,
+  Res,
+} from '@nestjs/common'
+import { FastifyReply } from 'fastify'
+import { z } from 'zod'
+
+import { InvalidCredentials } from '@/core/errors/use-cases/invalid-credentials'
+import { AuthenticatePatientUseCase } from '@/domain/auth/application/use-cases/authenticate-patient'
+import { Public } from '@/infra/auth/public'
+
+import { ZodValidationPipe } from '../pipes/zod-validation-pipe'
+
+const authenticatePatientBodySchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(6),
+})
+
+type AuthenticatePatientBody = z.infer<typeof authenticatePatientBodySchema>
+
+@Controller('/auth/patients/authenticate')
+export class AuthenticatePatientController {
+  constructor(
+    private readonly authenticatePatientUseCase: AuthenticatePatientUseCase,
+  ) {}
+
+  @Public()
+  @Post()
+  async handle(
+    @Res({ passthrough: true }) res: FastifyReply,
+    @Body(new ZodValidationPipe(authenticatePatientBodySchema))
+    { email, password }: AuthenticatePatientBody,
+  ) {
+    const result = await this.authenticatePatientUseCase.execute({
+      email,
+      password,
+    })
+
+    if (result.isLeft() && result.value instanceof InvalidCredentials) {
+      return new BadRequestException(result.value)
+    }
+
+    if (result.isRight()) {
+      res.setCookie('psify@access_token', result.value.accessToken, {
+        path: '/',
+        httpOnly: true,
+      })
+
+      return res.send({ ...result.value })
+    }
+  }
+}
