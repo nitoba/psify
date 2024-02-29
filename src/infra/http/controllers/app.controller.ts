@@ -1,8 +1,10 @@
-import { Body, Controller, Get, Post, Res } from '@nestjs/common'
+import { Body, Controller, Get, Post, Res, UseGuards } from '@nestjs/common'
 import { FastifyReply } from 'fastify'
 import { z } from 'zod'
 
 import { Encrypter } from '@/domain/auth/application/cryptography/encrypter'
+import { Cookies } from '@/infra/auth/decorators/cookie-decorator'
+import { JwtRefreshAuthGuard } from '@/infra/auth/guards/jwt-refresh-guard'
 import { Public } from '@/infra/auth/public'
 
 import { ZodValidationPipe } from '../pipes/zod-validation-pipe'
@@ -40,9 +42,15 @@ export class AppController {
       },
     )
 
-    res.setCookie('jwt', token, {
+    res.setCookie('psify@access_token', token, {
       path: '/',
       maxAge: 60 * 60 * 24,
+      httpOnly: true,
+    })
+
+    res.setCookie('psify@refresh_token', token, {
+      path: '/',
+      maxAge: 60 * 60 * 24 * 7,
       httpOnly: true,
     })
 
@@ -54,6 +62,16 @@ export class AppController {
 
   @Get()
   test() {
+    return {
+      ok: true,
+    }
+  }
+
+  @Public()
+  @UseGuards(JwtRefreshAuthGuard)
+  @Post('refresh')
+  refresh(@Cookies('psify@refresh_token') refreshToken: string) {
+    console.log(refreshToken)
     return {
       ok: true,
     }

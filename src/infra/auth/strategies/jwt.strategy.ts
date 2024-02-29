@@ -31,6 +31,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
   private static extractJWTFromCookie(req: FastifyRequest) {
     if (!req.cookies) return null
-    return req.cookies.jwt ?? null
+    return req.cookies['psify@access_token'] ?? null
   }
 }
