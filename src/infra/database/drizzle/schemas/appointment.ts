@@ -28,12 +28,12 @@ export const appointments = pgTable('appointments', {
 })
 
 export const appointmentRelations = relations(appointments, ({ one }) => ({
-  psychologists: one(psychologist, {
+  psychologist: one(psychologist, {
     relationName: 'psychologist_scheduled_appointments',
     fields: [appointments.psychologistId],
     references: [psychologist.id],
   }),
-  patients: one(patient, {
+  patient: one(patient, {
     relationName: 'patient_scheduled_appointments',
     fields: [appointments.patientId],
     references: [patient.id],
