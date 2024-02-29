@@ -10,8 +10,8 @@ export const patient = pgTable('patients', {
   phone: varchar('phone', { length: 256 }).notNull(),
   password: text('password').notNull(),
   authUserId: uuid('auth_user_id').notNull().unique(),
-  createdAt: timestamp('created_at').defaultNow(),
-  updatedAt: timestamp('updated_at').defaultNow(),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+  updatedAt: timestamp('updated_at').defaultNow().notNull(),
 })
 
 export const patientRelations = relations(patient, ({ many }) => ({
