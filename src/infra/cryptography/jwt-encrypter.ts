@@ -6,6 +6,11 @@ import { Encrypter } from '@/domain/auth/application/cryptography/encrypter'
 @Injectable()
 export class JwtEncrypter implements Encrypter {
   constructor(private readonly jwtService: JwtService) {}
+
+  async verify(token: string): Promise<boolean> {
+    return !!this.jwtService.verifyAsync(token)
+  }
+
   encrypt(
     payload: Record<string, unknown>,
     options?: Record<string, unknown>,
