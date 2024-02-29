@@ -3,14 +3,17 @@ import { APP_GUARD } from '@nestjs/core'
 import { JwtModule } from '@nestjs/jwt'
 import { PassportModule } from '@nestjs/passport'
 
+import { CryptographyModule } from '../cryptography/cryptography.module'
 import { EnvModule } from '../env/env.module'
 import { EnvService } from '../env/env.service'
 import { JwtAuthGuard } from './guards/jwt-auth-guard'
 import { JwtRefreshAuthGuard } from './guards/jwt-refresh-guard'
+import { AuthService } from './services/auth-service'
 import { JwtStrategy } from './strategies/jwt.strategy'
 
 @Module({
   imports: [
+    CryptographyModule,
     EnvModule,
     PassportModule,
     JwtModule.registerAsync({
@@ -31,6 +34,7 @@ import { JwtStrategy } from './strategies/jwt.strategy'
     }),
   ],
   providers: [
+    AuthService,
     JwtStrategy,
     JwtRefreshAuthGuard,
     {
@@ -38,5 +42,6 @@ import { JwtStrategy } from './strategies/jwt.strategy'
       useClass: JwtAuthGuard,
     },
   ],
+  exports: [AuthService],
 })
 export class AuthModule {}

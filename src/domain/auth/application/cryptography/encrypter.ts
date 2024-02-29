@@ -3,4 +3,6 @@ export abstract class Encrypter {
     payload: Record<string, unknown>,
     options?: Record<string, unknown>,
   ): Promise<string>
+
+  abstract verify(token: string): Promise<boolean>
 }

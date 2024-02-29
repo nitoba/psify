@@ -2,10 +2,9 @@ import { Body, Controller, Get, Post, Res, UseGuards } from '@nestjs/common'
 import { FastifyReply } from 'fastify'
 import { z } from 'zod'
 
-import { Encrypter } from '@/domain/auth/application/cryptography/encrypter'
-import { Cookies } from '@/infra/auth/decorators/cookie-decorator'
 import { JwtRefreshAuthGuard } from '@/infra/auth/guards/jwt-refresh-guard'
 import { Public } from '@/infra/auth/public'
+import { AuthService } from '@/infra/auth/services/auth-service'
 
 import { ZodValidationPipe } from '../pipes/zod-validation-pipe'
 
@@ -18,7 +17,7 @@ type CreateBodySchema = z.infer<typeof schema>
 
 @Controller()
 export class AppController {
-  constructor(private readonly jwt: Encrypter) {}
+  constructor(private readonly auth: AuthService) {}
 
   @Post()
   @Public()
@@ -26,21 +25,9 @@ export class AppController {
     @Res({ passthrough: true }) res: FastifyReply,
     @Body(new ZodValidationPipe(schema)) body: CreateBodySchema,
   ) {
-    const token = await this.jwt.encrypt(
-      {
-        sub: body.email,
-      },
-      {
-        expiresIn: '1d',
-      },
-    )
-
-    const refreshToken = await this.jwt.encrypt(
-      { token },
-      {
-        expiresIn: '7d',
-      },
-    )
+    const { token, refreshToken } = await this.auth.generateTokens({
+      sub: body.email,
+    })
 
     res.setCookie('psify@access_token', token, {
       path: '/',
@@ -48,7 +35,7 @@ export class AppController {
       httpOnly: true,
     })
 
-    res.setCookie('psify@refresh_token', token, {
+    res.setCookie('psify@refresh_token', refreshToken, {
       path: '/',
       maxAge: 60 * 60 * 24 * 7,
       httpOnly: true,
@@ -70,10 +57,21 @@ export class AppController {
   @Public()
   @UseGuards(JwtRefreshAuthGuard)
   @Post('refresh')
-  refresh(@Cookies('psify@refresh_token') refreshToken: string) {
-    console.log(refreshToken)
-    return {
-      ok: true,
-    }
+  async refresh(@Res({ passthrough: true }) res: FastifyReply) {
+    const { token, refreshToken } = await this.auth.refreshToken({
+      sub: 'uuid',
+    })
+
+    res.setCookie('psify@access_token', token, {
+      path: '/',
+      maxAge: 60 * 60 * 24,
+      httpOnly: true,
+    })
+
+    res.setCookie('psify@refresh_token', refreshToken, {
+      path: '/',
+      maxAge: 60 * 60 * 24 * 7,
+      httpOnly: true,
+    })
   }
 }

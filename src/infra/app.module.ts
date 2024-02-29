@@ -16,7 +16,5 @@ import { HttpModule } from './http/http.module'
     EnvModule,
     HttpModule,
   ],
-  controllers: [],
-  providers: [],
 })
 export class AppModule {}
