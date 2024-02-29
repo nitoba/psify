@@ -1,9 +1,9 @@
-import { Body, Controller, Get, Post, Res, UseGuards } from '@nestjs/common'
+import { Body, Controller, Get, Post, Res } from '@nestjs/common'
 import { FastifyReply } from 'fastify'
 import { z } from 'zod'
 
 import { Encrypter } from '@/domain/auth/application/cryptography/encrypter'
-import { JwtAuthGuard } from '@/infra/auth/guards/jwt-auth-guard'
+import { Public } from '@/infra/auth/public'
 
 import { ZodValidationPipe } from '../pipes/zod-validation-pipe'
 
@@ -19,6 +19,7 @@ export class AppController {
   constructor(private readonly jwt: Encrypter) {}
 
   @Post()
+  @Public()
   async hello(
     @Res({ passthrough: true }) res: FastifyReply,
     @Body(new ZodValidationPipe(schema)) body: CreateBodySchema,
@@ -52,7 +53,6 @@ export class AppController {
   }
 
   @Get()
-  @UseGuards(JwtAuthGuard)
   test() {
     return {
       ok: true,
