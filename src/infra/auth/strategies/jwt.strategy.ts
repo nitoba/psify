@@ -4,13 +4,7 @@ import { FastifyRequest } from 'fastify'
 import { ExtractJwt, Strategy } from 'passport-jwt'
 import { z } from 'zod'
 
-import { EnvService } from '../env/env.service'
-
-declare module 'fastify' {
-  export interface FastifyRequest {
-    cookies: { [cookieName: string]: string | undefined }
-  }
-}
+import { EnvService } from '../../env/env.service'
 
 const payloadTokenSchema = z.object({
   sub: z.string().uuid(),

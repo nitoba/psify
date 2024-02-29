@@ -1,7 +1,9 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common'
-import { JwtService } from '@nestjs/jwt'
-import { AuthGuard } from '@nestjs/passport'
+import { Body, Controller, Get, Post, Res, UseGuards } from '@nestjs/common'
+import { FastifyReply } from 'fastify'
 import { z } from 'zod'
+
+import { Encrypter } from '@/domain/auth/application/cryptography/encrypter'
+import { JwtAuthGuard } from '@/infra/auth/guards/jwt-auth-guard'
 
 import { ZodValidationPipe } from '../pipes/zod-validation-pipe'
 
@@ -14,11 +16,14 @@ type CreateBodySchema = z.infer<typeof schema>
 
 @Controller()
 export class AppController {
-  constructor(private readonly jwt: JwtService) {}
+  constructor(private readonly jwt: Encrypter) {}
 
   @Post()
-  async hello(@Body(new ZodValidationPipe(schema)) body: CreateBodySchema) {
-    const token = await this.jwt.signAsync(
+  async hello(
+    @Res({ passthrough: true }) res: FastifyReply,
+    @Body(new ZodValidationPipe(schema)) body: CreateBodySchema,
+  ) {
+    const token = await this.jwt.encrypt(
       {
         sub: body.email,
       },
@@ -27,21 +32,27 @@ export class AppController {
       },
     )
 
-    const refreshToken = await this.jwt.signAsync(
+    const refreshToken = await this.jwt.encrypt(
       { token },
       {
         expiresIn: '7d',
       },
     )
 
-    return {
+    res.setCookie('jwt', token, {
+      path: '/',
+      maxAge: 60 * 60 * 24,
+      httpOnly: true,
+    })
+
+    return res.send({
       token,
       refreshToken,
-    }
+    })
   }
 
   @Get()
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(JwtAuthGuard)
   test() {
     return {
       ok: true,

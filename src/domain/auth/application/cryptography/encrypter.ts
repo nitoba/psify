@@ -1,3 +1,6 @@
 export abstract class Encrypter {
-  abstract encrypt(payload: Record<string, unknown>): Promise<string>
+  abstract encrypt(
+    payload: Record<string, unknown>,
+    options?: Record<string, unknown>,
+  ): Promise<string>
 }
