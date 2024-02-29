@@ -1,7 +1,6 @@
 import { Body, Controller, Post } from '@nestjs/common'
+import { JwtService } from '@nestjs/jwt'
 import { z } from 'zod'
-
-import { DrizzleService } from '@/infra/database/drizzle/drizzle.service'
 
 import { ZodValidationPipe } from '../pipes/zod-validation-pipe'
 
@@ -14,10 +13,14 @@ type CreateBodySchema = z.infer<typeof schema>
 
 @Controller()
 export class AppController {
-  constructor(private readonly drizzle: DrizzleService) {}
+  constructor(private readonly jwt: JwtService) {}
 
   @Post()
   async hello(@Body(new ZodValidationPipe(schema)) body: CreateBodySchema) {
-    console.log(body)
+    const token = await this.jwt.signAsync(body)
+
+    return {
+      token,
+    }
   }
 }
