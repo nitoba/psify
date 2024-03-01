@@ -1,3 +1,5 @@
+import { Injectable } from '@nestjs/common'
+
 import { Either, left, right } from '@/core/either'
 import { InvalidCredentials } from '@/core/errors/use-cases/invalid-credentials'
 
@@ -17,6 +19,7 @@ type AuthenticatePsychologistUseCaseResponse = Either<
   }
 >
 
+@Injectable()
 export class AuthenticatePsychologistUseCase {
   constructor(
     private readonly authPsychologistRepository: AuthPsychologistRepository,

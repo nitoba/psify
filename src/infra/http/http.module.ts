@@ -3,6 +3,7 @@ import { Module } from '@nestjs/common'
 import { AuthPatientRepository } from '@/domain/auth/application/repositories/auth-patient-repository'
 import { AuthPsychologistRepository } from '@/domain/auth/application/repositories/auth-psychologist-repository'
 import { AuthenticatePatientUseCase } from '@/domain/auth/application/use-cases/authenticate-patient'
+import { AuthenticatePsychologistUseCase } from '@/domain/auth/application/use-cases/authenticate-psychologist'
 import { RegisterPatientUseCase } from '@/domain/auth/application/use-cases/register-patient'
 import { RegisterPsychologistUseCase } from '@/domain/auth/application/use-cases/register-psychologist'
 
@@ -12,6 +13,7 @@ import { DatabaseModule } from '../database/database.module'
 import { DrizzleAuthPatientRepository } from '../database/drizzle/repositories/drizzle-auth-patient-repository'
 import { DrizzleAuthPsychologistRepository } from '../database/drizzle/repositories/drizzle-auth-psychologist-repository'
 import { AuthenticatePatientController } from './controllers/authenticate-patient.controller'
+import { AuthenticatePsychologistController } from './controllers/authenticate-psychologist.controller'
 import { RegisterPatientController } from './controllers/register-patient.controller'
 import { RegisterPsychologistController } from './controllers/register-psychologist.controller'
 
@@ -19,8 +21,9 @@ import { RegisterPsychologistController } from './controllers/register-psycholog
   imports: [DatabaseModule, CryptographyModule, AuthModule],
   controllers: [
     RegisterPatientController,
-    AuthenticatePatientController,
     RegisterPsychologistController,
+    AuthenticatePatientController,
+    AuthenticatePsychologistController,
   ],
   providers: [
     {
@@ -34,6 +37,7 @@ import { RegisterPsychologistController } from './controllers/register-psycholog
     RegisterPatientUseCase,
     RegisterPsychologistUseCase,
     AuthenticatePatientUseCase,
+    AuthenticatePsychologistUseCase,
   ],
 })
 export class HttpModule {}
