@@ -11,7 +11,7 @@ describe('CRP', () => {
   })
 
   it('should create valid CRP', () => {
-    const validCRP = 'Normal'
+    const validCRP = '1122222'
     const result = CRP.create(validCRP)
 
     expect(result.isRight()).toBeTruthy()

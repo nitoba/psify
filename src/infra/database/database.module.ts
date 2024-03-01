@@ -13,9 +13,9 @@ import * as schema from './drizzle/schemas'
       tag: 'DB',
       imports: [EnvModule],
       inject: [EnvService],
-      useFactory: (env: EnvService): DrizzlePGConfig => {
-        console.log('CurrentDB:', env.get('DATABASE_URL'))
-
+      useFactory: async (env: EnvService): Promise<DrizzlePGConfig> => {
+        // process.env.DATABASE_URL = 'test'
+        // console.log({ data: env.get('DATABASE_URL') })
         return {
           pg: {
             connection: 'client',

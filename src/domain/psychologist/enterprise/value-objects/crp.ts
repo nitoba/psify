@@ -20,6 +20,6 @@ export class CRP extends ValueObject<CRPProps> {
   }
 
   private static validate(crp: string): boolean {
-    return crp.length <= 15
+    return crp.length === 7
   }
 }

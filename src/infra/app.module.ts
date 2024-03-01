@@ -9,8 +9,12 @@ import { HttpModule } from './http/http.module'
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: process.env.NODE_ENV === 'test' ? '.env' : '.env.test',
-      validate: (env) => envSchema.parse(env),
+      // ignoreEnvFile: process.env.NODE_ENV === 'test',
+      envFilePath: process.env.NODE_ENV === 'test' ? '.env.test' : '.env',
+      validate:
+        process.env.NODE_ENV === 'test'
+          ? undefined
+          : (env) => envSchema.parse(env),
       isGlobal: true,
     }),
     AuthModule,

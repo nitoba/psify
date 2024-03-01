@@ -10,4 +10,8 @@ export class EnvService {
   get<T extends keyof Env>(key: T) {
     return this.configService.get(key, { infer: true })
   }
+
+  set<T extends keyof Env>(key: T, value: string) {
+    return this.configService.set(key, value)
+  }
 }

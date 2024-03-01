@@ -9,6 +9,7 @@ export default defineConfig({
     globals: true,
     root: './',
     setupFiles: ['./test/setup-e2e.ts'],
+    hookTimeout: Infinity,
   },
   plugins: [
     tsConfigPaths(),

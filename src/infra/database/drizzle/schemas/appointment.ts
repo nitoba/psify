@@ -1,5 +1,5 @@
 import { relations } from 'drizzle-orm'
-import { decimal, pgEnum, pgTable, timestamp, uuid } from 'drizzle-orm/pg-core'
+import { pgEnum, pgTable, real, timestamp, uuid } from 'drizzle-orm/pg-core'
 
 import { patient } from './patient'
 import { psychologist } from './psychologist'
@@ -21,7 +21,7 @@ export const appointments = pgTable('appointments', {
     .notNull()
     .references(() => patient.id),
   scheduledTo: timestamp('scheduled_to').notNull(),
-  costInCents: decimal('cost_in_cents').notNull(),
+  costInCents: real('cost_in_cents').notNull(),
   status: appointmentStatusEnum('status'),
   createdAt: timestamp('created_at').defaultNow(),
   updatedAt: timestamp('updated_at').defaultNow(),

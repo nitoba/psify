@@ -24,7 +24,7 @@ describe('RegisterPsychologistUseCase', () => {
     name: 'John Doe',
     email: 'john@doe.com',
     phone: '(88) 987654321',
-    crp: '12345678901',
+    crp: '1234567',
     password: 'password',
     specialty: 'Cardiology',
   }

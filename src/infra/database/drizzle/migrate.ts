@@ -19,13 +19,12 @@ async function runMigrations() {
 
   await connection.connect()
 
-  const db = drizzle(connection, { schema, logger: true })
+  const db = drizzle(connection, { schema, logger: false })
 
   const migrationsFolder = path.resolve(__dirname, 'migrations')
 
   await migrate(db, {
     migrationsFolder,
-    migrationsTable: 'public',
   })
 
   await connection.end()

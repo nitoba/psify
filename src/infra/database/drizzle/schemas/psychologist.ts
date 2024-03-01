@@ -1,8 +1,8 @@
 import { relations } from 'drizzle-orm'
 import {
-  decimal,
   integer,
   pgTable,
+  real,
   text,
   timestamp,
   uuid,
@@ -17,11 +17,11 @@ export const psychologist = pgTable('psychologists', {
   email: varchar('email', { length: 256 }).notNull().unique(),
   phone: varchar('phone', { length: 256 }).notNull(),
   password: text('password').notNull(),
-  crm: text('crm').notNull().unique(),
-  consultationPriceInCents: decimal('consultation_price_in_cents'),
+  crp: text('crp').notNull().unique(),
+  consultationPriceInCents: real('consultation_price_in_cents'),
   specialties: text('specialties').array().notNull(),
   authUserId: uuid('auth_user_id').notNull().unique(),
-  createdAt: timestamp('created_at').defaultNow(),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at').defaultNow(),
 })
 
