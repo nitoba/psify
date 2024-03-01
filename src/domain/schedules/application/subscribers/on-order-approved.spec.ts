@@ -1,13 +1,14 @@
 /* eslint-disable no-new */
+import { makePatient } from 'test/factories/patient/make-patient'
+import { makeOrder } from 'test/factories/payment/make-order'
+import { makePsychologist } from 'test/factories/psychologist/make-psychologist'
+import { makeAppointment } from 'test/factories/schedules/make-appointment'
+import { InMemoryOrderRepository } from 'test/repositories/payment/in-memory-order-repository'
+import { InMemoryAppointmentsRepository } from 'test/repositories/schedules/in-memory-appointments-repository'
+import { waitFor } from 'test/utils/wait-for'
+
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { OrderItem } from '@/domain/payment/enterprise/entities/order-item'
-import { makePatient } from '@/test/factories/patient/make-patient'
-import { makeOrder } from '@/test/factories/payment/make-order'
-import { makePsychologist } from '@/test/factories/psychologist/make-psychologist'
-import { makeAppointment } from '@/test/factories/schedules/make-appointment'
-import { InMemoryOrderRepository } from '@/test/repositories/payment/in-memory-order-repository'
-import { InMemoryAppointmentsRepository } from '@/test/repositories/schedules/in-memory-appointments-repository'
-import { waitFor } from '@/test/utils/wait-for'
 
 import { MarkAppointmentAsScheduledUseCase } from '../use-cases/mark-appointment-as-scheduled'
 import { OnOrderApproved } from './on-order-approved'

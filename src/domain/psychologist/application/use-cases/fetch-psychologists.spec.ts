@@ -1,7 +1,8 @@
+import { makePsychologist } from 'test/factories/psychologist/make-psychologist'
+import { InMemoryPsychologistRepository } from 'test/repositories/psychologist/in-memory-psychologist-repository'
+
 import { Name } from '@/domain/core/enterprise/value-objects/name'
 import { Specialty } from '@/domain/psychologist/enterprise/value-objects/specialty'
-import { makePsychologist } from '@/test/factories/psychologist/make-psychologist'
-import { InMemoryPsychologistRepository } from '@/test/repositories/psychologist/in-memory-psychologist-repository'
 
 import { SpecialtyList } from '../../enterprise/entities/specialty-list'
 import { FetchPsychologistsUseCase } from './fetch-psychologists'

@@ -1,7 +1,7 @@
-import { makeAppointment } from '@/test/factories/schedules/make-appointment'
-import { InMemoryOrderRepository } from '@/test/repositories/payment/in-memory-order-repository'
-import { InMemoryAppointmentsRepository } from '@/test/repositories/schedules/in-memory-appointments-repository'
-import { waitFor } from '@/test/utils/wait-for'
+import { makeAppointment } from 'test/factories/schedules/make-appointment'
+import { InMemoryOrderRepository } from 'test/repositories/payment/in-memory-order-repository'
+import { InMemoryAppointmentsRepository } from 'test/repositories/schedules/in-memory-appointments-repository'
+import { waitFor } from 'test/utils/wait-for'
 
 import { CreateIntentOrderUseCase } from '../use-cases/create-intent-order'
 import { OnAppointmentCreatedHandler } from './on-appointment-requested'

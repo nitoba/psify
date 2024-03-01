@@ -1,10 +1,10 @@
 import { addDays } from 'date-fns'
+import { makePatient } from 'test/factories/patient/make-patient'
+import { makeAppointment } from 'test/factories/schedules/make-appointment'
+import { InMemoryPatientRepository } from 'test/repositories/patient/in-memory-patient-repository'
+import { InMemoryAppointmentsRepository } from 'test/repositories/schedules/in-memory-appointments-repository'
 
 import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
-import { makePatient } from '@/test/factories/patient/make-patient'
-import { makeAppointment } from '@/test/factories/schedules/make-appointment'
-import { InMemoryPatientRepository } from '@/test/repositories/patient/in-memory-patient-repository'
-import { InMemoryAppointmentsRepository } from '@/test/repositories/schedules/in-memory-appointments-repository'
 
 import { FetchScheduledAppointmentsFromPatientUseCase } from './fetch-scheduled-appointments-from-patient'
 

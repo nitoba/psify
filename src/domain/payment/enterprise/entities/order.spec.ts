@@ -1,5 +1,5 @@
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
-import { makeOrder } from '@/test/factories/payment/make-order'
+import { makeOrder } from 'test/factories/payment/make-order'
 
 import { PaymentMethod } from '../value-objects/payment-method'
 import { Order } from './order'

@@ -1,8 +1,9 @@
+import { makePsychologist } from 'test/factories/psychologist/make-psychologist'
+import { InMemoryPsychologistRepository } from 'test/repositories/psychologist/in-memory-psychologist-repository'
+
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
 import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resource'
-import { makePsychologist } from '@/test/factories/psychologist/make-psychologist'
-import { InMemoryPsychologistRepository } from '@/test/repositories/psychologist/in-memory-psychologist-repository'
 
 import { UpdateConsultationPriceUseCase } from './update-consultation-price'
 

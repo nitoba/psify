@@ -1,6 +1,7 @@
+import { makeAppointment } from 'test/factories/schedules/make-appointment'
+import { InMemoryAppointmentsRepository } from 'test/repositories/schedules/in-memory-appointments-repository'
+
 import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resource'
-import { makeAppointment } from '@/test/factories/schedules/make-appointment'
-import { InMemoryAppointmentsRepository } from '@/test/repositories/schedules/in-memory-appointments-repository'
 
 import { MarkAppointmentAsInactiveUseCase } from './mark-appointment-as-inactive'
 

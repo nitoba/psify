@@ -1,8 +1,9 @@
+import { FakeEncrypter } from 'test/cryptography/fake-encrypter'
+import { FakeHasher } from 'test/cryptography/fake-hasher'
+import { makeAuthPsychologist } from 'test/factories/auth/make-auth-psychologist'
+import { InMemoryAuthPsychologistRepository } from 'test/repositories/auth/in-memory-psychologist-repository'
+
 import { InvalidCredentials } from '@/core/errors/use-cases/invalid-credentials'
-import { FakeEncrypter } from '@/test/cryptography/fake-encrypter'
-import { FakeHasher } from '@/test/cryptography/fake-hasher'
-import { makeAuthPsychologist } from '@/test/factories/auth/make-auth-psychologist'
-import { InMemoryAuthPsychologistRepository } from '@/test/repositories/auth/in-memory-psychologist-repository'
 
 import { AuthenticatePsychologistUseCase } from './authenticate-psychologist'
 

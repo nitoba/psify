@@ -1,7 +1,8 @@
+import { makeAppointment } from 'test/factories/schedules/make-appointment'
+import { InMemoryAppointmentsRepository } from 'test/repositories/schedules/in-memory-appointments-repository'
+
 import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
 import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resource'
-import { makeAppointment } from '@/test/factories/schedules/make-appointment'
-import { InMemoryAppointmentsRepository } from '@/test/repositories/schedules/in-memory-appointments-repository'
 
 import { CancelScheduledAppointmentUseCase } from './cancel-scheduled-appointment'
 

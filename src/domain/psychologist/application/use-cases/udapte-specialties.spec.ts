@@ -1,7 +1,8 @@
+import { makePsychologist } from 'test/factories/psychologist/make-psychologist'
+import { InMemoryPsychologistRepository } from 'test/repositories/psychologist/in-memory-psychologist-repository'
+
 import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
 import { Specialty } from '@/domain/psychologist/enterprise/value-objects/specialty'
-import { makePsychologist } from '@/test/factories/psychologist/make-psychologist'
-import { InMemoryPsychologistRepository } from '@/test/repositories/psychologist/in-memory-psychologist-repository'
 
 import { SpecialtyList } from '../../enterprise/entities/specialty-list'
 import { UpdateSpecialtyUseCase } from './update-specialties'

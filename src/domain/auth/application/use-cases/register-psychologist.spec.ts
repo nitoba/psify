@@ -1,9 +1,10 @@
+import { FakeHasher } from 'test/cryptography/fake-hasher'
+import { makeAuthPsychologist } from 'test/factories/auth/make-auth-psychologist'
+import { InMemoryAuthPsychologistRepository } from 'test/repositories/auth/in-memory-psychologist-repository'
+
 import { left } from '@/core/either'
 import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resource'
 import { Email } from '@/domain/core/enterprise/value-objects/email'
-import { FakeHasher } from '@/test/cryptography/fake-hasher'
-import { makeAuthPsychologist } from '@/test/factories/auth/make-auth-psychologist'
-import { InMemoryAuthPsychologistRepository } from '@/test/repositories/auth/in-memory-psychologist-repository'
 
 import { HashGenerator } from '../cryptography/hash-generator'
 import { RegisterPsychologistUseCase } from './register-psychologist'

@@ -1,5 +1,5 @@
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
-import { InMemoryOrderRepository } from '@/test/repositories/payment/in-memory-order-repository'
+import { InMemoryOrderRepository } from 'test/repositories/payment/in-memory-order-repository'
 
 import { PaymentMethod } from '../../enterprise/value-objects/payment-method'
 import { CreateIntentOrderUseCase } from './create-intent-order'

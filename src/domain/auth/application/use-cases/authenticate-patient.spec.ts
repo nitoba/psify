@@ -1,8 +1,9 @@
+import { FakeEncrypter } from 'test/cryptography/fake-encrypter'
+import { FakeHasher } from 'test/cryptography/fake-hasher'
+import { makeAuthPatient } from 'test/factories/auth/make-auth-patient'
+import { InMemoryAuthPatientRepository } from 'test/repositories/auth/in-memory-patient-repository'
+
 import { InvalidCredentials } from '@/core/errors/use-cases/invalid-credentials'
-import { FakeEncrypter } from '@/test/cryptography/fake-encrypter'
-import { FakeHasher } from '@/test/cryptography/fake-hasher'
-import { makeAuthPatient } from '@/test/factories/auth/make-auth-patient'
-import { InMemoryAuthPatientRepository } from '@/test/repositories/auth/in-memory-patient-repository'
 
 import { AuthenticatePatientUseCase } from './authenticate-patient'
 
