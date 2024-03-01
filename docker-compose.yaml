@@ -10,6 +10,8 @@ services:
       POSTGRES_USER: docker
       POSTGRES_PASSWORD: docker
       POSTGRES_DB: psify
-      PGDATA: /bitnami/postgresql
     volumes:
-      - ./data/pg:/bitnami/postgresql
+      - psify_pg_data:/bitnami/postgresql
+
+volumes:
+  psify_pg_data:

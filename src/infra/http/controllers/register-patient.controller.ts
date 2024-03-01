@@ -27,6 +27,8 @@ const createPatientBodySchema = z.object({
 
 type CreatePatientBody = z.infer<typeof createPatientBodySchema>
 
+const zodValidationPipe = new ZodValidationPipe(createPatientBodySchema)
+
 @Controller('/auth/patients/register')
 export class RegisterPatientController {
   constructor(
@@ -37,7 +39,7 @@ export class RegisterPatientController {
   @Post()
   @HttpCode(HttpStatus.CREATED)
   async handle(
-    @Body(new ZodValidationPipe(createPatientBodySchema))
+    @Body(zodValidationPipe)
     { email, name, phone, password }: CreatePatientBody,
   ) {
     const result = await this.registerPatientUseCase.execute({
@@ -52,6 +54,8 @@ export class RegisterPatientController {
     }
 
     if (result.isLeft() && result.value instanceof InvalidResource) {
+      console.log('asdas')
+
       return new BadRequestException(result.value)
     }
   }

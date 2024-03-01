@@ -25,6 +25,7 @@ async function runMigrations() {
 
   await migrate(db, {
     migrationsFolder,
+    migrationsTable: 'public',
   })
 
   await connection.end()

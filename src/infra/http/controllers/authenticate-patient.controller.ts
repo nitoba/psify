@@ -21,6 +21,8 @@ const authenticatePatientBodySchema = z.object({
 
 type AuthenticatePatientBody = z.infer<typeof authenticatePatientBodySchema>
 
+const zodValidationPipe = new ZodValidationPipe(authenticatePatientBodySchema)
+
 @Controller('/auth/patients/authenticate')
 export class AuthenticatePatientController {
   constructor(
@@ -31,7 +33,7 @@ export class AuthenticatePatientController {
   @Post()
   async handle(
     @Res({ passthrough: true }) res: FastifyReply,
-    @Body(new ZodValidationPipe(authenticatePatientBodySchema))
+    @Body(zodValidationPipe)
     { email, password }: AuthenticatePatientBody,
   ) {
     const result = await this.authenticatePatientUseCase.execute({

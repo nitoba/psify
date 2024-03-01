@@ -1,4 +1,5 @@
 import { DrizzlePGModule } from '@knaadh/nestjs-drizzle-pg'
+import { DrizzlePGConfig } from '@knaadh/nestjs-drizzle-pg/src/node-postgres.interface'
 import { Module } from '@nestjs/common'
 
 import { EnvModule } from '../env/env.module'
@@ -12,7 +13,9 @@ import * as schema from './drizzle/schemas'
       tag: 'DB',
       imports: [EnvModule],
       inject: [EnvService],
-      useFactory: (env: EnvService) => {
+      useFactory: (env: EnvService): DrizzlePGConfig => {
+        console.log('CurrentDB:', env.get('DATABASE_URL'))
+
         return {
           pg: {
             connection: 'client',
