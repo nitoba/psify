@@ -12,10 +12,10 @@ import { CryptographyModule } from '../cryptography/cryptography.module'
 import { DatabaseModule } from '../database/database.module'
 import { DrizzleAuthPatientRepository } from '../database/drizzle/repositories/drizzle-auth-patient-repository'
 import { DrizzleAuthPsychologistRepository } from '../database/drizzle/repositories/drizzle-auth-psychologist-repository'
-import { AuthenticatePatientController } from './controllers/authenticate-patient.controller'
-import { AuthenticatePsychologistController } from './controllers/authenticate-psychologist.controller'
-import { RegisterPatientController } from './controllers/register-patient.controller'
-import { RegisterPsychologistController } from './controllers/register-psychologist.controller'
+import { AuthenticatePatientController } from './controllers/auth/authenticate-patient.controller'
+import { AuthenticatePsychologistController } from './controllers/auth/authenticate-psychologist.controller'
+import { RegisterPatientController } from './controllers/auth/register-patient.controller'
+import { RegisterPsychologistController } from './controllers/auth/register-psychologist.controller'
 
 @Module({
   imports: [DatabaseModule, CryptographyModule, AuthModule],

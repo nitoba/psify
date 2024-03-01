@@ -10,30 +10,29 @@ import {
 import { z } from 'zod'
 
 import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
-import { RegisterPsychologistUseCase } from '@/domain/auth/application/use-cases/register-psychologist'
+import { RegisterPatientUseCase } from '@/domain/auth/application/use-cases/register-patient'
 import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resource'
 import { Public } from '@/infra/auth/public'
 
-import { ZodValidationPipe } from '../pipes/zod-validation-pipe'
+import { ZodValidationPipe } from '../../pipes/zod-validation-pipe'
 
-const createPsychologistBodySchema = z.object({
+const createPatientBodySchema = z.object({
   name: z.string(),
   email: z.string().email(),
   phone: z
     .string()
     .regex(/^\(\d{2}\) 9\d{8}$/, { message: 'Invalid phone number format' }),
-  crp: z.string().length(7, { message: 'CRP must be valid' }),
   password: z.string().min(6),
 })
 
-type CreatePsychologistBody = z.infer<typeof createPsychologistBodySchema>
+type CreatePatientBody = z.infer<typeof createPatientBodySchema>
 
-const zodValidationPipe = new ZodValidationPipe(createPsychologistBodySchema)
+const zodValidationPipe = new ZodValidationPipe(createPatientBodySchema)
 
-@Controller('/auth/psychologists/register')
-export class RegisterPsychologistController {
+@Controller('/auth/patients/register')
+export class RegisterPatientController {
   constructor(
-    private readonly registerPsychologistUseCase: RegisterPsychologistUseCase,
+    private readonly registerPatientUseCase: RegisterPatientUseCase,
   ) {}
 
   @Public()
@@ -41,14 +40,13 @@ export class RegisterPsychologistController {
   @HttpCode(HttpStatus.CREATED)
   async handle(
     @Body(zodValidationPipe)
-    { email, name, phone, password, crp }: CreatePsychologistBody,
+    { email, name, phone, password }: CreatePatientBody,
   ) {
-    const result = await this.registerPsychologistUseCase.execute({
+    const result = await this.registerPatientUseCase.execute({
       name,
       email,
       phone,
       password,
-      crp,
     })
 
     if (result.isLeft() && result.value instanceof ResourceNotFound) {

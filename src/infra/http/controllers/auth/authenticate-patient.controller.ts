@@ -13,7 +13,7 @@ import { InvalidCredentials } from '@/core/errors/use-cases/invalid-credentials'
 import { AuthenticatePatientUseCase } from '@/domain/auth/application/use-cases/authenticate-patient'
 import { Public } from '@/infra/auth/public'
 
-import { ZodValidationPipe } from '../pipes/zod-validation-pipe'
+import { ZodValidationPipe } from '../../pipes/zod-validation-pipe'
 
 const authenticatePatientBodySchema = z.object({
   email: z.string().email(),
