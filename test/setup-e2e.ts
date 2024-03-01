@@ -22,7 +22,7 @@ beforeAll(async () => {
 
   await connection.connect()
 
-  db = drizzle(connection, { schema, logger: true })
+  db = drizzle(connection, { schema })
 
   await db.execute(
     sql.raw(

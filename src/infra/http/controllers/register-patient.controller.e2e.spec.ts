@@ -1,12 +1,16 @@
-import { INestApplication } from '@nestjs/common'
+import {
+  FastifyAdapter,
+  NestFastifyApplication,
+} from '@nestjs/platform-fastify'
 import { Test } from '@nestjs/testing'
+import { RawServerDefault } from 'fastify'
 import request from 'supertest'
 
 import { AppModule } from '@/infra/app.module'
 import { DatabaseModule } from '@/infra/database/database.module'
 import { DrizzleService } from '@/infra/database/drizzle/drizzle.service'
 describe('Register Patient (E2E)', () => {
-  let app: INestApplication
+  let app: NestFastifyApplication<RawServerDefault>
   let drizzleService: DrizzleService
 
   beforeAll(async () => {
@@ -14,11 +18,18 @@ describe('Register Patient (E2E)', () => {
       imports: [AppModule, DatabaseModule],
     }).compile()
 
-    app = moduleRef.createNestApplication()
+    app = moduleRef.createNestApplication<NestFastifyApplication>(
+      new FastifyAdapter(),
+    )
 
     drizzleService = moduleRef.get(DrizzleService)
 
     await app.init()
+    await app.getHttpAdapter().getInstance().ready()
+  })
+
+  afterAll(() => {
+    app.close()
   })
 
   test('[POST] /auth/patients/register', async () => {

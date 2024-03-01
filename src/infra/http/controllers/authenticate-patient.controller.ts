@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Body,
   Controller,
+  HttpStatus,
   Post,
   Res,
 } from '@nestjs/common'
@@ -42,7 +43,8 @@ export class AuthenticatePatientController {
     })
 
     if (result.isLeft() && result.value instanceof InvalidCredentials) {
-      return new BadRequestException(result.value)
+      console.log('ERROR:', result.value)
+      throw new BadRequestException(result.value)
     }
 
     if (result.isRight()) {
@@ -51,7 +53,9 @@ export class AuthenticatePatientController {
         httpOnly: true,
       })
 
-      return res.send({ ...result.value })
+      return res
+        .status(HttpStatus.OK)
+        .send({ access_token: result.value.accessToken })
     }
   }
 }
