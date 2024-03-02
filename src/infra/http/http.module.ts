@@ -7,6 +7,7 @@ import { AuthenticatePsychologistUseCase } from '@/domain/auth/application/use-c
 import { RegisterPatientUseCase } from '@/domain/auth/application/use-cases/register-patient'
 import { RegisterPsychologistUseCase } from '@/domain/auth/application/use-cases/register-psychologist'
 import { PsychologistRepository } from '@/domain/psychologist/application/repositories/psychology-repository'
+import { AddAvailableTimeUseCase } from '@/domain/psychologist/application/use-cases/add-available-time'
 import { UpdateSpecialtyUseCase } from '@/domain/psychologist/application/use-cases/update-specialties'
 
 import { AuthModule } from '../auth/auth.module'
@@ -19,6 +20,7 @@ import { AuthenticatePatientController } from './controllers/auth/authenticate-p
 import { AuthenticatePsychologistController } from './controllers/auth/authenticate-psychologist.controller'
 import { RegisterPatientController } from './controllers/auth/register-patient.controller'
 import { RegisterPsychologistController } from './controllers/auth/register-psychologist.controller'
+import { AddAvailableTimesController } from './controllers/psychologist/add-available-times.controller'
 import { UpdateSpecialtiesController } from './controllers/psychologist/update-specialties.controller'
 
 @Module({
@@ -31,6 +33,7 @@ import { UpdateSpecialtiesController } from './controllers/psychologist/update-s
     AuthenticatePsychologistController,
     // Psychologists Controllers
     UpdateSpecialtiesController,
+    AddAvailableTimesController,
   ],
   providers: [
     // Repositories
@@ -53,6 +56,7 @@ import { UpdateSpecialtiesController } from './controllers/psychologist/update-s
     AuthenticatePsychologistUseCase,
     // Psychologists UseCases
     UpdateSpecialtyUseCase,
+    AddAvailableTimeUseCase,
   ],
 })
 export class HttpModule {}

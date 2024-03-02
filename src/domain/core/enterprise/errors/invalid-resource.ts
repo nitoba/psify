@@ -1,8 +1,8 @@
 import { DomainError } from '@/core/errors/domain-error'
 
-export class InvalidResource extends Error implements DomainError {
+export class InvalidResource implements DomainError {
+  message: string
   constructor(message: string) {
-    super(message)
-    this.name = 'InvalidResource'
+    this.message = message
   }
 }

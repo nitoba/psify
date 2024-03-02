@@ -1,8 +1,8 @@
 import { UseCaseError } from '../use-case-error'
 
-export class ResourceNotFound extends Error implements UseCaseError {
+export class ResourceNotFound implements UseCaseError {
+  message: string
   constructor(message: string) {
-    super(message)
-    this.name = 'ResourceNotFound'
+    this.message = message
   }
 }

@@ -3,6 +3,7 @@ import { InMemoryPsychologistRepository } from 'test/repositories/psychologist/i
 
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
+import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resource'
 import { Time } from '@/domain/psychologist/enterprise/value-objects/time'
 
 import { AvailableTime } from '../../enterprise/entities/available-time'
@@ -110,6 +111,56 @@ describe('AddAvailableTimeUseCase', () => {
     })
 
     expect(result.isLeft()).toBeTruthy()
-    expect(result.value).toBeInstanceOf(Error)
+    expect(result.value).toBeInstanceOf(InvalidResource)
+  })
+
+  it('should not be able to add time without a 30 minutes of the diff to the same day', async () => {
+    const id = new UniqueEntityID()
+    const psychologist = makePsychologist(
+      {
+        availableTimes: new AvailableTimesList([
+          AvailableTime.create({
+            time: Time.create('09:00').value as Time,
+            weekday: 1,
+            psychologistId: id,
+          }),
+        ]),
+      },
+      id,
+    )
+
+    repository.create(psychologist)
+
+    const result = await useCase.execute({
+      psychologistId: psychologist.id.toString(),
+      availableTimes: [{ weekday: 1, time: '09:00' }],
+    })
+
+    expect(result.isLeft()).toBeTruthy()
+  })
+
+  it('should be able to add time with a 30 minutes of the diff to the same day', async () => {
+    const id = new UniqueEntityID()
+    const psychologist = makePsychologist(
+      {
+        availableTimes: new AvailableTimesList([
+          AvailableTime.create({
+            time: Time.create('09:00').value as Time,
+            weekday: 1,
+            psychologistId: id,
+          }),
+        ]),
+      },
+      id,
+    )
+
+    repository.create(psychologist)
+
+    const result = await useCase.execute({
+      psychologistId: psychologist.id.toString(),
+      availableTimes: [{ weekday: 1, time: '09:30' }],
+    })
+
+    expect(result.isRight()).toBeTruthy()
   })
 })

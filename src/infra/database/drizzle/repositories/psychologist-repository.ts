@@ -49,24 +49,28 @@ export class DrizzlePsychologistRepository implements PsychologistRepository {
     id: string,
   ): Promise<void> {
     await this.drizzle.client.transaction(async (tx) => {
-      const idsToDelete = `(${availableTimes
-        .getRemovedItems()
-        .map(({ id }) => `"${id.toString()}"`)
-        .join(', ')})`
+      if (availableTimes.getRemovedItems().length) {
+        const idsToDelete = `(${availableTimes
+          .getRemovedItems()
+          .map(({ id }) => `'${id.toString()}'`)
+          .join(', ')})`
 
-      await tx
-        .delete(availableTimesSchema)
-        .where(sql`${availableTimesSchema.id} IN ${idsToDelete}`)
+        await tx
+          .delete(availableTimesSchema)
+          .where(sql`${availableTimesSchema.id} IN ${idsToDelete}`)
+      }
 
-      const newAvailableTimes = availableTimes
-        .getNewItems()
-        .map((availableTime) => ({
-          weekday: availableTime.weekday,
-          time: availableTime.time.value,
-          psychologistId: id,
-        }))
+      if (availableTimes.getNewItems()) {
+        const newAvailableTimes = availableTimes
+          .getNewItems()
+          .map((availableTime) => ({
+            weekday: availableTime.weekday,
+            time: availableTime.time.value,
+            psychologistId: id,
+          }))
 
-      await tx.insert(availableTimesSchema).values(newAvailableTimes)
+        await tx.insert(availableTimesSchema).values(newAvailableTimes)
+      }
     })
   }
 

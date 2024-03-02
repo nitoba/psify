@@ -1,8 +1,8 @@
 import { UseCaseError } from '../use-case-error'
 
-export class InvalidCredentials extends Error implements UseCaseError {
+export class InvalidCredentials implements UseCaseError {
+  message: string
   constructor() {
-    super('Invalid credentials')
-    this.name = 'InvalidCredentials'
+    this.message = 'Invalid credentials'
   }
 }

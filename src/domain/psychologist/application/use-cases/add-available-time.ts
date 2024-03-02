@@ -1,3 +1,5 @@
+import { Injectable } from '@nestjs/common'
+
 import { Either, left, right } from '@/core/either'
 import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
 import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resource'
@@ -19,6 +21,7 @@ type AddAvailableTimeUseCaseResponse = Either<
   void
 >
 
+@Injectable()
 export class AddAvailableTimeUseCase {
   constructor(private readonly repository: PsychologistRepository) {}
 
@@ -56,11 +59,40 @@ export class AddAvailableTimeUseCase {
         return left(new InvalidResource('Available time already exists'))
       }
 
+      const available = AvailableTime.hasHalfHourDifference(
+        availableTimes,
+        availableTime.weekday,
+      )
+
+      if (!available) {
+        return left(
+          new InvalidResource(
+            'Available time in the same day must be have a 30 minutes of the difference',
+          ),
+        )
+      }
+
+      // Is Available to Add if to the same day there are difference of the 30 minutes between times
+      const isAvailableToAdd =
+        psychologist.availableTimes.hasHalfHourDifference(
+          availableTime.weekday,
+          availableTime.time,
+        )
+
+      if (!isAvailableToAdd) {
+        return left(
+          new InvalidResource(
+            'Available time in the same day must be have a 30 minutes of the difference',
+          ),
+        )
+      }
+
       const availableTimeToAdd = AvailableTime.create({
         time: timeVo.value,
         weekday: availableTime.weekday,
         psychologistId: psychologist.id,
       })
+
       psychologist.addAvailableTime(availableTimeToAdd)
     }
 
