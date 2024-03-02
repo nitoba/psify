@@ -30,7 +30,7 @@ export class RemoveAvailableTimesController {
   constructor(private readonly useCase: RemoveAvailableTimeUseCase) {}
 
   @Delete(':availableTimeId')
-  @HttpCode(HttpStatus.OK)
+  @HttpCode(HttpStatus.NO_CONTENT)
   async handle(
     @CurrentUser() user: PayloadUser,
     @Param('availableTimeId', zodValidationPipe)
