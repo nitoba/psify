@@ -52,7 +52,6 @@ export class AddAvailableTimesController {
     }
 
     if (result.isLeft() && result.value instanceof InvalidResource) {
-      console.log('Test')
       throw new BadRequestException(result.value)
     }
   }

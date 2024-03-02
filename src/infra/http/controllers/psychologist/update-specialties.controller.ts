@@ -17,7 +17,7 @@ import { ZodValidationPipe } from '../../pipes/zod-validation-pipe'
 
 const updateSpecialtiesBodySchema = z
   .object({
-    adds: z.array(z.string()),
+    adds: z.array(z.string()).optional(),
     removes: z.array(z.string()).optional(),
   })
   .superRefine(({ adds, removes }, ctx) => {
