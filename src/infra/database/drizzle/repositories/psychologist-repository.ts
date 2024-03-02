@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { sql } from 'drizzle-orm'
+import { eq, sql } from 'drizzle-orm'
 
 import { PaginationParams } from '@/core/repositories/pagination-params'
 import { PsychologistRepository } from '@/domain/psychologist/application/repositories/psychology-repository'
@@ -9,24 +9,64 @@ import { SpecialtyList } from '@/domain/psychologist/enterprise/entities/special
 
 import { DrizzleService } from '../drizzle.service'
 import { toDomain } from '../mappers/psychologist-mapper'
-
+import {
+  availableTimes as availableTimesSchema,
+  psychologist as psychologistSchema,
+} from '../schemas/psychologist'
 @Injectable()
 export class DrizzlePsychologistRepository implements PsychologistRepository {
   constructor(private drizzle: DrizzleService) {}
 
-  update(psychologist: Psychologist): Promise<void> {
-    throw new Error('Method not implemented.')
+  async update(psychologist: Psychologist): Promise<void> {
+    this.drizzle.client
+      .update(psychologistSchema)
+      .set({
+        name: psychologist.name.getValue,
+        phone: psychologist.phone.getValue,
+        consultationPriceInCents: psychologist.consultationPriceInCents,
+        specialties: psychologist.specialties.getUpdatedItems(),
+        updatedAt: new Date(),
+      })
+      .where(eq(psychologistSchema.id, psychologist.id.toString()))
   }
 
-  updateSpecialties(specialties: SpecialtyList, id: string): Promise<void> {
-    throw new Error('Method not implemented.')
+  async updateSpecialties(
+    specialties: SpecialtyList,
+    id: string,
+  ): Promise<void> {
+    this.drizzle.client
+      .update(psychologistSchema)
+      .set({
+        specialties: specialties.getUpdatedItems(),
+        updatedAt: new Date(),
+      })
+      .where(eq(psychologistSchema.id, id))
   }
 
-  updateAvailableTimes(
+  async updateAvailableTimes(
     availableTimes: AvailableTimesList,
     id: string,
   ): Promise<void> {
-    throw new Error('Method not implemented.')
+    await this.drizzle.client.transaction(async (tx) => {
+      const idsToDelete = `(${availableTimes
+        .getRemovedItems()
+        .map(({ id }) => `"${id.toString()}"`)
+        .join(', ')})`
+
+      await tx
+        .delete(availableTimesSchema)
+        .where(sql`${availableTimesSchema.id} IN ${idsToDelete}`)
+
+      const newAvailableTimes = availableTimes
+        .getNewItems()
+        .map((availableTime) => ({
+          weekday: availableTime.weekday,
+          time: availableTime.time.value,
+          psychologistId: id,
+        }))
+
+      await tx.insert(availableTimesSchema).values(newAvailableTimes)
+    })
   }
 
   async findMany(
