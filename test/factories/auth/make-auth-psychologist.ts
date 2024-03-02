@@ -2,6 +2,7 @@ import { randomUUID } from 'node:crypto'
 
 import { faker } from '@faker-js/faker'
 import { Injectable } from '@nestjs/common'
+import { randomNumbers } from 'test/utils/random-numbers'
 
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { HashGenerator } from '@/domain/auth/application/cryptography/hash-generator'
@@ -26,7 +27,7 @@ export function makeAuthPsychologist(
       email: Email.create(faker.internet.email()).value as Email,
       phone: Phone.create('(88) 987654321').value as Phone,
       password: faker.internet.password(),
-      crp: CRP.create(faker.random.numeric(7)).value as CRP,
+      crp: CRP.create(String(randomNumbers(7))).value as CRP,
       ...override,
     },
     id,

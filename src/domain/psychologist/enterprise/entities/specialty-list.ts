@@ -14,13 +14,6 @@ export class SpecialtyList extends WatchedList<Specialty> {
   }
 
   getUpdatedItems() {
-    console.log({
-      removed: this.getRemovedItems().map((i) => i.value),
-      new: this.getNewItems().map((i) => i.value),
-    })
-
-    console.log({ items: this.currentItems.map((i) => i.value) })
-
     return this.getItems().map((i) => i.value)
   }
 }

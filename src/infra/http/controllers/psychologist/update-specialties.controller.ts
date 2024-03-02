@@ -18,10 +18,10 @@ import { ZodValidationPipe } from '../../pipes/zod-validation-pipe'
 const updateSpecialtiesBodySchema = z
   .object({
     adds: z.array(z.string()),
-    removes: z.array(z.string()),
+    removes: z.array(z.string()).optional(),
   })
   .superRefine(({ adds, removes }, ctx) => {
-    if (adds.some((add) => removes.includes(add))) {
+    if (adds?.some((add) => removes?.includes(add))) {
       ctx.addIssue({
         path: ['adds', 'removes'],
         message:
@@ -40,7 +40,7 @@ export class UpdateSpecialtiesController {
   constructor(private readonly useCase: UpdateSpecialtyUseCase) {}
 
   @Put()
-  @HttpCode(HttpStatus.OK)
+  @HttpCode(HttpStatus.NO_CONTENT)
   async handle(
     @CurrentUser() user: PayloadUser,
     @Body(zodValidationPipe) { adds, removes }: UpdateSpecialtyBody,
