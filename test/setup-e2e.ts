@@ -25,16 +25,9 @@ beforeAll(async () => {
   }
 
   exec('npm run migrate')
-
-  await connection.query(
-    `TRUNCATE TABLE psychologists, patients, accounts, users, appointments, available_times`,
-  )
 })
 
 afterAll(async () => {
-  await connection.query(
-    `TRUNCATE TABLE psychologists, patients, accounts, users, appointments, available_times`,
-  )
   await connection.query(`DROP DATABASE IF EXISTS "${dbName} WITH (FORCE)"`)
   await connection.end()
 })
