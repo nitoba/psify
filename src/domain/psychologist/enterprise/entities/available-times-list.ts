@@ -5,18 +5,24 @@ import { WatchedList } from '@/core/entities/watched-list'
 import { AvailableTime } from './available-time'
 
 export class AvailableTimesList extends WatchedList<AvailableTime> {
+  updatedItems: AvailableTime[] = []
+
   compareItems(a: AvailableTime, b: AvailableTime): boolean {
     return a.id.equals(b.id)
   }
 
-  getUpdatedItems() {
-    const updated = this.getItems()
-      .filter((availableTime) =>
-        this.getRemovedItems().some((a) => a.equals(availableTime)),
-      )
-      .concat(this.getNewItems())
+  compareProps(a: AvailableTime, b: AvailableTime): boolean {
+    return a.time === b.time && a.weekday === b.weekday
+  }
 
-    return updated
+  updateAvailableTime(item: AvailableTime) {
+    const currentItems = this.getItems()
+    const index = currentItems.findIndex((i) => i.id.equals(item.id))
+
+    if (index !== -1) {
+      this.currentItems[index] = item
+      this.updatedItems.push(item)
+    }
   }
 
   hasHalfHourDifference(weekday: number, time: string) {

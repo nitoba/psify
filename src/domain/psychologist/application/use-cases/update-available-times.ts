@@ -1,5 +1,8 @@
+import { Injectable } from '@nestjs/common'
+
 import { Either, left, right } from '@/core/either'
 import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
+import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resource'
 import { Time } from '@/domain/psychologist/enterprise/value-objects/time'
 
 import { AvailableTime } from '../../enterprise/entities/available-time'
@@ -12,8 +15,12 @@ type UpdateAvailableTimesUseCaseRequest = {
   time: string
 }
 
-export type UpdateAvailableTimesUseCaseResponse = Either<ResourceNotFound, void>
+export type UpdateAvailableTimesUseCaseResponse = Either<
+  ResourceNotFound | InvalidResource,
+  void
+>
 
+@Injectable()
 export class UpdateAvailableTimesUseCase {
   constructor(private repository: PsychologistRepository) {}
 
@@ -55,7 +62,21 @@ export class UpdateAvailableTimesUseCase {
       },
       availableTime.id,
     )
-    psychologist.updateAvailableTimes([updatedAvailableTime])
+
+    const canUpdate = psychologist.availableTimes.hasHalfHourDifference(
+      weekday,
+      time,
+    )
+
+    if (!canUpdate) {
+      return left(
+        new InvalidResource(
+          'Available time in the same day must be have a 30 minutes of the difference',
+        ),
+      )
+    }
+
+    psychologist.availableTimes.updateAvailableTime(updatedAvailableTime)
 
     await this.repository.updateAvailableTimes(
       psychologist.availableTimes,

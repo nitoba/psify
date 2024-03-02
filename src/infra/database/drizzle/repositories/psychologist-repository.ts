@@ -54,7 +54,6 @@ export class DrizzlePsychologistRepository implements PsychologistRepository {
           .getRemovedItems()
           .map(({ id }) => `'${id.toString()}'`)
           .join(', ')
-
         await tx.execute(
           sql.raw(
             `DELETE FROM available_times WHERE available_times.id IN (${idsToDelete})`,
@@ -70,8 +69,21 @@ export class DrizzlePsychologistRepository implements PsychologistRepository {
             time: availableTime.time.value,
             psychologistId: id,
           }))
-
         await tx.insert(availableTimesSchema).values(newAvailableTimes)
+      }
+
+      if (availableTimes.updatedItems.length) {
+        const queries = availableTimes.updatedItems.map((update) =>
+          tx
+            .update(availableTimesSchema)
+            .set({
+              time: update.time.value,
+              weekday: update.weekday,
+            })
+            .where(eq(availableTimesSchema.id, update.id.toString())),
+        )
+
+        await Promise.all(queries)
       }
     })
   }

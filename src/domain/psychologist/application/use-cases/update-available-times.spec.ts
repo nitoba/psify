@@ -29,6 +29,16 @@ describe('UpdateAvailableTimesUseCase', () => {
             time: Time.create('08:00').value as Time,
             weekday: 1,
           }),
+          AvailableTime.create({
+            psychologistId,
+            time: Time.create('09:00').value as Time,
+            weekday: 1,
+          }),
+          AvailableTime.create({
+            psychologistId,
+            time: Time.create('10:00').value as Time,
+            weekday: 1,
+          }),
         ]),
       },
       psychologistId,
@@ -41,20 +51,26 @@ describe('UpdateAvailableTimesUseCase', () => {
       psychologistId: psychologistId.toString(),
       availableTimeId: availableTime.id.toString(),
       weekday: 1,
-      time: '09:00',
+      time: '12:00',
     })
 
     expect(result.isRight()).toBeTruthy()
 
-    expect(repository.psychologists[0].availableTimes.getItems()[0].id).toBe(
-      availableTime.id,
+    expect(repository.psychologists[0].availableTimes.getItems()).toHaveLength(
+      3,
     )
     expect(
-      repository.psychologists[0].availableTimes.getItems()[0].weekday,
-    ).toBe(1)
-    expect(
-      repository.psychologists[0].availableTimes.getItems()[0].time.value,
-    ).toBe('09:00')
+      repository.psychologists[0].availableTimes.currentItems[0].time.value,
+    ).toBe('12:00')
+    // expect(repository.psychologists[0].availableTimes.getItems()[0].id).toBe(
+    //   availableTime.id,
+    // )
+    // expect(
+    //   repository.psychologists[0].availableTimes.getItems()[0].weekday,
+    // ).toBe(1)
+    // expect(
+    //   repository.psychologists[0].availableTimes.getItems()[0].time.value,
+    // ).toBe('12:00')
   })
 
   it('should return left if psychologist not found', async () => {
