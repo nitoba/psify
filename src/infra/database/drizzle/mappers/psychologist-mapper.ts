@@ -44,11 +44,14 @@ type PsychologistModel = InferSelectModel<typeof psychologist> & {
 
 export function toDomain(model: PsychologistModel): Psychologist {
   const availableTimes = model.availableTimes.map((availableTime) => {
-    return AvailableTime.create({
-      psychologistId: new UniqueEntityID(availableTime.psychologistId),
-      time: Time.create(availableTime.time).value as Time,
-      weekday: availableTime.weekday,
-    })
+    return AvailableTime.create(
+      {
+        psychologistId: new UniqueEntityID(availableTime.psychologistId),
+        time: Time.create(availableTime.time).value as Time,
+        weekday: availableTime.weekday,
+      },
+      new UniqueEntityID(availableTime.id),
+    )
   })
 
   const specialties = model.specialties.map((specialty) => {

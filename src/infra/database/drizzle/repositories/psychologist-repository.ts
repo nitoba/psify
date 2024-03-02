@@ -50,17 +50,19 @@ export class DrizzlePsychologistRepository implements PsychologistRepository {
   ): Promise<void> {
     await this.drizzle.client.transaction(async (tx) => {
       if (availableTimes.getRemovedItems().length) {
-        const idsToDelete = `(${availableTimes
+        const idsToDelete = availableTimes
           .getRemovedItems()
           .map(({ id }) => `'${id.toString()}'`)
-          .join(', ')})`
+          .join(', ')
 
-        await tx
-          .delete(availableTimesSchema)
-          .where(sql`${availableTimesSchema.id} IN ${idsToDelete}`)
+        await tx.execute(
+          sql.raw(
+            `DELETE FROM available_times WHERE available_times.id IN (${idsToDelete})`,
+          ),
+        )
       }
 
-      if (availableTimes.getNewItems()) {
+      if (availableTimes.getNewItems().length) {
         const newAvailableTimes = availableTimes
           .getNewItems()
           .map((availableTime) => ({
