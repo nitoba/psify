@@ -5,9 +5,9 @@ import { Injectable } from '@nestjs/common'
 import { AuthPsychologistRepository } from '@/domain/auth/application/repositories/auth-psychologist-repository'
 import { Psychologist } from '@/domain/auth/enterprise/entities/psychologist'
 
-import { DrizzleService } from '../drizzle.service'
-import { toAuthDomain } from '../mappers/psychologist-mapper'
-import { accounts, psychologist, users } from '../schemas'
+import { DrizzleService } from '../../drizzle.service'
+import { toAuthDomain } from '../../mappers/psychologist-mapper'
+import { accounts, psychologist, users } from '../../schemas'
 
 @Injectable()
 export class DrizzleAuthPsychologistRepository

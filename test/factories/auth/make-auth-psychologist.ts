@@ -26,7 +26,7 @@ export function makeAuthPsychologist(
       email: Email.create(faker.internet.email()).value as Email,
       phone: Phone.create('(88) 987654321').value as Phone,
       password: faker.internet.password(),
-      crp: CRP.create('1234567').value as CRP,
+      crp: CRP.create(faker.random.numeric(7)).value as CRP,
       ...override,
     },
     id,

@@ -6,11 +6,11 @@ import { z } from 'zod'
 
 import { EnvService } from '../../env/env.service'
 
-const payloadTokenSchema = z.object({
+const payloadUserSchema = z.object({
   sub: z.string().uuid(),
 })
 
-type PayloadToken = z.infer<typeof payloadTokenSchema>
+export type PayloadUser = z.infer<typeof payloadUserSchema>
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -25,8 +25,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     })
   }
 
-  async validate(payload: PayloadToken) {
-    return payloadTokenSchema.parse(payload)
+  async validate(payload: PayloadUser) {
+    return payloadUserSchema.parse(payload)
   }
 
   private static extractJWTFromCookie(req: FastifyRequest) {

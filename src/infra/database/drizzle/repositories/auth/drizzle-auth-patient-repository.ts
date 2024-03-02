@@ -5,9 +5,9 @@ import { Injectable } from '@nestjs/common'
 import { AuthPatientRepository } from '@/domain/auth/application/repositories/auth-patient-repository'
 import { Patient } from '@/domain/auth/enterprise/entities/patient'
 
-import { DrizzleService } from '../drizzle.service'
-import { toAuthDomain } from '../mappers/patient-mapper'
-import { accounts, patient, users } from '../schemas'
+import { DrizzleService } from '../../drizzle.service'
+import { toAuthDomain } from '../../mappers/patient-mapper'
+import { accounts, patient, users } from '../../schemas'
 
 @Injectable()
 export class DrizzleAuthPatientRepository implements AuthPatientRepository {
