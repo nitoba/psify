@@ -43,8 +43,12 @@ export class AuthenticatePatientController {
     })
 
     if (result.isLeft() && result.value instanceof InvalidCredentials) {
-      console.log('ERROR:', result.value)
-      throw new BadRequestException(result.value)
+      const error = new BadRequestException(result.value)
+      return res.status(HttpStatus.BAD_REQUEST).send({
+        statusCode: error.getStatus(),
+        error: error.name,
+        message: error.message,
+      })
     }
 
     if (result.isRight()) {

@@ -4,6 +4,16 @@ import { Psychologist } from '@/domain/auth/enterprise/entities/psychologist'
 export class InMemoryAuthPsychologistRepository
   implements AuthPsychologistRepository
 {
+  async findByEmailOrCRP(
+    email: string,
+    crp: string,
+  ): Promise<Psychologist | null> {
+    const psychologist = this.psychologists.find(
+      (p) => p.email === email || p.crp.value === crp,
+    )
+    return psychologist ?? null
+  }
+
   psychologists: Psychologist[] = []
   async findById(id: string): Promise<Psychologist | null> {
     const psychologist = this.psychologists.find((p) => p.id.toString() === id)

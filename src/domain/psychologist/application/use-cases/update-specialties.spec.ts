@@ -2,9 +2,9 @@ import { makePsychologist } from 'test/factories/psychologist/make-psychologist'
 import { InMemoryPsychologistRepository } from 'test/repositories/psychologist/in-memory-psychologist-repository'
 
 import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
-import { Specialty } from '@/domain/psychologist/enterprise/value-objects/specialty'
 
 import { SpecialtyList } from '../../enterprise/entities/specialty-list'
+import { Specialty } from '../../enterprise/value-objects/specialty'
 import { UpdateSpecialtyUseCase } from './update-specialties'
 
 describe('UpdateSpecialtyUseCase', () => {
@@ -17,7 +17,7 @@ describe('UpdateSpecialtyUseCase', () => {
   })
 
   it('should add new specialties to a psychologist', async () => {
-    const specialties = ['specialty1', 'specialty2']
+    const specialtiesToAdd = ['specialty1', 'specialty2']
 
     const psychologist = makePsychologist()
 
@@ -25,79 +25,71 @@ describe('UpdateSpecialtyUseCase', () => {
 
     const result = await useCase.execute({
       psychologistId: psychologist.id.toString(),
-      specialties,
+      adds: specialtiesToAdd,
     })
     expect(result.isRight()).toBeTruthy()
+    expect(repository.psychologists[0].specialties.getItems()).toHaveLength(2)
     expect(repository.psychologists[0].specialties.getItems()).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          value: specialties[0],
+          value: specialtiesToAdd[0],
         }),
         expect.objectContaining({
-          value: specialties[1],
+          value: specialtiesToAdd[1],
         }),
       ]),
     )
   })
 
-  it('should update new specialties to a psychologist', async () => {
-    const specialties = ['specialty1', 'specialty2']
-
+  it('should remove specialties to a psychologist', async () => {
     const psychologist = makePsychologist({
-      specialties: new SpecialtyList([
-        Specialty.create('specialty3').value as Specialty,
-      ]),
+      specialties: new SpecialtyList(
+        ['specialty1', 'specialty2', 'specialty3'].map(
+          (item) => Specialty.create(item).value as Specialty,
+        ),
+      ),
     })
 
     repository.create(psychologist)
 
     const result = await useCase.execute({
       psychologistId: psychologist.id.toString(),
-      specialties,
+      removes: ['specialty1', 'specialty3'],
     })
-
     expect(result.isRight()).toBeTruthy()
-    expect(repository.psychologists[0].specialties.getNewItems()).toHaveLength(
-      2,
+    expect(repository.psychologists[0].specialties.getItems()).toHaveLength(1)
+    expect(repository.psychologists[0].specialties.getItems()).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          value: 'specialty2',
+        }),
+      ]),
     )
   })
 
-  it('should not add duplicate specialties', async () => {
-    const existingSpecialty = 'specialty1'
-    const newSpecialty = 'specialty2'
-
+  it('should return right if nothing to update', async () => {
     const psychologist = makePsychologist({
-      specialties: new SpecialtyList([
-        Specialty.create(existingSpecialty).value as Specialty,
-      ]),
+      specialties: new SpecialtyList(
+        ['specialty1', 'specialty2', 'specialty3'].map(
+          (item) => Specialty.create(item).value as Specialty,
+        ),
+      ),
     })
 
     repository.create(psychologist)
 
     const result = await useCase.execute({
       psychologistId: psychologist.id.toString(),
-      specialties: [existingSpecialty, newSpecialty],
     })
     expect(result.isRight()).toBeTruthy()
-    expect(repository.psychologists[0].specialties.getItems()).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          value: existingSpecialty,
-        }),
-        expect.objectContaining({
-          value: newSpecialty,
-        }),
-      ]),
-    )
+    expect(repository.psychologists[0].specialties.getItems()).toHaveLength(3)
   })
 
   it('should return left if psychologist not found', async () => {
     const psychologistId = '123'
-    const specialties = ['specialty1']
 
     const result = await useCase.execute({
       psychologistId,
-      specialties,
     })
 
     expect(result.isLeft()).toBeTruthy()

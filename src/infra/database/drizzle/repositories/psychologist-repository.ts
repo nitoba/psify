@@ -34,7 +34,8 @@ export class DrizzlePsychologistRepository implements PsychologistRepository {
     specialties: SpecialtyList,
     id: string,
   ): Promise<void> {
-    this.drizzle.client
+    // specialties.getUpdatedItems()
+    await this.drizzle.client
       .update(psychologistSchema)
       .set({
         specialties: specialties.getUpdatedItems(),

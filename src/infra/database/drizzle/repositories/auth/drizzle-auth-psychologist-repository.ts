@@ -25,6 +25,20 @@ export class DrizzleAuthPsychologistRepository
     return toAuthDomain(result)
   }
 
+  async findByEmailOrCRP(
+    email: string,
+    crp: string,
+  ): Promise<Psychologist | null> {
+    const result = await this.db.client.query.psychologist.findFirst({
+      where: (psychologist, { eq, or }) =>
+        or(eq(psychologist.email, email), eq(psychologist.crp, crp)),
+    })
+
+    if (!result) return null
+
+    return toAuthDomain(result)
+  }
+
   async create(entity: Psychologist): Promise<void> {
     // TODO: execute with transactions
     const [user] = await this.db.client

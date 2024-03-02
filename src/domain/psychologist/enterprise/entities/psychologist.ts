@@ -7,7 +7,6 @@ import { Email } from '@/domain/core/enterprise/value-objects/email'
 import { Name } from '@/domain/core/enterprise/value-objects/name'
 import { Phone } from '@/domain/core/enterprise/value-objects/phone'
 import { CRP } from '@/domain/psychologist/enterprise/value-objects/crp'
-import { Specialty } from '@/domain/psychologist/enterprise/value-objects/specialty'
 import { Appointment } from '@/domain/schedules/enterprise/entities/appointment'
 
 import { AvailableTime } from './available-time'
@@ -61,10 +60,6 @@ export class Psychologist extends AggregateRoot<PsychologistProps> {
 
   get createdAt(): Date {
     return this.props.createdAt
-  }
-
-  updateSpecialties(specialties: Specialty[]): void {
-    this.props.specialties.update(specialties)
   }
 
   updateAvailableTimes(availableTimes: AvailableTime[]): void {

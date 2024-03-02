@@ -39,21 +39,28 @@ export class RegisterPsychologistUseCase {
     crp,
     password,
   }: RegisterPsychologistUseCaseRequest): Promise<RegisterPsychologistUseCaseResponse> {
-    const psychologistExists =
-      await this.authPsychologistRepository.findByEmail(email)
-
-    if (psychologistExists) {
-      return left(new ResourceNotFound('Psychologist already exists'))
-    }
-
     const emailVo = Email.create(email)
-    const nameVo = Name.create(name)
-    const phoneVo = Phone.create(phone)
     const crpVo = CRP.create(crp)
 
     if (emailVo.isLeft()) {
       return left(emailVo.value)
     }
+    if (crpVo.isLeft()) {
+      return left(crpVo.value)
+    }
+
+    const psychologistExists =
+      await this.authPsychologistRepository.findByEmailOrCRP(
+        emailVo.value.getValue,
+        crpVo.value.value,
+      )
+
+    if (psychologistExists) {
+      return left(new ResourceNotFound('Psychologist already exists'))
+    }
+
+    const nameVo = Name.create(name)
+    const phoneVo = Phone.create(phone)
 
     if (nameVo.isLeft()) {
       return left(nameVo.value)
@@ -61,10 +68,6 @@ export class RegisterPsychologistUseCase {
 
     if (phoneVo.isLeft()) {
       return left(phoneVo.value)
-    }
-
-    if (crpVo.isLeft()) {
-      return left(crpVo.value)
     }
 
     const hashedPassword = await this.hasher.hash(password)

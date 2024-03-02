@@ -5,6 +5,7 @@ import { InMemoryAuthPsychologistRepository } from 'test/repositories/auth/in-me
 import { left } from '@/core/either'
 import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resource'
 import { Email } from '@/domain/core/enterprise/value-objects/email'
+import { CRP } from '@/domain/psychologist/enterprise/value-objects/crp'
 
 import { HashGenerator } from '../cryptography/hash-generator'
 import { RegisterPsychologistUseCase } from './register-psychologist'
@@ -74,6 +75,7 @@ describe('RegisterPsychologistUseCase', () => {
   it('should return resource not found error if psychologist already exists', async () => {
     const psychologist = makeAuthPsychologist({
       email: Email.create(request.email).value as Email,
+      crp: CRP.create(request.crp).value as CRP,
     })
 
     mockRepo.psychologists.push(psychologist)

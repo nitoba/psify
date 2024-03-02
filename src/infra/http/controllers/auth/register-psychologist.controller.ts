@@ -58,5 +58,8 @@ export class RegisterPsychologistController {
     if (result.isLeft() && result.value instanceof InvalidResource) {
       return new BadRequestException(result.value)
     }
+    if (result.isLeft()) {
+      return new BadRequestException(result.value)
+    }
   }
 }

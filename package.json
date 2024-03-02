@@ -19,7 +19,7 @@
     "test:e2e:watch": "NODE_ENV=test vitest --config ./vitest.config.e2e.ts",
     "generate": "drizzle-kit generate:pg",
     "migrate": "tsx ./src/infra/database/drizzle/migrate.ts",
-    "studio": "drizzle-kit studio"
+    "studio": "drizzle-kit studio --port 3000"
   },
   "dependencies": {
     "@fastify/cookie": "^9.3.1",
