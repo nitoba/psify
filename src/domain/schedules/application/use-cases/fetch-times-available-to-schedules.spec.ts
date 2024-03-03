@@ -5,8 +5,8 @@ import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { Time } from '@/domain/psychologist/enterprise/value-objects/time'
 import { Appointment } from '@/domain/schedules/enterprise/entities/appointment'
 
-import { AvailableTime } from '../../enterprise/entities/available-time'
-import { AvailableTimesList } from '../../enterprise/entities/available-times-list'
+import { AvailableTime } from '../../../psychologist/enterprise/entities/available-time'
+import { AvailableTimesList } from '../../../psychologist/enterprise/entities/available-times-list'
 import { FetchTimesAvailableToSchedulesUseCase } from './fetch-times-available-to-schedules'
 
 describe('FetchTimesAvailableToSchedulesUseCase', () => {
