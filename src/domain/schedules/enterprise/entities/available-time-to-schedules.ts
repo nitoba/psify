@@ -2,6 +2,8 @@ import { Entity } from '@/core/entities/entity'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { Time } from '@/domain/psychologist/enterprise/value-objects/time'
 
+import { Appointment } from './appointment'
+
 export type AvailableTimeToSchedulesProps = {
   weekday: number
   time: Time
@@ -57,6 +59,27 @@ export class AvailableTimeToSchedule extends Entity<AvailableTimeToSchedulesProp
     }
 
     return false
+  }
+
+  static getAvailableTimesToSchedules(
+    currentAvailableTimes: AvailableTimeToSchedule[],
+    scheduledAppointments: Appointment[],
+  ): AvailableTimeToSchedule[] {
+    // filter availableTimes to response only times more than current date now and not scheduled yet
+    const availableTimes = currentAvailableTimes.filter((at) => {
+      const [hourFromTime, minutesFromTime] = at.time.getHoursAndMinutes()
+
+      const dateToCompare = new Date()
+      dateToCompare.setHours(hourFromTime, minutesFromTime)
+
+      const isTimeNotScheduled = scheduledAppointments.every((sp) => {
+        return sp.scheduledTo.getTime() !== dateToCompare.getTime()
+      })
+
+      return Date.now() <= dateToCompare.getTime() && isTimeNotScheduled
+    })
+
+    return availableTimes
   }
 
   static create(

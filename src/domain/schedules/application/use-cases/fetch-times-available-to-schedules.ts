@@ -34,7 +34,10 @@ export class FetchTimesAvailableToSchedulesUseCase {
     }
 
     const availableTimesToSchedules =
-      psychologist.getAvailableTimesToSchedules()
+      AvailableTimeToSchedule.getAvailableTimesToSchedules(
+        psychologist.availableTimes.getItems(),
+        psychologist.scheduledAppointments,
+      )
 
     return right({
       availableTimesToSchedules,
