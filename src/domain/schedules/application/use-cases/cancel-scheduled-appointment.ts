@@ -4,7 +4,7 @@ import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resourc
 import { AppointmentsRepository } from '@/domain/schedules/application/repositories/appointments-repository'
 
 type CancelScheduledAppointmentUseCaseRequest = {
-  scheduleAppointmentId: string
+  scheduledAppointmentId: string
 }
 
 type CancelScheduledAppointmentUseCaseResponse = Either<
@@ -18,10 +18,10 @@ export class CancelScheduledAppointmentUseCase {
   ) {}
 
   async execute({
-    scheduleAppointmentId,
+    scheduledAppointmentId,
   }: CancelScheduledAppointmentUseCaseRequest): Promise<CancelScheduledAppointmentUseCaseResponse> {
     const scheduleAppointment = await this.appointmentsRepository.findById(
-      scheduleAppointmentId,
+      scheduledAppointmentId,
     )
 
     if (!scheduleAppointment) {
