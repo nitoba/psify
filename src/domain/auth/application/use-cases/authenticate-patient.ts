@@ -49,6 +49,7 @@ export class AuthenticatePatientUseCase {
     const accessToken = await this.encrypter.encrypt({
       sub: patient.id.toString(),
       email: patient.email,
+      role: 'patient',
     })
 
     return right({ accessToken })

@@ -7,9 +7,11 @@ import { AuthenticatePsychologistUseCase } from '@/domain/auth/application/use-c
 import { RegisterPatientUseCase } from '@/domain/auth/application/use-cases/register-patient'
 import { RegisterPsychologistUseCase } from '@/domain/auth/application/use-cases/register-psychologist'
 import { PatientRepository } from '@/domain/patient/application/repositories/patient-repository'
+import { FetchProfileUseCase as FetchProfileFromPatientUseCase } from '@/domain/patient/application/use-cases/fetch-profile'
 import { PsychologistRepository } from '@/domain/psychologist/application/repositories/psychology-repository'
 import { AddAvailableTimeUseCase } from '@/domain/psychologist/application/use-cases/add-available-time'
 import { FetchAvailableTimesUseCase } from '@/domain/psychologist/application/use-cases/fetch-available-times'
+import { FetchProfileUseCase as FetchProfileFromPsychologistUseCase } from '@/domain/psychologist/application/use-cases/fetch-profile'
 import { FetchPsychologistsUseCase } from '@/domain/psychologist/application/use-cases/fetch-psychologists'
 import { RemoveAvailableTimeUseCase } from '@/domain/psychologist/application/use-cases/remove-available-time'
 import { UpdateAvailableTimesUseCase } from '@/domain/psychologist/application/use-cases/update-available-times'
@@ -27,6 +29,7 @@ import { DrizzlePatientRepository } from '../database/drizzle/repositories/patie
 import { DrizzlePsychologistRepository } from '../database/drizzle/repositories/psychologist-repository'
 import { AuthenticatePatientController } from './controllers/auth/authenticate-patient.controller'
 import { AuthenticatePsychologistController } from './controllers/auth/authenticate-psychologist.controller'
+import { FetchProfileController } from './controllers/auth/fetch-profile.controller'
 import { RegisterPatientController } from './controllers/auth/register-patient.controller'
 import { RegisterPsychologistController } from './controllers/auth/register-psychologist.controller'
 import { AddAvailableTimesController } from './controllers/psychologist/add-available-times.controller'
@@ -45,6 +48,7 @@ import { RequestScheduleAppointmentController } from './controllers/schedules/re
     RegisterPsychologistController,
     AuthenticatePatientController,
     AuthenticatePsychologistController,
+    FetchProfileController,
     // Psychologists Controllers
     UpdateSpecialtiesController,
     AddAvailableTimesController,
@@ -52,6 +56,7 @@ import { RequestScheduleAppointmentController } from './controllers/schedules/re
     UpdateAvailableTimesController,
     FetchAvailableTimesController,
     FetchPsychologistsController,
+    // Schedules Controllers
     RequestScheduleAppointmentController,
   ],
   providers: [
@@ -88,6 +93,10 @@ import { RequestScheduleAppointmentController } from './controllers/schedules/re
     UpdateAvailableTimesUseCase,
     FetchAvailableTimesUseCase,
     FetchPsychologistsUseCase,
+    FetchProfileFromPsychologistUseCase,
+    // Patient UseCases
+    FetchProfileFromPatientUseCase,
+    // Schedules UseCases
     RequestScheduleAppointmentUseCase,
   ],
 })

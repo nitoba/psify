@@ -50,6 +50,7 @@ export class AuthenticatePsychologistUseCase {
     const accessToken = await this.encrypter.encrypt({
       sub: psychologist.id.toString(),
       email: psychologist.email,
+      role: 'psychologist',
     })
 
     return right({ accessToken })

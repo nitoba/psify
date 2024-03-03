@@ -12,7 +12,7 @@ import { z } from 'zod'
 import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
 import { RegisterPsychologistUseCase } from '@/domain/auth/application/use-cases/register-psychologist'
 import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resource'
-import { Public } from '@/infra/auth/public'
+import { Public } from '@/infra/auth/decorators/public'
 
 import { ZodValidationPipe } from '../../pipes/zod-validation-pipe'
 

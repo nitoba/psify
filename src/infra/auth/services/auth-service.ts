@@ -2,8 +2,11 @@ import { Injectable } from '@nestjs/common'
 
 import { Encrypter } from '@/domain/auth/application/cryptography/encrypter'
 
+import { Role } from '../roles'
+
 type Payload = {
   sub: string
+  role: Role
 }
 
 @Injectable()

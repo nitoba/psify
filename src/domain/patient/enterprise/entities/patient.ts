@@ -15,6 +15,18 @@ export type PatientProps = {
 }
 
 export class Patient extends Entity<PatientProps> {
+  get name() {
+    return this.props.name.getValue
+  }
+
+  get email() {
+    return this.props.email.getValue
+  }
+
+  get phone() {
+    return this.props.phone.getValue
+  }
+
   static create(
     { createdAt, ...props }: Optional<PatientProps, 'createdAt'>,
     id?: UniqueEntityID,

@@ -1,3 +1,5 @@
+import { Injectable } from '@nestjs/common'
+
 import { Either, left, right } from '@/core/either'
 import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
 
@@ -12,6 +14,7 @@ type FetchProfileUseCaseResponse = Either<
   { profile: Patient }
 >
 
+@Injectable()
 export class FetchProfileUseCase {
   constructor(private readonly patientRepository: PatientRepository) {}
 
