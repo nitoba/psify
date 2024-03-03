@@ -79,6 +79,7 @@ describe('FetchAvailableTimesUseCase', () => {
             patientId: new UniqueEntityID(),
             psychologistId,
             scheduledTo: new Date(2024, 1, 25, 9),
+            costInCents: 100,
           }),
         ],
         availableTimes: new AvailableTimesList(availableTimes),
