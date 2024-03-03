@@ -4,7 +4,7 @@ import { Either, left, right } from '@/core/either'
 import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
 
 import { PsychologistRepository } from '../../../psychologist/application/repositories/psychology-repository'
-import { AvailableTime } from '../../../psychologist/enterprise/entities/available-time'
+import { AvailableTimeToSchedule } from '../../enterprise/entities/available-time-to-schedules'
 
 type FetchTimesAvailableToSchedulesUseCaseRequest = {
   psychologistId: string
@@ -13,7 +13,7 @@ type FetchTimesAvailableToSchedulesUseCaseRequest = {
 type FetchTimesAvailableToSchedulesUseCaseResponse = Either<
   ResourceNotFound,
   {
-    availableTimes: AvailableTime[]
+    availableTimesToSchedules: AvailableTimeToSchedule[]
   }
 >
 
@@ -33,10 +33,11 @@ export class FetchTimesAvailableToSchedulesUseCase {
       return left(new ResourceNotFound('Psychologist not found'))
     }
 
-    const availableTimes = psychologist.getAvailableTimesToSchedules()
+    const availableTimesToSchedules =
+      psychologist.getAvailableTimesToSchedules()
 
     return right({
-      availableTimes,
+      availableTimesToSchedules,
     })
   }
 }

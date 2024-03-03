@@ -12,11 +12,11 @@ import { PsychologistRepository } from '@/domain/psychologist/application/reposi
 import { AddAvailableTimeUseCase } from '@/domain/psychologist/application/use-cases/add-available-time'
 import { FetchProfileUseCase as FetchProfileFromPsychologistUseCase } from '@/domain/psychologist/application/use-cases/fetch-profile'
 import { FetchPsychologistsUseCase } from '@/domain/psychologist/application/use-cases/fetch-psychologists'
-import { FetchTimesAvailableToSchedulesUseCase } from '@/domain/schedules/application/use-cases/fetch-times-available-to-schedules'
 import { RemoveAvailableTimeUseCase } from '@/domain/psychologist/application/use-cases/remove-available-time'
 import { UpdateAvailableTimesUseCase } from '@/domain/psychologist/application/use-cases/update-available-times'
 import { UpdateSpecialtyUseCase } from '@/domain/psychologist/application/use-cases/update-specialties'
 import { AppointmentsRepository } from '@/domain/schedules/application/repositories/appointments-repository'
+import { FetchTimesAvailableToSchedulesUseCase } from '@/domain/schedules/application/use-cases/fetch-times-available-to-schedules'
 import { RequestScheduleAppointmentUseCase } from '@/domain/schedules/application/use-cases/request-schedule-appointment'
 
 import { AuthModule } from '../auth/auth.module'
@@ -34,10 +34,10 @@ import { RegisterPatientController } from './controllers/auth/register-patient.c
 import { RegisterPsychologistController } from './controllers/auth/register-psychologist.controller'
 import { AddAvailableTimesController } from './controllers/psychologist/add-available-times.controller'
 import { FetchPsychologistsController } from './controllers/psychologist/fetch-psychologists.controller'
-import { FetchAvailableTimesController } from './controllers/psychologist/fetch-times-available-to-schedules.controller'
 import { RemoveAvailableTimesController } from './controllers/psychologist/remove-available-times.controller'
 import { UpdateAvailableTimesController } from './controllers/psychologist/update-available-times.controller'
 import { UpdateSpecialtiesController } from './controllers/psychologist/update-specialties.controller'
+import { FetchAvailableTimesController } from './controllers/schedules/fetch-times-available-to-schedules.controller'
 import { RequestScheduleAppointmentController } from './controllers/schedules/request-schedule-appointment.controller'
 
 @Module({
@@ -54,9 +54,9 @@ import { RequestScheduleAppointmentController } from './controllers/schedules/re
     AddAvailableTimesController,
     RemoveAvailableTimesController,
     UpdateAvailableTimesController,
-    FetchAvailableTimesController,
     FetchPsychologistsController,
     // Schedules Controllers
+    FetchAvailableTimesController,
     RequestScheduleAppointmentController,
   ],
   providers: [
@@ -91,12 +91,12 @@ import { RequestScheduleAppointmentController } from './controllers/schedules/re
     AddAvailableTimeUseCase,
     RemoveAvailableTimeUseCase,
     UpdateAvailableTimesUseCase,
-    FetchTimesAvailableToSchedulesUseCase,
     FetchPsychologistsUseCase,
     FetchProfileFromPsychologistUseCase,
     // Patient UseCases
     FetchProfileFromPatientUseCase,
     // Schedules UseCases
+    FetchTimesAvailableToSchedulesUseCase,
     RequestScheduleAppointmentUseCase,
   ],
 })

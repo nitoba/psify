@@ -53,7 +53,7 @@ describe('FetchTimesAvailableToSchedulesUseCase', () => {
     expect(result.isRight()).toBeTruthy()
 
     if (result.isRight()) {
-      expect(result.value.availableTimes).toEqual(availableTimes)
+      expect(result.value.availableTimesToSchedules).toEqual(availableTimes)
     }
   })
 
@@ -96,7 +96,9 @@ describe('FetchTimesAvailableToSchedulesUseCase', () => {
     expect(result.isRight()).toBeTruthy()
 
     if (result.isRight()) {
-      expect(result.value.availableTimes).toEqual([availableTimes[1]])
+      expect(result.value.availableTimesToSchedules).toEqual([
+        availableTimes[1],
+      ])
     }
   })
 
@@ -130,7 +132,9 @@ describe('FetchTimesAvailableToSchedulesUseCase', () => {
 
     expect(result.isRight()).toBeTruthy()
     if (result.isRight()) {
-      expect(result.value.availableTimes).toEqual([availableTimes[0]])
+      expect(result.value.availableTimesToSchedules).toEqual([
+        availableTimes[0],
+      ])
     }
   })
 
