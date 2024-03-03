@@ -7,13 +7,17 @@ import { DomainEvents } from '@/core/events/domain-events'
 import { envSchema } from '@/infra/env/env'
 config({ path: '.env.test', override: true })
 const env = envSchema.parse(process.env)
-const connection = new Client({
-  connectionString: env.DATABASE_URL,
-})
+const connections: Client[] = []
 
 const dbName = randomUUID()
 
 beforeAll(async () => {
+  const connection = new Client({
+    connectionString: env.DATABASE_URL,
+  })
+
+  connections.push(connection)
+
   DomainEvents.shouldRun = false
   await connection.connect()
 
@@ -28,6 +32,8 @@ beforeAll(async () => {
 })
 
 afterAll(async () => {
-  await connection.query(`DROP DATABASE IF EXISTS "${dbName} WITH (FORCE)"`)
-  await connection.end()
+  for (const connection of connections) {
+    await connection.query(`DROP DATABASE IF EXISTS "${dbName}" WITH (FORCE)`)
+    await connection.end()
+  }
 })
