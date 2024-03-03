@@ -17,7 +17,7 @@ import { CryptographyModule } from '@/infra/cryptography/cryptography.module'
 import { DatabaseModule } from '@/infra/database/database.module'
 import { DrizzleService } from '@/infra/database/drizzle/drizzle.service'
 
-describe('Fetch Available Times To Schedules To Psychologists (E2E)', () => {
+describe('Fetch Available Times To Psychologists (E2E)', () => {
   let app: NestFastifyApplication<RawServerDefault>
   let authPsychologistFactory: AuthPsychologistFactory
   let availableTimesFactory: AvailableTimesFactory
@@ -45,12 +45,10 @@ describe('Fetch Available Times To Schedules To Psychologists (E2E)', () => {
   })
 
   afterAll(async () => {
-    vi.useRealTimers()
     await app.close()
   })
 
-  test('[GET] /schedules/psychologists/:psychologistId/available-times', async () => {
-    vi.useFakeTimers().setSystemTime(new Date(2024, 1, 25, 8))
+  test('[GET] /psychologists/available-times', async () => {
     const psychologist = await authPsychologistFactory.makeDbPsychologist()
     await availableTimesFactory.makeDbAvailableTime(
       {
@@ -76,14 +74,14 @@ describe('Fetch Available Times To Schedules To Psychologists (E2E)', () => {
     })
 
     const response = await request(app.getHttpServer())
-      .get(`/schedules/psychologists/${psychologist.id}/available-times`)
+      .get(`/psychologists/available-times`)
       .set('Cookie', [`psify@access_token=${token}`])
       .send()
 
     expect(response.statusCode).toBe(200)
     expect(response.body).toEqual(
       expect.objectContaining({
-        availableTimesToSchedules: [
+        availableTimes: [
           {
             id: availableTimeDB?.id,
             weekday: availableTimeDB?.weekday,

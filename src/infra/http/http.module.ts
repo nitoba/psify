@@ -10,6 +10,7 @@ import { PatientRepository } from '@/domain/patient/application/repositories/pat
 import { FetchProfileUseCase as FetchProfileFromPatientUseCase } from '@/domain/patient/application/use-cases/fetch-profile'
 import { PsychologistRepository } from '@/domain/psychologist/application/repositories/psychology-repository'
 import { AddAvailableTimeUseCase } from '@/domain/psychologist/application/use-cases/add-available-time'
+import { FetchAvailableTimesUseCase } from '@/domain/psychologist/application/use-cases/fetch-available-times'
 import { FetchProfileUseCase as FetchProfileFromPsychologistUseCase } from '@/domain/psychologist/application/use-cases/fetch-profile'
 import { FetchPsychologistsUseCase } from '@/domain/psychologist/application/use-cases/fetch-psychologists'
 import { RemoveAvailableTimeUseCase } from '@/domain/psychologist/application/use-cases/remove-available-time'
@@ -33,6 +34,7 @@ import { FetchProfileController } from './controllers/auth/fetch-profile.control
 import { RegisterPatientController } from './controllers/auth/register-patient.controller'
 import { RegisterPsychologistController } from './controllers/auth/register-psychologist.controller'
 import { AddAvailableTimesController } from './controllers/psychologist/add-available-times.controller'
+import { FetchAvailableTimesController } from './controllers/psychologist/featch-available-times.controller'
 import { FetchPsychologistsController } from './controllers/psychologist/fetch-psychologists.controller'
 import { RemoveAvailableTimesController } from './controllers/psychologist/remove-available-times.controller'
 import { UpdateAvailableTimesController } from './controllers/psychologist/update-available-times.controller'
@@ -55,6 +57,7 @@ import { RequestScheduleAppointmentController } from './controllers/schedules/re
     RemoveAvailableTimesController,
     UpdateAvailableTimesController,
     FetchPsychologistsController,
+    FetchAvailableTimesController,
     // Schedules Controllers
     FetchAvailableTimesToSchedulesController,
     RequestScheduleAppointmentController,
@@ -93,6 +96,7 @@ import { RequestScheduleAppointmentController } from './controllers/schedules/re
     UpdateAvailableTimesUseCase,
     FetchPsychologistsUseCase,
     FetchProfileFromPsychologistUseCase,
+    FetchAvailableTimesUseCase,
     // Patient UseCases
     FetchProfileFromPatientUseCase,
     // Schedules UseCases

@@ -1,3 +1,5 @@
+import { Injectable } from '@nestjs/common'
+
 import { Either, left, right } from '@/core/either'
 import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
 
@@ -13,6 +15,7 @@ type FetchAvailableTimesUseCaseResponse = Either<
   { availableTimes: AvailableTime[] }
 >
 
+@Injectable()
 export class FetchAvailableTimesUseCase {
   constructor(private readonly repository: PsychologistRepository) {}
 
