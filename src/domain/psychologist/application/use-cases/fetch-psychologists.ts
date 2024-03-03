@@ -1,3 +1,5 @@
+import { Injectable } from '@nestjs/common'
+
 import { Either, right } from '@/core/either'
 import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
 
@@ -17,6 +19,7 @@ type FetchPsychologistsUseCaseResponse = Either<
   }
 >
 
+@Injectable()
 export class FetchPsychologistsUseCase {
   constructor(private readonly repository: PsychologistRepository) {}
 
@@ -25,12 +28,13 @@ export class FetchPsychologistsUseCase {
     specialties,
     page,
   }: FetchPsychologistsUseCaseRequest): Promise<FetchPsychologistsUseCaseResponse> {
-    const filter = {
-      name,
-      specialties,
-    }
-
-    const psychologists = await this.repository.findMany(filter, { page })
+    const psychologists = await this.repository.findMany(
+      {
+        name,
+        specialties,
+      },
+      { page },
+    )
 
     return right({ psychologists })
   }

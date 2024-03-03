@@ -99,20 +99,29 @@ export class DrizzlePsychologistRepository implements PsychologistRepository {
         where:
           !filter.name && !filter.specialties
             ? undefined
-            : ({ name, specialties }, { ilike, sql, and }) => {
-                if (filter.name && !filter.specialties) {
+            : ({ name, specialties }, { ilike, sql, or }) => {
+                if (filter.name && !filter.specialties?.length) {
                   return ilike(name, `%${filter.name}%`)
                 }
 
-                if (!filter.name && filter.specialties) {
+                if (
+                  !filter.name &&
+                  filter.specialties &&
+                  filter.specialties?.length > 0
+                ) {
                   const params = `{${filter.specialties.map((v) => `"${v.toLowerCase()}"`).join(', ')}}`
 
                   return sql`(SELECT ARRAY(SELECT LOWER(unnest(${specialties})))) @> ${params}`
                 }
 
-                if (filter.name && filter.specialties) {
+                if (
+                  filter.name &&
+                  filter.specialties &&
+                  filter.specialties?.length > 0
+                ) {
+                  console.log('Aqui')
                   const params = `{${filter.specialties.map((v) => `"${v.toLowerCase()}"`).join(', ')}}`
-                  return and(
+                  return or(
                     ilike(name, `%${filter.name}%`),
                     sql`(SELECT ARRAY(SELECT LOWER(unnest(${specialties})))) @> ${params}`,
                   )

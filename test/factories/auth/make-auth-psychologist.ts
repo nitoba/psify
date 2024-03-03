@@ -8,17 +8,18 @@ import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { HashGenerator } from '@/domain/auth/application/cryptography/hash-generator'
 import {
   Psychologist,
-  PsychologistProps,
+  PsychologistProps as AuthProps,
 } from '@/domain/auth/enterprise/entities/psychologist'
 import { Email } from '@/domain/core/enterprise/value-objects/email'
 import { Name } from '@/domain/core/enterprise/value-objects/name'
 import { Phone } from '@/domain/core/enterprise/value-objects/phone'
+import { PsychologistProps } from '@/domain/psychologist/enterprise/entities/psychologist'
 import { CRP } from '@/domain/psychologist/enterprise/value-objects/crp'
 import { DrizzleService } from '@/infra/database/drizzle/drizzle.service'
 import { psychologist } from '@/infra/database/drizzle/schemas/psychologist'
 
 export function makeAuthPsychologist(
-  override: Partial<PsychologistProps> = {},
+  override: Partial<AuthProps> = {},
   id?: UniqueEntityID,
 ) {
   const psychologist = Psychologist.create(
@@ -55,7 +56,10 @@ export class AuthPsychologistFactory {
         phone: p.phone,
         authUserId: randomUUID(),
         crp: p.crp.value,
-        specialties: [],
+        consultationPriceInCents:
+          override.consultationPriceInCents ?? 100 * 100, // 100 moneys
+        specialties:
+          override.specialties?.currentItems.map((s) => s.value) ?? [],
       })
       .returning()
 

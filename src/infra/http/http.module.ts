@@ -9,6 +9,7 @@ import { RegisterPsychologistUseCase } from '@/domain/auth/application/use-cases
 import { PsychologistRepository } from '@/domain/psychologist/application/repositories/psychology-repository'
 import { AddAvailableTimeUseCase } from '@/domain/psychologist/application/use-cases/add-available-time'
 import { FetchAvailableTimesUseCase } from '@/domain/psychologist/application/use-cases/fetch-available-times'
+import { FetchPsychologistsUseCase } from '@/domain/psychologist/application/use-cases/fetch-psychologists'
 import { RemoveAvailableTimeUseCase } from '@/domain/psychologist/application/use-cases/remove-available-time'
 import { UpdateAvailableTimesUseCase } from '@/domain/psychologist/application/use-cases/update-available-times'
 import { UpdateSpecialtyUseCase } from '@/domain/psychologist/application/use-cases/update-specialties'
@@ -25,6 +26,7 @@ import { RegisterPatientController } from './controllers/auth/register-patient.c
 import { RegisterPsychologistController } from './controllers/auth/register-psychologist.controller'
 import { AddAvailableTimesController } from './controllers/psychologist/add-available-times.controller'
 import { FetchAvailableTimesController } from './controllers/psychologist/fetch-available-times.controller'
+import { FetchPsychologistsController } from './controllers/psychologist/fetch-psychologists.controller'
 import { RemoveAvailableTimesController } from './controllers/psychologist/remove-available-times.controller'
 import { UpdateAvailableTimesController } from './controllers/psychologist/update-available-times.controller'
 import { UpdateSpecialtiesController } from './controllers/psychologist/update-specialties.controller'
@@ -43,6 +45,7 @@ import { UpdateSpecialtiesController } from './controllers/psychologist/update-s
     RemoveAvailableTimesController,
     UpdateAvailableTimesController,
     FetchAvailableTimesController,
+    FetchPsychologistsController,
   ],
   providers: [
     // Repositories
@@ -69,6 +72,7 @@ import { UpdateSpecialtiesController } from './controllers/psychologist/update-s
     RemoveAvailableTimeUseCase,
     UpdateAvailableTimesUseCase,
     FetchAvailableTimesUseCase,
+    FetchPsychologistsUseCase,
   ],
 })
 export class HttpModule {}
