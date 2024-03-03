@@ -7,6 +7,7 @@ import { PatientRepository } from '@/domain/patient/application/repositories/pat
 import { PsychologistRepository } from '@/domain/psychologist/application/repositories/psychology-repository'
 
 import { Appointment } from '../../enterprise/entities/appointment'
+import { AvailableTimeToSchedule } from '../../enterprise/entities/available-time-to-schedules'
 import { AppointmentsRepository } from '../repositories/appointments-repository'
 
 type RequestScheduleAppointmentUseCaseRequest = {
@@ -62,7 +63,10 @@ export class RequestScheduleAppointmentUseCase {
 
     // validate if psychologist is available to schedule appointment
     const availableTimesToSchedules =
-      psychologist.getAvailableTimesToSchedules()
+      AvailableTimeToSchedule.getAvailableTimesToSchedules(
+        psychologist.getAvailableTimes(),
+        psychologist.scheduledAppointments,
+      )
     const isAvailable = availableTimesToSchedules.some((at) => {
       const [hourFromTime, minutesFromTime] = at.time.getHoursAndMinutes()
 
