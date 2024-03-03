@@ -6,6 +6,7 @@ import { AuthenticatePatientUseCase } from '@/domain/auth/application/use-cases/
 import { AuthenticatePsychologistUseCase } from '@/domain/auth/application/use-cases/authenticate-psychologist'
 import { RegisterPatientUseCase } from '@/domain/auth/application/use-cases/register-patient'
 import { RegisterPsychologistUseCase } from '@/domain/auth/application/use-cases/register-psychologist'
+import { PatientRepository } from '@/domain/patient/application/repositories/patient-repository'
 import { PsychologistRepository } from '@/domain/psychologist/application/repositories/psychology-repository'
 import { AddAvailableTimeUseCase } from '@/domain/psychologist/application/use-cases/add-available-time'
 import { FetchAvailableTimesUseCase } from '@/domain/psychologist/application/use-cases/fetch-available-times'
@@ -13,12 +14,16 @@ import { FetchPsychologistsUseCase } from '@/domain/psychologist/application/use
 import { RemoveAvailableTimeUseCase } from '@/domain/psychologist/application/use-cases/remove-available-time'
 import { UpdateAvailableTimesUseCase } from '@/domain/psychologist/application/use-cases/update-available-times'
 import { UpdateSpecialtyUseCase } from '@/domain/psychologist/application/use-cases/update-specialties'
+import { AppointmentsRepository } from '@/domain/schedules/application/repositories/appointments-repository'
+import { RequestScheduleAppointmentUseCase } from '@/domain/schedules/application/use-cases/request-schedule-appointment'
 
 import { AuthModule } from '../auth/auth.module'
 import { CryptographyModule } from '../cryptography/cryptography.module'
 import { DatabaseModule } from '../database/database.module'
+import { DrizzleAppointmentRepository } from '../database/drizzle/repositories/appointment-repository'
 import { DrizzleAuthPatientRepository } from '../database/drizzle/repositories/auth/drizzle-auth-patient-repository'
 import { DrizzleAuthPsychologistRepository } from '../database/drizzle/repositories/auth/drizzle-auth-psychologist-repository'
+import { DrizzlePatientRepository } from '../database/drizzle/repositories/patient-repository'
 import { DrizzlePsychologistRepository } from '../database/drizzle/repositories/psychologist-repository'
 import { AuthenticatePatientController } from './controllers/auth/authenticate-patient.controller'
 import { AuthenticatePsychologistController } from './controllers/auth/authenticate-psychologist.controller'
@@ -30,6 +35,7 @@ import { FetchPsychologistsController } from './controllers/psychologist/fetch-p
 import { RemoveAvailableTimesController } from './controllers/psychologist/remove-available-times.controller'
 import { UpdateAvailableTimesController } from './controllers/psychologist/update-available-times.controller'
 import { UpdateSpecialtiesController } from './controllers/psychologist/update-specialties.controller'
+import { RequestScheduleAppointmentController } from './controllers/schedules/request-schedule-appointment.controller'
 
 @Module({
   imports: [DatabaseModule, CryptographyModule, AuthModule],
@@ -46,6 +52,7 @@ import { UpdateSpecialtiesController } from './controllers/psychologist/update-s
     UpdateAvailableTimesController,
     FetchAvailableTimesController,
     FetchPsychologistsController,
+    RequestScheduleAppointmentController,
   ],
   providers: [
     // Repositories
@@ -61,6 +68,14 @@ import { UpdateSpecialtiesController } from './controllers/psychologist/update-s
       provide: PsychologistRepository,
       useClass: DrizzlePsychologistRepository,
     },
+    {
+      provide: PatientRepository,
+      useClass: DrizzlePatientRepository,
+    },
+    {
+      provide: AppointmentsRepository,
+      useClass: DrizzleAppointmentRepository,
+    },
     // Auth UseCases
     RegisterPatientUseCase,
     RegisterPsychologistUseCase,
@@ -73,6 +88,7 @@ import { UpdateSpecialtiesController } from './controllers/psychologist/update-s
     UpdateAvailableTimesUseCase,
     FetchAvailableTimesUseCase,
     FetchPsychologistsUseCase,
+    RequestScheduleAppointmentUseCase,
   ],
 })
 export class HttpModule {}
