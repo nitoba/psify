@@ -1,22 +1,20 @@
-import { Controller, Get, NotFoundException } from '@nestjs/common'
+import { Controller, Get, NotFoundException, Param } from '@nestjs/common'
 
 import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
 import { FetchTimesAvailableToSchedulesUseCase } from '@/domain/schedules/application/use-cases/fetch-times-available-to-schedules'
-import { CurrentUser } from '@/infra/auth/decorators/current-user-decorator'
-import { PayloadUser } from '@/infra/auth/strategies/jwt.strategy'
 
 import { AvailableTimesPresenter } from '../../presenters/available-times-presenter'
 
-@Controller('/psychologists/available-times')
-export class FetchAvailableTimesController {
+@Controller('/schedules/psychologists/:psychologistId/available-times')
+export class FetchAvailableTimesToSchedulesController {
   constructor(
     private readonly useCase: FetchTimesAvailableToSchedulesUseCase,
   ) {}
 
   @Get()
-  async handle(@CurrentUser() user: PayloadUser) {
+  async handle(@Param('psychologistId') psychologistId: string) {
     const result = await this.useCase.execute({
-      psychologistId: user.sub,
+      psychologistId,
     })
 
     if (result.isLeft() && result.value instanceof ResourceNotFound) {
@@ -25,7 +23,7 @@ export class FetchAvailableTimesController {
 
     if (result.isRight()) {
       return {
-        availableTimes: result.value.availableTimes.map(
+        availableTimesToSchedules: result.value.availableTimesToSchedules.map(
           AvailableTimesPresenter.toHttp,
         ),
       }

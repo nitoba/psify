@@ -71,19 +71,19 @@ describe('Fetch Available Times To Psychologists (E2E)', () => {
     expect(availableTimeDB).toBeDefined()
 
     const token = await encrypter.encrypt({
-      sub: psychologist.id.toString(),
+      sub: psychologist.id,
       role: 'psychologist',
     })
 
     const response = await request(app.getHttpServer())
-      .get('/psychologists/available-times')
+      .get(`/schedules/psychologists/${psychologist.id}/available-times`)
       .set('Cookie', [`psify@access_token=${token}`])
       .send()
 
     expect(response.statusCode).toBe(200)
     expect(response.body).toEqual(
       expect.objectContaining({
-        availableTimes: [
+        availableTimesToSchedules: [
           {
             id: availableTimeDB?.id,
             weekday: availableTimeDB?.weekday,

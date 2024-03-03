@@ -37,7 +37,7 @@ import { FetchPsychologistsController } from './controllers/psychologist/fetch-p
 import { RemoveAvailableTimesController } from './controllers/psychologist/remove-available-times.controller'
 import { UpdateAvailableTimesController } from './controllers/psychologist/update-available-times.controller'
 import { UpdateSpecialtiesController } from './controllers/psychologist/update-specialties.controller'
-import { FetchAvailableTimesController } from './controllers/schedules/fetch-times-available-to-schedules.controller'
+import { FetchAvailableTimesToSchedulesController } from './controllers/schedules/fetch-times-available-to-schedules.controller'
 import { RequestScheduleAppointmentController } from './controllers/schedules/request-schedule-appointment.controller'
 
 @Module({
@@ -56,7 +56,7 @@ import { RequestScheduleAppointmentController } from './controllers/schedules/re
     UpdateAvailableTimesController,
     FetchPsychologistsController,
     // Schedules Controllers
-    FetchAvailableTimesController,
+    FetchAvailableTimesToSchedulesController,
     RequestScheduleAppointmentController,
   ],
   providers: [
