@@ -119,7 +119,6 @@ export class DrizzlePsychologistRepository implements PsychologistRepository {
                   filter.specialties &&
                   filter.specialties?.length > 0
                 ) {
-                  console.log('Aqui')
                   const params = `{${filter.specialties.map((v) => `"${v.toLowerCase()}"`).join(', ')}}`
                   return or(
                     ilike(name, `%${filter.name}%`),
