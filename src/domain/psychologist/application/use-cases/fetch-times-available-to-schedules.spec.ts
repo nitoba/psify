@@ -7,15 +7,15 @@ import { Appointment } from '@/domain/schedules/enterprise/entities/appointment'
 
 import { AvailableTime } from '../../enterprise/entities/available-time'
 import { AvailableTimesList } from '../../enterprise/entities/available-times-list'
-import { FetchAvailableTimesUseCase } from './fetch-available-times'
+import { FetchTimesAvailableToSchedulesUseCase } from './fetch-times-available-to-schedules'
 
-describe('FetchAvailableTimesUseCase', () => {
-  let useCase: FetchAvailableTimesUseCase
+describe('FetchTimesAvailableToSchedulesUseCase', () => {
+  let useCase: FetchTimesAvailableToSchedulesUseCase
   let repository: InMemoryPsychologistRepository
 
   beforeEach(() => {
     repository = new InMemoryPsychologistRepository()
-    useCase = new FetchAvailableTimesUseCase(repository)
+    useCase = new FetchTimesAvailableToSchedulesUseCase(repository)
   })
 
   afterEach(() => {

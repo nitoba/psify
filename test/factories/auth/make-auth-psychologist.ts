@@ -43,7 +43,9 @@ export class AuthPsychologistFactory {
     private hasher: HashGenerator,
   ) {}
 
-  async makeDbPsychologist(override: Partial<PsychologistProps> = {}) {
+  async makeDbPsychologist(
+    override: Partial<PsychologistProps & Pick<AuthProps, 'password'>> = {},
+  ) {
     const p = makeAuthPsychologist(override)
 
     const [psychologistDB] = await this.drizzle.client

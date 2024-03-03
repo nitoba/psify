@@ -62,6 +62,7 @@ describe('Fetch Available Times To Psychologists (E2E)', () => {
 
     const token = await encrypter.encrypt({
       sub: patient.id.toString(),
+      role: 'psychologist',
     })
 
     const response = await request(app.getHttpServer())

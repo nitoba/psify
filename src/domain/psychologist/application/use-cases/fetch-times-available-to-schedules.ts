@@ -6,11 +6,11 @@ import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
 import { AvailableTime } from '../../enterprise/entities/available-time'
 import { PsychologistRepository } from '../repositories/psychology-repository'
 
-type FetchAvailableTimesUseCaseRequest = {
+type FetchTimesAvailableToSchedulesUseCaseRequest = {
   psychologistId: string
 }
 
-type FetchAvailableTimesUseCaseResponse = Either<
+type FetchTimesAvailableToSchedulesUseCaseResponse = Either<
   ResourceNotFound,
   {
     availableTimes: AvailableTime[]
@@ -18,14 +18,14 @@ type FetchAvailableTimesUseCaseResponse = Either<
 >
 
 @Injectable()
-export class FetchAvailableTimesUseCase {
+export class FetchTimesAvailableToSchedulesUseCase {
   constructor(
     private readonly psychologistRepository: PsychologistRepository,
   ) {}
 
   async execute({
     psychologistId,
-  }: FetchAvailableTimesUseCaseRequest): Promise<FetchAvailableTimesUseCaseResponse> {
+  }: FetchTimesAvailableToSchedulesUseCaseRequest): Promise<FetchTimesAvailableToSchedulesUseCaseResponse> {
     const psychologist =
       await this.psychologistRepository.findById(psychologistId)
 

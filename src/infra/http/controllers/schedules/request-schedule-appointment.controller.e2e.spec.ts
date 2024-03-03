@@ -72,6 +72,7 @@ describe('Request Schedule Appointment (E2E)', () => {
 
     const token = await encrypter.encrypt({
       sub: patient.id.toString(),
+      role: 'patient',
     })
 
     const response = await request(app.getHttpServer())

@@ -49,6 +49,7 @@ describe('Update Specialties From Psychologists (E2E)', () => {
 
     const token = await encrypter.encrypt({
       sub: psychologist.id.toString(),
+      role: 'psychologist',
     })
 
     let response = await request(app.getHttpServer())
