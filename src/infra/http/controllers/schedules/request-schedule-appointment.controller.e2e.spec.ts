@@ -103,6 +103,14 @@ describe('Request Schedule Appointment (E2E)', () => {
           ),
       })
 
+    const orderCreatedOnDb = await drizzleService.client.query.orders.findFirst(
+      {
+        where: (order, { eq }) => eq(order.sellerId, psychologist.id),
+      },
+    )
+
+    expect(orderCreatedOnDb).toBeDefined()
+    expect(orderCreatedOnDb?.sellerId).toBe(psychologist.id)
     expect(appointment).toBeDefined()
   })
 })

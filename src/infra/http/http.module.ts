@@ -1,20 +1,15 @@
 import { Module } from '@nestjs/common'
 
-import { AuthPatientRepository } from '@/domain/auth/application/repositories/auth-patient-repository'
-import { AuthPsychologistRepository } from '@/domain/auth/application/repositories/auth-psychologist-repository'
 import { AuthenticatePatientUseCase } from '@/domain/auth/application/use-cases/authenticate-patient'
 import { AuthenticatePsychologistUseCase } from '@/domain/auth/application/use-cases/authenticate-psychologist'
 import { ChangePasswordFromPatientUseCase } from '@/domain/auth/application/use-cases/change-patient-password'
 import { ChangePasswordFromPsychologistUseCase } from '@/domain/auth/application/use-cases/change-psychologist-password'
 import { RegisterPatientUseCase } from '@/domain/auth/application/use-cases/register-patient'
 import { RegisterPsychologistUseCase } from '@/domain/auth/application/use-cases/register-psychologist'
-import { PatientRepository } from '@/domain/patient/application/repositories/patient-repository'
 import { FetchProfileUseCase as FetchProfileFromPatientUseCase } from '@/domain/patient/application/use-cases/fetch-profile'
-import { OrderRepository } from '@/domain/payment/application/repositories/order-repository'
 import { ApproveOrderUseCase } from '@/domain/payment/application/use-cases/approve-order'
 import { CancelOrderUseCase } from '@/domain/payment/application/use-cases/cancel-order'
 import { RequestPaymentUseCase } from '@/domain/payment/application/use-cases/request-payment'
-import { PsychologistRepository } from '@/domain/psychologist/application/repositories/psychology-repository'
 import { AddAvailableTimeUseCase } from '@/domain/psychologist/application/use-cases/add-available-time'
 import { FetchAvailableTimesUseCase } from '@/domain/psychologist/application/use-cases/fetch-available-times'
 import { FetchProfileUseCase as FetchProfileFromPsychologistUseCase } from '@/domain/psychologist/application/use-cases/fetch-profile'
@@ -22,7 +17,6 @@ import { FetchPsychologistsUseCase } from '@/domain/psychologist/application/use
 import { RemoveAvailableTimeUseCase } from '@/domain/psychologist/application/use-cases/remove-available-time'
 import { UpdateAvailableTimesUseCase } from '@/domain/psychologist/application/use-cases/update-available-times'
 import { UpdateSpecialtyUseCase } from '@/domain/psychologist/application/use-cases/update-specialties'
-import { AppointmentsRepository } from '@/domain/schedules/application/repositories/appointments-repository'
 import { CancelScheduledAppointmentUseCase } from '@/domain/schedules/application/use-cases/cancel-scheduled-appointment'
 import { FetchScheduledAppointmentsFromPatientUseCase } from '@/domain/schedules/application/use-cases/fetch-scheduled-appointments-from-patient'
 import { FetchScheduledAppointmentsFromPsychologistUseCase } from '@/domain/schedules/application/use-cases/fetch-scheduled-appointments-from-psychologist'
@@ -33,12 +27,6 @@ import { RequestScheduleAppointmentUseCase } from '@/domain/schedules/applicatio
 import { AuthModule } from '../auth/auth.module'
 import { CryptographyModule } from '../cryptography/cryptography.module'
 import { DatabaseModule } from '../database/database.module'
-import { DrizzleAppointmentRepository } from '../database/drizzle/repositories/appointment-repository'
-import { DrizzleAuthPatientRepository } from '../database/drizzle/repositories/auth/drizzle-auth-patient-repository'
-import { DrizzleAuthPsychologistRepository } from '../database/drizzle/repositories/auth/drizzle-auth-psychologist-repository'
-import { DrizzleOrderRepository } from '../database/drizzle/repositories/order-repository'
-import { DrizzlePatientRepository } from '../database/drizzle/repositories/patient-repository'
-import { DrizzlePsychologistRepository } from '../database/drizzle/repositories/psychologist-repository'
 import { PaymentModule } from '../payment/payment.module'
 import { AuthenticatePatientController } from './controllers/auth/authenticate-patient.controller'
 import { AuthenticatePsychologistController } from './controllers/auth/authenticate-psychologist.controller'
@@ -92,31 +80,6 @@ import { RequestScheduleAppointmentController } from './controllers/schedules/re
     RequestOrderPaymentController,
   ],
   providers: [
-    // Repositories
-    {
-      provide: AuthPatientRepository,
-      useClass: DrizzleAuthPatientRepository,
-    },
-    {
-      provide: AuthPsychologistRepository,
-      useClass: DrizzleAuthPsychologistRepository,
-    },
-    {
-      provide: PsychologistRepository,
-      useClass: DrizzlePsychologistRepository,
-    },
-    {
-      provide: PatientRepository,
-      useClass: DrizzlePatientRepository,
-    },
-    {
-      provide: AppointmentsRepository,
-      useClass: DrizzleAppointmentRepository,
-    },
-    {
-      provide: OrderRepository,
-      useClass: DrizzleOrderRepository,
-    },
     // Auth UseCases
     RegisterPatientUseCase,
     RegisterPsychologistUseCase,

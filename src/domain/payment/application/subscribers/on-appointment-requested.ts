@@ -1,3 +1,5 @@
+import { Injectable } from '@nestjs/common'
+
 import { left, right } from '@/core/either'
 import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
 import { DomainEvents } from '@/core/events/domain-events'
@@ -9,6 +11,7 @@ import { AppointmentRequested } from '@/domain/schedules/enterprise/events/appoi
 import { OrderRepository } from '../repositories/order-repository'
 import { CreateIntentOrderUseCase } from '../use-cases/create-intent-order'
 
+@Injectable()
 export class OnAppointmentCreatedHandler implements EventHandler {
   constructor(
     private readonly createOrderUseCase: CreateIntentOrderUseCase,

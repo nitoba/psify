@@ -16,7 +16,7 @@ beforeAll(async () => {
 
   connections.push(connection)
 
-  DomainEvents.shouldRun = false
+  DomainEvents.shouldRun = true
 
   await connection`CREATE DATABASE ${connection(dbName)}`
 
