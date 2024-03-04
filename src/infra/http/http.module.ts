@@ -4,6 +4,8 @@ import { AuthPatientRepository } from '@/domain/auth/application/repositories/au
 import { AuthPsychologistRepository } from '@/domain/auth/application/repositories/auth-psychologist-repository'
 import { AuthenticatePatientUseCase } from '@/domain/auth/application/use-cases/authenticate-patient'
 import { AuthenticatePsychologistUseCase } from '@/domain/auth/application/use-cases/authenticate-psychologist'
+import { ChangePasswordFromPatientUseCase } from '@/domain/auth/application/use-cases/change-patient-password'
+import { ChangePasswordFromPsychologistUseCase } from '@/domain/auth/application/use-cases/change-psychologist-password'
 import { RegisterPatientUseCase } from '@/domain/auth/application/use-cases/register-patient'
 import { RegisterPsychologistUseCase } from '@/domain/auth/application/use-cases/register-psychologist'
 import { PatientRepository } from '@/domain/patient/application/repositories/patient-repository'
@@ -34,6 +36,7 @@ import { DrizzlePatientRepository } from '../database/drizzle/repositories/patie
 import { DrizzlePsychologistRepository } from '../database/drizzle/repositories/psychologist-repository'
 import { AuthenticatePatientController } from './controllers/auth/authenticate-patient.controller'
 import { AuthenticatePsychologistController } from './controllers/auth/authenticate-psychologist.controller'
+import { ChangePasswordController } from './controllers/auth/change-password.controller'
 import { FetchProfileController } from './controllers/auth/fetch-profile.controller'
 import { RegisterPatientController } from './controllers/auth/register-patient.controller'
 import { RegisterPsychologistController } from './controllers/auth/register-psychologist.controller'
@@ -73,6 +76,7 @@ import { RequestScheduleAppointmentController } from './controllers/schedules/re
     FinishScheduledAppointmentController,
     FetchScheduledAppointmentsFromPsychologistController,
     FetchScheduledAppointmentsFromPatientController,
+    ChangePasswordController,
   ],
   providers: [
     // Repositories
@@ -101,6 +105,8 @@ import { RequestScheduleAppointmentController } from './controllers/schedules/re
     RegisterPsychologistUseCase,
     AuthenticatePatientUseCase,
     AuthenticatePsychologistUseCase,
+    ChangePasswordFromPatientUseCase,
+    ChangePasswordFromPsychologistUseCase,
     // Psychologists UseCases
     UpdateSpecialtyUseCase,
     AddAvailableTimeUseCase,

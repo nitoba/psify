@@ -1,3 +1,5 @@
+import { Injectable } from '@nestjs/common'
+
 import { Either, left, right } from '@/core/either'
 import { InvalidCredentials } from '@/core/errors/use-cases/invalid-credentials'
 
@@ -13,6 +15,7 @@ type ChangePasswordFromPatientUseCaseRequest = {
 
 type ChangePasswordFromPatientUseCaseResponse = Either<InvalidCredentials, void>
 
+@Injectable()
 export class ChangePasswordFromPatientUseCase {
   constructor(
     private readonly authPatientRepository: AuthPatientRepository,
