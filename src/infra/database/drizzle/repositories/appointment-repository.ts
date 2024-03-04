@@ -43,16 +43,17 @@ export class DrizzleAppointmentRepository implements AppointmentsRepository {
         ),
       )
 
-    const [appointmentsCount] = await this.drizzle.client
-      .select({
-        count: count(),
-      })
-      .from(baseQuery.as('baseQuery'))
-
-    const scheduledAppointments = await baseQuery
-      .offset(offset)
-      .limit(perPage)
-      .orderBy(desc(appointments.createdAt))
+    const [[appointmentsCount], scheduledAppointments] = await Promise.all([
+      await this.drizzle.client
+        .select({
+          count: count(),
+        })
+        .from(baseQuery.as('baseQuery')),
+      await baseQuery
+        .offset(offset)
+        .limit(perPage)
+        .orderBy(desc(appointments.createdAt)),
+    ])
 
     return {
       appointments: scheduledAppointments.map(toDomain),
@@ -91,16 +92,17 @@ export class DrizzleAppointmentRepository implements AppointmentsRepository {
         ),
       )
 
-    const [appointmentsCount] = await this.drizzle.client
-      .select({
-        count: count(),
-      })
-      .from(baseQuery.as('baseQuery'))
-
-    const scheduledAppointments = await baseQuery
-      .offset(offset)
-      .limit(perPage)
-      .orderBy(desc(appointments.createdAt))
+    const [[appointmentsCount], scheduledAppointments] = await Promise.all([
+      await this.drizzle.client
+        .select({
+          count: count(),
+        })
+        .from(baseQuery.as('baseQuery')),
+      await baseQuery
+        .offset(offset)
+        .limit(perPage)
+        .orderBy(desc(appointments.createdAt)),
+    ])
 
     return {
       appointments: scheduledAppointments.map(toDomain),
