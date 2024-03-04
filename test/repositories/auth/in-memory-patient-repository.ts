@@ -16,4 +16,12 @@ export class InMemoryAuthPatientRepository implements AuthPatientRepository {
   async create(patient: Patient): Promise<void> {
     this.patients.push(patient)
   }
+
+  async save(patient: Patient): Promise<void> {
+    const index = this.patients.findIndex((p) => p.equals(patient))
+
+    if (index !== -1) {
+      this.patients[index] = patient
+    }
+  }
 }

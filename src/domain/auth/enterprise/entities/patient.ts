@@ -27,6 +27,10 @@ export class Patient extends User<PatientProps> {
     return this.props.password
   }
 
+  changePassword(newPassword: string): void {
+    this.props.password = newPassword
+  }
+
   static create(
     {
       name,

@@ -8,4 +8,6 @@ export abstract class AuthPsychologistRepository extends Repository<Psychologist
     email: string,
     crp: string,
   ): Promise<Psychologist | null>
+
+  abstract save(psychologist: Psychologist): Promise<void>
 }

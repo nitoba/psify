@@ -33,6 +33,10 @@ export class Psychologist extends User<PsychologistProps> {
     return this.props.createdAt
   }
 
+  changePassword(newPassword: string): void {
+    this.props.password = newPassword
+  }
+
   static create(
     {
       name,
