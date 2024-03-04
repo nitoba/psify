@@ -59,7 +59,7 @@ export class FetchScheduledAppointmentsFromPsychologistController {
 
     if (result.isRight()) {
       return {
-        total: result.value.scheduledAppointments.length,
+        total: result.value.total,
         scheduledAppointments: result.value.scheduledAppointments.map(
           AppointmentPresenter.toHttp,
         ),

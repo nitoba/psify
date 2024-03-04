@@ -43,7 +43,7 @@ import { RemoveAvailableTimesController } from './controllers/psychologist/remov
 import { UpdateAvailableTimesController } from './controllers/psychologist/update-available-times.controller'
 import { UpdateSpecialtiesController } from './controllers/psychologist/update-specialties.controller'
 import { CancelScheduledAppointmentController } from './controllers/schedules/cancel-scheduled-appointment.controller'
-import { FetchScheduledAppointmentsFromPsychologistController } from './controllers/schedules/fetch-scheduled-appointments-from-psychologis.controller'
+import { FetchScheduledAppointmentsFromPsychologistController } from './controllers/schedules/fetch-scheduled-appointments-from-psychologist.controller'
 import { FetchAvailableTimesToSchedulesController } from './controllers/schedules/fetch-times-available-to-schedules.controller'
 import { FinishScheduledAppointmentController } from './controllers/schedules/finish-scheduled-appointment.controller'
 import { RequestScheduleAppointmentController } from './controllers/schedules/request-schedule-appointment.controller'

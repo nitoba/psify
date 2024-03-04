@@ -53,7 +53,7 @@ export class FetchScheduledAppointmentsFromPsychologistUseCase {
     // validate if period has a valid dates
     if (period) {
       const diffInDays = differenceInDays(period.to, period.from)
-      const isInvalidPeriod = diffInDays < 0 || diffInDays >= 7
+      const isInvalidPeriod = diffInDays < 0 || diffInDays > 7
 
       if (isInvalidPeriod) {
         return left(
