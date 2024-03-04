@@ -28,7 +28,7 @@ describe('On Appointment Cancelled Handler', () => {
     )
   })
 
-  it('should create order when appointment is requested', async () => {
+  it('should cancel order when appointment is cancelled', async () => {
     const cancelOrderUseCaseSpy = vi.spyOn(cancelOrderUseCase, 'execute')
     const appointment = makeAppointment()
     appointmentRepository.create(appointment)
