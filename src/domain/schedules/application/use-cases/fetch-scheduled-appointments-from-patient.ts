@@ -1,3 +1,4 @@
+import { Injectable } from '@nestjs/common'
 import { differenceInDays } from 'date-fns'
 
 import { Either, left, right } from '@/core/either'
@@ -29,6 +30,7 @@ type FetchScheduledAppointmentsFromPatientUseCaseResponse = Either<
   }
 >
 
+@Injectable()
 export class FetchScheduledAppointmentsFromPatientUseCase {
   constructor(
     private readonly patientRepository: PatientRepository,
