@@ -2,22 +2,18 @@ import 'dotenv/config'
 
 import path from 'node:path'
 
-import { drizzle } from 'drizzle-orm/node-postgres'
-import { migrate } from 'drizzle-orm/node-postgres/migrator'
-import { Client } from 'pg'
+import chalk from 'chalk'
+import { drizzle } from 'drizzle-orm/postgres-js'
+import { migrate } from 'drizzle-orm/postgres-js/migrator'
+import postgres from 'postgres'
 
+import * as schema from '@/infra/database/drizzle/schemas'
 import { envSchema } from '@/infra/env/env'
-
-import * as schema from './schemas'
 
 async function runMigrations() {
   const env = envSchema.parse(process.env)
 
-  const connection = new Client({
-    connectionString: env.DATABASE_URL,
-  })
-
-  await connection.connect()
+  const connection = postgres(env.DATABASE_URL, { max: 1 })
 
   const db = drizzle(connection, { schema, logger: false })
 
@@ -30,4 +26,6 @@ async function runMigrations() {
   await connection.end()
 }
 
-runMigrations()
+runMigrations().then(() =>
+  console.log(chalk.greenBright('Migrations applied successfully!')),
+)

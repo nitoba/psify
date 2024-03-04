@@ -1,27 +1,24 @@
 import { randomUUID } from 'crypto'
 import { config } from 'dotenv'
-import { Client } from 'pg'
+import postgres from 'postgres'
 import { exec } from 'shelljs'
 
 import { DomainEvents } from '@/core/events/domain-events'
 import { envSchema } from '@/infra/env/env'
 config({ path: '.env.test', override: true })
 const env = envSchema.parse(process.env)
-const connections: Client[] = []
+const connections: postgres.Sql[] = []
 
 const dbName = randomUUID()
 
 beforeAll(async () => {
-  const connection = new Client({
-    connectionString: env.DATABASE_URL,
-  })
+  const connection = postgres(env.DATABASE_URL)
 
   connections.push(connection)
 
   DomainEvents.shouldRun = false
-  await connection.connect()
 
-  await connection.query(`CREATE DATABASE "${dbName}"`)
+  await connection`CREATE DATABASE ${connection(dbName)}`
 
   process.env = {
     ...process.env,
@@ -33,7 +30,7 @@ beforeAll(async () => {
 
 afterAll(async () => {
   for (const connection of connections) {
-    await connection.query(`DROP DATABASE IF EXISTS "${dbName}" WITH (FORCE)`)
+    await connection`DROP DATABASE IF EXISTS ${connection(dbName)} WITH (FORCE)`
     await connection.end()
   }
 })
