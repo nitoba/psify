@@ -11,21 +11,21 @@ import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { OrderItem } from '@/domain/payment/enterprise/entities/order-item'
 
 import { MarkAppointmentAsScheduledUseCase } from '../use-cases/mark-appointment-as-scheduled'
-import { OnOrderApproved } from './on-order-approved'
+import { OnOrderPaid } from './on-order-paid'
 let orderRepository: InMemoryOrderRepository
 let markAsScheduledUseCase: MarkAppointmentAsScheduledUseCase
 let appointmentsRepository: InMemoryAppointmentsRepository
-describe('On Order Approved', () => {
+describe('On Order Paid', () => {
   beforeEach(() => {
     orderRepository = new InMemoryOrderRepository()
     appointmentsRepository = new InMemoryAppointmentsRepository()
     markAsScheduledUseCase = new MarkAppointmentAsScheduledUseCase(
       appointmentsRepository,
     )
-    new OnOrderApproved(markAsScheduledUseCase)
+    new OnOrderPaid(markAsScheduledUseCase)
   })
 
-  it('should mark appointment as scheduled when order approved', async () => {
+  it('should mark appointment as scheduled when order paid', async () => {
     const markAsScheduledUseCaseSpy = vi.spyOn(
       markAsScheduledUseCase,
       'execute',
@@ -42,6 +42,7 @@ describe('On Order Approved', () => {
     const orderId = new UniqueEntityID()
     const order = makeOrder(
       {
+        status: 'approved',
         orderItems: [
           OrderItem.create({
             itemId: appointment.id,
@@ -55,7 +56,7 @@ describe('On Order Approved', () => {
       orderId,
     )
 
-    order.approve()
+    order.pay()
 
     orderRepository.save(order)
 

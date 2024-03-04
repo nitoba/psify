@@ -1,11 +1,12 @@
-import { UniqueEntityID } from '@/core/entities/unique-entity-id'
-import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
-import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resource'
 import { makeOrder } from 'test/factories/payment/make-order'
 import { makeAppointment } from 'test/factories/schedules/make-appointment'
 import { FakePaymentGateway } from 'test/gateway/fake-payment-gateway'
 import { InMemoryOrderRepository } from 'test/repositories/payment/in-memory-order-repository'
 import { InMemoryAppointmentsRepository } from 'test/repositories/schedules/in-memory-appointments-repository'
+
+import { UniqueEntityID } from '@/core/entities/unique-entity-id'
+import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
+import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resource'
 
 import { OrderItem } from '../../enterprise/entities/order-item'
 import { PaymentGateway } from '../gateway/payment-gateway'
@@ -62,7 +63,7 @@ describe('RequestPaymentUseCase', () => {
     const orderId = new UniqueEntityID()
     const order = makeOrder(
       {
-        status: 'approved',
+        status: 'paid',
         orderItems: [
           OrderItem.create({
             itemId: appointment.id,
@@ -98,6 +99,7 @@ describe('RequestPaymentUseCase', () => {
     const orderId = new UniqueEntityID()
     const order = makeOrder(
       {
+        status: 'approved',
         orderItems: [
           OrderItem.create({
             itemId: appointment.id,
@@ -130,6 +132,7 @@ describe('RequestPaymentUseCase', () => {
     const orderId = new UniqueEntityID()
     const order = makeOrder(
       {
+        status: 'approved',
         orderItems: [
           OrderItem.create({
             itemId: appointment.id,

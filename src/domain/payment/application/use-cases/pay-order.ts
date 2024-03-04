@@ -4,27 +4,24 @@ import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resourc
 
 import { OrderRepository } from '../repositories/order-repository'
 
-type ApproveOrderUseCaseRequest = {
+type PayOrderUseCaseRequest = {
   orderId: string
 }
 
-type ApproveOrderUseCaseResponse = Either<
-  ResourceNotFound | InvalidResource,
-  void
->
+type PayOrderUseCaseResponse = Either<ResourceNotFound | InvalidResource, void>
 
-export class ApproveOrderUseCase {
+export class PayOrderUseCase {
   constructor(private readonly orderRepository: OrderRepository) {}
 
   async execute({
     orderId,
-  }: ApproveOrderUseCaseRequest): Promise<ApproveOrderUseCaseResponse> {
+  }: PayOrderUseCaseRequest): Promise<PayOrderUseCaseResponse> {
     const order = await this.orderRepository.findById(orderId)
     if (!order) {
       return left(new ResourceNotFound('Order not found'))
     }
 
-    const result = order.approve()
+    const result = order.pay()
 
     if (result.isLeft()) {
       return left(result.value)

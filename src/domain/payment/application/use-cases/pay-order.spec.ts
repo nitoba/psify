@@ -1,20 +1,21 @@
+import { makeOrder } from 'test/factories/payment/make-order'
+import { InMemoryOrderRepository } from 'test/repositories/payment/in-memory-order-repository'
+
 import { left, right } from '@/core/either'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
 import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resource'
-import { makeOrder } from 'test/factories/payment/make-order'
-import { InMemoryOrderRepository } from 'test/repositories/payment/in-memory-order-repository'
 
 import { OrderItem } from '../../enterprise/entities/order-item'
-import { ApproveOrderUseCase } from './approve-order'
+import { PayOrderUseCase } from './pay-order'
 
-describe('ApproveOrderUseCase', () => {
+describe('PayOrderUseCase', () => {
   let orderRepository: InMemoryOrderRepository
-  let useCase: ApproveOrderUseCase
+  let useCase: PayOrderUseCase
 
   beforeEach(() => {
     orderRepository = new InMemoryOrderRepository()
-    useCase = new ApproveOrderUseCase(orderRepository)
+    useCase = new PayOrderUseCase(orderRepository)
   })
 
   it('should return ResourceNotFound error if order does not exist', async () => {
@@ -25,34 +26,43 @@ describe('ApproveOrderUseCase', () => {
     expect(result).toEqual(left(new ResourceNotFound('Order not found')))
   })
 
-  it('should return InvalidResource error if order is already approved or canceled', async () => {
+  it('should return InvalidResource error if order is already paid or canceled', async () => {
     let order = makeOrder({
-      status: 'approved',
+      status: 'paid',
     })
 
     orderRepository.orders.push(order)
 
     let result = await useCase.execute({ orderId: order.id.toString() })
     expect(result).toEqual(
-      left(new InvalidResource('Order can only be approved if it is pending')),
+      left(
+        new InvalidResource(
+          'Order can only be pay if it is approved and has items',
+        ),
+      ),
     )
 
     order = makeOrder({
-      status: 'approved',
+      status: 'paid',
     })
 
     orderRepository.orders.push(order)
 
     result = await useCase.execute({ orderId: order.id.toString() })
     expect(result).toEqual(
-      left(new InvalidResource('Order can only be approved if it is pending')),
+      left(
+        new InvalidResource(
+          'Order can only be pay if it is approved and has items',
+        ),
+      ),
     )
   })
 
-  it.only('should approve order successfully', async () => {
+  it('should pay order successfully', async () => {
     const orderId = new UniqueEntityID()
     const order = makeOrder(
       {
+        status: 'approved',
         orderItems: [
           OrderItem.create({
             name: 'Item 1',
@@ -71,6 +81,6 @@ describe('ApproveOrderUseCase', () => {
     const result = await useCase.execute({ orderId: order.id.toString() })
 
     expect(result).toEqual(right(undefined))
-    expect(orderRepository.orders[0].status).toEqual('approved')
+    expect(orderRepository.orders[0].status).toEqual('paid')
   })
 })

@@ -4,12 +4,12 @@ import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { Optional } from '@/core/types/optional'
 import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resource'
 
-import { OrderApproved } from '../events/order-approved'
+import { OrderPaid } from '../events/order-paid'
 import { OrderRejected } from '../events/order-rejected'
 import { PaymentMethod } from '../value-objects/payment-method'
 import { OrderItem } from './order-item'
 
-type OrderStatuses = 'pending' | 'approved' | 'canceled'
+type OrderStatuses = 'pending' | 'approved' | 'canceled' | 'paid'
 
 export type OrderProps = {
   costumerId: UniqueEntityID
@@ -47,7 +47,7 @@ export class Order extends AggregateRoot<OrderProps> {
   }
 
   cancel(): Either<InvalidResource, void> {
-    if (this.props.status !== 'pending') {
+    if (!['pending'].includes(this.props.status)) {
       return left(
         new InvalidResource('Order can only be canceled if it is pending'),
       )
@@ -60,22 +60,31 @@ export class Order extends AggregateRoot<OrderProps> {
     return right(undefined)
   }
 
-  approve(): Either<InvalidResource, void> {
-    if (this.props.status !== 'pending' || this.props.orderItems.length === 0) {
+  pay(): Either<InvalidResource, void> {
+    if (
+      this.props.status !== 'approved' ||
+      this.props.orderItems.length === 0
+    ) {
       return left(
-        new InvalidResource('Order can only be approved if it is pending'),
+        new InvalidResource(
+          'Order can only be pay if it is approved and has items',
+        ),
       )
     }
 
-    this.props.status = 'approved'
+    this.props.status = 'paid'
 
-    this.addDomainEvent(new OrderApproved(this))
+    this.addDomainEvent(new OrderPaid(this))
 
     return right(undefined)
   }
 
   get isAvailableToApprove(): boolean {
     return this.props.status === 'pending' && this.props.orderItems.length > 0
+  }
+
+  get isAvailableToBePaid(): boolean {
+    return this.props.status === 'approved' && this.props.orderItems.length > 0
   }
 
   static create(
