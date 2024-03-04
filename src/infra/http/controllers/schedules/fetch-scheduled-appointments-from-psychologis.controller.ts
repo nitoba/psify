@@ -17,11 +17,11 @@ import { ZodValidationPipe } from '../../pipes/zod-validation-pipe'
 import { AppointmentPresenter } from '../../presenters/appointment-presenter'
 
 const appointmentStatusesSchema = z
-  .enum(['pending', 'canceled', 'finished'])
+  .enum(['pending', 'canceled', 'finished', 'scheduled'])
   .default('pending')
   .optional()
 
-const appointmentPeriodSchema = z.date().optional()
+const appointmentPeriodSchema = z.coerce.date().optional()
 
 const zodValidatorStatuses = new ZodValidationPipe(appointmentStatusesSchema)
 const zodValidatorPeriod = new ZodValidationPipe(appointmentPeriodSchema)

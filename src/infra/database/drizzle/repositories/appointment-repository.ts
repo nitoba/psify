@@ -36,8 +36,8 @@ export class DrizzleAppointmentRepository implements AppointmentsRepository {
           filter.status ? eq(appointments.status, filter.status) : undefined,
           filter.period
             ? and(
-                gte(appointments.scheduledTo, filter.period.from),
-                lte(appointments.scheduledTo, filter.period.to),
+                gte(appointments.scheduledTo, new Date(filter.period.from)),
+                lte(appointments.scheduledTo, new Date(filter.period.to)),
               )
             : undefined,
         ),
@@ -84,8 +84,8 @@ export class DrizzleAppointmentRepository implements AppointmentsRepository {
             : undefined,
           filter.period
             ? and(
-                gte(appointments.scheduledTo, filter.period.from),
-                lte(appointments.scheduledTo, filter.period.to),
+                gte(appointments.scheduledTo, new Date(filter.period.from)),
+                lte(appointments.scheduledTo, new Date(filter.period.to)),
               )
             : undefined,
         ),
