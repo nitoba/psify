@@ -61,7 +61,7 @@ export class Order extends AggregateRoot<OrderProps> {
   }
 
   cancel(): Either<InvalidResource, void> {
-    if (!['pending'].includes(this.props.status)) {
+    if (this.props.status !== 'pending') {
       return left(
         new InvalidResource('Order can only be canceled if it is pending'),
       )
