@@ -5,6 +5,7 @@ import { Optional } from '@/core/types/optional'
 import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resource'
 
 import { OrderApproved } from '../events/order-approved'
+import { OrderCreated } from '../events/order-created'
 import { OrderPaid } from '../events/order-paid'
 import { OrderRejected } from '../events/order-rejected'
 import { PaymentMethod } from '../value-objects/payment-method'
@@ -104,6 +105,10 @@ export class Order extends AggregateRoot<OrderProps> {
     return this.props.status === 'approved' && this.props.orderItems.length > 0
   }
 
+  addOderItem(orderItem: OrderItem) {
+    this.props.orderItems.push(orderItem)
+  }
+
   static create(
     {
       status,
@@ -127,6 +132,12 @@ export class Order extends AggregateRoot<OrderProps> {
       },
       id,
     )
+
+    const isNewOrder = !id
+
+    if (isNewOrder) {
+      order.addDomainEvent(new OrderCreated(order))
+    }
 
     return order
   }

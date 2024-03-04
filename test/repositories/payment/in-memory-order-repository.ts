@@ -20,6 +20,7 @@ export class InMemoryOrderRepository implements OrderRepository {
 
   async create(entity: Order): Promise<void> {
     this.orders.push(entity)
+    DomainEvents.dispatchEventsForAggregate(entity.id)
   }
 
   async save(order: Order): Promise<void> {
