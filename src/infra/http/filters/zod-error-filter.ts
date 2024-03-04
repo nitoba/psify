@@ -8,7 +8,10 @@ export class ZodFilter<T extends ZodError> implements ExceptionFilter {
     const response = ctx.getResponse<FastifyReply>()
     const status = 400
     response.status(status).send({
-      errors: exception.flatten().fieldErrors,
+      // eslint-disable-next-line no-extra-boolean-cast
+      errors: Object.keys(exception.formErrors.fieldErrors).length
+        ? exception.formErrors.fieldErrors
+        : exception.errors.map((error) => error.message),
       // message: exception.flatten().,
       statusCode: status,
     })

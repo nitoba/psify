@@ -1,3 +1,5 @@
+import { Injectable } from '@nestjs/common'
+
 import { Either, left, right } from '@/core/either'
 import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
 import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resource'
@@ -11,7 +13,7 @@ type CancelScheduledAppointmentUseCaseResponse = Either<
   ResourceNotFound | InvalidResource,
   void
 >
-
+@Injectable()
 export class CancelScheduledAppointmentUseCase {
   constructor(
     private readonly appointmentsRepository: AppointmentsRepository,

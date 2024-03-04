@@ -17,6 +17,7 @@ import { RemoveAvailableTimeUseCase } from '@/domain/psychologist/application/us
 import { UpdateAvailableTimesUseCase } from '@/domain/psychologist/application/use-cases/update-available-times'
 import { UpdateSpecialtyUseCase } from '@/domain/psychologist/application/use-cases/update-specialties'
 import { AppointmentsRepository } from '@/domain/schedules/application/repositories/appointments-repository'
+import { CancelScheduledAppointmentUseCase } from '@/domain/schedules/application/use-cases/cancel-scheduled-appointment'
 import { FetchTimesAvailableToSchedulesUseCase } from '@/domain/schedules/application/use-cases/fetch-times-available-to-schedules'
 import { RequestScheduleAppointmentUseCase } from '@/domain/schedules/application/use-cases/request-schedule-appointment'
 
@@ -39,6 +40,7 @@ import { FetchPsychologistsController } from './controllers/psychologist/fetch-p
 import { RemoveAvailableTimesController } from './controllers/psychologist/remove-available-times.controller'
 import { UpdateAvailableTimesController } from './controllers/psychologist/update-available-times.controller'
 import { UpdateSpecialtiesController } from './controllers/psychologist/update-specialties.controller'
+import { CancelScheduledAppointmentController } from './controllers/schedules/cancel-scheduled-appointment.controller'
 import { FetchAvailableTimesToSchedulesController } from './controllers/schedules/fetch-times-available-to-schedules.controller'
 import { RequestScheduleAppointmentController } from './controllers/schedules/request-schedule-appointment.controller'
 
@@ -61,6 +63,7 @@ import { RequestScheduleAppointmentController } from './controllers/schedules/re
     // Schedules Controllers
     FetchAvailableTimesToSchedulesController,
     RequestScheduleAppointmentController,
+    CancelScheduledAppointmentController,
   ],
   providers: [
     // Repositories
@@ -102,6 +105,7 @@ import { RequestScheduleAppointmentController } from './controllers/schedules/re
     // Schedules UseCases
     FetchTimesAvailableToSchedulesUseCase,
     RequestScheduleAppointmentUseCase,
+    CancelScheduledAppointmentUseCase,
   ],
 })
 export class HttpModule {}
