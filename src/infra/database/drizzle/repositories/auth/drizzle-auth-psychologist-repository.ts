@@ -1,6 +1,7 @@
 import { randomUUID } from 'node:crypto'
 
 import { Injectable } from '@nestjs/common'
+import { eq } from 'drizzle-orm'
 
 import { AuthPsychologistRepository } from '@/domain/auth/application/repositories/auth-psychologist-repository'
 import { Psychologist } from '@/domain/auth/enterprise/entities/psychologist'
@@ -14,6 +15,15 @@ export class DrizzleAuthPsychologistRepository
   implements AuthPsychologistRepository
 {
   constructor(private readonly db: DrizzleService) {}
+  async findById(id: string): Promise<Psychologist | null> {
+    const result = await this.db.client.query.psychologist.findFirst({
+      where: (psychologist, { eq }) => eq(psychologist.id, id),
+    })
+
+    if (!result) return null
+
+    return toAuthDomain(result)
+  }
 
   async findByEmail(email: string): Promise<Psychologist | null> {
     const result = await this.db.client.query.psychologist.findFirst({
@@ -69,13 +79,17 @@ export class DrizzleAuthPsychologistRepository
     })
   }
 
-  async findById(id: string): Promise<Psychologist | null> {
-    const result = await this.db.client.query.psychologist.findFirst({
-      where: (psychologist, { eq }) => eq(psychologist.id, id),
-    })
-
-    if (!result) return null
-
-    return toAuthDomain(result)
+  async save(entity: Psychologist): Promise<void> {
+    await this.db.client
+      .update(psychologist)
+      .set({
+        name: entity.name,
+        email: entity.email,
+        password: entity.password,
+        phone: entity.phone,
+        crp: entity.crp.value,
+        updatedAt: new Date(),
+      })
+      .where(eq(psychologist.id, entity.id.toString()))
   }
 }
