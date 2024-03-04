@@ -1,13 +1,12 @@
 import { Either, left, right } from '@/core/either'
 import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
 import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resource'
-import { AppointmentsRepository } from '@/domain/schedules/application/repositories/appointments-repository'
 
 import { PaymentGateway } from '../gateway/payment-gateway'
 import { OrderRepository } from '../repositories/order-repository'
 
 type RequestPaymentUseCaseRequest = {
-  appointmentId: string
+  orderId: string
 }
 
 type RequestPaymentUseCaseResponse = Either<
@@ -20,33 +19,23 @@ type RequestPaymentUseCaseResponse = Either<
 export class RequestPaymentUseCase {
   constructor(
     private readonly paymentGateway: PaymentGateway,
-    private readonly appointmentsRepository: AppointmentsRepository,
     private readonly orderRepository: OrderRepository,
   ) {}
 
   async execute({
-    appointmentId,
+    orderId,
   }: RequestPaymentUseCaseRequest): Promise<RequestPaymentUseCaseResponse> {
-    const appointment =
-      await this.appointmentsRepository.findById(appointmentId)
+    const order = await this.orderRepository.findById(orderId)
 
-    if (!appointment) {
-      return left(new ResourceNotFound('Appointment not found'))
-    }
-    const orderExistsForThisAppointment =
-      await this.orderRepository.findByItemId(appointmentId)
-
-    if (!orderExistsForThisAppointment) {
+    if (!order) {
       return left(new ResourceNotFound('Order not found'))
     }
 
-    if (!orderExistsForThisAppointment.isAvailableToBePaid) {
+    if (!order.isAvailableToBePaid) {
       return left(new InvalidResource('Order already paid'))
     }
 
-    const paymentUrl = await this.paymentGateway.requestPayment(
-      orderExistsForThisAppointment,
-    )
+    const paymentUrl = await this.paymentGateway.requestPayment(order)
 
     if (!paymentUrl) {
       return left(new InvalidResource('Payment gateway error'))

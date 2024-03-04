@@ -23,7 +23,6 @@ describe('RequestPaymentUseCase', () => {
     appointmentsRepository = new InMemoryAppointmentsRepository()
     requestPaymentUseCase = new RequestPaymentUseCase(
       paymentGateway,
-      appointmentsRepository,
       orderRepository,
     )
   })
@@ -32,22 +31,13 @@ describe('RequestPaymentUseCase', () => {
     vi.clearAllMocks()
   })
 
-  it('should not be able to request payment if appointment not exits', async () => {
-    const appointmentId = new UniqueEntityID().toString()
-    const result = await requestPaymentUseCase.execute({ appointmentId })
-    expect(result.isLeft()).toBe(true)
-    expect(result.value).toEqual(new ResourceNotFound('Appointment not found'))
-  })
-
   it('should not be able to request payment if order not exits', async () => {
-    const appointmentId = new UniqueEntityID()
-
-    const appointment = makeAppointment({}, appointmentId)
-
-    appointmentsRepository.appointments.push(appointment)
+    const order = makeOrder({
+      status: 'approved',
+    })
 
     const result = await requestPaymentUseCase.execute({
-      appointmentId: appointmentId.toString(),
+      orderId: order.id.toString(),
     })
     expect(result.isLeft()).toBe(true)
     expect(result.value).toEqual(new ResourceNotFound('Order not found'))
@@ -80,7 +70,7 @@ describe('RequestPaymentUseCase', () => {
     orderRepository.orders.push(order)
 
     const result = await requestPaymentUseCase.execute({
-      appointmentId: appointmentId.toString(),
+      orderId: order.id.toString(),
     })
     expect(result.isLeft()).toBe(true)
     expect(result.value).toEqual(new ResourceNotFound('Order already paid'))
@@ -116,7 +106,7 @@ describe('RequestPaymentUseCase', () => {
     orderRepository.orders.push(order)
 
     const result = await requestPaymentUseCase.execute({
-      appointmentId: appointmentId.toString(),
+      orderId: orderId.toString(),
     })
     expect(result.isLeft()).toBeTruthy()
     expect(result.value).toEqual(new InvalidResource('Payment gateway error'))
@@ -149,7 +139,7 @@ describe('RequestPaymentUseCase', () => {
     orderRepository.orders.push(order)
 
     const result = await requestPaymentUseCase.execute({
-      appointmentId: appointmentId.toString(),
+      orderId: orderId.toString(),
     })
     expect(result.isRight()).toBe(true)
     expect(result.value).toEqual(
