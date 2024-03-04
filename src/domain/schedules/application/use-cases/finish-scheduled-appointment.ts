@@ -1,10 +1,12 @@
+import { Injectable } from '@nestjs/common'
+
 import { Either, left, right } from '@/core/either'
 import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
 import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resource'
 import { AppointmentsRepository } from '@/domain/schedules/application/repositories/appointments-repository'
 
 type FinishScheduledAppointmentUseCaseRequest = {
-  scheduleAppointmentId: string
+  scheduledAppointmentId: string
 }
 
 type FinishScheduledAppointmentUseCaseResponse = Either<
@@ -12,16 +14,17 @@ type FinishScheduledAppointmentUseCaseResponse = Either<
   void
 >
 
+@Injectable()
 export class FinishScheduledAppointmentUseCase {
   constructor(
     private readonly appointmentsRepository: AppointmentsRepository,
   ) {}
 
   async execute({
-    scheduleAppointmentId,
+    scheduledAppointmentId,
   }: FinishScheduledAppointmentUseCaseRequest): Promise<FinishScheduledAppointmentUseCaseResponse> {
     const scheduledAppointment = await this.appointmentsRepository.findById(
-      scheduleAppointmentId,
+      scheduledAppointmentId,
     )
 
     if (!scheduledAppointment) {

@@ -19,6 +19,7 @@ import { UpdateSpecialtyUseCase } from '@/domain/psychologist/application/use-ca
 import { AppointmentsRepository } from '@/domain/schedules/application/repositories/appointments-repository'
 import { CancelScheduledAppointmentUseCase } from '@/domain/schedules/application/use-cases/cancel-scheduled-appointment'
 import { FetchTimesAvailableToSchedulesUseCase } from '@/domain/schedules/application/use-cases/fetch-times-available-to-schedules'
+import { FinishScheduledAppointmentUseCase } from '@/domain/schedules/application/use-cases/finish-scheduled-appointment'
 import { RequestScheduleAppointmentUseCase } from '@/domain/schedules/application/use-cases/request-schedule-appointment'
 
 import { AuthModule } from '../auth/auth.module'
@@ -42,6 +43,7 @@ import { UpdateAvailableTimesController } from './controllers/psychologist/updat
 import { UpdateSpecialtiesController } from './controllers/psychologist/update-specialties.controller'
 import { CancelScheduledAppointmentController } from './controllers/schedules/cancel-scheduled-appointment.controller'
 import { FetchAvailableTimesToSchedulesController } from './controllers/schedules/fetch-times-available-to-schedules.controller'
+import { FinishScheduledAppointmentController } from './controllers/schedules/finish-scheduled-appointment.controller'
 import { RequestScheduleAppointmentController } from './controllers/schedules/request-schedule-appointment.controller'
 
 @Module({
@@ -64,6 +66,7 @@ import { RequestScheduleAppointmentController } from './controllers/schedules/re
     FetchAvailableTimesToSchedulesController,
     RequestScheduleAppointmentController,
     CancelScheduledAppointmentController,
+    FinishScheduledAppointmentController,
   ],
   providers: [
     // Repositories
@@ -106,6 +109,7 @@ import { RequestScheduleAppointmentController } from './controllers/schedules/re
     FetchTimesAvailableToSchedulesUseCase,
     RequestScheduleAppointmentUseCase,
     CancelScheduledAppointmentUseCase,
+    FinishScheduledAppointmentUseCase,
   ],
 })
 export class HttpModule {}

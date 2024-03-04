@@ -21,7 +21,7 @@ describe('FinishScheduledAppointmentUseCase', () => {
     repository.appointments.push(appointment)
 
     const result = await useCase.execute({
-      scheduleAppointmentId: appointment.id.toString(),
+      scheduledAppointmentId: appointment.id.toString(),
     })
 
     expect(result.isRight()).toBeTruthy()
@@ -31,7 +31,7 @@ describe('FinishScheduledAppointmentUseCase', () => {
 
   it('should return left if appointment not found', async () => {
     const result = await useCase.execute({
-      scheduleAppointmentId: '456',
+      scheduledAppointmentId: '456',
     })
 
     expect(result.isLeft()).toBeTruthy()
@@ -50,14 +50,14 @@ describe('FinishScheduledAppointmentUseCase', () => {
     repository.appointments.push(appointment, appointment2)
 
     const result = await useCase.execute({
-      scheduleAppointmentId: appointment.id.toString(),
+      scheduledAppointmentId: appointment.id.toString(),
     })
 
     expect(result.isLeft()).toBeTruthy()
     expect(result.value).toBeInstanceOf(InvalidResource)
 
     const result2 = await useCase.execute({
-      scheduleAppointmentId: appointment2.id.toString(),
+      scheduledAppointmentId: appointment2.id.toString(),
     })
 
     expect(result2.isLeft()).toBeTruthy()
