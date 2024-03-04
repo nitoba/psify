@@ -44,6 +44,18 @@ export class Order extends AggregateRoot<OrderProps> {
     return this.props.paymentMethod
   }
 
+  get createdAt(): Date {
+    return this.props.createdAt
+  }
+
+  get updatedAt(): Date {
+    return this.props.updatedAt
+  }
+
+  private touch() {
+    this.props.updatedAt = new Date()
+  }
+
   addOrderItems(orderItems: OrderItem[]) {
     this.props.orderItems = orderItems
   }
@@ -58,6 +70,8 @@ export class Order extends AggregateRoot<OrderProps> {
     this.props.status = 'canceled'
 
     this.addDomainEvent(new OrderRejected(this))
+
+    this.touch()
 
     return right(undefined)
   }
@@ -77,6 +91,7 @@ export class Order extends AggregateRoot<OrderProps> {
     this.props.status = 'paid'
 
     this.addDomainEvent(new OrderPaid(this))
+    this.touch()
 
     return right(undefined)
   }
@@ -93,6 +108,7 @@ export class Order extends AggregateRoot<OrderProps> {
     this.props.status = 'approved'
 
     this.addDomainEvent(new OrderApproved(this))
+    this.touch()
 
     return right(undefined)
   }
@@ -107,6 +123,7 @@ export class Order extends AggregateRoot<OrderProps> {
 
   addOderItem(orderItem: OrderItem) {
     this.props.orderItems.push(orderItem)
+    this.touch()
   }
 
   static create(

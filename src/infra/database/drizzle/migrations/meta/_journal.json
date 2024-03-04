@@ -36,6 +36,20 @@
       "when": 1709316672620,
       "tag": "0004_aberrant_the_professor",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1709588618485,
+      "tag": "0005_regular_red_hulk",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1709591276464,
+      "tag": "0006_whole_invisible_woman",
+      "breakpoints": true
     }
   ]
 }

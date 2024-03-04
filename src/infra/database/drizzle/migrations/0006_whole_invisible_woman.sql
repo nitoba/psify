@@ -1,0 +1,1 @@
+ALTER TABLE "orders_items" ALTER COLUMN "order_id" SET NOT NULL;

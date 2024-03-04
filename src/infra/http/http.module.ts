@@ -10,6 +10,10 @@ import { RegisterPatientUseCase } from '@/domain/auth/application/use-cases/regi
 import { RegisterPsychologistUseCase } from '@/domain/auth/application/use-cases/register-psychologist'
 import { PatientRepository } from '@/domain/patient/application/repositories/patient-repository'
 import { FetchProfileUseCase as FetchProfileFromPatientUseCase } from '@/domain/patient/application/use-cases/fetch-profile'
+import { OrderRepository } from '@/domain/payment/application/repositories/order-repository'
+import { ApproveOrderUseCase } from '@/domain/payment/application/use-cases/approve-order'
+import { CancelOrderUseCase } from '@/domain/payment/application/use-cases/cancel-order'
+import { RequestPaymentUseCase } from '@/domain/payment/application/use-cases/request-payment'
 import { PsychologistRepository } from '@/domain/psychologist/application/repositories/psychology-repository'
 import { AddAvailableTimeUseCase } from '@/domain/psychologist/application/use-cases/add-available-time'
 import { FetchAvailableTimesUseCase } from '@/domain/psychologist/application/use-cases/fetch-available-times'
@@ -32,14 +36,19 @@ import { DatabaseModule } from '../database/database.module'
 import { DrizzleAppointmentRepository } from '../database/drizzle/repositories/appointment-repository'
 import { DrizzleAuthPatientRepository } from '../database/drizzle/repositories/auth/drizzle-auth-patient-repository'
 import { DrizzleAuthPsychologistRepository } from '../database/drizzle/repositories/auth/drizzle-auth-psychologist-repository'
+import { DrizzleOrderRepository } from '../database/drizzle/repositories/order-repository'
 import { DrizzlePatientRepository } from '../database/drizzle/repositories/patient-repository'
 import { DrizzlePsychologistRepository } from '../database/drizzle/repositories/psychologist-repository'
+import { PaymentModule } from '../payment/payment.module'
 import { AuthenticatePatientController } from './controllers/auth/authenticate-patient.controller'
 import { AuthenticatePsychologistController } from './controllers/auth/authenticate-psychologist.controller'
 import { ChangePasswordController } from './controllers/auth/change-password.controller'
 import { FetchProfileController } from './controllers/auth/fetch-profile.controller'
 import { RegisterPatientController } from './controllers/auth/register-patient.controller'
 import { RegisterPsychologistController } from './controllers/auth/register-psychologist.controller'
+import { ApproveOrderController } from './controllers/payment/approve-order.controller'
+import { CancelOrderController } from './controllers/payment/cancel-order.controller'
+import { RequestOrderPaymentController } from './controllers/payment/request-payment.controller'
 import { AddAvailableTimesController } from './controllers/psychologist/add-available-times.controller'
 import { FetchAvailableTimesController } from './controllers/psychologist/featch-available-times.controller'
 import { FetchPsychologistsController } from './controllers/psychologist/fetch-psychologists.controller'
@@ -54,7 +63,7 @@ import { FinishScheduledAppointmentController } from './controllers/schedules/fi
 import { RequestScheduleAppointmentController } from './controllers/schedules/request-schedule-appointment.controller'
 
 @Module({
-  imports: [DatabaseModule, CryptographyModule, AuthModule],
+  imports: [DatabaseModule, CryptographyModule, AuthModule, PaymentModule],
   controllers: [
     // Auth Controllers
     RegisterPatientController,
@@ -77,6 +86,10 @@ import { RequestScheduleAppointmentController } from './controllers/schedules/re
     FetchScheduledAppointmentsFromPsychologistController,
     FetchScheduledAppointmentsFromPatientController,
     ChangePasswordController,
+    // Payment Controllers
+    ApproveOrderController,
+    CancelOrderController,
+    RequestOrderPaymentController,
   ],
   providers: [
     // Repositories
@@ -99,6 +112,10 @@ import { RequestScheduleAppointmentController } from './controllers/schedules/re
     {
       provide: AppointmentsRepository,
       useClass: DrizzleAppointmentRepository,
+    },
+    {
+      provide: OrderRepository,
+      useClass: DrizzleOrderRepository,
     },
     // Auth UseCases
     RegisterPatientUseCase,
@@ -124,6 +141,10 @@ import { RequestScheduleAppointmentController } from './controllers/schedules/re
     FinishScheduledAppointmentUseCase,
     FetchScheduledAppointmentsFromPsychologistUseCase,
     FetchScheduledAppointmentsFromPatientUseCase,
+    // Payments UseCases
+    ApproveOrderUseCase,
+    CancelOrderUseCase,
+    RequestPaymentUseCase,
   ],
 })
 export class HttpModule {}
