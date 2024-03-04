@@ -1,3 +1,4 @@
+import { Injectable } from '@nestjs/common'
 import { differenceInDays } from 'date-fns'
 
 import { Either, left, right } from '@/core/either'
@@ -25,9 +26,11 @@ type FetchScheduledAppointmentsFromPsychologistUseCaseResponse = Either<
   ResourceNotFound | InvalidResource,
   {
     scheduledAppointments: Appointment[]
+    total: number
   }
 >
 
+@Injectable()
 export class FetchScheduledAppointmentsFromPsychologistUseCase {
   constructor(
     private readonly psychologistRepository: PsychologistRepository,
@@ -59,7 +62,7 @@ export class FetchScheduledAppointmentsFromPsychologistUseCase {
       }
     }
 
-    const scheduledAppointments =
+    const { appointments, total } =
       await this.appointmentsRepository.findManyByPsychologistId(
         {
           status,
@@ -70,7 +73,8 @@ export class FetchScheduledAppointmentsFromPsychologistUseCase {
       )
 
     return right({
-      scheduledAppointments,
+      scheduledAppointments: appointments,
+      total,
     })
   }
 }

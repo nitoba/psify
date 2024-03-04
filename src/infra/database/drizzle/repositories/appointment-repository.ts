@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { eq } from 'drizzle-orm'
+import { and, count, desc, eq, gte, inArray, lte } from 'drizzle-orm'
 
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { PaginationParams } from '@/core/repositories/pagination-params'
@@ -23,55 +23,89 @@ export class DrizzleAppointmentRepository implements AppointmentsRepository {
     },
     { page }: PaginationParams,
     psychologistId: UniqueEntityID,
-  ): Promise<Appointment[]> {
+  ): Promise<{ appointments: Appointment[]; total: number }> {
     const perPage = 10
     const offset = (page - 1) * perPage
-    const appointments = await this.drizzle.client.query.appointments.findMany({
-      where: (a, { eq, and, gte, lte }) =>
+
+    const baseQuery = this.drizzle.client
+      .select()
+      .from(appointments)
+      .where(
         and(
-          eq(a.patientId, psychologistId.toString()),
-          filter.status ? eq(a.status, filter.status) : undefined,
+          eq(appointments.psychologistId, psychologistId.toString()),
+          filter.status ? eq(appointments.status, filter.status) : undefined,
           filter.period
             ? and(
-                gte(a.scheduledTo, filter.period.from),
-                lte(a.scheduledTo, filter.period.to),
+                gte(appointments.scheduledTo, filter.period.from),
+                lte(appointments.scheduledTo, filter.period.to),
               )
             : undefined,
         ),
-      limit: perPage,
-      offset,
-    })
+      )
 
-    return appointments.map(toDomain)
+    const [appointmentsCount] = await this.drizzle.client
+      .select({
+        count: count(),
+      })
+      .from(baseQuery.as('baseQuery'))
+
+    const scheduledAppointments = await baseQuery
+      .offset(offset)
+      .limit(perPage)
+      .orderBy(desc(appointments.createdAt))
+
+    return {
+      appointments: scheduledAppointments.map(toDomain),
+      total: appointmentsCount.count,
+    }
   }
 
   async findManyByPatientId(
     filter: {
-      status?: AppointmentStatuses
+      statuses?: AppointmentStatuses[]
       period?: { from: Date; to: Date }
     },
     { page }: PaginationParams,
     patientId: UniqueEntityID,
-  ): Promise<Appointment[]> {
+  ): Promise<{
+    appointments: Appointment[]
+    total: number
+  }> {
     const perPage = 10
     const offset = (page - 1) * perPage
-    const appointments = await this.drizzle.client.query.appointments.findMany({
-      where: (a, { eq, and, gte, lte }) =>
+    const baseQuery = this.drizzle.client
+      .select()
+      .from(appointments)
+      .where(
         and(
-          eq(a.patientId, patientId.toString()),
-          filter.status ? eq(a.status, filter.status) : undefined,
+          eq(appointments.patientId, patientId.toString()),
+          filter.statuses?.length
+            ? inArray(appointments.status, filter.statuses)
+            : undefined,
           filter.period
             ? and(
-                gte(a.scheduledTo, filter.period.from),
-                lte(a.scheduledTo, filter.period.to),
+                gte(appointments.scheduledTo, filter.period.from),
+                lte(appointments.scheduledTo, filter.period.to),
               )
             : undefined,
         ),
-      limit: perPage,
-      offset,
-    })
+      )
 
-    return appointments.map(toDomain)
+    const [appointmentsCount] = await this.drizzle.client
+      .select({
+        count: count(),
+      })
+      .from(baseQuery.as('baseQuery'))
+
+    const scheduledAppointments = await baseQuery
+      .offset(offset)
+      .limit(perPage)
+      .orderBy(desc(appointments.createdAt))
+
+    return {
+      appointments: scheduledAppointments.map(toDomain),
+      total: appointmentsCount.count,
+    }
   }
 
   async save(appointment: Appointment): Promise<void> {

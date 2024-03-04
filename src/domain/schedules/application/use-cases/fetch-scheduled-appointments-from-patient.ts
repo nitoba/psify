@@ -25,6 +25,7 @@ type FetchScheduledAppointmentsFromPatientUseCaseResponse = Either<
   ResourceNotFound | InvalidResource,
   {
     scheduledAppointments: Appointment[]
+    total: number
   }
 >
 
@@ -58,10 +59,10 @@ export class FetchScheduledAppointmentsFromPatientUseCase {
       }
     }
 
-    const scheduledAppointments =
+    const { appointments, total } =
       await this.appointmentsRepository.findManyByPatientId(
         {
-          status,
+          statuses: status ? [status] : undefined,
           period,
         },
         { page },
@@ -69,7 +70,8 @@ export class FetchScheduledAppointmentsFromPatientUseCase {
       )
 
     return right({
-      scheduledAppointments,
+      scheduledAppointments: appointments,
+      total,
     })
   }
 }

@@ -18,6 +18,7 @@ import { UpdateAvailableTimesUseCase } from '@/domain/psychologist/application/u
 import { UpdateSpecialtyUseCase } from '@/domain/psychologist/application/use-cases/update-specialties'
 import { AppointmentsRepository } from '@/domain/schedules/application/repositories/appointments-repository'
 import { CancelScheduledAppointmentUseCase } from '@/domain/schedules/application/use-cases/cancel-scheduled-appointment'
+import { FetchScheduledAppointmentsFromPsychologistUseCase } from '@/domain/schedules/application/use-cases/fetch-scheduled-appointments-from-psychologist'
 import { FetchTimesAvailableToSchedulesUseCase } from '@/domain/schedules/application/use-cases/fetch-times-available-to-schedules'
 import { FinishScheduledAppointmentUseCase } from '@/domain/schedules/application/use-cases/finish-scheduled-appointment'
 import { RequestScheduleAppointmentUseCase } from '@/domain/schedules/application/use-cases/request-schedule-appointment'
@@ -42,6 +43,7 @@ import { RemoveAvailableTimesController } from './controllers/psychologist/remov
 import { UpdateAvailableTimesController } from './controllers/psychologist/update-available-times.controller'
 import { UpdateSpecialtiesController } from './controllers/psychologist/update-specialties.controller'
 import { CancelScheduledAppointmentController } from './controllers/schedules/cancel-scheduled-appointment.controller'
+import { FetchScheduledAppointmentsFromPsychologistController } from './controllers/schedules/fetch-scheduled-appointments-from-psychologis.controller'
 import { FetchAvailableTimesToSchedulesController } from './controllers/schedules/fetch-times-available-to-schedules.controller'
 import { FinishScheduledAppointmentController } from './controllers/schedules/finish-scheduled-appointment.controller'
 import { RequestScheduleAppointmentController } from './controllers/schedules/request-schedule-appointment.controller'
@@ -67,6 +69,7 @@ import { RequestScheduleAppointmentController } from './controllers/schedules/re
     RequestScheduleAppointmentController,
     CancelScheduledAppointmentController,
     FinishScheduledAppointmentController,
+    FetchScheduledAppointmentsFromPsychologistController,
   ],
   providers: [
     // Repositories
@@ -110,6 +113,7 @@ import { RequestScheduleAppointmentController } from './controllers/schedules/re
     RequestScheduleAppointmentUseCase,
     CancelScheduledAppointmentUseCase,
     FinishScheduledAppointmentUseCase,
+    FetchScheduledAppointmentsFromPsychologistUseCase,
   ],
 })
 export class HttpModule {}

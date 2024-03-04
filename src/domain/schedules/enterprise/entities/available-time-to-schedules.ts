@@ -1,3 +1,5 @@
+import { isAfter, setDay } from 'date-fns'
+
 import { Entity } from '@/core/entities/entity'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { Time } from '@/domain/psychologist/enterprise/value-objects/time'
@@ -69,14 +71,16 @@ export class AvailableTimeToSchedule extends Entity<AvailableTimeToSchedulesProp
     const availableTimes = currentAvailableTimes.filter((at) => {
       const [hourFromTime, minutesFromTime] = at.time.getHoursAndMinutes()
 
-      const dateToCompare = new Date()
-      dateToCompare.setHours(hourFromTime, minutesFromTime)
+      const dateToCompare = setDay(
+        new Date().setHours(hourFromTime, minutesFromTime),
+        at.weekday,
+      )
 
       const isTimeNotScheduled = scheduledAppointments.every((sp) => {
         return sp.scheduledTo.getTime() !== dateToCompare.getTime()
       })
 
-      return Date.now() <= dateToCompare.getTime() && isTimeNotScheduled
+      return isAfter(dateToCompare, new Date()) && isTimeNotScheduled
     })
 
     return availableTimes

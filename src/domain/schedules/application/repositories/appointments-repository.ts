@@ -18,11 +18,11 @@ export abstract class AppointmentsRepository extends Repository<Appointment> {
     },
     params: PaginationParams,
     psychologistId: UniqueEntityID,
-  ): Promise<Appointment[]>
+  ): Promise<{ appointments: Appointment[]; total: number }>
 
   abstract findManyByPatientId(
     filter: {
-      status?: AppointmentStatuses
+      statuses?: AppointmentStatuses[]
       period?: {
         from: Date
         to: Date
@@ -30,7 +30,7 @@ export abstract class AppointmentsRepository extends Repository<Appointment> {
     },
     params: PaginationParams,
     patientId: UniqueEntityID,
-  ): Promise<Appointment[]>
+  ): Promise<{ appointments: Appointment[]; total: number }>
 
   abstract save(appointment: Appointment): Promise<void>
 }

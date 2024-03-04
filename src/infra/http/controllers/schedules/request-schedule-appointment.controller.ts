@@ -25,7 +25,7 @@ type RequestScheduleAppointmentBody = z.infer<
   typeof requestScheduleAppointmentBodySchema
 >
 
-@Controller('/appointments')
+@Controller('/schedules')
 export class RequestScheduleAppointmentController {
   constructor(private useCase: RequestScheduleAppointmentUseCase) {}
 
@@ -46,12 +46,13 @@ export class RequestScheduleAppointmentController {
     if (
       result.isLeft() &&
       (result.value instanceof InvalidResource ||
-        result instanceof ResourceNotFound)
+        result.value instanceof ResourceNotFound)
     ) {
       throw new BadRequestException(result.value)
     }
 
     if (result.isRight()) {
+      console.log('Deu')
       return AppointmentPresenter.toHttp(result.value.appointment)
     }
   }

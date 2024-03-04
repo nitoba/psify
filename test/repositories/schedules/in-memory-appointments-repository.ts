@@ -25,25 +25,25 @@ export class InMemoryAppointmentsRepository implements AppointmentsRepository {
 
   async findManyByPatientId(
     filter: {
-      status?: AppointmentStatuses
+      statuses?: AppointmentStatuses[]
       period?: { from: Date; to: Date }
     },
     { page }: PaginationParams,
     patientId: UniqueEntityID,
-  ): Promise<Appointment[]> {
+  ): Promise<{ appointments: Appointment[]; total: number }> {
     const offset = (page - 1) * 10
 
     const appointmentsFromPsychologist = this.appointments.filter((ap) => {
-      if (!filter.period && !filter.status) {
+      if (!filter.period && !filter.statuses) {
         return (
           differenceInDays(new Date(), ap.scheduledTo) <= 7 &&
           ap.patientId.equals(patientId)
         )
       }
 
-      if (!filter.period && filter.status) {
+      if (!filter.period && filter.statuses) {
         return (
-          ap.status === filter.status &&
+          filter.statuses.includes(ap.status) &&
           differenceInDays(new Date(), ap.scheduledTo) <= 7 &&
           ap.patientId.equals(patientId)
         )
@@ -52,7 +52,7 @@ export class InMemoryAppointmentsRepository implements AppointmentsRepository {
       // scheduled to: 12-03-2024
       // from: 10-03-2024
       // to: 17-03-2024
-      if (!filter.status && filter.period) {
+      if (!filter.statuses && filter.period) {
         return (
           ap.scheduledTo > filter.period.from &&
           ap.scheduledTo < filter.period.to &&
@@ -63,7 +63,10 @@ export class InMemoryAppointmentsRepository implements AppointmentsRepository {
       return false
     })
 
-    return appointmentsFromPsychologist.slice(offset, offset + 10)
+    return {
+      appointments: appointmentsFromPsychologist.slice(offset, offset + 10),
+      total: appointmentsFromPsychologist.length,
+    }
   }
 
   async findManyByPsychologistId(
@@ -73,7 +76,10 @@ export class InMemoryAppointmentsRepository implements AppointmentsRepository {
     },
     { page }: PaginationParams,
     psychologistId: UniqueEntityID,
-  ): Promise<Appointment[]> {
+  ): Promise<{
+    appointments: Appointment[]
+    total: number
+  }> {
     const offset = (page - 1) * 10
 
     const appointmentsFromPsychologist = this.appointments.filter((ap) => {
@@ -106,7 +112,10 @@ export class InMemoryAppointmentsRepository implements AppointmentsRepository {
       return false
     })
 
-    return appointmentsFromPsychologist.slice(offset, offset + 10)
+    return {
+      appointments: appointmentsFromPsychologist.slice(offset, offset + 10),
+      total: appointmentsFromPsychologist.length,
+    }
   }
 
   async save(appointment: Appointment): Promise<void> {

@@ -57,7 +57,7 @@ describe('Request Schedule Appointment (E2E)', () => {
     await app.close()
   })
 
-  test('[POST] /appointments', async () => {
+  test('[POST] /schedules', async () => {
     vi.useFakeTimers().setSystemTime(new Date(2024, 1, 25, 8))
     const psychologist = await authPsychologistFactory.makeDbPsychologist()
     await availableTimesFactory.makeDbAvailableTime(
@@ -76,7 +76,7 @@ describe('Request Schedule Appointment (E2E)', () => {
     })
 
     const response = await request(app.getHttpServer())
-      .post('/appointments')
+      .post('/schedules')
       .set('Cookie', [`psify@access_token=${token}`])
       .send({
         psychologistId: psychologist.id.toString(),

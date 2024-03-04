@@ -43,15 +43,15 @@ export class RequestScheduleAppointmentUseCase {
       return left(new ResourceNotFound('Psychologist or patient not found'))
     }
 
-    // validate if patient is not already scheduled to the same psychologist
+    // validate if patient is not already scheduled or this schedule are pending to the same psychologist
     const appointmentsScheduled =
       await this.appointmentRepository.findManyByPatientId(
-        { status: 'scheduled' },
+        { statuses: ['pending', 'scheduled'] },
         { page: 1 },
         patient.id,
       )
 
-    const isAlreadyScheduled = appointmentsScheduled.some((ap) =>
+    const isAlreadyScheduled = appointmentsScheduled.appointments.some((ap) =>
       ap.psychologistId.equals(psychologist.id),
     )
 
@@ -67,10 +67,11 @@ export class RequestScheduleAppointmentUseCase {
         psychologist.getAvailableTimes(),
         psychologist.scheduledAppointments,
       )
+
     const isAvailable = availableTimesToSchedules.some((at) => {
       const [hourFromTime, minutesFromTime] = at.time.getHoursAndMinutes()
 
-      const scheduledDate = new Date(
+      const timeAvailableToSchedulesToDate = new Date(
         scheduledTo.getFullYear(),
         scheduledTo.getMonth(),
         scheduledTo.getDate(),
@@ -79,7 +80,7 @@ export class RequestScheduleAppointmentUseCase {
       )
 
       return (
-        scheduledDate.getTime() === scheduledTo.getTime() &&
+        scheduledTo.getTime() >= timeAvailableToSchedulesToDate.getTime() &&
         scheduledTo.getDay() === at.weekday
       )
     })
