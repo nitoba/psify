@@ -5,6 +5,7 @@ import { makeAppointment } from 'test/factories/schedules/make-appointment'
 import { FakeMailPublisher } from 'test/notification-publisher/fake-mail'
 import { InMemoryAuthPatientRepository } from 'test/repositories/auth/in-memory-patient-repository'
 import { InMemoryAuthPsychologistRepository } from 'test/repositories/auth/in-memory-psychologist-repository'
+import { InMemoryNotificationRepository } from 'test/repositories/notification/in-memory-notification-repository'
 import { InMemoryOrderRepository } from 'test/repositories/payment/in-memory-order-repository'
 import { InMemoryAppointmentsRepository } from 'test/repositories/schedules/in-memory-appointments-repository'
 import { waitFor } from 'test/utils/wait-for'
@@ -21,6 +22,7 @@ let fakeMailPublisher: FakeMailPublisher
 let appointmentsRepository: InMemoryAppointmentsRepository
 let patientRepository: InMemoryAuthPatientRepository
 let psychologistRepository: InMemoryAuthPsychologistRepository
+let notificationRepository: InMemoryNotificationRepository
 describe('On Order Approved', () => {
   beforeEach(() => {
     psychologistRepository = new InMemoryAuthPsychologistRepository()
@@ -28,7 +30,11 @@ describe('On Order Approved', () => {
     appointmentsRepository = new InMemoryAppointmentsRepository()
     orderRepository = new InMemoryOrderRepository()
     fakeMailPublisher = new FakeMailPublisher()
-    useCase = new SendNotificationUseCase(fakeMailPublisher)
+    notificationRepository = new InMemoryNotificationRepository()
+    useCase = new SendNotificationUseCase(
+      fakeMailPublisher,
+      notificationRepository,
+    )
     new OnOrderCreated(useCase, psychologistRepository)
   })
 
@@ -69,6 +75,9 @@ describe('On Order Approved', () => {
       expect(useCaseSpy).toHaveBeenCalled()
     })
     expect(fakeMailPublisher.notifications[0].to).toEqual(psychologist.email)
+    expect(notificationRepository.notifications[0].to).toEqual(
+      psychologist.email,
+    )
     expect(appointmentsRepository.appointments[0].status).toEqual('pending')
   })
 })

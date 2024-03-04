@@ -2,6 +2,7 @@ import { Email } from '@/domain/core/enterprise/value-objects/email'
 
 import { Notification } from '../../enterprise/entities/notification'
 import { MailNotificationPublisher } from '../notification-publisher/mail'
+import { NotificationRepository } from '../repositories/notification-repository'
 
 type SendNotificationUseCaseRequest = {
   subject: string
@@ -12,6 +13,7 @@ type SendNotificationUseCaseRequest = {
 export class SendNotificationUseCase {
   constructor(
     private readonly notificationPublisher: MailNotificationPublisher,
+    private readonly notificationRepository: NotificationRepository,
   ) {}
 
   async execute({
@@ -25,6 +27,7 @@ export class SendNotificationUseCase {
       to: Email.create(to).value as Email,
     })
 
+    await this.notificationRepository.create(notification)
     await this.notificationPublisher.send(notification)
   }
 }
