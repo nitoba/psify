@@ -51,6 +51,108 @@ describe('Order', () => {
     })
   })
 
+  describe('approve', () => {
+    it('should not approve order that is not pending', () => {
+      let order = makeOrder({
+        status: 'approved',
+        orderItems: [
+          OrderItem.create({
+            itemId: new UniqueEntityID(),
+            quantity: 1,
+            name: 'Item 1',
+            orderId,
+            priceInCents: 100,
+          }),
+        ],
+      })
+      let result = order.approve()
+
+      expect(result.isLeft()).toBeTruthy()
+      expect(order.status).toBe('approved')
+
+      order = makeOrder({
+        status: 'paid',
+        orderItems: [
+          OrderItem.create({
+            itemId: new UniqueEntityID(),
+            quantity: 1,
+            name: 'Item 1',
+            orderId,
+            priceInCents: 100,
+          }),
+        ],
+      })
+      result = order.approve()
+
+      expect(result.isLeft()).toBeTruthy()
+      expect(order.status).toBe('paid')
+
+      order = makeOrder({
+        status: 'canceled',
+        orderItems: [
+          OrderItem.create({
+            itemId: new UniqueEntityID(),
+            quantity: 1,
+            name: 'Item 1',
+            orderId,
+            priceInCents: 100,
+          }),
+        ],
+      })
+      result = order.approve()
+
+      expect(result.isLeft()).toBeTruthy()
+      expect(order.status).toBe('canceled')
+    })
+    it('should approve order with items', () => {
+      const order = makeOrder({
+        orderItems: [
+          OrderItem.create({
+            itemId: new UniqueEntityID(),
+            quantity: 1,
+            name: 'Item 1',
+            orderId,
+            priceInCents: 100,
+          }),
+        ],
+      })
+      const result = order.approve()
+
+      expect(result.isRight()).toBeTruthy()
+      expect(order.status).toBe('approved')
+    })
+
+    it('should not approve an order without items', () => {
+      const order = makeOrder({
+        orderItems: [],
+      })
+      const result = order.approve()
+
+      expect(result.isLeft()).toBeTruthy()
+      expect(order.status).toBe('pending')
+    })
+
+    it('should not approve an already paid approved', () => {
+      const order = makeOrder({
+        status: 'approved',
+        orderItems: [
+          OrderItem.create({
+            itemId: new UniqueEntityID(),
+            quantity: 1,
+            name: 'Item 1',
+            orderId,
+            priceInCents: 100,
+          }),
+        ],
+      })
+
+      const result = order.approve()
+
+      expect(result.isLeft()).toBeTruthy()
+      expect(order.status).toBe('approved')
+    })
+  })
+
   describe('pay', () => {
     it('should pay a approved order with items', () => {
       const order = makeOrder({

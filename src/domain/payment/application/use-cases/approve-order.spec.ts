@@ -7,15 +7,15 @@ import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
 import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resource'
 
 import { OrderItem } from '../../enterprise/entities/order-item'
-import { PayOrderUseCase } from './pay-order'
+import { ApproveOrderUseCase } from './approve-order'
 
-describe('PayOrderUseCase', () => {
+describe('ApproveOrderUseCase', () => {
   let orderRepository: InMemoryOrderRepository
-  let useCase: PayOrderUseCase
+  let useCase: ApproveOrderUseCase
 
   beforeEach(() => {
     orderRepository = new InMemoryOrderRepository()
-    useCase = new PayOrderUseCase(orderRepository)
+    useCase = new ApproveOrderUseCase(orderRepository)
   })
 
   it('should return ResourceNotFound error if order does not exist', async () => {
@@ -37,7 +37,7 @@ describe('PayOrderUseCase', () => {
     expect(result).toEqual(
       left(
         new InvalidResource(
-          'Order can only be pay if it is paid and has items',
+          'Order can only be pay if it is approved and has items',
         ),
       ),
     )
@@ -52,17 +52,17 @@ describe('PayOrderUseCase', () => {
     expect(result).toEqual(
       left(
         new InvalidResource(
-          'Order can only be pay if it is paid and has items',
+          'Order can only be pay if it is approved and has items',
         ),
       ),
     )
   })
 
-  it('should pay order successfully', async () => {
+  it('should approve order successfully', async () => {
     const orderId = new UniqueEntityID()
     const order = makeOrder(
       {
-        status: 'approved',
+        status: 'pending',
         orderItems: [
           OrderItem.create({
             name: 'Item 1',
@@ -81,6 +81,6 @@ describe('PayOrderUseCase', () => {
     const result = await useCase.execute({ orderId: order.id.toString() })
 
     expect(result).toEqual(right(undefined))
-    expect(orderRepository.orders[0].status).toEqual('paid')
+    expect(orderRepository.orders[0].status).toEqual('approved')
   })
 })

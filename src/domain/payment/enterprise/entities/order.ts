@@ -4,6 +4,7 @@ import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { Optional } from '@/core/types/optional'
 import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resource'
 
+import { OrderApproved } from '../events/order-approved'
 import { OrderPaid } from '../events/order-paid'
 import { OrderRejected } from '../events/order-rejected'
 import { PaymentMethod } from '../value-objects/payment-method'
@@ -67,7 +68,7 @@ export class Order extends AggregateRoot<OrderProps> {
     ) {
       return left(
         new InvalidResource(
-          'Order can only be pay if it is approved and has items',
+          'Order can only be pay if it is paid and has items',
         ),
       )
     }
@@ -75,6 +76,22 @@ export class Order extends AggregateRoot<OrderProps> {
     this.props.status = 'paid'
 
     this.addDomainEvent(new OrderPaid(this))
+
+    return right(undefined)
+  }
+
+  approve(): Either<InvalidResource, void> {
+    if (this.props.status !== 'pending' || this.props.orderItems.length === 0) {
+      return left(
+        new InvalidResource(
+          'Order can only be pay if it is approved and has items',
+        ),
+      )
+    }
+
+    this.props.status = 'approved'
+
+    this.addDomainEvent(new OrderApproved(this))
 
     return right(undefined)
   }
