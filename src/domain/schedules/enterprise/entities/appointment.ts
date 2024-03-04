@@ -4,6 +4,7 @@ import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { Optional } from '@/core/types/optional'
 import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resource'
 
+import { AppointmentCancelled } from '../events/appointment-cancelled'
 import { AppointmentRequested } from '../events/appointment-requested'
 
 export type AppointmentStatuses =
@@ -59,6 +60,7 @@ export class Appointment extends AggregateRoot<AppointmentProps> {
     }
 
     this.props.status = 'canceled'
+    this.addDomainEvent(new AppointmentCancelled(this))
 
     return right(undefined)
   }
