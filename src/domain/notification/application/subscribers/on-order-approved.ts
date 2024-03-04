@@ -30,7 +30,7 @@ export class OnOrderApproved implements EventHandler {
     await this.sendNotificationUseCase.execute({
       to: patient.email,
       subject: 'Order approved',
-      content: `The order with id ${order.id.toString()} was approved`,
+      content: `The order with id ${order.id.toString()} was approved. Now you are able to process the payment`,
     })
   }
 }
