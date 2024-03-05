@@ -1,6 +1,6 @@
 import { ValueObject } from '@/core/entities/value-objects'
 
-export type Source = 'credit_card' | 'pix'
+export type Source = 'card' | 'pix'
 
 export type PaymentMethodProps = {
   value: Source

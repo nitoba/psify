@@ -28,20 +28,18 @@ export class StripePaymentGateway implements PaymentGateway {
       currency: 'BRL',
       success_url: `https://google.com`,
       mode: 'payment',
-      payment_method_types: ['card'],
-      line_items: [
-        {
-          quantity: order.orderItems[0].quantity,
-          price_data: {
-            currency: 'BRL',
-            product_data: {
-              name: order.orderItems[0].name,
-              description: `Consultation with psychologist`,
-            },
-            unit_amount: order.orderItems[0].priceInCents,
+      payment_method_types: [order.paymentMethod.value],
+      line_items: order.orderItems.map((orderItem) => ({
+        quantity: orderItem.quantity,
+        price_data: {
+          currency: 'BRL',
+          product_data: {
+            name: orderItem.name,
+            description: `Consultation with psychologist`,
           },
+          unit_amount: orderItem.priceInCents,
         },
-      ],
+      })),
     })
 
     return checkoutSession.url

@@ -57,7 +57,7 @@ describe('FetchTimesAvailableToSchedulesUseCase', () => {
     }
   })
 
-  it.only('should return only available times available to schedule', async () => {
+  it('should return only available times available to schedule', async () => {
     vi.useFakeTimers().setSystemTime(new Date(2024, 1, 25, 8))
     const psychologistId = new UniqueEntityID()
     const availableTimes = [

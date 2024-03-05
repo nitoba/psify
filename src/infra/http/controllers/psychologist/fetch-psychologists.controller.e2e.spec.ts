@@ -44,7 +44,7 @@ describe('Fetch Available Times To Psychologists (E2E)', () => {
     await app.close()
   })
 
-  test.only('[GET] /psychologists', async () => {
+  test('[GET] /psychologists', async () => {
     const patient = makePatient()
     await authPsychologistFactory.makeDbPsychologist({
       name: Name.create('John Doe').value as Name,
