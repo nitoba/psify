@@ -36,6 +36,8 @@ import { ChangePasswordController } from './controllers/auth/change-password.con
 import { FetchProfileController } from './controllers/auth/fetch-profile.controller'
 import { RegisterPatientController } from './controllers/auth/register-patient.controller'
 import { RegisterPsychologistController } from './controllers/auth/register-psychologist.controller'
+import { ApproveOrderController } from './controllers/payment/approve-order.controller'
+import { CancelOrderController } from './controllers/payment/cancel-order.controller'
 import { RequestOrderPaymentController } from './controllers/payment/request-payment.controller'
 import { AddAvailableTimesController } from './controllers/psychologist/add-available-times.controller'
 import { FetchAvailableTimesController } from './controllers/psychologist/featch-available-times.controller'
@@ -80,8 +82,8 @@ import { RequestScheduleAppointmentController } from './controllers/schedules/re
     RejectAppointmentController,
     // Payment Controllers
     RequestOrderPaymentController,
-    // ApproveOrderController,
-    // CancelOrderController,
+    ApproveOrderController,
+    CancelOrderController,
   ],
   providers: [
     // Auth UseCases
