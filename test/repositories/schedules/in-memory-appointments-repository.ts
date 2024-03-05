@@ -124,5 +124,7 @@ export class InMemoryAppointmentsRepository implements AppointmentsRepository {
     )
 
     this.appointments[appointmentIndex] = appointment
+
+    DomainEvents.dispatchEventsForAggregate(appointment.id)
   }
 }
