@@ -23,6 +23,7 @@ import { FetchScheduledAppointmentsFromPatientUseCase } from '@/domain/schedules
 import { FetchScheduledAppointmentsFromPsychologistUseCase } from '@/domain/schedules/application/use-cases/fetch-scheduled-appointments-from-psychologist'
 import { FetchTimesAvailableToSchedulesUseCase } from '@/domain/schedules/application/use-cases/fetch-times-available-to-schedules'
 import { FinishScheduledAppointmentUseCase } from '@/domain/schedules/application/use-cases/finish-scheduled-appointment'
+import { RejectAppointmentUseCase } from '@/domain/schedules/application/use-cases/reject-appointment'
 import { RequestScheduleAppointmentUseCase } from '@/domain/schedules/application/use-cases/request-schedule-appointment'
 
 import { AuthModule } from '../auth/auth.module'
@@ -48,6 +49,7 @@ import { FetchScheduledAppointmentsFromPatientController } from './controllers/s
 import { FetchScheduledAppointmentsFromPsychologistController } from './controllers/schedules/fetch-scheduled-appointments-from-psychologist.controller'
 import { FetchAvailableTimesToSchedulesController } from './controllers/schedules/fetch-times-available-to-schedules.controller'
 import { FinishScheduledAppointmentController } from './controllers/schedules/finish-scheduled-appointment.controller'
+import { RejectAppointmentController } from './controllers/schedules/reject-appointment.controller'
 import { RequestScheduleAppointmentController } from './controllers/schedules/request-schedule-appointment.controller'
 
 @Module({
@@ -75,6 +77,7 @@ import { RequestScheduleAppointmentController } from './controllers/schedules/re
     FetchScheduledAppointmentsFromPsychologistController,
     FetchScheduledAppointmentsFromPatientController,
     ApproveAppointmentController,
+    RejectAppointmentController,
     // Payment Controllers
     RequestOrderPaymentController,
     // ApproveOrderController,
@@ -106,6 +109,7 @@ import { RequestScheduleAppointmentController } from './controllers/schedules/re
     FetchScheduledAppointmentsFromPsychologistUseCase,
     FetchScheduledAppointmentsFromPatientUseCase,
     ApproveAppointmentUseCase,
+    RejectAppointmentUseCase,
     // Payments UseCases
     ApproveOrderUseCase,
     CancelOrderUseCase,
