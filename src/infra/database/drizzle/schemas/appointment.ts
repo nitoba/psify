@@ -7,6 +7,7 @@ import { psychologist } from './psychologist'
 export const appointmentStatusEnum = pgEnum('appointment_status', [
   'pending',
   'scheduled',
+  'approved',
   'finished',
   'inactive',
   'canceled',

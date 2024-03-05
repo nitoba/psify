@@ -35,7 +35,7 @@ describe('On Order Paid', () => {
     const appointment = makeAppointment({
       patientId: patient.id,
       psychologistId: psychologist.id,
-      status: 'pending',
+      status: 'approved',
     })
     appointmentsRepository.appointments.push(appointment)
 

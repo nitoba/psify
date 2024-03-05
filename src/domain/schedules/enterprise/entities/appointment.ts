@@ -8,11 +8,12 @@ import { AppointmentCancelled } from '../events/appointment-cancelled'
 import { AppointmentRequested } from '../events/appointment-requested'
 
 export type AppointmentStatuses =
-  | 'pending'
-  | 'scheduled'
-  | 'canceled'
-  | 'finished'
-  | 'inactive'
+  | 'pending' // pending to approbation
+  | 'approved' // when appointment was accepted by psychologist
+  | 'scheduled' // when approved and order paid
+  | 'finished' // when consultation was made
+  | 'canceled' // when not approved
+  | 'inactive' // when order was rejected or canceled by some motive
 
 export type AppointmentProps = {
   psychologistId: UniqueEntityID
@@ -52,6 +53,19 @@ export class Appointment extends AggregateRoot<AppointmentProps> {
     this.props.status = status
   }
 
+  approve(): Either<InvalidResource, void> {
+    if (this.status !== 'pending') {
+      return left(
+        new InvalidResource('This scheduled appointment could not be approved'),
+      )
+    }
+
+    this.props.status = 'approved'
+    this.addDomainEvent(new AppointmentCancelled(this))
+
+    return right(undefined)
+  }
+
   cancel(): Either<InvalidResource, void> {
     if (['canceled', 'finished'].includes(this.status)) {
       return left(
@@ -66,7 +80,7 @@ export class Appointment extends AggregateRoot<AppointmentProps> {
   }
 
   schedule(): Either<InvalidResource, void> {
-    if (this.status !== 'pending') {
+    if (this.status !== 'approved') {
       return left(
         new InvalidResource(
           'This scheduled appointment could not be scheduled',

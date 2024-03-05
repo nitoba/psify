@@ -15,7 +15,7 @@ describe('MarkAppointmentAsScheduledUseCase', () => {
   })
 
   it('should mark appointment as scheduled', async () => {
-    const appointment = makeAppointment({ status: 'pending' })
+    const appointment = makeAppointment({ status: 'approved' })
     repository.appointments.push(appointment)
 
     const result = await useCase.execute({
