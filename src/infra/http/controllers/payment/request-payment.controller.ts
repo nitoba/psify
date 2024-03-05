@@ -1,6 +1,8 @@
-import { Controller, Param, Post } from '@nestjs/common'
+import { BadRequestException, Controller, Param, Post } from '@nestjs/common'
 import { z } from 'zod'
 
+import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
+import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resource'
 import { RequestPaymentUseCase } from '@/domain/payment/application/use-cases/request-payment'
 
 import { ZodValidationPipe } from '../../pipes/zod-validation-pipe'
@@ -19,6 +21,21 @@ export class RequestOrderPaymentController {
 
   @Post()
   async handle(@Param('orderId', orderIdValidator) orderId: string) {
-    console.log('RequestOrderPaymentController.handle', orderId)
+    const result = await this.useCase.execute({
+      orderId,
+    })
+    if (
+      result.isLeft() &&
+      (result.value instanceof ResourceNotFound ||
+        result.value instanceof InvalidResource)
+    ) {
+      throw new BadRequestException(result.value)
+    }
+
+    if (result.isRight()) {
+      return {
+        paymentUrl: result.value.paymentUrl,
+      }
+    }
   }
 }

@@ -26,7 +26,9 @@ export class StripePaymentGateway implements PaymentGateway {
     const checkoutSession = await this.stripe.checkout.sessions.create({
       customer: costumer.costumerId,
       currency: 'BRL',
-      // success_url: `http://localhost:3333/orders/${order.id}/approve`,
+      success_url: `https://google.com`,
+      mode: 'payment',
+      payment_method_types: ['card'],
       line_items: [
         {
           quantity: order.orderItems[0].quantity,
@@ -37,7 +39,6 @@ export class StripePaymentGateway implements PaymentGateway {
               description: `Consultation with psychologist`,
             },
             unit_amount: order.orderItems[0].priceInCents,
-            unit_amount_decimal: '2',
           },
         },
       ],
