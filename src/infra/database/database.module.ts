@@ -24,6 +24,7 @@ import * as schema from './drizzle/schemas'
 import { MongoNotificationRepository } from './mongoose/repositories/mongo-notification-repository'
 @Module({
   imports: [
+    EnvModule,
     DrizzlePGModule.registerAsync({
       tag: 'DB',
       imports: [EnvModule],
@@ -49,7 +50,7 @@ import { MongoNotificationRepository } from './mongoose/repositories/mongo-notif
       inject: [EnvService],
       useFactory: (env: EnvService) => {
         return {
-          dbName: 'Psify_Notifications',
+          dbName: env.get('MONGODB_DATABASE_NAME'),
           uri: env.get('MONGODB_URL'),
         }
       },
