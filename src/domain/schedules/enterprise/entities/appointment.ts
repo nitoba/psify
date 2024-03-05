@@ -4,6 +4,7 @@ import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { Optional } from '@/core/types/optional'
 import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resource'
 
+import { AppointmentApproved } from '../events/appointment-approved'
 import { AppointmentCancelled } from '../events/appointment-cancelled'
 import { AppointmentRequested } from '../events/appointment-requested'
 
@@ -61,7 +62,7 @@ export class Appointment extends AggregateRoot<AppointmentProps> {
     }
 
     this.props.status = 'approved'
-    this.addDomainEvent(new AppointmentCancelled(this))
+    this.addDomainEvent(new AppointmentApproved(this))
 
     return right(undefined)
   }
