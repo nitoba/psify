@@ -22,12 +22,12 @@ export class OnAppointmentRejectedHandler implements EventHandler {
 
   setupSubscriptions(): void {
     DomainEvents.register(
-      this.notifyAboutAppointmentRequested.bind(this),
+      this.notifyAboutAppointmentRejected.bind(this),
       AppointmentRequested.name,
     )
   }
 
-  private async notifyAboutAppointmentRequested({
+  private async notifyAboutAppointmentRejected({
     appointment,
   }: AppointmentRequested) {
     const appointmentExists = await this.appointmentRepository.findById(
