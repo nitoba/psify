@@ -42,7 +42,7 @@ describe('CancelOrderUseCase', () => {
     )
 
     order = makeOrder({
-      status: 'paid',
+      status: 'approved',
     })
 
     orderRepository.orders.push(order)

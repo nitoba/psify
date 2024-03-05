@@ -38,16 +38,15 @@ describe('Order', () => {
       expect(order.status).toBe('canceled')
     })
 
-    it('should not cancel an paid order', () => {
+    it('should not cancel an approved order', () => {
       const order = makeOrder({
-        status: 'paid',
+        status: 'approved',
       })
-      order.pay()
 
       const result = order.cancel()
 
       expect(result.isLeft()).toBeTruthy()
-      expect(order.status).toBe('paid')
+      expect(order.status).toBe('approved')
     })
   })
 
@@ -71,7 +70,7 @@ describe('Order', () => {
       expect(order.status).toBe('approved')
 
       order = makeOrder({
-        status: 'paid',
+        status: 'approved',
         orderItems: [
           OrderItem.create({
             itemId: new UniqueEntityID(),
@@ -85,7 +84,7 @@ describe('Order', () => {
       result = order.approve()
 
       expect(result.isLeft()).toBeTruthy()
-      expect(order.status).toBe('paid')
+      expect(order.status).toBe('approved')
 
       order = makeOrder({
         status: 'canceled',
@@ -132,7 +131,7 @@ describe('Order', () => {
       expect(order.status).toBe('pending')
     })
 
-    it('should not approve an already paid approved', () => {
+    it('should not approve an already approved approved', () => {
       const order = makeOrder({
         status: 'approved',
         orderItems: [
@@ -152,11 +151,9 @@ describe('Order', () => {
       expect(order.status).toBe('approved')
     })
   })
-
-  describe('pay', () => {
-    it('should pay a approved order with items', () => {
+  describe('isAvailableToApprove', () => {
+    it('should return true for approved order with items', () => {
       const order = makeOrder({
-        status: 'approved',
         orderItems: [
           OrderItem.create({
             itemId: new UniqueEntityID(),
@@ -167,71 +164,19 @@ describe('Order', () => {
           }),
         ],
       })
-      const result = order.pay()
-
-      expect(result.isRight()).toBeTruthy()
-      expect(order.status).toBe('paid')
+      expect(order.isAvailableToApprove).toBeTruthy()
     })
 
-    it('should not pay an order without items', () => {
-      const order = makeOrder({
-        status: 'approved',
-        orderItems: [],
-      })
-      const result = order.pay()
-
-      expect(result.isLeft()).toBeTruthy()
-      expect(order.status).toBe('approved')
-    })
-
-    it('should not pay an already paid order', () => {
-      const order = makeOrder({
-        status: 'paid',
-        orderItems: [
-          OrderItem.create({
-            itemId: new UniqueEntityID(),
-            quantity: 1,
-            name: 'Item 1',
-            orderId,
-            priceInCents: 100,
-          }),
-        ],
-      })
-
-      const result = order.pay()
-
-      expect(result.isLeft()).toBeTruthy()
-      expect(order.status).toBe('paid')
-    })
-  })
-
-  describe('isAvailableToPay', () => {
-    it('should return true for paid order with items', () => {
-      const order = makeOrder({
-        status: 'approved',
-        orderItems: [
-          OrderItem.create({
-            itemId: new UniqueEntityID(),
-            quantity: 1,
-            name: 'Item 1',
-            orderId,
-            priceInCents: 100,
-          }),
-        ],
-      })
-      expect(order.isAvailableToBePaid).toBeTruthy()
-    })
-
-    it('should return false for paid order without items', () => {
+    it('should return false for approved order without items', () => {
       const order = makeOrder()
 
-      expect(order.isAvailableToBePaid).toBeFalsy()
+      expect(order.isAvailableToApprove).toBeFalsy()
     })
 
-    it('should return false for paid order', () => {
-      order.pay()
+    it('should return false for approved order', () => {
+      order.approve()
 
-      expect(order.isAvailableToBePaid).toBeFalsy()
+      expect(order.isAvailableToApprove).toBeFalsy()
     })
   })
 })

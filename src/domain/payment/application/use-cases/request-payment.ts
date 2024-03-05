@@ -34,7 +34,7 @@ export class RequestPaymentUseCase {
       return left(new ResourceNotFound('Order not found'))
     }
 
-    if (!order.isAvailableToBePaid) {
+    if (!order.isAvailableToApprove) {
       return left(new InvalidResource('Order already paid'))
     }
 

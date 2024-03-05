@@ -1,10 +1,10 @@
 import { DomainEvents } from '@/core/events/domain-events'
 import { EventHandler } from '@/core/events/event-handler'
-import { OrderPaid } from '@/domain/payment/enterprise/events/order-paid'
+import { OrderApproved } from '@/domain/payment/enterprise/events/order-approved'
 
 import { MarkAppointmentAsScheduledUseCase } from '../use-cases/mark-appointment-as-scheduled'
 
-export class OnOrderPaid implements EventHandler {
+export class OnOrderApproved implements EventHandler {
   constructor(
     private readonly markAsScheduledUseCase: MarkAppointmentAsScheduledUseCase,
   ) {
@@ -12,10 +12,10 @@ export class OnOrderPaid implements EventHandler {
   }
 
   setupSubscriptions(): void {
-    DomainEvents.register(this.markAsScheduled.bind(this), OrderPaid.name)
+    DomainEvents.register(this.markAsScheduled.bind(this), OrderApproved.name)
   }
 
-  private async markAsScheduled({ order }: OrderPaid) {
+  private async markAsScheduled({ order }: OrderApproved) {
     const result = await this.markAsScheduledUseCase.execute({
       scheduleAppointmentId: order.orderItems[0].itemId.toString(),
     })

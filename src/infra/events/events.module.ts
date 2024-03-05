@@ -15,6 +15,7 @@ import { NotificationModule } from '../notification/notification.module'
   providers: [
     OnAppointmentRequestedHandler,
     OnAppointmentApprovedHandler,
+    OnAppointmentRequestedHandler,
     OnOrderApproved,
     CreateIntentOrderUseCase,
     ApproveOrderUseCase,

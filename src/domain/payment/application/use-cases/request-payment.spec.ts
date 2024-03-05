@@ -53,7 +53,7 @@ describe('RequestPaymentUseCase', () => {
     const orderId = new UniqueEntityID()
     const order = makeOrder(
       {
-        status: 'paid',
+        status: 'approved',
         orderItems: [
           OrderItem.create({
             itemId: appointment.id,
@@ -89,7 +89,7 @@ describe('RequestPaymentUseCase', () => {
     const orderId = new UniqueEntityID()
     const order = makeOrder(
       {
-        status: 'approved',
+        status: 'pending',
         orderItems: [
           OrderItem.create({
             itemId: appointment.id,
@@ -122,7 +122,7 @@ describe('RequestPaymentUseCase', () => {
     const orderId = new UniqueEntityID()
     const order = makeOrder(
       {
-        status: 'approved',
+        status: 'pending',
         orderItems: [
           OrderItem.create({
             itemId: appointment.id,

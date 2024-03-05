@@ -7,11 +7,10 @@ import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resourc
 import { OrderApproved } from '../events/order-approved'
 import { OrderCanceled } from '../events/order-canceled'
 import { OrderCreated } from '../events/order-created'
-import { OrderPaid } from '../events/order-paid'
 import { PaymentMethod } from '../value-objects/payment-method'
 import { OrderItem } from './order-item'
 
-type OrderStatuses = 'pending' | 'approved' | 'canceled' | 'paid'
+type OrderStatuses = 'pending' | 'approved' | 'canceled'
 
 export type OrderProps = {
   costumerId: UniqueEntityID
@@ -61,7 +60,7 @@ export class Order extends AggregateRoot<OrderProps> {
   }
 
   cancel(): Either<InvalidResource, void> {
-    if (['canceled', 'paid'].includes(this.props.status)) {
+    if (['canceled', 'approved'].includes(this.props.status)) {
       return left(
         new InvalidResource(
           'Order can only be canceled if it is pending or approved',
@@ -73,26 +72,6 @@ export class Order extends AggregateRoot<OrderProps> {
 
     this.addDomainEvent(new OrderCanceled(this))
 
-    this.touch()
-
-    return right(undefined)
-  }
-
-  pay(): Either<InvalidResource, void> {
-    if (
-      this.props.status !== 'approved' ||
-      this.props.orderItems.length === 0
-    ) {
-      return left(
-        new InvalidResource(
-          'Order can only be pay if it is paid and has items',
-        ),
-      )
-    }
-
-    this.props.status = 'paid'
-
-    this.addDomainEvent(new OrderPaid(this))
     this.touch()
 
     return right(undefined)
@@ -117,10 +96,6 @@ export class Order extends AggregateRoot<OrderProps> {
 
   get isAvailableToApprove(): boolean {
     return this.props.status === 'pending' && this.props.orderItems.length > 0
-  }
-
-  get isAvailableToBePaid(): boolean {
-    return this.props.status === 'approved' && this.props.orderItems.length > 0
   }
 
   addOderItem(orderItem: OrderItem) {
