@@ -1,16 +1,22 @@
 import { Module } from '@nestjs/common'
 
-import { PaymentGateway } from '@/domain/payment/application/gateway/payment-gateway'
-
-import { StripePaymentGateway } from './stripe-paytment-gateway'
+import { EnvModule } from '../env/env.module'
+import { EnvService } from '../env/env.service'
+import { StripeModule } from './stripe/stripe.module'
 
 @Module({
-  providers: [
-    {
-      provide: PaymentGateway,
-      useClass: StripePaymentGateway,
-    },
+  imports: [
+    StripeModule.forRootAsync({
+      imports: [EnvModule],
+      inject: [EnvService],
+      useFactory: (env: EnvService) => ({
+        apiKey: env.get('STRIPE_SECRET_KEY'),
+        options: {
+          apiVersion: '2023-10-16',
+        },
+      }),
+    }),
   ],
-  exports: [PaymentGateway],
+  exports: [StripeModule],
 })
 export class PaymentModule {}
