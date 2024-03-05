@@ -12,7 +12,7 @@ import { AppointmentRequested } from '../events/appointment-requested'
 export type AppointmentStatuses =
   | 'pending' // pending to approbation
   | 'approved' // when appointment was accepted by psychologist
-  | 'scheduled' // when approved and order paid
+  | 'scheduled' // when approved and order approved
   | 'finished' // when consultation was made
   | 'canceled' // when was approved but not paid yet
   | 'rejected' // when not approved
@@ -83,7 +83,9 @@ export class Appointment extends AggregateRoot<AppointmentProps> {
   }
 
   cancel(): Either<InvalidResource, void> {
-    if (['canceled', 'finished'].includes(this.status)) {
+    if (
+      ['canceled', 'finished', 'rejected', 'inactive'].includes(this.status)
+    ) {
       return left(
         new InvalidResource('This scheduled appointment could not be canceled'),
       )
