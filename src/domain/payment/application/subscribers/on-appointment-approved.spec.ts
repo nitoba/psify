@@ -7,29 +7,32 @@ import { waitFor } from 'test/utils/wait-for'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 
 import { OrderItem } from '../../enterprise/entities/order-item'
-import { ApproveOrderUseCase } from '../use-cases/approve-order'
+import { CreateIntentOrderUseCase } from '../use-cases/create-intent-order'
 import { OnAppointmentApprovedHandler } from './on-appointment-approved'
 
 describe('On Appointment Approved Handler', () => {
-  let approveOrderUseCase: ApproveOrderUseCase
+  let createIntentOrderUseCase: CreateIntentOrderUseCase
   let appointmentRepository: InMemoryAppointmentsRepository
   let orderRepository: InMemoryOrderRepository
 
   beforeEach(() => {
     appointmentRepository = new InMemoryAppointmentsRepository()
     orderRepository = new InMemoryOrderRepository()
-    approveOrderUseCase = new ApproveOrderUseCase(orderRepository)
+    createIntentOrderUseCase = new CreateIntentOrderUseCase(orderRepository)
 
     // eslint-disable-next-line no-new
     new OnAppointmentApprovedHandler(
-      approveOrderUseCase,
+      createIntentOrderUseCase,
       appointmentRepository,
       orderRepository,
     )
   })
 
   it('should approve order when appointment is approved', async () => {
-    const approveOrderUseCaseSpy = vi.spyOn(approveOrderUseCase, 'execute')
+    const createIntentOrderUseCaseSpy = vi.spyOn(
+      createIntentOrderUseCase,
+      'execute',
+    )
     const appointment = makeAppointment()
     appointmentRepository.create(appointment)
 
@@ -55,7 +58,7 @@ describe('On Appointment Approved Handler', () => {
     order.approve()
 
     await waitFor(() => {
-      expect(approveOrderUseCaseSpy).toHaveBeenCalled()
+      expect(createIntentOrderUseCaseSpy).toHaveBeenCalled()
     })
     expect(orderRepository.orders[0].status).toBe('approved')
     // expect(appointmentRepository.appointments[0].status).toBe('inactive')

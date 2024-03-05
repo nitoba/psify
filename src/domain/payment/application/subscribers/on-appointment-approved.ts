@@ -4,16 +4,17 @@ import { left, right } from '@/core/either'
 import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
 import { DomainEvents } from '@/core/events/domain-events'
 import { EventHandler } from '@/core/events/event-handler'
+import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resource'
 import { AppointmentsRepository } from '@/domain/schedules/application/repositories/appointments-repository'
-import { AppointmentRequested } from '@/domain/schedules/enterprise/events/appointment-requested'
+import { AppointmentApproved } from '@/domain/schedules/enterprise/events/appointment-approved'
 
 import { OrderRepository } from '../repositories/order-repository'
-import { ApproveOrderUseCase } from '../use-cases/approve-order'
+import { CreateIntentOrderUseCase } from '../use-cases/create-intent-order'
 
 @Injectable()
 export class OnAppointmentApprovedHandler implements EventHandler {
   constructor(
-    private readonly approveOrderUseCase: ApproveOrderUseCase,
+    private readonly createOrderUseCase: CreateIntentOrderUseCase,
     private readonly appointmentRepository: AppointmentsRepository,
     private readonly orderRepository: OrderRepository,
   ) {
@@ -21,13 +22,10 @@ export class OnAppointmentApprovedHandler implements EventHandler {
   }
 
   setupSubscriptions(): void {
-    DomainEvents.register(
-      this.approveOrder.bind(this),
-      AppointmentRequested.name,
-    )
+    DomainEvents.register(this.createOrder.bind(this), AppointmentApproved.name)
   }
 
-  private async approveOrder({ appointment }: AppointmentRequested) {
+  private async createOrder({ appointment }: AppointmentApproved) {
     const appointmentExists = await this.appointmentRepository.findById(
       appointment.id.toString(),
     )
@@ -36,18 +34,25 @@ export class OnAppointmentApprovedHandler implements EventHandler {
       return left(new ResourceNotFound('Appointment not found'))
     }
 
-    const order = await this.orderRepository.findByItemId(
-      appointment.id.toString(),
-    )
+    const orderExistsForThisAppointment =
+      await this.orderRepository.findByItemId(appointment.id.toString())
 
-    if (!order) {
-      return left(new ResourceNotFound('Order not found'))
+    if (orderExistsForThisAppointment) {
+      return left(new InvalidResource('Order already exists'))
     }
 
-    const result = await this.approveOrderUseCase.execute({
-      orderId: order.id.toString(),
+    const result = await this.createOrderUseCase.execute({
+      costumerId: appointment.patientId.toString(),
+      sellerId: appointment.psychologistId.toString(),
+      paymentMethod: 'credit_card',
+      orderItems: [
+        {
+          itemId: appointment.id.toString(),
+          name: 'Consultation',
+          priceInCents: appointment.costInCents,
+        },
+      ],
     })
-
     if (result.isLeft()) {
       return left(result.value)
     }
