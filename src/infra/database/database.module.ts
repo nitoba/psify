@@ -50,6 +50,7 @@ import { MongoNotificationRepository } from './mongoose/repositories/mongo-notif
       inject: [EnvService],
       useFactory: (env: EnvService) => {
         return {
+          autoCreate: true,
           dbName: env.get('MONGODB_DATABASE_NAME'),
           uri: env.get('MONGODB_URL'),
         }
