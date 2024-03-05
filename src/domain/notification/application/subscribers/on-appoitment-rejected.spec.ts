@@ -42,9 +42,12 @@ describe('On Appointment Rejected Handler', () => {
       patientId: patient.id,
     })
     patientRepository.patients.push(patient)
+    appointmentRepository.appointments.push(appointment)
 
-    expect(appointment.domainEvents).toHaveLength(1)
-    appointmentRepository.create(appointment)
+    appointment.reject()
+
+    appointmentRepository.save(appointment)
+
     expect(appointment.domainEvents).toHaveLength(0)
 
     await waitFor(() => {
