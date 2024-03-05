@@ -11,7 +11,7 @@ import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { OrderItem } from '@/domain/payment/enterprise/entities/order-item'
 
 import { MarkAppointmentAsInactiveUseCase } from '../use-cases/mark-appointment-as-inactive'
-import { OnOrderRejected } from './on-order-rejected'
+import { OnOrderCanceled } from './on-order-canceled'
 
 let markAsInactiveUseCase: MarkAppointmentAsInactiveUseCase
 let appointmentsRepository: InMemoryAppointmentsRepository
@@ -23,10 +23,10 @@ describe('On Order Rejected', () => {
     markAsInactiveUseCase = new MarkAppointmentAsInactiveUseCase(
       appointmentsRepository,
     )
-    new OnOrderRejected(markAsInactiveUseCase)
+    new OnOrderCanceled(markAsInactiveUseCase)
   })
 
-  it('should mark appointment as inactive when order rejected', async () => {
+  it('should mark appointment as inactive when order canceled', async () => {
     const markAsInactiveUseCaseSpy = vi.spyOn(markAsInactiveUseCase, 'execute')
     const psychologist = makePsychologist()
     const patient = makePatient()

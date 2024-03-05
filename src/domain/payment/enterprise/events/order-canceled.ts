@@ -3,7 +3,7 @@ import { DomainEvent } from '@/core/events/domain-event'
 
 import { Order } from '../entities/order'
 
-export class OrderRejected implements DomainEvent {
+export class OrderCanceled implements DomainEvent {
   public ocurredAt: Date
   public order: Order
 

@@ -1,10 +1,10 @@
 import { DomainEvents } from '@/core/events/domain-events'
 import { EventHandler } from '@/core/events/event-handler'
-import { OrderRejected } from '@/domain/payment/enterprise/events/order-rejected'
+import { OrderCanceled } from '@/domain/payment/enterprise/events/order-canceled'
 
 import { MarkAppointmentAsInactiveUseCase } from '../use-cases/mark-appointment-as-inactive'
 
-export class OnOrderRejected implements EventHandler {
+export class OnOrderCanceled implements EventHandler {
   constructor(
     private readonly markAsInactiveUseCase: MarkAppointmentAsInactiveUseCase,
   ) {
@@ -12,10 +12,10 @@ export class OnOrderRejected implements EventHandler {
   }
 
   setupSubscriptions(): void {
-    DomainEvents.register(this.markAsScheduled.bind(this), OrderRejected.name)
+    DomainEvents.register(this.maskAsInactive.bind(this), OrderCanceled.name)
   }
 
-  private async markAsScheduled({ order }: OrderRejected) {
+  private async maskAsInactive({ order }: OrderCanceled) {
     const result = await this.markAsInactiveUseCase.execute({
       scheduleAppointmentId: order.orderItems[0].itemId.toString(),
     })

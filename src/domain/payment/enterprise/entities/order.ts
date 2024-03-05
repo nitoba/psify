@@ -5,9 +5,9 @@ import { Optional } from '@/core/types/optional'
 import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resource'
 
 import { OrderApproved } from '../events/order-approved'
+import { OrderCanceled } from '../events/order-canceled'
 import { OrderCreated } from '../events/order-created'
 import { OrderPaid } from '../events/order-paid'
-import { OrderRejected } from '../events/order-rejected'
 import { PaymentMethod } from '../value-objects/payment-method'
 import { OrderItem } from './order-item'
 
@@ -61,15 +61,17 @@ export class Order extends AggregateRoot<OrderProps> {
   }
 
   cancel(): Either<InvalidResource, void> {
-    if (this.props.status !== 'pending') {
+    if (['canceled', 'paid'].includes(this.props.status)) {
       return left(
-        new InvalidResource('Order can only be canceled if it is pending'),
+        new InvalidResource(
+          'Order can only be canceled if it is pending or approved',
+        ),
       )
     }
 
     this.props.status = 'canceled'
 
-    this.addDomainEvent(new OrderRejected(this))
+    this.addDomainEvent(new OrderCanceled(this))
 
     this.touch()
 

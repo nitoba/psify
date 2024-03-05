@@ -1,9 +1,10 @@
+import { makeOrder } from 'test/factories/payment/make-order'
+import { InMemoryOrderRepository } from 'test/repositories/payment/in-memory-order-repository'
+
 import { left, right } from '@/core/either'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
 import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resource'
-import { makeOrder } from 'test/factories/payment/make-order'
-import { InMemoryOrderRepository } from 'test/repositories/payment/in-memory-order-repository'
 
 import { CancelOrderUseCase } from './cancel-order'
 
@@ -24,7 +25,7 @@ describe('CancelOrderUseCase', () => {
     expect(result).toEqual(left(new ResourceNotFound('Order not found')))
   })
 
-  it('should return InvalidResource error if order is already canceled or approved', async () => {
+  it('should return InvalidResource error if order is already canceled or paid', async () => {
     let order = makeOrder({
       status: 'canceled',
     })
@@ -33,18 +34,26 @@ describe('CancelOrderUseCase', () => {
 
     let result = await useCase.execute({ orderId: order.id.toString() })
     expect(result).toEqual(
-      left(new InvalidResource('Order can only be canceled if it is pending')),
+      left(
+        new InvalidResource(
+          'Order can only be canceled if it is pending or approved',
+        ),
+      ),
     )
 
     order = makeOrder({
-      status: 'approved',
+      status: 'paid',
     })
 
     orderRepository.orders.push(order)
 
     result = await useCase.execute({ orderId: order.id.toString() })
     expect(result).toEqual(
-      left(new InvalidResource('Order can only be canceled if it is pending')),
+      left(
+        new InvalidResource(
+          'Order can only be canceled if it is pending or approved',
+        ),
+      ),
     )
   })
 
