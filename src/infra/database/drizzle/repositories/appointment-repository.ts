@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { and, count, desc, eq, gte, inArray, lte } from 'drizzle-orm'
 
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
+import { DomainEvents } from '@/core/events/domain-events'
 import { PaginationParams } from '@/core/repositories/pagination-params'
 import { AppointmentsRepository } from '@/domain/schedules/application/repositories/appointments-repository'
 import {
@@ -135,6 +136,8 @@ export class DrizzleAppointmentRepository implements AppointmentsRepository {
       costInCents: entity.costInCents,
       createdAt: entity.createdAt,
     })
+
+    DomainEvents.dispatchEventsForAggregate(entity.id)
   }
 
   async findById(id: string): Promise<Appointment | null> {

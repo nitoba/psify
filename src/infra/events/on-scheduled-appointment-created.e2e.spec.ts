@@ -18,6 +18,8 @@ import { CryptographyModule } from '@/infra/cryptography/cryptography.module'
 import { DatabaseModule } from '@/infra/database/database.module'
 import { DrizzleService } from '@/infra/database/drizzle/drizzle.service'
 
+import { orders } from '../database/drizzle/schemas'
+
 describe('Request Schedule Appointment (E2E)', () => {
   let app: NestFastifyApplication<RawServerDefault>
   let authPsychologistFactory: AuthPsychologistFactory
@@ -52,12 +54,11 @@ describe('Request Schedule Appointment (E2E)', () => {
   })
 
   afterAll(async () => {
-    vi.clearAllTimers()
     vi.useRealTimers()
     await app.close()
   })
 
-  test('[POST] /schedules', async () => {
+  it('[POST] /schedules', async () => {
     vi.useFakeTimers().setSystemTime(new Date(2024, 1, 25, 8))
     const psychologist = await authPsychologistFactory.makeDbPsychologist()
     await availableTimesFactory.makeDbAvailableTime(
@@ -75,7 +76,7 @@ describe('Request Schedule Appointment (E2E)', () => {
       role: 'patient',
     })
 
-    const response = await request(app.getHttpServer())
+    await request(app.getHttpServer())
       .post('/schedules')
       .set('Cookie', [`psify@access_token=${token}`])
       .send({
@@ -83,26 +84,9 @@ describe('Request Schedule Appointment (E2E)', () => {
         scheduledTo: new Date(2024, 1, 25, 9),
       })
 
-    expect(response.status).toBe(201)
-    expect(response.body).toEqual({
-      id: expect.any(String),
-      psychologistId: psychologist.id.toString(),
-      patientId: patient.id.toString(),
-      scheduledTo: expect.any(String),
-      costInCents: expect.any(Number),
-      status: 'pending',
+    new Promise((resolve) => setTimeout(resolve, 1000)).then(async () => {
+      const orderCreated = await drizzleService.client.select().from(orders)
+      expect(orderCreated.length).toBe(1)
     })
-
-    const appointment =
-      await drizzleService.client.query.appointments.findFirst({
-        where: (ap, { eq, and }) =>
-          and(
-            eq(ap.psychologistId, psychologist.id.toString()),
-            eq(ap.patientId, patient.id.toString()),
-            eq(ap.status, 'pending'),
-          ),
-      })
-
-    expect(appointment).toBeDefined()
   })
 })

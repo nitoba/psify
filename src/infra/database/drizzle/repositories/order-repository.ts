@@ -58,27 +58,36 @@ export class DrizzleOrderRepository implements OrderRepository {
   }
 
   async create(entity: Order): Promise<void> {
-    this.drizzle.client.transaction(async (tx) => {
-      await tx.insert(orders).values({
-        id: entity.id.toString(),
-        costumerId: entity.costumerId.toString(),
-        sellerId: entity.sellerId.toString(),
-        paymentMethod: entity.paymentMethod.value,
-        status: entity.status,
-        createdAt: entity.createdAt,
-        updatedAt: entity.updatedAt,
+    await this.drizzle.client
+      .transaction(async (tx) => {
+        const [orderCreated] = await tx
+          .insert(orders)
+          .values({
+            id: entity.id.toString(),
+            costumerId: entity.costumerId.toString(),
+            sellerId: entity.sellerId.toString(),
+            paymentMethod: entity.paymentMethod.value,
+            status: entity.status,
+            createdAt: entity.createdAt,
+            updatedAt: entity.updatedAt,
+          })
+          .returning()
+        const orderItemsValues = entity.orderItems.map((orderItem) => ({
+          orderId: orderCreated.id,
+          itemId: orderItem.itemId.toString(),
+          name: orderItem.name,
+          priceInCents: orderItem.priceInCents,
+          quantity: orderItem.quantity,
+          createdAt: orderItem.createdAt,
+        }))
+        await this.drizzle.client.insert(orderItems).values(orderItemsValues)
       })
-
-      const orderItemsValues = entity.orderItems.map((orderItem) => ({
-        orderId: entity.id.toString(),
-        itemId: orderItem.itemId.toString(),
-        name: orderItem.name,
-        priceInCents: orderItem.priceInCents,
-        quantity: orderItem.quantity,
-        createdAt: orderItem.createdAt,
-      }))
-
-      await this.drizzle.client.insert(orderItems).values(orderItemsValues)
-    })
+      .then(() => {
+        console.log('Order created')
+      })
+      .catch((err) => {
+        console.log('Order not created')
+        console.log(err)
+      })
   }
 }
