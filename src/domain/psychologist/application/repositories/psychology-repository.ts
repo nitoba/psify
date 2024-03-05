@@ -24,4 +24,8 @@ export abstract class PsychologistRepository extends Repository<Psychologist> {
     },
     params: PaginationParams,
   ): Promise<Psychologist[]>
+
+  abstract findWithAvailableTimesToSchedule(
+    id: string,
+  ): Promise<Psychologist | null>
 }

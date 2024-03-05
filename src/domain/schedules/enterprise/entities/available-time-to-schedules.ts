@@ -1,4 +1,4 @@
-import { isAfter, setDay } from 'date-fns'
+import { setDay } from 'date-fns'
 
 import { Entity } from '@/core/entities/entity'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
@@ -67,23 +67,23 @@ export class AvailableTimeToSchedule extends Entity<AvailableTimeToSchedulesProp
     currentAvailableTimes: AvailableTimeToSchedule[],
     scheduledAppointments: Appointment[],
   ): AvailableTimeToSchedule[] {
-    // filter availableTimes to response only times more than current date now and not scheduled yet
-    const availableTimes = currentAvailableTimes.filter((at) => {
-      const [hourFromTime, minutesFromTime] = at.time.getHoursAndMinutes()
+    const currentTime = new Date().getTime()
+    const scheduledAppointmentsTimes = scheduledAppointments.map((sp) =>
+      sp.scheduledTo.getTime(),
+    )
 
+    return currentAvailableTimes.filter((at) => {
+      const [hourFromTime, minutesFromTime] = at.time.getHoursAndMinutes()
       const dateToCompare = setDay(
         new Date().setHours(hourFromTime, minutesFromTime),
         at.weekday,
+      ).getTime()
+
+      return (
+        dateToCompare > currentTime &&
+        !scheduledAppointmentsTimes.includes(dateToCompare)
       )
-
-      const isTimeNotScheduled = scheduledAppointments.every((sp) => {
-        return sp.scheduledTo.getTime() !== dateToCompare.getTime()
-      })
-
-      return isAfter(dateToCompare, new Date()) && isTimeNotScheduled
     })
-
-    return availableTimes
   }
 
   static create(

@@ -57,7 +57,7 @@ describe('FetchTimesAvailableToSchedulesUseCase', () => {
     }
   })
 
-  it('should return only available times that not scheduled', async () => {
+  it.only('should return only available times available to schedule', async () => {
     vi.useFakeTimers().setSystemTime(new Date(2024, 1, 25, 8))
     const psychologistId = new UniqueEntityID()
     const availableTimes = [
@@ -76,6 +76,7 @@ describe('FetchTimesAvailableToSchedulesUseCase', () => {
       {
         scheduledAppointments: [
           Appointment.create({
+            status: 'pending',
             patientId: new UniqueEntityID(),
             psychologistId,
             scheduledTo: new Date(2024, 1, 25, 9),

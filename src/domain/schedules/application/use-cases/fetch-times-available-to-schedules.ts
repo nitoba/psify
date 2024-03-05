@@ -27,7 +27,9 @@ export class FetchTimesAvailableToSchedulesUseCase {
     psychologistId,
   }: FetchTimesAvailableToSchedulesUseCaseRequest): Promise<FetchTimesAvailableToSchedulesUseCaseResponse> {
     const psychologist =
-      await this.psychologistRepository.findById(psychologistId)
+      await this.psychologistRepository.findWithAvailableTimesToSchedule(
+        psychologistId,
+      )
 
     if (!psychologist) {
       return left(new ResourceNotFound('Psychologist not found'))

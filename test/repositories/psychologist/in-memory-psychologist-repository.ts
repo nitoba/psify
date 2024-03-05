@@ -118,4 +118,20 @@ export class InMemoryPsychologistRepository implements PsychologistRepository {
     const psychologist = this.psychologists.find((p) => p.id.toString() === id)
     return psychologist ?? null
   }
+
+  async findWithAvailableTimesToSchedule(
+    id: string,
+  ): Promise<Psychologist | null> {
+    const psychologist = this.psychologists.find((p) => p.id.toString() === id)
+
+    if (!psychologist) return null
+
+    const scheduledAppointments = psychologist.scheduledAppointments.filter(
+      (sp) => ['pending', 'approved'].includes(sp.status),
+    )
+
+    psychologist.scheduledAppointments = scheduledAppointments
+
+    return psychologist
+  }
 }

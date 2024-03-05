@@ -17,6 +17,27 @@ import {
 export class DrizzlePsychologistRepository implements PsychologistRepository {
   constructor(private drizzle: DrizzleService) {}
 
+  async findWithAvailableTimesToSchedule(
+    id: string,
+  ): Promise<Psychologist | null> {
+    const psychologist = await this.drizzle.client.query.psychologist.findFirst(
+      {
+        where: (p, { eq }) => eq(p.id, id),
+        with: {
+          availableTimes: true,
+          scheduledAppointments: {
+            where: (sap, { eq, and }) =>
+              and(eq(sap.status, 'approved'), eq(sap.status, 'pending')),
+          },
+        },
+      },
+    )
+
+    if (!psychologist) return null
+
+    return toDomain(psychologist)
+  }
+
   async update(psychologist: Psychologist): Promise<void> {
     this.drizzle.client
       .update(psychologistSchema)

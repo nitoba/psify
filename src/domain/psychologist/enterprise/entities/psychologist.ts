@@ -62,6 +62,10 @@ export class Psychologist extends AggregateRoot<PsychologistProps> {
     return this.props.createdAt
   }
 
+  set scheduledAppointments(appointments: Appointment[]) {
+    this.props.scheduledAppointments = appointments
+  }
+
   updateAvailableTimes(availableTimes: AvailableTime[]): void {
     this.props.availableTimes.update(availableTimes)
   }
