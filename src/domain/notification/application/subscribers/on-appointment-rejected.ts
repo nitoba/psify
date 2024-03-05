@@ -6,7 +6,7 @@ import { DomainEvents } from '@/core/events/domain-events'
 import { EventHandler } from '@/core/events/event-handler'
 import { AuthPatientRepository } from '@/domain/auth/application/repositories/auth-patient-repository'
 import { AppointmentsRepository } from '@/domain/schedules/application/repositories/appointments-repository'
-import { AppointmentRequested } from '@/domain/schedules/enterprise/events/appointment-requested'
+import { AppointmentRejected } from '@/domain/schedules/enterprise/events/appointment-rejected'
 
 import { SendNotificationUseCase } from '../use-cases/send-mail-notification'
 
@@ -23,13 +23,13 @@ export class OnAppointmentRejectedHandler implements EventHandler {
   setupSubscriptions(): void {
     DomainEvents.register(
       this.notifyAboutAppointmentRejected.bind(this),
-      AppointmentRequested.name,
+      AppointmentRejected.name,
     )
   }
 
   private async notifyAboutAppointmentRejected({
     appointment,
-  }: AppointmentRequested) {
+  }: AppointmentRejected) {
     const appointmentExists = await this.appointmentRepository.findById(
       appointment.id.toString(),
     )

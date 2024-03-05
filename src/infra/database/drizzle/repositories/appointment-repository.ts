@@ -124,6 +124,8 @@ export class DrizzleAppointmentRepository implements AppointmentsRepository {
       })
       .where(eq(appointments.id, appointment.id.toString()))
       .execute()
+
+    DomainEvents.dispatchEventsForAggregate(appointment.id)
   }
 
   async create(entity: Appointment): Promise<void> {
