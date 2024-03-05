@@ -6,6 +6,7 @@ import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resourc
 
 import { AppointmentApproved } from '../events/appointment-approved'
 import { AppointmentCancelled } from '../events/appointment-cancelled'
+import { AppointmentRejected } from '../events/appointment-rejected'
 import { AppointmentRequested } from '../events/appointment-requested'
 
 export type AppointmentStatuses =
@@ -13,7 +14,8 @@ export type AppointmentStatuses =
   | 'approved' // when appointment was accepted by psychologist
   | 'scheduled' // when approved and order paid
   | 'finished' // when consultation was made
-  | 'canceled' // when not approved
+  | 'canceled' // when was approved but not paid yet
+  | 'rejected' // when not approved
   | 'inactive' // when order was rejected or canceled by some motive
 
 export type AppointmentProps = {
@@ -63,6 +65,19 @@ export class Appointment extends AggregateRoot<AppointmentProps> {
 
     this.props.status = 'approved'
     this.addDomainEvent(new AppointmentApproved(this))
+
+    return right(undefined)
+  }
+
+  reject(): Either<InvalidResource, void> {
+    if (this.status !== 'pending') {
+      return left(
+        new InvalidResource('This scheduled appointment could not be rejected'),
+      )
+    }
+
+    this.props.status = 'rejected'
+    this.addDomainEvent(new AppointmentRejected(this))
 
     return right(undefined)
   }

@@ -9,6 +9,7 @@ export const appointmentStatusEnum = pgEnum('appointment_status', [
   'scheduled',
   'approved',
   'finished',
+  'rejected',
   'inactive',
   'canceled',
 ])
