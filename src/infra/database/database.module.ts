@@ -1,9 +1,11 @@
 import { DrizzlePGModule } from '@knaadh/nestjs-drizzle-pg'
 import { DrizzlePGConfig } from '@knaadh/nestjs-drizzle-pg/src/node-postgres.interface'
 import { Module } from '@nestjs/common'
+import { MongooseModule } from '@nestjs/mongoose'
 
 import { AuthPatientRepository } from '@/domain/auth/application/repositories/auth-patient-repository'
 import { AuthPsychologistRepository } from '@/domain/auth/application/repositories/auth-psychologist-repository'
+import { NotificationRepository } from '@/domain/notification/application/repositories/notification-repository'
 import { PatientRepository } from '@/domain/patient/application/repositories/patient-repository'
 import { OrderRepository } from '@/domain/payment/application/repositories/order-repository'
 import { PsychologistRepository } from '@/domain/psychologist/application/repositories/psychology-repository'
@@ -19,7 +21,7 @@ import { DrizzleOrderRepository } from './drizzle/repositories/order-repository'
 import { DrizzlePatientRepository } from './drizzle/repositories/patient-repository'
 import { DrizzlePsychologistRepository } from './drizzle/repositories/psychologist-repository'
 import * as schema from './drizzle/schemas'
-
+import { MongoNotificationRepository } from './mongoose/repositories/mongo-notification-repository'
 @Module({
   imports: [
     DrizzlePGModule.registerAsync({
@@ -39,6 +41,16 @@ import * as schema from './drizzle/schemas'
           config: {
             schema: { ...schema },
           },
+        }
+      },
+    }),
+    MongooseModule.forRootAsync({
+      imports: [EnvModule],
+      inject: [EnvService],
+      useFactory: (env: EnvService) => {
+        return {
+          dbName: 'Psify_Notifications',
+          uri: env.get('MONGODB_URL'),
         }
       },
     }),
@@ -69,6 +81,10 @@ import * as schema from './drizzle/schemas'
       provide: OrderRepository,
       useClass: DrizzleOrderRepository,
     },
+    {
+      provide: NotificationRepository,
+      useClass: MongoNotificationRepository,
+    },
   ],
   exports: [
     DrizzleService,
@@ -78,6 +94,7 @@ import * as schema from './drizzle/schemas'
     PatientRepository,
     AppointmentsRepository,
     OrderRepository,
+    NotificationRepository,
   ],
 })
 export class DatabaseModule {}

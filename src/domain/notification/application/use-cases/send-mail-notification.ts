@@ -1,3 +1,5 @@
+import { Injectable } from '@nestjs/common'
+
 import { Email } from '@/domain/core/enterprise/value-objects/email'
 
 import { Notification } from '../../enterprise/entities/notification'
@@ -10,6 +12,7 @@ type SendNotificationUseCaseRequest = {
   to: string
 }
 
+@Injectable()
 export class SendNotificationUseCase {
   constructor(
     private readonly notificationPublisher: MailNotificationPublisher,

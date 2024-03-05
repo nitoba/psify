@@ -1,6 +1,16 @@
 version: "3.8"
 
 services:
+  mongodb:
+    image: mongo:latest
+    container_name: "psify_mongodb"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=docker
+      - MONGO_INITDB_ROOT_PASSWORD=docker
+    ports:
+      - "27017:27017"
+    volumes:
+      - psify_mongodb_data:/data/db
   postgres:
     container_name: psify_pg
     image: bitnami/postgresql:latest
@@ -15,3 +25,4 @@ services:
 
 volumes:
   psify_pg_data:
+  psify_mongodb_data:

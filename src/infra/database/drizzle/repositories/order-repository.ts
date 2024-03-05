@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { eq } from 'drizzle-orm'
 
+import { DomainEvents } from '@/core/events/domain-events'
 import { OrderRepository } from '@/domain/payment/application/repositories/order-repository'
 import { Order } from '@/domain/payment/enterprise/entities/order'
 
@@ -55,6 +56,8 @@ export class DrizzleOrderRepository implements OrderRepository {
       })
       .where(eq(orders.id, order.id.toString()))
       .execute()
+
+    DomainEvents.dispatchEventsForAggregate(order.id)
   }
 
   async create(entity: Order): Promise<void> {

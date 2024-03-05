@@ -1,3 +1,5 @@
+import { Injectable } from '@nestjs/common'
+
 import { DomainEvents } from '@/core/events/domain-events'
 import { EventHandler } from '@/core/events/event-handler'
 import { AuthPatientRepository } from '@/domain/auth/application/repositories/auth-patient-repository'
@@ -5,6 +7,7 @@ import { OrderApproved } from '@/domain/payment/enterprise/events/order-approved
 
 import { SendNotificationUseCase } from '../use-cases/send-mail-notification'
 
+@Injectable()
 export class OnOrderApproved implements EventHandler {
   constructor(
     private readonly sendNotificationUseCase: SendNotificationUseCase,
