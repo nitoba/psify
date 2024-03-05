@@ -17,6 +17,7 @@ import { FetchPsychologistsUseCase } from '@/domain/psychologist/application/use
 import { RemoveAvailableTimeUseCase } from '@/domain/psychologist/application/use-cases/remove-available-time'
 import { UpdateAvailableTimesUseCase } from '@/domain/psychologist/application/use-cases/update-available-times'
 import { UpdateSpecialtyUseCase } from '@/domain/psychologist/application/use-cases/update-specialties'
+import { ApproveAppointmentUseCase } from '@/domain/schedules/application/use-cases/approve-appointment'
 import { CancelScheduledAppointmentUseCase } from '@/domain/schedules/application/use-cases/cancel-scheduled-appointment'
 import { FetchScheduledAppointmentsFromPatientUseCase } from '@/domain/schedules/application/use-cases/fetch-scheduled-appointments-from-patient'
 import { FetchScheduledAppointmentsFromPsychologistUseCase } from '@/domain/schedules/application/use-cases/fetch-scheduled-appointments-from-psychologist'
@@ -43,6 +44,7 @@ import { FetchPsychologistsController } from './controllers/psychologist/fetch-p
 import { RemoveAvailableTimesController } from './controllers/psychologist/remove-available-times.controller'
 import { UpdateAvailableTimesController } from './controllers/psychologist/update-available-times.controller'
 import { UpdateSpecialtiesController } from './controllers/psychologist/update-specialties.controller'
+import { ApproveAppointmentController } from './controllers/schedules/approve-appointment.controller'
 import { CancelScheduledAppointmentController } from './controllers/schedules/cancel-scheduled-appointment.controller'
 import { FetchScheduledAppointmentsFromPatientController } from './controllers/schedules/fetch-scheduled-appointments-from-patient.controller'
 import { FetchScheduledAppointmentsFromPsychologistController } from './controllers/schedules/fetch-scheduled-appointments-from-psychologist.controller'
@@ -59,6 +61,7 @@ import { RequestScheduleAppointmentController } from './controllers/schedules/re
     AuthenticatePatientController,
     AuthenticatePsychologistController,
     FetchProfileController,
+    ChangePasswordController,
     // Psychologists Controllers
     UpdateSpecialtiesController,
     AddAvailableTimesController,
@@ -73,7 +76,7 @@ import { RequestScheduleAppointmentController } from './controllers/schedules/re
     FinishScheduledAppointmentController,
     FetchScheduledAppointmentsFromPsychologistController,
     FetchScheduledAppointmentsFromPatientController,
-    ChangePasswordController,
+    ApproveAppointmentController,
     // Payment Controllers
     ApproveOrderController,
     CancelOrderController,
@@ -104,6 +107,7 @@ import { RequestScheduleAppointmentController } from './controllers/schedules/re
     FinishScheduledAppointmentUseCase,
     FetchScheduledAppointmentsFromPsychologistUseCase,
     FetchScheduledAppointmentsFromPatientUseCase,
+    ApproveAppointmentUseCase,
     // Payments UseCases
     ApproveOrderUseCase,
     CancelOrderUseCase,
