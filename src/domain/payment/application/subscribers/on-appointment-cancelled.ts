@@ -3,7 +3,7 @@ import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
 import { DomainEvents } from '@/core/events/domain-events'
 import { EventHandler } from '@/core/events/event-handler'
 import { AppointmentsRepository } from '@/domain/schedules/application/repositories/appointments-repository'
-import { AppointmentRequested } from '@/domain/schedules/enterprise/events/appointment-requested'
+import { AppointmentCancelled } from '@/domain/schedules/enterprise/events/appointment-cancelled'
 
 import { OrderRepository } from '../repositories/order-repository'
 import { CancelOrderUseCase } from '../use-cases/cancel-order'
@@ -20,11 +20,14 @@ export class OnAppointmentCancelledHandler implements EventHandler {
   setupSubscriptions(): void {
     DomainEvents.register(
       this.cancelOrder.bind(this),
-      AppointmentRequested.name,
+      AppointmentCancelled.name,
     )
   }
 
-  private async cancelOrder({ appointment }: AppointmentRequested) {
+  private async cancelOrder({
+    appointment,
+    previousStatus,
+  }: AppointmentCancelled) {
     const appointmentExists = await this.appointmentRepository.findById(
       appointment.id.toString(),
     )
@@ -33,20 +36,22 @@ export class OnAppointmentCancelledHandler implements EventHandler {
       return left(new ResourceNotFound('Appointment not found'))
     }
 
-    const order = await this.orderRepository.findByItemId(
-      appointment.id.toString(),
-    )
+    if (previousStatus === 'approved') {
+      const order = await this.orderRepository.findByItemId(
+        appointment.id.toString(),
+      )
 
-    if (!order) {
-      return left(new ResourceNotFound('Order not found'))
-    }
+      if (!order) {
+        return left(new ResourceNotFound('Order not found'))
+      }
 
-    const result = await this.cancelOrderUseCase.execute({
-      orderId: order.id.toString(),
-    })
+      const result = await this.cancelOrderUseCase.execute({
+        orderId: order.id.toString(),
+      })
 
-    if (result.isLeft()) {
-      return left(result.value)
+      if (result.isLeft()) {
+        return left(result.value)
+      }
     }
 
     return right(undefined)

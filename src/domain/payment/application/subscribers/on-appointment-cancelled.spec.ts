@@ -28,10 +28,12 @@ describe('On Appointment Cancelled Handler', () => {
     )
   })
 
-  it('should cancel order when appointment is cancelled', async () => {
+  it('should cancel order when appointment is cancelled if previous status was approved', async () => {
     const cancelOrderUseCaseSpy = vi.spyOn(cancelOrderUseCase, 'execute')
-    const appointment = makeAppointment()
-    appointmentRepository.create(appointment)
+    const appointment = makeAppointment({
+      status: 'approved',
+    })
+    appointmentRepository.appointments.push(appointment)
 
     const orderId = new UniqueEntityID()
     const order = makeOrder(
@@ -52,7 +54,9 @@ describe('On Appointment Cancelled Handler', () => {
     )
     orderRepository.orders.push(order)
 
-    order.cancel()
+    appointment.cancel()
+
+    appointmentRepository.save(appointment)
 
     await waitFor(() => {
       expect(cancelOrderUseCaseSpy).toHaveBeenCalled()

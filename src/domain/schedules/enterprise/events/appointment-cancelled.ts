@@ -6,10 +6,12 @@ import { Appointment } from '../entities/appointment'
 export class AppointmentCancelled implements DomainEvent {
   ocurredAt: Date
   appointment: Appointment
+  previousStatus: Appointment['status']
 
-  constructor(appointment: Appointment) {
+  constructor(appointment: Appointment, previousStatus: Appointment['status']) {
     this.ocurredAt = new Date()
     this.appointment = appointment
+    this.previousStatus = previousStatus
   }
 
   getAggregateId(): UniqueEntityID {

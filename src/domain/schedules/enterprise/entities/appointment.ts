@@ -84,17 +84,26 @@ export class Appointment extends AggregateRoot<AppointmentProps> {
   }
 
   cancel(): Either<InvalidResource, void> {
-    if (
-      ['canceled', 'finished', 'rejected', 'inactive'].includes(this.status)
-    ) {
+    const nonCancelableStatuses = [
+      'canceled',
+      'finished',
+      'rejected',
+      'inactive',
+    ]
+    const cancelableStatuses = ['pending', 'approved']
+
+    if (nonCancelableStatuses.includes(this.status)) {
       return left(
         new InvalidResource('This scheduled appointment could not be canceled'),
       )
     }
 
+    const previousStatus = this.status
     this.props.status = 'canceled'
-    this.addDomainEvent(new AppointmentCancelled(this))
 
+    if (cancelableStatuses.includes(previousStatus)) {
+      this.addDomainEvent(new AppointmentCancelled(this, previousStatus))
+    }
     return right(undefined)
   }
 
