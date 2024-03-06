@@ -84,6 +84,9 @@ export class Appointment extends AggregateRoot<AppointmentProps> {
   }
 
   cancel(): Either<InvalidResource, void> {
+    // TODO: How to cancel appointment SCHEDULED?
+    // TODO: When status SCHEDULED, ORDER was APPROVED(paid), then the appointment must be and/or maybe remarked to another date
+    // TODO: When status SCHEDULED, ORDER was APPROVED(paid), then the patient must be refunded
     const nonCancelableStatuses = [
       'canceled',
       'finished',
