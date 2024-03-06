@@ -46,7 +46,7 @@ export class RequestScheduleAppointmentUseCase {
     // validate if patient is not already scheduled or this schedule are pending to the same psychologist
     const appointmentsScheduled =
       await this.appointmentRepository.findManyByPatientId(
-        { statuses: ['pending', 'scheduled'] },
+        { statuses: ['pending', 'scheduled', 'approved'] },
         { page: 1 },
         patient.id,
       )
