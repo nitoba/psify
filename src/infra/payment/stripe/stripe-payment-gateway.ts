@@ -28,6 +28,11 @@ export class StripePaymentGateway implements PaymentGateway {
       currency: 'BRL',
       success_url: `https://google.com`,
       mode: 'payment',
+      metadata: {
+        sellerId: order.sellerId.toString(),
+        costumerId: order.costumerId.toString(),
+        orderId: order.id.toString(),
+      },
       payment_method_types: [order.paymentMethod.value],
       line_items: order.orderItems.map((orderItem) => ({
         quantity: orderItem.quantity,
