@@ -1,3 +1,9 @@
+## TODOS:
+- [] Criar uma rotina para ficar verificando se as solicitações de agendamento que estão pendentes ou aprovadas tem a data do agendamento maior que a data atual. Se a data atual for maior, deve ser inativada a solicitação de agendamento e cancelada a order
+- [] Reset de password
+- [] Adicionar Roles
+- [] Adicionar serviço de email
+
 # Agendamento de Consultas em Clínicas Psicológicas
 
 ## Subdomínios para Agendamento de Consultas em Clínicas Psicológicas

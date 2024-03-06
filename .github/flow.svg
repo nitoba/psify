@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" direction="ltr" width="3012.61" height="3257.10"
-    viewBox="693.89 1241.06 3012.61 3257.10" stroke-linecap="round" stroke-linejoin="round"
+<svg xmlns="http://www.w3.org/2000/svg" direction="ltr" width="3705.95" height="3878.86"
+    viewBox="-328.1025976012322 1249.89 3705.95 3878.86" stroke-linecap="round" stroke-linejoin="round"
     style="background-color: rgb(19, 19, 21);">
     <defs>
         <!--def: tldraw:font:draw-->
@@ -21,28 +21,12 @@
             <g><text font-size="26px" font-family="'tldraw_draw', sans-serif" font-style="normal" font-weight="normal"
                     line-height="35.1px" dominant-baseline="mathematical" alignment-baseline="mathematical"
                     stroke-width="2" fill="hsl(240, 5%, 8%)" stroke="hsl(240, 5%, 8%)">
-                    <tspan alignment-baseline="mathematical" x="92.703125px" y="50px">Psicólogo</tspan>
+                    <tspan alignment-baseline="mathematical" x="85.90625px" y="50px">Psicólogos</tspan>
                 </text><text font-size="26px" font-family="'tldraw_draw', sans-serif" font-style="normal"
                     font-weight="normal" line-height="35.1px" dominant-baseline="mathematical"
                     alignment-baseline="mathematical" fill="#e1e1e1" stroke="none">
-                    <tspan alignment-baseline="mathematical" x="92.703125px" y="50px">Psicólogo</tspan>
+                    <tspan alignment-baseline="mathematical" x="85.90625px" y="50px">Psicólogos</tspan>
                 </text></g>
-        </g>
-    </g>
-    <g transform="matrix(1, 0, 0, 1, 1989.75, 1370.92)" opacity="1">
-        <g>
-            <defs>
-                <mask id="shape_YmW73vxArFnDbx-2DwDNU_clip">
-                    <rect x="-58.08072925779675" y="-84.72052000386225" width="365.53" height="329.17" fill="white" />
-                    <path d="M 201.82 130.54 L 207.44 144.45 L 192.59 142.37" fill="none" stroke="none" />
-                </mask>
-            </defs>
-            <g mask="url(#shape_YmW73vxArFnDbx-2DwDNU_clip)">
-                <rect x="-100" y="-100" width="365.53" height="329.17" fill="transparent" stroke="none" />
-                <path d="M41.91927074220325,15.279479996137752L207.4495797479591,144.45236541339642" fill="none"
-                    stroke="#e1e1e1" stroke-width="5" stroke-dasharray="none" stroke-dashoffset="none" />
-            </g>
-            <path d="M 201.82 130.54 L 207.44 144.45 L 192.59 142.37" fill="none" stroke="#e1e1e1" stroke-width="5" />
         </g>
     </g>
     <g transform="matrix(1, 0, 0, 1, 2114.26, 1813.90)" opacity="1">
@@ -71,6 +55,7 @@
                 <mask id="shape__LDwSjz5VzMW4Gkwttgf7_clip">
                     <rect x="-62.95527335928" y="-74.52142045493451" width="200.69" height="366.18" fill="white" />
                     <path d="M 45.18 178.64 L 37.73 191.66 L 30.18 178.70" fill="none" stroke="none" />
+                    <rect x="-32.240597854250936" y="88.12" width="139.26" height="40.89" fill="black" />
                 </mask>
             </defs>
             <g mask="url(#shape__LDwSjz5VzMW4Gkwttgf7_clip)">
@@ -78,7 +63,22 @@
                 <path d="M37.04472664072,25.478579545065486L37.73970265077812,191.66195132608678" fill="none"
                     stroke="#e1e1e1" stroke-width="5" stroke-dasharray="none" stroke-dashoffset="none" />
             </g>
-            <path d="M 45.18 178.64 L 37.73 191.66 L 30.18 178.70" fill="none" stroke="#e1e1e1" stroke-width="5" />
+            <path d="M 45.18 178.64 L 37.73 191.66 L 30.18 178.70" fill="none" stroke="#e1e1e1" stroke-width="5" /><text
+                font-size="24px" font-family="'tldraw_draw', sans-serif" font-style="normal" font-weight="normal"
+                line-height="32.400000000000006px" dominant-baseline="mathematical" alignment-baseline="mathematical"
+                fill="hsl(240, 5%, 8%)" stroke-width="2" stroke="hsl(240, 5%, 8%)">
+                <tspan alignment-baseline="mathematical" x="-27.631222854250936px" y="104.62495293557613px">buscar
+                </tspan>
+                <tspan alignment-baseline="mathematical" x="54.009402145749064px" y="104.62495293557613px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="62.243777145749064px" y="104.62495293557613px">por</tspan>
+            </text><text font-size="24px" font-family="'tldraw_draw', sans-serif" font-style="normal"
+                font-weight="normal" line-height="32.400000000000006px" dominant-baseline="mathematical"
+                alignment-baseline="mathematical" fill="#e1e1e1">
+                <tspan alignment-baseline="mathematical" x="-27.631222854250936px" y="104.62495293557613px">buscar
+                </tspan>
+                <tspan alignment-baseline="mathematical" x="54.009402145749064px" y="104.62495293557613px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="62.243777145749064px" y="104.62495293557613px">por</tspan>
+            </text>
         </g>
     </g>
     <g transform="matrix(1, 0, 0, 1, 1935.90, 2436.41)" opacity="1">
@@ -105,7 +105,7 @@
                 </text></g>
         </g>
     </g>
-    <g transform="matrix(1, 0, 0, 1, 1676.34, 1273.06)" opacity="1">
+    <g transform="matrix(1, 0, 0, 1, 2112.76, 1281.89)" opacity="1">
         <g>
             <path
                 d="M9.9999,0.0443 L319.4388,1.4154 Q329.4387,1.4597 329.52,11.4593 L330.3096,96.9904 Q330.4008,106.99 320.40,107.0156 L10.9804,107.8057 Q0.9804,107.8312 1.04,97.8314 L1.5979,8.9555 Q1.6603,-1.0443 11.66,-0.9983 L318.8972,0.414 Q328.8971,0.46 329.13,10.4573 L331.153,97.1336 Q331.3862,107.1309 321.38,107.1743 L8.788,108.5311 Q-1.2119,108.5745 -1.2475,98.5745 L-1.5601,10.7024 Q-1.5957,0.7025 9.99,0.0443 "
@@ -119,6 +119,36 @@
                     alignment-baseline="mathematical" fill="#e1e1e1" stroke="none">
                     <tspan alignment-baseline="mathematical" x="108.5625px" y="50px">Paciente</tspan>
                 </text></g>
+        </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 1989.75, 1370.92)" opacity="1">
+        <g>
+            <defs>
+                <mask id="shape_YmW73vxArFnDbx-2DwDNU_clip">
+                    <rect x="188.32" y="-80.91280082707522" width="200.14" height="319.59" fill="white" />
+                    <path d="M 295.94 125.68 L 288.46 138.68 L 280.94 125.69" fill="none" stroke="none" />
+                    <rect x="218.76" y="58.43" width="139.26" height="40.89" fill="black" />
+                </mask>
+            </defs>
+            <g mask="url(#shape_YmW73vxArFnDbx-2DwDNU_clip)">
+                <rect x="-100" y="-100" width="200.14" height="319.59" fill="transparent" stroke="none" />
+                <path d="M288.3223162659208,19.087199172924784L288.4654644538391,138.68048435704563" fill="none"
+                    stroke="#e1e1e1" stroke-width="5" stroke-dasharray="none" stroke-dashoffset="none" />
+            </g>
+            <path d="M 295.94 125.68 L 288.46 138.68 L 280.94 125.69" fill="none" stroke="#e1e1e1" stroke-width="5" />
+            <text font-size="24px" font-family="'tldraw_draw', sans-serif" font-style="normal" font-weight="normal"
+                line-height="32.400000000000006px" dominant-baseline="mathematical" alignment-baseline="mathematical"
+                fill="hsl(240, 5%, 8%)" stroke-width="2" stroke="hsl(240, 5%, 8%)">
+                <tspan alignment-baseline="mathematical" x="223.37045285987995px" y="74.9385292649852px">buscar</tspan>
+                <tspan alignment-baseline="mathematical" x="305.01107785987995px" y="74.9385292649852px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="313.24545285987995px" y="74.9385292649852px">por</tspan>
+            </text><text font-size="24px" font-family="'tldraw_draw', sans-serif" font-style="normal"
+                font-weight="normal" line-height="32.400000000000006px" dominant-baseline="mathematical"
+                alignment-baseline="mathematical" fill="#e1e1e1">
+                <tspan alignment-baseline="mathematical" x="223.37045285987995px" y="74.9385292649852px">buscar</tspan>
+                <tspan alignment-baseline="mathematical" x="305.01107785987995px" y="74.9385292649852px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="313.24545285987995px" y="74.9385292649852px">por</tspan>
+            </text>
         </g>
     </g>
     <g transform="matrix(1, 0, 0, 1, 1939.02, 2101.75)" opacity="1">
@@ -271,7 +301,7 @@
             <path d="M 147.39 158.43 L 149.25 173.31 L 135.43 167.49" fill="none" stroke="#e1e1e1" stroke-width="5" />
         </g>
     </g>
-    <g transform="matrix(1, 0, 0, 1, 1756.09, 3093.99)" opacity="1">
+    <g transform="matrix(1, 0, 0, 1, 734.09, 3724.58)" opacity="1">
         <g>
             <path
                 d="M10,0.0093 L320.238,0.2978 Q330.238,0.3071 330.29,10.3069 L330.7972,97.8778 Q330.8546,107.8777 320.85,107.8683 L11.4225,107.58 Q1.4225,107.5706 1.28,97.5715 L0.1019,9.233 Q-0.0324,-0.7661 9.96,-0.7716 L321.6063,-0.9442 Q331.6063,-0.9497 331.61,9.0502 L331.7191,97.387 Q331.7306,107.387 321.73,107.4359 L8.4793,108.9675 Q-1.5206,109.0164 -1.2514,99.02 L1.1667,9.217 Q1.4359,-0.7793 10,0.0093 "
@@ -291,51 +321,7 @@
                 </text></g>
         </g>
     </g>
-    <g transform="matrix(1, 0, 0, 1, 1920.39, 2827.35)" opacity="1">
-        <g>
-            <defs>
-                <mask id="shape_4H3Fnh3MdNOgjcgjeUuyJ_clip">
-                    <rect x="-93.18154009716955" y="-93.30095233788234" width="200.83" height="444.94" fill="white" />
-                    <path d="M 15.10 238.62 L 7.65 251.64 L 0.10 238.67" fill="none" stroke="none" />
-                    <rect x="-189.01418071331966" y="92.52" width="392.5" height="73.28" fill="black" />
-                </mask>
-            </defs>
-            <g mask="url(#shape_4H3Fnh3MdNOgjcgjeUuyJ_clip)">
-                <rect x="-100" y="-100" width="200.83" height="444.94" fill="transparent" stroke="none" />
-                <path d="M6.818459902830455,6.699047662117664L7.653178670530232,251.6403054906054" fill="none"
-                    stroke="#e1e1e1" stroke-width="5" stroke-dasharray="none" stroke-dashoffset="none" />
-            </g>
-            <path d="M 15.10 238.62 L 7.65 251.64 L 0.10 238.67" fill="none" stroke="#e1e1e1" stroke-width="5" /><text
-                font-size="24px" font-family="'tldraw_draw', sans-serif" font-style="normal" font-weight="normal"
-                line-height="32.400000000000006px" dominant-baseline="mathematical" alignment-baseline="mathematical"
-                fill="hsl(240, 5%, 8%)" stroke-width="2" stroke="hsl(240, 5%, 8%)">
-                <tspan alignment-baseline="mathematical" x="-126.12355571331966px" y="109.33373907636155px">Status:
-                </tspan>
-                <tspan alignment-baseline="mathematical" x="-39.59230571331966px" y="109.33373907636155px"> </tspan>
-                <tspan alignment-baseline="mathematical" x="-31.35793071331966px" y="109.33373907636155px">pendente/não
-                </tspan>
-                <tspan alignment-baseline="mathematical" x="141.09519428668034px" y="109.33373907636155px"> </tspan>
-                <tspan alignment-baseline="mathematical" x="-185.01418071331966px" y="141.72436407636155px">
-                </tspan>
-                <tspan alignment-baseline="mathematical" x="-61.77980571331966px" y="141.72436407636155px">confirmado
-                </tspan>
-            </text><text font-size="24px" font-family="'tldraw_draw', sans-serif" font-style="normal"
-                font-weight="normal" line-height="32.400000000000006px" dominant-baseline="mathematical"
-                alignment-baseline="mathematical" fill="#e1e1e1">
-                <tspan alignment-baseline="mathematical" x="-126.12355571331966px" y="109.33373907636155px">Status:
-                </tspan>
-                <tspan alignment-baseline="mathematical" x="-39.59230571331966px" y="109.33373907636155px"> </tspan>
-                <tspan alignment-baseline="mathematical" x="-31.35793071331966px" y="109.33373907636155px">pendente/não
-                </tspan>
-                <tspan alignment-baseline="mathematical" x="141.09519428668034px" y="109.33373907636155px"> </tspan>
-                <tspan alignment-baseline="mathematical" x="-185.01418071331966px" y="141.72436407636155px">
-                </tspan>
-                <tspan alignment-baseline="mathematical" x="-61.77980571331966px" y="141.72436407636155px">confirmado
-                </tspan>
-            </text>
-        </g>
-    </g>
-    <g transform="matrix(1, 0, 0, 1, 1229.39, 3378.59)" opacity="1">
+    <g transform="matrix(1, 0, 0, 1, 207.39, 4009.18)" opacity="1">
         <g>
             <path
                 d="M10,0.0245 L319.7109,0.7818 Q329.7108,0.8063 329.63,10.806 L328.994,97.255 Q328.9196,107.2547 318.91,107.2411 L9.9303,106.8205 Q-0.0696,106.8069 0.08,96.8081 L1.4464,9.388 Q1.6021,-0.6108 11.60,-0.5462 L320.8933,1.4497 Q330.8931,1.5143 330.93,11.5142 L331.3249,98.7345 Q331.3693,108.7344 321.36,108.7145 L9.4564,108.0924 Q-0.5436,108.0725 -0.5678,98.0725 L-0.7829,9.4762 Q-0.8071,-0.5238 10,0.0245 "
@@ -351,25 +337,25 @@
                 </text></g>
         </g>
     </g>
-    <g transform="matrix(1, 0, 0, 1, 1637.45, 3182.69)" opacity="1">
+    <g transform="matrix(1, 0, 0, 1, 615.45, 3813.28)" opacity="1">
         <g>
             <defs>
                 <mask id="shape__kPylHD1-IKZ0MOyf86mi_clip">
-                    <rect x="-229.57094055772575" y="-80.58539327797871" width="513.41" height="369.35" fill="white" />
-                    <path d="M -114.57690404038004 189.18 L -129.57094055772575 188.76 L -121.70765506413048 175.99"
+                    <rect x="-229.57094055772552" y="-80.58539327797871" width="513.41" height="369.35" fill="white" />
+                    <path d="M -114.57690404037982 189.18 L -129.57094055772552 188.76 L -121.70765506413022 175.99"
                         fill="none" stroke="none" />
                 </mask>
             </defs>
             <g mask="url(#shape__kPylHD1-IKZ0MOyf86mi_clip)">
                 <rect x="-100" y="-100" width="513.41" height="369.35" fill="transparent" stroke="none" />
-                <path d="M183.84423736302915,19.41460672202129L-129.57094055772575,188.7667035191378" fill="none"
+                <path d="M183.84423736302915,19.41460672202129L-129.57094055772552,188.76670351913737" fill="none"
                     stroke="#e1e1e1" stroke-width="5" stroke-dasharray="none" stroke-dashoffset="none" />
             </g>
-            <path d="M -114.57690404038004 189.18 L -129.57094055772575 188.76 L -121.70765506413048 175.99" fill="none"
+            <path d="M -114.57690404037982 189.18 L -129.57094055772552 188.76 L -121.70765506413022 175.99" fill="none"
                 stroke="#e1e1e1" stroke-width="5" />
         </g>
     </g>
-    <g transform="matrix(1, 0, 0, 1, 2258.88, 3371.59)" opacity="1">
+    <g transform="matrix(1, 0, 0, 1, 1236.88, 4002.18)" opacity="1">
         <g>
             <path
                 d="M10,-0.0233 L321.2693,-0.7477 Q331.2693,-0.7709 331.27,9.2291 L331.3239,98.0962 Q331.3295,108.0962 321.32,108.132 L9.2876,109.2506 Q-0.7124,109.2865 -0.6773,99.2865 L-0.3648,10.1543 Q-0.3297,0.1543 9.67,0.1171 L319.0744,-1.0357 Q329.0743,-1.073 329.24,8.9255 L330.8164,98.1114 Q330.992,108.1099 320.99,108.1537 L10.0075,109.5151 Q0.0076,109.5589 -0.0162,99.5589 L-0.2329,8.5536 Q-0.2567,-1.4464 10,-0.0233 "
@@ -385,23 +371,23 @@
                 </text></g>
         </g>
     </g>
-    <g transform="matrix(1, 0, 0, 1, 2250.52, 3178.83)" opacity="1">
+    <g transform="matrix(1, 0, 0, 1, 1228.52, 3809.42)" opacity="1">
         <g>
             <defs>
                 <mask id="shape_IY3MPKO3PqOeWeVFb3Bu-_clip">
-                    <rect x="-331.2789490796631" y="-76.71924212899421" width="493.83" height="362.23" fill="white" />
+                    <rect x="-331.2789490796629" y="-76.71924212899421" width="493.83" height="362.23" fill="white" />
                     <path d="M 54.80 172.66 L 62.55 185.51 L 47.55 185.80" fill="none" stroke="none" />
                 </mask>
             </defs>
             <g mask="url(#shape_IY3MPKO3PqOeWeVFb3Bu-_clip)">
                 <rect x="-100" y="-100" width="493.83" height="362.23" fill="transparent" stroke="none" />
-                <path d="M-231.2789490796631,23.28075787100579L62.55678607007933,185.51345684897953" fill="none"
+                <path d="M-231.27894907966288,23.28075787100579L62.556786070079326,185.51345684897908" fill="none"
                     stroke="#e1e1e1" stroke-width="5" stroke-dasharray="none" stroke-dashoffset="none" />
             </g>
             <path d="M 54.80 172.66 L 62.55 185.51 L 47.55 185.80" fill="none" stroke="#e1e1e1" stroke-width="5" />
         </g>
     </g>
-    <g transform="matrix(1, 0, 0, 1, 902.57, 3724.80)" opacity="1">
+    <g transform="matrix(1, 0, 0, 1, -119.4219, 4355.39)" opacity="1">
         <g>
             <path
                 d="M10,-0.0288 L321.8117,-0.9277 Q331.8117,-0.9565 331.74,9.0433 L331.1642,98.5541 Q331.0991,108.5539 321.09,108.5283 L10.0384,107.7314 Q0.0384,107.7058 -0.0519,97.7062 L-0.8509,9.2226 Q-0.9412,-0.777 9.05,-0.7558 L321.6618,-0.0952 Q331.6618,-0.0741 331.53,9.9251 L330.4169,97.0168 Q330.2887,107.016 320.28,107.0864 L9.5026,109.2738 Q-0.4972,109.3442 -0.4082,99.3446 L0.3869,9.9786 Q0.4758,-0.021 10,-0.0288 "
@@ -421,45 +407,45 @@
                 </text></g>
         </g>
     </g>
-    <g transform="matrix(1, 0, 0, 1, 1066.88, 3419.99)" opacity="1">
+    <g transform="matrix(1, 0, 0, 1, 44.88, 4050.57)" opacity="1">
         <g>
             <defs>
                 <mask id="shape_VFv6uqErXncgYthXbKV3o_clip">
-                    <rect x="-37.73395189756921" y="-33.27770443187819" width="414.46" height="427.18" fill="white" />
+                    <rect x="-37.733951897569156" y="-33.2777044318791" width="414.46" height="427.18" fill="white" />
                     <path d="M 76.63 289.61 L 62.26 293.91 L 65.72 279.31" fill="none" stroke="none" />
-                    <rect x="-1.8307082592462507" y="159.87" width="342.65" height="40.89" fill="black" />
+                    <rect x="-1.8307082592461086" y="159.87" width="342.65" height="40.89" fill="black" />
                 </mask>
             </defs>
             <g mask="url(#shape_VFv6uqErXncgYthXbKV3o_clip)">
                 <rect x="-100" y="-100" width="414.46" height="427.18" fill="transparent" stroke="none" />
-                <path d="M276.7287853790767,66.72229556812181L62.26604810243079,293.91058213983234" fill="none"
+                <path d="M276.72878537907695,66.7222955681209L62.266048102430844,293.91058213983143" fill="none"
                     stroke="#e1e1e1" stroke-width="5" stroke-dasharray="none" stroke-dashoffset="none" />
             </g>
             <path d="M 76.63 289.61 L 62.26 293.91 L 65.72 279.31" fill="none" stroke="#e1e1e1" stroke-width="5" /><text
                 font-size="24px" font-family="'tldraw_draw', sans-serif" font-style="normal" font-weight="normal"
                 line-height="32.400000000000006px" dominant-baseline="mathematical" alignment-baseline="mathematical"
                 fill="hsl(240, 5%, 8%)" stroke-width="2" stroke="hsl(240, 5%, 8%)">
-                <tspan alignment-baseline="mathematical" x="2.5911667407537493px" y="176.37112635397708px">status:
+                <tspan alignment-baseline="mathematical" x="2.5911667407538914px" y="176.37112635397617px">status:
                 </tspan>
-                <tspan alignment-baseline="mathematical" x="87.95054174075375px" y="176.37112635397708px"> </tspan>
-                <tspan alignment-baseline="mathematical" x="96.18491674075375px" y="176.37112635397708px">pendente/não
+                <tspan alignment-baseline="mathematical" x="87.95054174075389px" y="176.37112635397617px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="96.18491674075389px" y="176.37112635397617px">pendente/não
                 </tspan>
-                <tspan alignment-baseline="mathematical" x="268.62241674075375px" y="176.37112635397708px"> </tspan>
-                <tspan alignment-baseline="mathematical" x="276.85679174075375px" y="176.37112635397708px">pago</tspan>
+                <tspan alignment-baseline="mathematical" x="268.6224167407539px" y="176.37112635397617px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="276.8567917407539px" y="176.37112635397617px">pago</tspan>
             </text><text font-size="24px" font-family="'tldraw_draw', sans-serif" font-style="normal"
                 font-weight="normal" line-height="32.400000000000006px" dominant-baseline="mathematical"
                 alignment-baseline="mathematical" fill="#e1e1e1">
-                <tspan alignment-baseline="mathematical" x="2.5911667407537493px" y="176.37112635397708px">status:
+                <tspan alignment-baseline="mathematical" x="2.5911667407538914px" y="176.37112635397617px">status:
                 </tspan>
-                <tspan alignment-baseline="mathematical" x="87.95054174075375px" y="176.37112635397708px"> </tspan>
-                <tspan alignment-baseline="mathematical" x="96.18491674075375px" y="176.37112635397708px">pendente/não
+                <tspan alignment-baseline="mathematical" x="87.95054174075389px" y="176.37112635397617px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="96.18491674075389px" y="176.37112635397617px">pendente/não
                 </tspan>
-                <tspan alignment-baseline="mathematical" x="268.62241674075375px" y="176.37112635397708px"> </tspan>
-                <tspan alignment-baseline="mathematical" x="276.85679174075375px" y="176.37112635397708px">pago</tspan>
+                <tspan alignment-baseline="mathematical" x="268.6224167407539px" y="176.37112635397617px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="276.8567917407539px" y="176.37112635397617px">pago</tspan>
             </text>
         </g>
     </g>
-    <g transform="matrix(1, 0, 0, 1, 725.89, 4027.52)" opacity="1">
+    <g transform="matrix(1, 0, 0, 1, -296.1026, 4658.11)" opacity="1">
         <g>
             <path
                 d="M10,-0.0313 L321.4293,-1.0057 Q331.4292,-1.0369 331.32,8.9625 L330.3971,98.0565 Q330.2929,108.056 320.29,108.0244 L9.9674,107.0452 Q-0.0325,107.0136 0.12,97.0149 L1.4958,9.595 Q1.6527,-0.4037 11.65,-0.3617 L320.8124,0.9368 Q330.8123,0.9788 330.89,10.9785 L331.6294,99.1452 Q331.7126,109.1449 321.71,109.1153 L10.3,108.1951 Q0.3,108.1656 0.34,98.1657 L0.726,10.3826 Q0.7696,0.3827 10,-0.0313 "
@@ -475,25 +461,25 @@
                 </text></g>
         </g>
     </g>
-    <g transform="matrix(1, 0, 0, 1, 1059.17, 3830.62)" opacity="1">
+    <g transform="matrix(1, 0, 0, 1, 37.17, 4461.21)" opacity="1">
         <g>
             <defs>
                 <mask id="shape_sBmFVaIh_6-FSpdtRowqV_clip">
-                    <rect x="-228.92332467270597" y="-97.70108065350087" width="306.01" height="381.64" fill="white" />
-                    <path d="M -115.89775645282876 176.50 L -128.92332467270597 183.94 L -128.85266206208678 168.94"
+                    <rect x="-228.9233246727061" y="-97.70108065350178" width="306.01" height="381.64" fill="white" />
+                    <path d="M -115.89775645282887 176.50 L -128.9233246727061 183.94 L -128.85266206208692 168.94"
                         fill="none" stroke="none" />
                 </mask>
             </defs>
             <g mask="url(#shape_sBmFVaIh_6-FSpdtRowqV_clip)">
                 <rect x="-100" y="-100" width="306.01" height="381.64" fill="transparent" stroke="none" />
-                <path d="M-22.905241049477127,2.298919346499133L-128.92332467270597,183.94603611953087" fill="none"
+                <path d="M-22.905241049476984,2.2989193464982236L-128.9233246727061,183.94603611953085" fill="none"
                     stroke="#e1e1e1" stroke-width="5" stroke-dasharray="none" stroke-dashoffset="none" />
             </g>
-            <path d="M -115.89775645282876 176.50 L -128.92332467270597 183.94 L -128.85266206208678 168.94" fill="none"
+            <path d="M -115.89775645282887 176.50 L -128.9233246727061 183.94 L -128.85266206208692 168.94" fill="none"
                 stroke="#e1e1e1" stroke-width="5" />
         </g>
     </g>
-    <g transform="matrix(1, 0, 0, 1, 1080.37, 4028.52)" opacity="1">
+    <g transform="matrix(1, 0, 0, 1, 58.37, 4659.11)" opacity="1">
         <g>
             <path
                 d="M9.9999,0.0402 L320.0888,1.2872 Q330.0888,1.3274 330.16,11.3271 L330.8184,96.4891 Q330.8951,106.4888 320.89,106.5607 L9.4669,108.7999 Q-0.5328,108.8718 -0.4141,98.8725 L0.6495,9.2637 Q0.7681,-0.7356 10.76,-0.6943 L319.499,0.5809 Q329.4989,0.6222 329.56,10.622 L330.114,98.6928 Q330.1767,108.6926 320.17,108.6486 L9.4435,107.2817 Q-0.5564,107.2377 -0.5365,97.2377 L-0.3641,10.8357 Q-0.3441,0.8357 9.99,0.0402 "
@@ -509,23 +495,23 @@
                 </text></g>
         </g>
     </g>
-    <g transform="matrix(1, 0, 0, 1, 1072.01, 3835.76)" opacity="1">
+    <g transform="matrix(1, 0, 0, 1, 50.02, 4466.35)" opacity="1">
         <g>
             <defs>
                 <mask id="shape_IY02Vj2cgEkiAI4Ij-PJ-_clip">
-                    <rect x="-72.55254645933246" y="-102.83841669041658" width="306.92" height="382.65" fill="white" />
+                    <rect x="-72.55254645933246" y="-102.83841669041794" width="306.92" height="382.65" fill="white" />
                     <path d="M 134.28 164.81 L 134.37 179.81 L 121.33 172.39" fill="none" stroke="none" />
                 </mask>
             </defs>
             <g mask="url(#shape_IY02Vj2cgEkiAI4Ij-PJ-_clip)">
                 <rect x="-100" y="-100" width="306.92" height="382.65" fill="transparent" stroke="none" />
-                <path d="M27.44745354066754,-2.8384166904165795L134.37438224531607,179.818566862667" fill="none"
+                <path d="M27.44745354066754,-2.8384166904179438L134.3743822453162,179.81856686266698" fill="none"
                     stroke="#e1e1e1" stroke-width="5" stroke-dasharray="none" stroke-dashoffset="none" />
             </g>
             <path d="M 134.28 164.81 L 134.37 179.81 L 121.33 172.39" fill="none" stroke="#e1e1e1" stroke-width="5" />
         </g>
     </g>
-    <g transform="matrix(1, 0, 0, 1, 728.50, 4358.05)" opacity="1">
+    <g transform="matrix(1, 0, 0, 1, -293.4893, 4988.64)" opacity="1">
         <g>
             <path
                 d="M10,-0.0213 L319.6083,-0.6818 Q329.6083,-0.7031 329.68,9.2966 L330.369,99.7333 Q330.4448,109.733 320.44,109.662 L10.0939,107.4582 Q0.0941,107.3872 0.01,97.3875 L-0.7014,10.0397 Q-0.7831,0.0401 9.21,0.0817 L320.4128,1.3766 Q330.4128,1.4182 330.56,11.4171 L331.8695,97.4965 Q332.0211,107.4954 322.02,107.5161 L10.6492,108.1595 Q0.6492,108.1802 0.61,98.1802 L0.3438,10.8283 Q0.3124,0.8284 10,-0.0213 "
@@ -549,7 +535,7 @@
                 </text></g>
         </g>
     </g>
-    <g transform="matrix(1, 0, 0, 1, 1142.60, 4221.97)" opacity="1">
+    <g transform="matrix(1, 0, 0, 1, 120.60, 4852.56)" opacity="1">
         <g>
             <defs>
                 <mask id="shape_jNcbMhfEBef2FiI6hBCM4_clip">
@@ -585,7 +571,7 @@
             </text>
         </g>
     </g>
-    <g transform="matrix(1, 0, 0, 1, 1484.80, 3718.80)" opacity="1">
+    <g transform="matrix(1, 0, 0, 1, 790.42, 4376.69)" opacity="1">
         <g>
             <path
                 d="M10,0.0247 L320.3475,0.7911 Q330.3475,0.8158 330.47,10.8149 L331.6211,97.9553 Q331.7521,107.9545 321.75,107.9329 L9.0423,107.2568 Q-0.9577,107.2352 -0.738,97.2376 L1.207,8.6855 Q1.4266,-1.3121 11.42,-1.2653 L319.4884,0.1775 Q329.4883,0.2243 329.57,10.2239 L330.3382,97.1624 Q330.4259,107.162 320.42,107.1959 L9.3677,108.2479 Q-0.6322,108.2817 -0.5312,98.2822 L0.3696,9.0903 Q0.4706,-0.9092 10,0.0247 "
@@ -605,23 +591,53 @@
                 </text></g>
         </g>
     </g>
-    <g transform="matrix(1, 0, 0, 1, 1399.50, 3482.38)" opacity="1">
+    <g transform="matrix(1, 0, 0, 1, 705.12, 4140.27)" opacity="1">
         <g>
             <defs>
                 <mask id="shape_BBoAwz2OEM3A0wO3PgWcq_clip">
-                    <rect x="-64.28124148313464" y="-95.667546142618" width="365.23" height="420.09" fill="white" />
-                    <path d="M 199.15 209.53 L 200.95 224.43 L 187.15 218.54" fill="none" stroke="none" />
+                    <rect x="-346.7255867078922" y="-122.96918236084457" width="598.82" height="451.39" fill="white" />
+                    <path d="M 145.10 215.15 L 152.09 228.42 L 137.10 227.84" fill="none" stroke="none" />
+                    <rect x="-218.9717735942517" y="66.08" width="343.31" height="73.28" fill="black" />
                 </mask>
             </defs>
             <g mask="url(#shape_BBoAwz2OEM3A0wO3PgWcq_clip)">
-                <rect x="-100" y="-100" width="365.23" height="420.09" fill="transparent" stroke="none" />
-                <path d="M35.718758516865364,4.332453857382006L200.95356550717972,224.4303283397635" fill="none"
+                <rect x="-100" y="-100" width="598.82" height="451.39" fill="transparent" stroke="none" />
+                <path d="M-246.7255867078922,-22.96918236084457L152.09453951938883,228.42735447893313" fill="none"
                     stroke="#e1e1e1" stroke-width="5" stroke-dasharray="none" stroke-dashoffset="none" />
             </g>
-            <path d="M 199.15 209.53 L 200.95 224.43 L 187.15 218.54" fill="none" stroke="#e1e1e1" stroke-width="5" />
+            <path d="M 145.10 215.15 L 152.09 228.42 L 137.10 227.84" fill="none" stroke="#e1e1e1" stroke-width="5" />
+            <text font-size="24px" font-family="'tldraw_draw', sans-serif" font-style="normal" font-weight="normal"
+                line-height="32.400000000000006px" dominant-baseline="mathematical" alignment-baseline="mathematical"
+                fill="hsl(240, 5%, 8%)" stroke-width="2" stroke="hsl(240, 5%, 8%)">
+                <tspan alignment-baseline="mathematical" x="-212.1748985942517px" y="82.89314855904428px">cancelamento
+                </tspan>
+                <tspan alignment-baseline="mathematical" x="-39.42489859425169px" y="82.89314855904428px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="-31.206148594251687px" y="82.89314855904428px">após</tspan>
+                <tspan alignment-baseline="mathematical" x="26.887601405748313px" y="82.89314855904428px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="35.10635140574831px" y="82.89314855904428px">pedido</tspan>
+                <tspan alignment-baseline="mathematical" x="118.21572640574831px" y="82.89314855904428px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="-214.9717735942517px" y="115.28377355904428px">
+                </tspan>
+                <tspan alignment-baseline="mathematical" x="-85.26864859425169px" y="115.28377355904428px">criado
+                </tspan>
+            </text><text font-size="24px" font-family="'tldraw_draw', sans-serif" font-style="normal"
+                font-weight="normal" line-height="32.400000000000006px" dominant-baseline="mathematical"
+                alignment-baseline="mathematical" fill="#e1e1e1">
+                <tspan alignment-baseline="mathematical" x="-212.1748985942517px" y="82.89314855904428px">cancelamento
+                </tspan>
+                <tspan alignment-baseline="mathematical" x="-39.42489859425169px" y="82.89314855904428px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="-31.206148594251687px" y="82.89314855904428px">após</tspan>
+                <tspan alignment-baseline="mathematical" x="26.887601405748313px" y="82.89314855904428px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="35.10635140574831px" y="82.89314855904428px">pedido</tspan>
+                <tspan alignment-baseline="mathematical" x="118.21572640574831px" y="82.89314855904428px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="-214.9717735942517px" y="115.28377355904428px">
+                </tspan>
+                <tspan alignment-baseline="mathematical" x="-85.26864859425169px" y="115.28377355904428px">criado
+                </tspan>
+            </text>
         </g>
     </g>
-    <g transform="matrix(1, 0, 0, 1, 1488.53, 4025.52)" opacity="1">
+    <g transform="matrix(1, 0, 0, 1, 794.15, 4683.41)" opacity="1">
         <g>
             <path
                 d="M10,-0.0249 L321.1527,-0.7982 Q331.1527,-0.8231 331.07,9.1766 L330.3532,97.294 Q330.2717,107.2937 320.27,107.2714 L10.0242,106.5786 Q0.0243,106.5563 -0.0452,96.5565 L-0.6466,10.0113 Q-0.7161,0.0116 9.28,-0.0311 L320.6709,-1.3618 Q330.6708,-1.4046 330.80,8.5946 L331.9845,99.0996 Q332.1152,109.0987 322.11,109.0206 L10.303,106.5832 Q0.3033,106.505 0.26,96.5051 L-0.0388,9.128 Q-0.0739,-0.872 10,-0.0249 "
@@ -629,60 +645,65 @@
             <g><text font-size="26px" font-family="'tldraw_draw', sans-serif" font-style="normal" font-weight="normal"
                     line-height="35.1px" dominant-baseline="mathematical" alignment-baseline="mathematical"
                     stroke-width="2" fill="hsl(240, 5%, 8%)" stroke="hsl(240, 5%, 8%)">
-                    <tspan alignment-baseline="mathematical" x="17.796875px" y="32.453125px">Deletar</tspan>
-                    <tspan alignment-baseline="mathematical" x="119px" y="32.453125px"> </tspan>
-                    <tspan alignment-baseline="mathematical" x="127.921875px" y="32.453125px">agendamento</tspan>
-                    <tspan alignment-baseline="mathematical" x="313.1875px" y="32.453125px"> </tspan>
+                    <tspan alignment-baseline="mathematical" x="20.140625px" y="32.453125px">marcar</tspan>
+                    <tspan alignment-baseline="mathematical" x="116.671875px" y="32.453125px"> </tspan>
+                    <tspan alignment-baseline="mathematical" x="125.59375px" y="32.453125px">agendamento</tspan>
+                    <tspan alignment-baseline="mathematical" x="310.859375px" y="32.453125px"> </tspan>
                     <tspan alignment-baseline="mathematical" x="16px" y="67.546875px">
                     </tspan>
-                    <tspan alignment-baseline="mathematical" x="101.8125px" y="67.546875px">pendente</tspan>
+                    <tspan alignment-baseline="mathematical" x="81.9375px" y="67.546875px">como</tspan>
+                    <tspan alignment-baseline="mathematical" x="148.859375px" y="67.546875px"> </tspan>
+                    <tspan alignment-baseline="mathematical" x="157.765625px" y="67.546875px">inativo</tspan>
                 </text><text font-size="26px" font-family="'tldraw_draw', sans-serif" font-style="normal"
                     font-weight="normal" line-height="35.1px" dominant-baseline="mathematical"
                     alignment-baseline="mathematical" fill="#e1e1e1" stroke="none">
-                    <tspan alignment-baseline="mathematical" x="17.796875px" y="32.453125px">Deletar</tspan>
-                    <tspan alignment-baseline="mathematical" x="119px" y="32.453125px"> </tspan>
-                    <tspan alignment-baseline="mathematical" x="127.921875px" y="32.453125px">agendamento</tspan>
-                    <tspan alignment-baseline="mathematical" x="313.1875px" y="32.453125px"> </tspan>
+                    <tspan alignment-baseline="mathematical" x="20.140625px" y="32.453125px">marcar</tspan>
+                    <tspan alignment-baseline="mathematical" x="116.671875px" y="32.453125px"> </tspan>
+                    <tspan alignment-baseline="mathematical" x="125.59375px" y="32.453125px">agendamento</tspan>
+                    <tspan alignment-baseline="mathematical" x="310.859375px" y="32.453125px"> </tspan>
                     <tspan alignment-baseline="mathematical" x="16px" y="67.546875px">
                     </tspan>
-                    <tspan alignment-baseline="mathematical" x="101.8125px" y="67.546875px">pendente</tspan>
+                    <tspan alignment-baseline="mathematical" x="81.9375px" y="67.546875px">como</tspan>
+                    <tspan alignment-baseline="mathematical" x="148.859375px" y="67.546875px"> </tspan>
+                    <tspan alignment-baseline="mathematical" x="157.765625px" y="67.546875px">inativo</tspan>
                 </text></g>
         </g>
     </g>
-    <g transform="matrix(1, 0, 0, 1, 1806.47, 4086.49)" opacity="1">
+    <g transform="matrix(1, 0, 0, 1, 1112.09, 4744.38)" opacity="1">
         <g>
             <defs>
                 <mask id="shape_xo2KPNx2cGm7qo2-hWz8-_clip">
-                    <rect x="-238.4771645673021" y="-2327.264417394509" width="2206.51" height="2719.31" fill="white" />
-                    <path d="M 656.85 -2224.0735926137095 L 651.77 -2227.264417394509 L 657.07 -2230.0694570165365"
+                    <rect x="-232.80268336717074" y="-2968.495090355111" width="2566.55" height="3288.84"
+                        fill="white" />
+                    <path d="M 1347.94 -2863.449714283325 L 1344.69 -2868.495090355111 L 1350.68 -2868.784543002165"
                         fill="none" stroke="none" />
                 </mask>
             </defs>
             <g mask="url(#shape_xo2KPNx2cGm7qo2-hWz8-_clip)">
-                <rect x="-100" y="-100" width="2206.51" height="2719.31" fill="transparent" stroke="none" />
+                <rect x="-100" y="-100" width="2566.55" height="3288.84" fill="transparent" stroke="none" />
                 <path
-                    d="M-138.477164567302,47.14114052163268 A1260.040039830857 1260.04 0 1 0 651.77,-2227.264417394509"
+                    d="M-132.8026833671704,47.141140521632224 A1634.3310570849105 1634.33 0 0 0 1344.69,-2868.495090355111"
                     fill="none" stroke="#e1e1e1" stroke-width="2" stroke-dasharray="none" stroke-dashoffset="none" />
             </g>
-            <path d="M 656.85 -2224.0735926137095 L 651.77 -2227.264417394509 L 657.07 -2230.0694570165365" fill="none"
+            <path d="M 1347.94 -2863.449714283325 L 1344.69 -2868.495090355111 L 1350.68 -2868.784543002165" fill="none"
                 stroke="#e1e1e1" stroke-width="2" />
         </g>
     </g>
-    <g transform="matrix(1, 0, 0, 1, 1654.35, 3828.51)" opacity="1">
+    <g transform="matrix(1, 0, 0, 1, 959.97, 4486.40)" opacity="1">
         <g>
             <defs>
                 <mask id="shape_Fic5IyEcLscykOO2TmTUm_clip">
-                    <rect x="-100.23195529266735" y="-100" width="200.23" height="382.00" fill="white" />
-                    <path d="M 7.28 169.02 L -0.2319552926673465 182.00 L -7.715393940120348 169.00" fill="none"
+                    <rect x="-100.23195529266745" y="-100" width="200.23" height="382.00" fill="white" />
+                    <path d="M 7.28 169.02 L -0.2319552926674515 182.00 L -7.715393940120445 169.00" fill="none"
                         stroke="none" />
                 </mask>
             </defs>
             <g mask="url(#shape_Fic5IyEcLscykOO2TmTUm_clip)">
                 <rect x="-100" y="-100" width="200.23" height="382.00" fill="transparent" stroke="none" />
-                <path d="M0,0L-0.2319552926673465,182.0077025548046" fill="none" stroke="#e1e1e1" stroke-width="5"
+                <path d="M0,0L-0.2319552926674515,182.00770255480415" fill="none" stroke="#e1e1e1" stroke-width="5"
                     stroke-dasharray="none" stroke-dashoffset="none" />
             </g>
-            <path d="M 7.28 169.02 L -0.2319552926673465 182.00 L -7.715393940120348 169.00" fill="none"
+            <path d="M 7.28 169.02 L -0.2319552926674515 182.00 L -7.715393940120445 169.00" fill="none"
                 stroke="#e1e1e1" stroke-width="5" />
         </g>
     </g>
@@ -808,35 +829,589 @@
                 fill="none" stroke="#e1e1e1" stroke-width="3.5" />
         </g>
     </g>
-    <g transform="matrix(1, 0, 0, 1, 1107.01, 4393.52)" opacity="1">
-        <g><text font-size="24px" font-family="'tldraw_draw', sans-serif" font-style="normal" font-weight="normal"
-                line-height="32.400000000000006px" dominant-baseline="mathematical" alignment-baseline="mathematical"
+    <g transform="matrix(1, 0, 0, 1, 195.18, 4993.02)" opacity="1">
+        <g><text font-size="36px" font-family="'tldraw_draw', sans-serif" font-style="normal" font-weight="normal"
+                line-height="48.6px" dominant-baseline="mathematical" alignment-baseline="mathematical"
                 stroke="hsl(240, 5%, 8%)" stroke-width="2px" fill="hsl(240, 5%, 8%)">
-                <tspan alignment-baseline="mathematical" x="0.953125px" y="12.5px">Aguardando</tspan>
-                <tspan alignment-baseline="mathematical" x="155.265625px" y="12.5px"> </tspan>
-                <tspan alignment-baseline="mathematical" x="163.5px" y="12.5px">pagamento</tspan>
-            </text><text font-size="24px" font-family="'tldraw_draw', sans-serif" font-style="normal"
-                font-weight="normal" line-height="32.400000000000006px" dominant-baseline="mathematical"
+                <tspan alignment-baseline="mathematical" x="0.953125px" y="17.203125px">-</tspan>
+                <tspan alignment-baseline="mathematical" x="19.234375px" y="17.203125px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="31.578125px" y="17.203125px">Aguardando</tspan>
+                <tspan alignment-baseline="mathematical" x="263.0625px" y="17.203125px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="275.40625px" y="17.203125px">pagamento</tspan>
+                <tspan alignment-baseline="mathematical" x="484.671875px" y="17.203125px">  </tspan>
+                <tspan alignment-baseline="mathematical" x="0px" y="65.796875px">
+                </tspan>
+                <tspan alignment-baseline="mathematical" x="83.296875px" y="65.796875px">-</tspan>
+                <tspan alignment-baseline="mathematical" x="101.578125px" y="65.796875px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="113.921875px" y="65.796875px">Cancelar</tspan>
+                <tspan alignment-baseline="mathematical" x="277.6875px" y="65.796875px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="290.03125px" y="65.796875px">pedido</tspan>
+            </text><text font-size="36px" font-family="'tldraw_draw', sans-serif" font-style="normal"
+                font-weight="normal" line-height="48.6px" dominant-baseline="mathematical"
                 alignment-baseline="mathematical" stroke="none" stroke-width="2px" fill="#4dabf7">
-                <tspan alignment-baseline="mathematical" x="0.953125px" y="12.5px">Aguardando</tspan>
-                <tspan alignment-baseline="mathematical" x="155.265625px" y="12.5px"> </tspan>
-                <tspan alignment-baseline="mathematical" x="163.5px" y="12.5px">pagamento</tspan>
+                <tspan alignment-baseline="mathematical" x="0.953125px" y="17.203125px">-</tspan>
+                <tspan alignment-baseline="mathematical" x="19.234375px" y="17.203125px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="31.578125px" y="17.203125px">Aguardando</tspan>
+                <tspan alignment-baseline="mathematical" x="263.0625px" y="17.203125px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="275.40625px" y="17.203125px">pagamento</tspan>
+                <tspan alignment-baseline="mathematical" x="484.671875px" y="17.203125px">  </tspan>
+                <tspan alignment-baseline="mathematical" x="0px" y="65.796875px">
+                </tspan>
+                <tspan alignment-baseline="mathematical" x="83.296875px" y="65.796875px">-</tspan>
+                <tspan alignment-baseline="mathematical" x="101.578125px" y="65.796875px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="113.921875px" y="65.796875px">Cancelar</tspan>
+                <tspan alignment-baseline="mathematical" x="277.6875px" y="65.796875px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="290.03125px" y="65.796875px">pedido</tspan>
             </text></g>
     </g>
-    <g transform="matrix(1, 0, 0, 1, 1239.53, 4115.88)" opacity="1">
+    <g transform="matrix(1, 0, 0, 1, 217.54, 4746.47)" opacity="1">
         <g>
             <defs>
                 <mask id="shape_yFmYaJ6fbwiQRGU2VjZJe_clip">
-                    <rect x="-93.19730641188221" y="-79.24176487623208" width="203.26" height="443.38" fill="white" />
-                    <path d="M 15.19 254.98 L 10.06 264.14 L 4.69 255.12" fill="none" stroke="none" />
+                    <rect x="-57.74145564300295" y="-79.24176487623117" width="343.19" height="413.94" fill="white" />
+                    <path d="M 184.75 224.23 L 185.45 234.70 L 176.03 230.07" fill="none" stroke="none" />
                 </mask>
             </defs>
             <g mask="url(#shape_yFmYaJ6fbwiQRGU2VjZJe_clip)">
-                <rect x="-100" y="-100" width="203.26" height="443.38" fill="transparent" stroke="none" />
-                <path d="M6.802693588117791,20.758235123767918L10.065464776478235,264.14657831470197" fill="none"
+                <rect x="-100" y="-100" width="343.19" height="413.94" fill="transparent" stroke="none" />
+                <path d="M42.25854435699705,20.758235123768827L185.453824899879,234.70809987714762" fill="none"
                     stroke="#e1e1e1" stroke-width="3.5" stroke-dasharray="none" stroke-dashoffset="none" />
             </g>
-            <path d="M 15.19 254.98 L 10.06 264.14 L 4.69 255.12" fill="none" stroke="#e1e1e1" stroke-width="3.5" />
+            <path d="M 184.75 224.23 L 185.45 234.70 L 176.03 230.07" fill="none" stroke="#e1e1e1" stroke-width="3.5" />
+        </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 1362.76, 3157.36)" opacity="1">
+        <g>
+            <path
+                d="M10,0.0113 L524.4658,0.5936 Q534.4658,0.6049 534.49,10.6049 L534.8269,126.7349 Q534.8555,136.7348 524.85,136.7291 L10.6938,136.4347 Q0.6938,136.4289 0.58,126.4295 L-0.616,11.1342 Q-0.7205,1.1347 9.27,1.0955 L525.8543,-0.9309 Q535.8542,-0.9701 535.81,9.0298 L535.3026,128.4178 Q535.26,138.4177 525.26,138.4162 L10.2121,138.3358 Q0.2121,138.3342 0.31,128.3347 L1.5015,10.2483 Q1.6022,0.2488 10,0.0113 "
+                fill="none" stroke="#e1e1e1" stroke-width="5" />
+            <g><text font-size="26px" font-family="'tldraw_draw', sans-serif" font-style="normal" font-weight="normal"
+                    line-height="35.1px" dominant-baseline="mathematical" alignment-baseline="mathematical"
+                    stroke-width="2" fill="hsl(240, 5%, 8%)" stroke="hsl(240, 5%, 8%)">
+                    <tspan alignment-baseline="mathematical" x="106.984375px" y="64.5px">Agendamento</tspan>
+                    <tspan alignment-baseline="mathematical" x="294.59375px" y="64.5px"> </tspan>
+                    <tspan alignment-baseline="mathematical" x="303.515625px" y="64.5px">aprovado</tspan>
+                </text><text font-size="26px" font-family="'tldraw_draw', sans-serif" font-style="normal"
+                    font-weight="normal" line-height="35.1px" dominant-baseline="mathematical"
+                    alignment-baseline="mathematical" fill="#e1e1e1" stroke="none">
+                    <tspan alignment-baseline="mathematical" x="106.984375px" y="64.5px">Agendamento</tspan>
+                    <tspan alignment-baseline="mathematical" x="294.59375px" y="64.5px"> </tspan>
+                    <tspan alignment-baseline="mathematical" x="303.515625px" y="64.5px">aprovado</tspan>
+                </text></g>
+        </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 2274.73, 2647.33)" opacity="1">
+        <g>
+            <defs>
+                <mask id="shape_RclIfKDSV7gjZn5THvn62_clip">
+                    <rect x="-737.4074628490082" y="86.72" width="446.93" height="512.12" fill="white" />
+                    <path d="M -627.6482584612133 494.98 L -637.4074628490082 498.85 L -635.882849073561 488.46"
+                        fill="none" stroke="none" />
+                </mask>
+            </defs>
+            <g mask="url(#shape_RclIfKDSV7gjZn5THvn62_clip)">
+                <rect x="-100" y="-100" width="446.93" height="512.12" fill="transparent" stroke="none" />
+                <path d="M-390.47058293181135,186.7262784078107L-637.4074628490082,498.85412613280704" fill="none"
+                    stroke="#e1e1e1" stroke-width="3.5" stroke-dasharray="none" stroke-dashoffset="none" />
+            </g>
+            <path d="M -627.6482584612133 494.98 L -637.4074628490082 498.85 L -635.882849073561 488.46" fill="none"
+                stroke="#e1e1e1" stroke-width="3.5" />
+        </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 1287.27, 3413.68)" opacity="1">
+        <g>
+            <path
+                d="M9.9999,0.0358 L321.2368,1.1492 Q331.2368,1.185 331.09,11.1839 L329.8491,96.5763 Q329.7036,106.5753 319.70,106.6141 L9.0782,107.8205 Q-0.9217,107.8594 -0.7653,97.8606 L0.6049,10.2882 Q0.7613,0.2894 10.76,0.3236 L320.8358,1.3839 Q330.8358,1.4181 330.67,11.4168 L329.2481,99.1198 Q329.0856,109.1185 319.08,109.0721 L9.9076,107.6377 Q-0.0923,107.5913 -0.0379,97.5914 L0.4337,10.9194 Q0.4881,0.9195 9.99,0.0358 "
+                fill="none" stroke="#e1e1e1" stroke-width="5" />
+            <g><text font-size="26px" font-family="'tldraw_draw', sans-serif" font-style="normal" font-weight="normal"
+                    line-height="35.1px" dominant-baseline="mathematical" alignment-baseline="mathematical"
+                    stroke-width="2" fill="hsl(240, 5%, 8%)" stroke="hsl(240, 5%, 8%)">
+                    <tspan alignment-baseline="mathematical" x="142.578125px" y="50px">Sim</tspan>
+                </text><text font-size="26px" font-family="'tldraw_draw', sans-serif" font-style="normal"
+                    font-weight="normal" line-height="35.1px" dominant-baseline="mathematical"
+                    alignment-baseline="mathematical" fill="#e1e1e1" stroke="none">
+                    <tspan alignment-baseline="mathematical" x="142.578125px" y="50px">Sim</tspan>
+                </text></g>
+        </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 1496.72, 3507.86)" opacity="1">
+        <g>
+            <defs>
+                <mask id="shape_63tb0xmeICIXcatjQ3A7s_clip">
+                    <rect x="-635.6242214870182" y="-86.07329176158646" width="585.32" height="396.32" fill="white" />
+                    <path d="M -525.1386212519216 210.79 L -535.6242214870182 210.24 L -529.9053533256932 201.44"
+                        fill="none" stroke="none" />
+                </mask>
+            </defs>
+            <g mask="url(#shape_63tb0xmeICIXcatjQ3A7s_clip)">
+                <rect x="-100" y="-100" width="585.32" height="396.32" fill="transparent" stroke="none" />
+                <path d="M-150.30384927269597,13.92670823841354L-535.6242214870182,210.2485195691323" fill="none"
+                    stroke="#e1e1e1" stroke-width="3.5" stroke-dasharray="none" stroke-dashoffset="none" />
+            </g>
+            <path d="M -525.1386212519216 210.79 L -535.6242214870182 210.24 L -529.9053533256932 201.44" fill="none"
+                stroke="#e1e1e1" stroke-width="3.5" />
+        </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 1628.39, 3262.08)" opacity="1">
+        <g>
+            <defs>
+                <mask id="shape_5uBZm_vmE05GkI3RPiNeh_clip">
+                    <rect x="-253.11260788189193" y="-67.44129102066336" width="294.75" height="308.31" fill="white" />
+                    <path d="M -143.17390189681674 137.48 L -153.11260788189193 140.87 L -151.0765282326814 130.57"
+                        fill="none" stroke="none" />
+                </mask>
+            </defs>
+            <g mask="url(#shape_5uBZm_vmE05GkI3RPiNeh_clip)">
+                <rect x="-100" y="-100" width="294.75" height="308.31" fill="transparent" stroke="none" />
+                <path d="M-58.35414115357048,32.55870897933664L-153.11260788189193,140.8721496999959" fill="none"
+                    stroke="#e1e1e1" stroke-width="3.5" stroke-dasharray="none" stroke-dashoffset="none" />
+            </g>
+            <path d="M -143.17390189681674 137.48 L -153.11260788189193 140.87 L -151.0765282326814 130.57" fill="none"
+                stroke="#e1e1e1" stroke-width="3.5" />
+        </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 1641.75, 3414.68)" opacity="1">
+        <g>
+            <path
+                d="M10,-0.0252 L319.1737,-0.8036 Q329.1737,-0.8288 329.23,9.1711 L329.7467,99.0594 Q329.804,109.0592 319.80,108.9936 L8.8883,106.9514 Q-1.1115,106.8857 -1.1085,96.8858 L-1.0825,10.6243 Q-1.0795,0.6243 8.92,0.6401 L319.2355,1.1314 Q329.2355,1.1472 329.42,11.1455 L331.0008,96.6701 Q331.1856,106.6684 321.18,106.712 L11.6564,108.0616 Q1.6565,108.1052 1.60,98.1054 L1.132,10.4601 Q1.0783,0.4602 10,-0.0252 "
+                fill="none" stroke="#e1e1e1" stroke-width="5" />
+            <g><text font-size="26px" font-family="'tldraw_draw', sans-serif" font-style="normal" font-weight="normal"
+                    line-height="35.1px" dominant-baseline="mathematical" alignment-baseline="mathematical"
+                    stroke-width="2" fill="hsl(240, 5%, 8%)" stroke="hsl(240, 5%, 8%)">
+                    <tspan alignment-baseline="mathematical" x="138.640625px" y="50px">Não</tspan>
+                </text><text font-size="26px" font-family="'tldraw_draw', sans-serif" font-style="normal"
+                    font-weight="normal" line-height="35.1px" dominant-baseline="mathematical"
+                    alignment-baseline="mathematical" fill="#e1e1e1" stroke="none">
+                    <tspan alignment-baseline="mathematical" x="138.640625px" y="50px">Não</tspan>
+                </text></g>
+        </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 1626.64, 3241.01)" opacity="1">
+        <g>
+            <defs>
+                <mask id="shape_UzmDx29tupEXhazWd2-J2_clip">
+                    <rect x="-46.52345189634002" y="-46.37391976545405" width="279.08" height="308.52" fill="white" />
+                    <path d="M 131.45 151.70 L 132.56 162.14 L 122.96 157.89" fill="none" stroke="none" />
+                </mask>
+            </defs>
+            <g mask="url(#shape_UzmDx29tupEXhazWd2-J2_clip)">
+                <rect x="-100" y="-100" width="279.08" height="308.52" fill="transparent" stroke="none" />
+                <path d="M53.47654810365998,53.62608023454595L132.56638218862034,162.1483367546522" fill="none"
+                    stroke="#e1e1e1" stroke-width="3.5" stroke-dasharray="none" stroke-dashoffset="none" />
+            </g>
+            <path d="M 131.45 151.70 L 132.56 162.14 L 122.96 157.89" fill="none" stroke="#e1e1e1" stroke-width="3.5" />
+        </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 1461.28, 3616.58)" opacity="1">
+        <g><text font-size="24px" font-family="'tldraw_draw', sans-serif" font-style="normal" font-weight="normal"
+                line-height="32.400000000000006px" dominant-baseline="mathematical" alignment-baseline="mathematical"
+                stroke="hsl(240, 5%, 8%)" stroke-width="2px" fill="hsl(240, 5%, 8%)">
+                <tspan alignment-baseline="mathematical" x="0.65625px" y="12.5px">Notificação</tspan>
+                <tspan alignment-baseline="mathematical" x="139.25px" y="12.5px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="147.484375px" y="12.5px">de</tspan>
+                <tspan alignment-baseline="mathematical" x="178.421875px" y="12.5px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="186.640625px" y="12.5px">agendamento</tspan>
+                <tspan alignment-baseline="mathematical" x="357.640625px" y="12.5px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="365.875px" y="12.5px">rejeitado</tspan>
+            </text><text font-size="24px" font-family="'tldraw_draw', sans-serif" font-style="normal"
+                font-weight="normal" line-height="32.400000000000006px" dominant-baseline="mathematical"
+                alignment-baseline="mathematical" stroke="none" stroke-width="2px" fill="#40c057">
+                <tspan alignment-baseline="mathematical" x="0.65625px" y="12.5px">Notificação</tspan>
+                <tspan alignment-baseline="mathematical" x="139.25px" y="12.5px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="147.484375px" y="12.5px">de</tspan>
+                <tspan alignment-baseline="mathematical" x="178.421875px" y="12.5px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="186.640625px" y="12.5px">agendamento</tspan>
+                <tspan alignment-baseline="mathematical" x="357.640625px" y="12.5px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="365.875px" y="12.5px">rejeitado</tspan>
+            </text></g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 1970.74, 3478.02)" opacity="1">
+        <g>
+            <defs>
+                <mask id="shape_WdS40j7TC1p6T91DQmOt0_clip">
+                    <rect x="-262.8186998847236" y="-55.227849150039674" width="201.37" height="280.29" fill="white" />
+                    <path d="M -156.3502139346831 115.88 L -161.4437464034153 125.06 L -166.84867465780303 116.06"
+                        fill="none" stroke="none" />
+                </mask>
+            </defs>
+            <g mask="url(#shape_WdS40j7TC1p6T91DQmOt0_clip)">
+                <rect x="-100" y="-100" width="201.37" height="280.29" fill="transparent" stroke="none" />
+                <path d="M-162.81869988472363,44.772150849960326L-161.4437464034153,125.06216407701172" fill="none"
+                    stroke="#e1e1e1" stroke-width="3.5" stroke-dasharray="none" stroke-dashoffset="none" />
+            </g>
+            <path d="M -156.3502139346831 115.88 L -161.4437464034153 125.06 L -166.84867465780303 116.06" fill="none"
+                stroke="#e1e1e1" stroke-width="3.5" />
+        </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 2863.70, 3216.57)" opacity="1">
+        <g><text font-size="24px" font-family="'tldraw_draw', sans-serif" font-style="normal" font-weight="normal"
+                line-height="32.400000000000006px" dominant-baseline="mathematical" alignment-baseline="mathematical"
+                stroke="hsl(240, 5%, 8%)" stroke-width="2px" fill="hsl(240, 5%, 8%)">
+                <tspan alignment-baseline="mathematical" x="0.796875px" y="12.5px">Notificação</tspan>
+                <tspan alignment-baseline="mathematical" x="139.390625px" y="12.5px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="147.625px" y="12.5px">agendamento</tspan>
+                <tspan alignment-baseline="mathematical" x="318.625px" y="12.5px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="326.859375px" y="12.5px">solicitado</tspan>
+            </text><text font-size="24px" font-family="'tldraw_draw', sans-serif" font-style="normal"
+                font-weight="normal" line-height="32.400000000000006px" dominant-baseline="mathematical"
+                alignment-baseline="mathematical" stroke="none" stroke-width="2px" fill="#40c057">
+                <tspan alignment-baseline="mathematical" x="0.796875px" y="12.5px">Notificação</tspan>
+                <tspan alignment-baseline="mathematical" x="139.390625px" y="12.5px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="147.625px" y="12.5px">agendamento</tspan>
+                <tspan alignment-baseline="mathematical" x="318.625px" y="12.5px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="326.859375px" y="12.5px">solicitado</tspan>
+            </text></g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 2141.16, 2864.26)" opacity="1">
+        <g>
+            <defs>
+                <mask id="shape_rcsloTEmucV9DZ5r-_YBY_clip">
+                    <rect x="-148.88350115738154" y="-156.38530555123452" width="1030.15" height="600.08"
+                        fill="white" />
+                    <path d="M 777.55 333.88 L 781.27 343.70 L 770.91 342.01" fill="none" stroke="none" />
+                </mask>
+            </defs>
+            <g mask="url(#shape_rcsloTEmucV9DZ5r-_YBY_clip)">
+                <rect x="-100" y="-100" width="1030.15" height="600.08" fill="transparent" stroke="none" />
+                <path
+                    d="M-48.88350115738149,-56.38530555123407 A1947.0022404668225 1947.00 0 0 1 781.27,343.70446373016443"
+                    fill="none" stroke="#e1e1e1" stroke-width="3.5" stroke-dasharray="none" stroke-dashoffset="none" />
+            </g>
+            <path d="M 777.55 333.88 L 781.27 343.70 L 770.91 342.01" fill="none" stroke="#e1e1e1" stroke-width="3.5" />
+        </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 1339.57, 4255.68)" opacity="1">
+        <g><text font-size="24px" font-family="'tldraw_draw', sans-serif" font-style="normal" font-weight="normal"
+                line-height="32.400000000000006px" dominant-baseline="mathematical" alignment-baseline="mathematical"
+                stroke="hsl(240, 5%, 8%)" stroke-width="2px" fill="hsl(240, 5%, 8%)">
+                <tspan alignment-baseline="mathematical" x="0px" y="12.5px">O</tspan>
+                <tspan alignment-baseline="mathematical" x="16.703125px" y="12.5px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="24.921875px" y="12.5px">que</tspan>
+                <tspan alignment-baseline="mathematical" x="68.75px" y="12.5px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="76.984375px" y="12.5px">fazer</tspan>
+                <tspan alignment-baseline="mathematical" x="143.78125px" y="12.5px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="152px" y="12.5px">quando</tspan>
+                <tspan alignment-baseline="mathematical" x="243.953125px" y="12.5px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="252.1875px" y="12.5px">o</tspan>
+                <tspan alignment-baseline="mathematical" x="266.796875px" y="12.5px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="275.03125px" y="12.5px">pedido</tspan>
+                <tspan alignment-baseline="mathematical" x="358.125px" y="12.5px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="366.34375px" y="12.5px">não</tspan>
+                <tspan alignment-baseline="mathematical" x="412.75px" y="12.5px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="420.96875px" y="12.5px">for</tspan>
+                <tspan alignment-baseline="mathematical" x="457.390625px" y="12.5px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="465.609375px" y="12.5px">criado</tspan>
+                <tspan alignment-baseline="mathematical" x="542.203125px" y="12.5px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="550.4375px" y="12.5px">?</tspan>
+            </text><text font-size="24px" font-family="'tldraw_draw', sans-serif" font-style="normal"
+                font-weight="normal" line-height="32.400000000000006px" dominant-baseline="mathematical"
+                alignment-baseline="mathematical" stroke="none" stroke-width="2px" fill="#e1e1e1">
+                <tspan alignment-baseline="mathematical" x="0px" y="12.5px">O</tspan>
+                <tspan alignment-baseline="mathematical" x="16.703125px" y="12.5px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="24.921875px" y="12.5px">que</tspan>
+                <tspan alignment-baseline="mathematical" x="68.75px" y="12.5px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="76.984375px" y="12.5px">fazer</tspan>
+                <tspan alignment-baseline="mathematical" x="143.78125px" y="12.5px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="152px" y="12.5px">quando</tspan>
+                <tspan alignment-baseline="mathematical" x="243.953125px" y="12.5px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="252.1875px" y="12.5px">o</tspan>
+                <tspan alignment-baseline="mathematical" x="266.796875px" y="12.5px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="275.03125px" y="12.5px">pedido</tspan>
+                <tspan alignment-baseline="mathematical" x="358.125px" y="12.5px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="366.34375px" y="12.5px">não</tspan>
+                <tspan alignment-baseline="mathematical" x="412.75px" y="12.5px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="420.96875px" y="12.5px">for</tspan>
+                <tspan alignment-baseline="mathematical" x="457.390625px" y="12.5px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="465.609375px" y="12.5px">criado</tspan>
+                <tspan alignment-baseline="mathematical" x="542.203125px" y="12.5px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="550.4375px" y="12.5px">?</tspan>
+            </text></g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 1437.73, 4070.84)" opacity="1">
+        <g>
+            <defs>
+                <mask id="shape_vwZdNPU7Dl6SqbRzJeYjC_clip">
+                    <rect x="-134.76708517631187" y="-60.54198557749805" width="202.04" height="331.88" fill="white" />
+                    <path d="M -27.616661175635432 162.17 L -32.72527193043086 171.34 L -38.11540310429287 162.33"
+                        fill="none" stroke="none" />
+                </mask>
+            </defs>
+            <g mask="url(#shape_vwZdNPU7Dl6SqbRzJeYjC_clip)">
+                <rect x="-100" y="-100" width="202.04" height="331.88" fill="transparent" stroke="none" />
+                <path d="M-34.767085176311866,39.45801442250195L-32.72527193043086,171.3456262635949" fill="none"
+                    stroke="#e1e1e1" stroke-width="3.5" stroke-dasharray="none" stroke-dashoffset="none" />
+            </g>
+            <path d="M -27.616661175635432 162.17 L -32.72527193043086 171.34 L -38.11540310429287 162.33" fill="none"
+                stroke="#e1e1e1" stroke-width="3.5" />
+        </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 2211.40, 3150.98)" opacity="1">
+        <g>
+            <path
+                d="M10,-0.0048 L525.622,-0.2537 Q535.622,-0.2585 535.63,9.7415 L535.8198,127.2654 Q535.8353,137.2653 525.83,137.2712 L9.413,137.5749 Q-0.587,137.5807 -0.4888,127.5812 L0.6664,9.9808 Q0.7646,-0.0187 10.76,0.007 L526.3039,1.3292 Q536.3039,1.3549 536.08,11.3525 L533.5671,126.868 Q533.3491,136.8656 523.34,136.864 L9.182,136.7798 Q-0.818,136.7782 -0.828,126.7782 L-0.9452,9.8573 Q-0.9552,-0.1427 10,-0.0048 "
+                fill="none" stroke="#e1e1e1" stroke-width="5" />
+            <g><text font-size="26px" font-family="'tldraw_draw', sans-serif" font-style="normal" font-weight="normal"
+                    line-height="35.1px" dominant-baseline="mathematical" alignment-baseline="mathematical"
+                    stroke-width="2" fill="hsl(240, 5%, 8%)" stroke="hsl(240, 5%, 8%)">
+                    <tspan alignment-baseline="mathematical" x="101.4375px" y="64.5px">Agendamento</tspan>
+                    <tspan alignment-baseline="mathematical" x="289.046875px" y="64.5px"> </tspan>
+                    <tspan alignment-baseline="mathematical" x="297.96875px" y="64.5px">cancelado</tspan>
+                </text><text font-size="26px" font-family="'tldraw_draw', sans-serif" font-style="normal"
+                    font-weight="normal" line-height="35.1px" dominant-baseline="mathematical"
+                    alignment-baseline="mathematical" fill="#e1e1e1" stroke="none">
+                    <tspan alignment-baseline="mathematical" x="101.4375px" y="64.5px">Agendamento</tspan>
+                    <tspan alignment-baseline="mathematical" x="289.046875px" y="64.5px"> </tspan>
+                    <tspan alignment-baseline="mathematical" x="297.96875px" y="64.5px">cancelado</tspan>
+                </text></g>
+        </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 1969.70, 2656.40)" opacity="1">
+        <g>
+            <defs>
+                <mask id="shape_RHjckpp71znI0WCwMBjrA_clip">
+                    <rect x="-74.83372700971768" y="77.65" width="586.57" height="508.04" fill="white" />
+                    <path d="M 407.90 475.93 L 411.74 485.70 L 401.35 484.14" fill="none" stroke="none" />
+                </mask>
+            </defs>
+            <g mask="url(#shape_RHjckpp71znI0WCwMBjrA_clip)">
+                <rect x="-100" y="-100" width="586.57" height="508.04" fill="transparent" stroke="none" />
+                <path d="M25.166272990282323,177.6541470118359L411.7412054844433,485.7028227688684" fill="none"
+                    stroke="#e1e1e1" stroke-width="3.5" stroke-dasharray="none" stroke-dashoffset="none" />
+            </g>
+            <path d="M 407.90 475.93 L 411.74 485.70 L 401.35 484.14" fill="none" stroke="#e1e1e1" stroke-width="3.5" />
+        </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 2158.24, 3439.57)" opacity="1">
+        <g>
+            <path
+                d="M10,0.0303 L321.9269,0.9758 Q331.9269,1.0062 331.72,11.0041 L329.9992,96.5445 Q329.7974,106.5424 319.79,106.5501 L9.8975,106.7871 Q-0.1025,106.7947 -0.1186,96.7947 L-0.2587,10.2665 Q-0.2749,0.2666 9.72,0.2626 L320.1672,0.1385 Q330.1672,0.1345 330.19,10.1344 L330.4415,98.7295 Q330.4693,108.7294 320.46,108.6807 L10.4894,107.1699 Q0.4895,107.1211 0.38,97.1217 L-0.5353,9.305 Q-0.6401,-0.6945 10,0.0303 "
+                fill="none" stroke="#e1e1e1" stroke-width="5" />
+            <g><text font-size="26px" font-family="'tldraw_draw', sans-serif" font-style="normal" font-weight="normal"
+                    line-height="35.1px" dominant-baseline="mathematical" alignment-baseline="mathematical"
+                    stroke-width="2" fill="hsl(240, 5%, 8%)" stroke="hsl(240, 5%, 8%)">
+                    <tspan alignment-baseline="mathematical" x="142.578125px" y="50px">Sim</tspan>
+                </text><text font-size="26px" font-family="'tldraw_draw', sans-serif" font-style="normal"
+                    font-weight="normal" line-height="35.1px" dominant-baseline="mathematical"
+                    alignment-baseline="mathematical" fill="#e1e1e1" stroke="none">
+                    <tspan alignment-baseline="mathematical" x="142.578125px" y="50px">Sim</tspan>
+                </text></g>
+        </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 2482.44, 3282.79)" opacity="1">
+        <g>
+            <defs>
+                <mask id="shape_SrMK4KOF1dHQcxF7e6T6h_clip">
+                    <rect x="-221.29710414005388" y="-94.53024101729852" width="278.69" height="338.90" fill="white" />
+                    <path d="M -112.24688558072111 139.05 L -121.29710414005389 144.37 L -121.38259764323828 133.87"
+                        fill="none" stroke="none" />
+                </mask>
+            </defs>
+            <g mask="url(#shape_SrMK4KOF1dHQcxF7e6T6h_clip)">
+                <rect x="-100" y="-100" width="278.69" height="338.90" fill="transparent" stroke="none" />
+                <path d="M-42.60095113488387,5.469758982701478L-121.29710414005389,144.37529629327415" fill="none"
+                    stroke="#e1e1e1" stroke-width="3.5" stroke-dasharray="none" stroke-dashoffset="none" />
+            </g>
+            <path d="M -112.24688558072111 139.05 L -121.29710414005389 144.37 L -121.38259764323828 133.87" fill="none"
+                stroke="#e1e1e1" stroke-width="3.5" />
+        </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 2512.72, 3440.57)" opacity="1">
+        <g>
+            <path
+                d="M10,-0.0285 L320.5491,-0.9144 Q330.549,-0.9429 330.44,9.0566 L329.5365,99.6261 Q329.4358,109.6256 319.43,109.5875 L10.1156,108.4068 Q0.1157,108.3686 0.16,98.3687 L0.6111,8.4443 Q0.6607,-1.5556 10.66,-1.5164 L319.0164,-0.3089 Q329.0164,-0.2697 329.21,9.7283 L331.0078,98.0797 Q331.2102,108.0777 321.21,108.0799 L8.8223,108.1504 Q-1.1777,108.1527 -1.2083,98.1527 L-1.4801,9.1919 Q-1.5106,-0.808 10,-0.0285 "
+                fill="none" stroke="#e1e1e1" stroke-width="5" />
+            <g><text font-size="26px" font-family="'tldraw_draw', sans-serif" font-style="normal" font-weight="normal"
+                    line-height="35.1px" dominant-baseline="mathematical" alignment-baseline="mathematical"
+                    stroke-width="2" fill="hsl(240, 5%, 8%)" stroke="hsl(240, 5%, 8%)">
+                    <tspan alignment-baseline="mathematical" x="138.640625px" y="50px">Não</tspan>
+                </text><text font-size="26px" font-family="'tldraw_draw', sans-serif" font-style="normal"
+                    font-weight="normal" line-height="35.1px" dominant-baseline="mathematical"
+                    alignment-baseline="mathematical" fill="#e1e1e1" stroke="none">
+                    <tspan alignment-baseline="mathematical" x="138.640625px" y="50px">Não</tspan>
+                </text></g>
+        </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 2474.99, 3255.49)" opacity="1">
+        <g>
+            <defs>
+                <mask id="shape_XO31100LbO1Udcqa2WW5p_clip">
+                    <rect x="-46.53635457282553" y="-67.22860479907285" width="301.98" height="340.76" fill="white" />
+                    <path d="M 154.36 163.09 L 155.44 173.53 L 145.86 169.25" fill="none" stroke="none" />
+                </mask>
+            </defs>
+            <g mask="url(#shape_XO31100LbO1Udcqa2WW5p_clip)">
+                <rect x="-100" y="-100" width="301.98" height="340.76" fill="transparent" stroke="none" />
+                <path d="M53.46364542717447,32.771395200927145L155.44865976397716,173.53575684226604" fill="none"
+                    stroke="#e1e1e1" stroke-width="3.5" stroke-dasharray="none" stroke-dashoffset="none" />
+            </g>
+            <path d="M 154.36 163.09 L 155.44 173.53 L 145.86 169.25" fill="none" stroke="#e1e1e1" stroke-width="3.5" />
+        </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 2034.97, 3924.32)" opacity="1">
+        <g><text font-size="24px" font-family="'tldraw_draw', sans-serif" font-style="normal" font-weight="normal"
+                line-height="32.400000000000006px" dominant-baseline="mathematical" alignment-baseline="mathematical"
+                stroke="hsl(240, 5%, 8%)" stroke-width="2px" fill="hsl(240, 5%, 8%)">
+                <tspan alignment-baseline="mathematical" x="0.796875px" y="12.3046875px">Marcar</tspan>
+                <tspan alignment-baseline="mathematical" x="91.71875px" y="12.3046875px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="99.953125px" y="12.3046875px">agendamento</tspan>
+                <tspan alignment-baseline="mathematical" x="270.953125px" y="12.3046875px">  </tspan>
+                <tspan alignment-baseline="mathematical" x="0px" y="44.6953125px">
+                </tspan>
+                <tspan alignment-baseline="mathematical" x="42.421875px" y="44.6953125px">como</tspan>
+                <tspan alignment-baseline="mathematical" x="104.1875px" y="44.6953125px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="112.421875px" y="44.6953125px">cancelado</tspan>
+            </text><text font-size="24px" font-family="'tldraw_draw', sans-serif" font-style="normal"
+                font-weight="normal" line-height="32.400000000000006px" dominant-baseline="mathematical"
+                alignment-baseline="mathematical" stroke="none" stroke-width="2px" fill="#4dabf7">
+                <tspan alignment-baseline="mathematical" x="0.796875px" y="12.3046875px">Marcar</tspan>
+                <tspan alignment-baseline="mathematical" x="91.71875px" y="12.3046875px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="99.953125px" y="12.3046875px">agendamento</tspan>
+                <tspan alignment-baseline="mathematical" x="270.953125px" y="12.3046875px">  </tspan>
+                <tspan alignment-baseline="mathematical" x="0px" y="44.6953125px">
+                </tspan>
+                <tspan alignment-baseline="mathematical" x="42.421875px" y="44.6953125px">como</tspan>
+                <tspan alignment-baseline="mathematical" x="104.1875px" y="44.6953125px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="112.421875px" y="44.6953125px">cancelado</tspan>
+            </text></g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 1996.92, 3687.76)" opacity="1">
+        <g>
+            <path
+                d="M10,-0.0003 L321.5059,-0.0093 Q331.5059,-0.0096 331.49,9.9904 L331.3985,96.9497 Q331.3874,106.9497 321.38,107.0195 L8.4219,109.2059 Q-1.5779,109.2757 -1.5138,99.2759 L-0.9358,9.0244 Q-0.8717,-0.9754 9.12,-0.9294 L319.6516,0.4999 Q329.6515,0.5459 329.72,10.5456 L330.4016,97.9387 Q330.4786,107.9384 320.47,107.9559 L11.235,108.4947 Q1.235,108.5122 1.00,98.5148 L-0.9756,11.6571 Q-1.2037,1.6597 10,-0.0003 "
+                fill="none" stroke="#e1e1e1" stroke-width="5" />
+            <g><text font-size="26px" font-family="'tldraw_draw', sans-serif" font-style="normal" font-weight="normal"
+                    line-height="35.1px" dominant-baseline="mathematical" alignment-baseline="mathematical"
+                    stroke-width="2" fill="hsl(240, 5%, 8%)" stroke="hsl(240, 5%, 8%)">
+                    <tspan alignment-baseline="mathematical" x="50.828125px" y="50px">status=pendente</tspan>
+                </text><text font-size="26px" font-family="'tldraw_draw', sans-serif" font-style="normal"
+                    font-weight="normal" line-height="35.1px" dominant-baseline="mathematical"
+                    alignment-baseline="mathematical" fill="#e1e1e1" stroke="none">
+                    <tspan alignment-baseline="mathematical" x="50.828125px" y="50px">status=pendente</tspan>
+                </text></g>
+        </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 2333.52, 3535.95)" opacity="1">
+        <g>
+            <defs>
+                <mask id="shape_CvjNbeUKZraeXV2NhbIGe_clip">
+                    <rect x="-228.45371124764802" y="-88.27130045551212" width="283.28" height="328.13" fill="white" />
+                    <path d="M -119.09615782005648 135.09 L -128.45371124764802 139.86 L -127.89981579121316 129.37"
+                        fill="none" stroke="none" />
+                </mask>
+            </defs>
+            <g mask="url(#shape_CvjNbeUKZraeXV2NhbIGe_clip)">
+                <rect x="-100" y="-100" width="283.28" height="328.13" fill="transparent" stroke="none" />
+                <path d="M-45.16706122366668,11.728699544487881L-128.45371124764802,139.86200727368958" fill="none"
+                    stroke="#e1e1e1" stroke-width="3.5" stroke-dasharray="none" stroke-dashoffset="none" />
+            </g>
+            <path d="M -119.09615782005648 135.09 L -128.45371124764802 139.86 L -127.89981579121316 129.37" fill="none"
+                stroke="#e1e1e1" stroke-width="3.5" />
+        </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 2215.42, 3778.25)" opacity="1">
+        <g>
+            <defs>
+                <mask id="shape_IQ__4FkR95v7BrerA8HLf_clip">
+                    <rect x="-152.6792719312507" y="-82.36812294297488" width="201.22" height="314.94" fill="white" />
+                    <path d="M -46.305494818720284 123.42 L -51.4586364761311 132.57 L -56.80490278408279 123.53"
+                        fill="none" stroke="none" />
+                </mask>
+            </defs>
+            <g mask="url(#shape_IQ__4FkR95v7BrerA8HLf_clip)">
+                <rect x="-100" y="-100" width="201.22" height="314.94" fill="transparent" stroke="none" />
+                <path d="M-52.679271931250696,17.63187705702512L-51.4586364761311,132.57254272249418" fill="none"
+                    stroke="#e1e1e1" stroke-width="3.5" stroke-dasharray="none" stroke-dashoffset="none" />
+            </g>
+            <path d="M -46.305494818720284 123.42 L -51.4586364761311 132.57 L -56.80490278408279 123.53" fill="none"
+                stroke="#e1e1e1" stroke-width="3.5" />
+        </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 2351.39, 3688.76)" opacity="1">
+        <g>
+            <path
+                d="M9.9999,-0.0411 L322.1379,-1.3226 Q332.1378,-1.3637 331.91,8.6338 L329.8695,99.55 Q329.6448,109.5474 319.64,109.5081 L9.0579,108.2871 Q-0.9421,108.2478 -0.7749,98.2492 L0.7242,8.6025 Q0.8914,-1.3961 10.89,-1.3399 L320.8003,0.4041 Q330.8001,0.4604 330.71,10.46 L329.9355,99.404 Q329.8481,109.4036 319.84,109.4101 L8.969,109.6126 Q-1.0309,109.6192 -0.8231,99.6213 L1.0151,11.2165 Q1.223,1.2187 9.99,-0.0411 "
+                fill="none" stroke="#e1e1e1" stroke-width="5" />
+            <g><text font-size="26px" font-family="'tldraw_draw', sans-serif" font-style="normal" font-weight="normal"
+                    line-height="35.1px" dominant-baseline="mathematical" alignment-baseline="mathematical"
+                    stroke-width="2" fill="hsl(240, 5%, 8%)" stroke="hsl(240, 5%, 8%)">
+                    <tspan alignment-baseline="mathematical" x="51.59375px" y="50px">status=aprovado</tspan>
+                </text><text font-size="26px" font-family="'tldraw_draw', sans-serif" font-style="normal"
+                    font-weight="normal" line-height="35.1px" dominant-baseline="mathematical"
+                    alignment-baseline="mathematical" fill="#e1e1e1" stroke="none">
+                    <tspan alignment-baseline="mathematical" x="51.59375px" y="50px">status=aprovado</tspan>
+                </text></g>
+        </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 2296.29, 3521.06)" opacity="1">
+        <g>
+            <defs>
+                <mask id="shape_BDO-uLEcTE2FcRSxxo-IZ_clip">
+                    <rect x="-30.90068458262749" y="-73.37949888193452" width="300.61" height="329.81" fill="white" />
+                    <path d="M 168.29 146.03 L 169.71 156.43 L 159.99 152.46" fill="none" stroke="none" />
+                </mask>
+            </defs>
+            <g mask="url(#shape_BDO-uLEcTE2FcRSxxo-IZ_clip)">
+                <rect x="-100" y="-100" width="300.61" height="329.81" fill="transparent" stroke="none" />
+                <path d="M69.09931541737251,26.620501118065476L169.71928617722872,156.43867325437498" fill="none"
+                    stroke="#e1e1e1" stroke-width="3.5" stroke-dasharray="none" stroke-dashoffset="none" />
+            </g>
+            <path d="M 168.29 146.03 L 169.71 156.43 L 159.99 152.46" fill="none" stroke="#e1e1e1" stroke-width="3.5" />
+        </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 2384.93, 3904.46)" opacity="1">
+        <g><text font-size="24px" font-family="'tldraw_draw', sans-serif" font-style="normal" font-weight="normal"
+                line-height="32.400000000000006px" dominant-baseline="mathematical" alignment-baseline="mathematical"
+                stroke="hsl(240, 5%, 8%)" stroke-width="2px" fill="hsl(240, 5%, 8%)">
+                <tspan alignment-baseline="mathematical" x="0.796875px" y="12.609375px">Marcar</tspan>
+                <tspan alignment-baseline="mathematical" x="91.71875px" y="12.609375px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="99.953125px" y="12.609375px">agendamento</tspan>
+                <tspan alignment-baseline="mathematical" x="270.953125px" y="12.609375px">  </tspan>
+                <tspan alignment-baseline="mathematical" x="0px" y="45px">
+                </tspan>
+                <tspan alignment-baseline="mathematical" x="42.421875px" y="45px">como</tspan>
+                <tspan alignment-baseline="mathematical" x="104.1875px" y="45px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="112.421875px" y="45px">cancelado</tspan>
+                <tspan alignment-baseline="mathematical" x="237.578125px" y="45px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="0px" y="77.390625px">
+                </tspan>
+                <tspan alignment-baseline="mathematical" x="40.578125px" y="77.390625px">cancelar</tspan>
+                <tspan alignment-baseline="mathematical" x="148.09375px" y="77.390625px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="156.328125px" y="77.390625px">pedido</tspan>
+            </text><text font-size="24px" font-family="'tldraw_draw', sans-serif" font-style="normal"
+                font-weight="normal" line-height="32.400000000000006px" dominant-baseline="mathematical"
+                alignment-baseline="mathematical" stroke="none" stroke-width="2px" fill="#4dabf7">
+                <tspan alignment-baseline="mathematical" x="0.796875px" y="12.609375px">Marcar</tspan>
+                <tspan alignment-baseline="mathematical" x="91.71875px" y="12.609375px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="99.953125px" y="12.609375px">agendamento</tspan>
+                <tspan alignment-baseline="mathematical" x="270.953125px" y="12.609375px">  </tspan>
+                <tspan alignment-baseline="mathematical" x="0px" y="45px">
+                </tspan>
+                <tspan alignment-baseline="mathematical" x="42.421875px" y="45px">como</tspan>
+                <tspan alignment-baseline="mathematical" x="104.1875px" y="45px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="112.421875px" y="45px">cancelado</tspan>
+                <tspan alignment-baseline="mathematical" x="237.578125px" y="45px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="0px" y="77.390625px">
+                </tspan>
+                <tspan alignment-baseline="mathematical" x="40.578125px" y="77.390625px">cancelar</tspan>
+                <tspan alignment-baseline="mathematical" x="148.09375px" y="77.390625px"> </tspan>
+                <tspan alignment-baseline="mathematical" x="156.328125px" y="77.390625px">pedido</tspan>
+            </text></g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 2522.15, 3756.85)" opacity="1">
+        <g>
+            <defs>
+                <mask id="shape_Qypk4h03bQTHSoTUK9teB_clip">
+                    <rect x="-103.45543932976261" y="-59.969664237286906" width="203.57" height="294.09" fill="white" />
+                    <path d="M 5.02 124.83 L 0.12 134.12 L -5.469773562217989 125.23" fill="none" stroke="none" />
+                </mask>
+            </defs>
+            <g mask="url(#shape_Qypk4h03bQTHSoTUK9teB_clip)">
+                <rect x="-100" y="-100" width="203.57" height="294.09" fill="transparent" stroke="none" />
+                <path d="M-3.455439329762612,40.030335762713094L0.12190215426493445,134.1242509123279" fill="none"
+                    stroke="#e1e1e1" stroke-width="3.5" stroke-dasharray="none" stroke-dashoffset="none" />
+            </g>
+            <path d="M 5.02 124.83 L 0.12 134.12 L -5.469773562217989 125.23" fill="none" stroke="#e1e1e1"
+                stroke-width="3.5" />
         </g>
     </g>
 </svg>
