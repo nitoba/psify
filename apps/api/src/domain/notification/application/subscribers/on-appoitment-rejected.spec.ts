@@ -36,7 +36,7 @@ describe('On Appointment Rejected Handler', () => {
 
   it('should send a notification about rejected appointment when appointment is rejected', async () => {
     const sendNotificationUseCaseSpy = vi.spyOn(useCase, 'execute')
-    const fakeMailPublisherSpy = vi.spyOn(fakeMailPublisher, 'send')
+    const fakeMailPublisherSpy = vi.spyOn(fakeMailPublisher, 'publish')
     const patient = makeAuthPatient()
     const appointment = makeAppointment({
       patientId: patient.id,

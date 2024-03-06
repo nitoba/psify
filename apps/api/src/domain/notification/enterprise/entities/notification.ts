@@ -2,9 +2,13 @@ import { Entity } from '@/core/entities/entity'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { Optional } from '@/core/types/optional'
 import { Email } from '@/domain/core/enterprise/value-objects/email'
+import { AppointmentRequested } from '@/domain/schedules/enterprise/events/appointment-requested'
+
+export type SubjectType = 'appointment_requested' | 'appointment_rejected' | 'order_approved'
 
 export type NotificationProps = {
   subject: string
+  subjectType: SubjectType
   content: string
   to: Email
   createdAt: Date

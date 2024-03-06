@@ -1,10 +1,10 @@
-import { MailNotificationPublisher } from '@/domain/notification/application/notification-publisher/mail'
+import {  NotificationPublisher } from '@/domain/notification/application/notification-publisher/publisher'
 import { Notification } from '@/domain/notification/enterprise/entities/notification'
 
-export class FakeMailPublisher implements MailNotificationPublisher {
+export class FakeMailPublisher implements NotificationPublisher  {
   notifications: Notification[] = []
 
-  async send(notification: Notification): Promise<void> {
+  async publish(notification: Notification): Promise<void> {
     this.notifications.push(notification)
   }
 }

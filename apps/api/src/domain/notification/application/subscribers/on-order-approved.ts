@@ -42,6 +42,7 @@ export class OnOrderApproved implements EventHandler {
     await this.sendNotificationUseCase.execute({
       to: patient.email,
       subject: 'Order approved',
+      subjectType: 'order_approved',
       content: `The order with id ${order.id.toString()} was approved. Your appointment was scheduled with successfully!`,
     })
   }

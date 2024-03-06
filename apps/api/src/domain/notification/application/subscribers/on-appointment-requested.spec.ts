@@ -36,7 +36,7 @@ describe('On Appointment Requested Handler', () => {
 
   it('should send a notification about requested appointment when appointment is requested', async () => {
     const sendNotificationUseCaseSpy = vi.spyOn(useCase, 'execute')
-    const fakeMailPublisherSpy = vi.spyOn(fakeMailPublisher, 'send')
+    const fakeMailPublisherSpy = vi.spyOn(fakeMailPublisher, 'publish')
     const psychologist = makeAuthPsychologist()
     const appointment = makeAppointment({
       psychologistId: psychologist.id,

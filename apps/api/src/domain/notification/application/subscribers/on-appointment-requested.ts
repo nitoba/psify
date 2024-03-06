@@ -48,6 +48,7 @@ export class OnAppointmentRequestedHandler implements EventHandler {
 
     await this.sendNotificationUseCase.execute({
       subject: 'New Appointment Requested',
+      subjectType: 'appointment_requested',
       content:
         'You received a new appointment requested, go to the platform to approve or cancel',
       to: psychologist.email,

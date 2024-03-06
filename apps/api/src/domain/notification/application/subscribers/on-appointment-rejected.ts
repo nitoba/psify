@@ -48,6 +48,7 @@ export class OnAppointmentRejectedHandler implements EventHandler {
 
     await this.sendNotificationUseCase.execute({
       subject: 'Rejected Appointment',
+      subjectType: 'appointment_rejected',
       content:
         'Unfortunately your appointment requested was rejected, you can try again!',
       to: patient.email,
