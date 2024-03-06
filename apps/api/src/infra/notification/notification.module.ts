@@ -1,18 +1,26 @@
 import { Module } from '@nestjs/common'
 
-import { MailNotificationPublisher } from '@/domain/notification/application/notification-publisher/mail'
-
-import { DatabaseModule } from '../database/database.module'
-import { ResendMailNotificationPublisher } from './resend-mail-notification-publisher'
+import { NodeMailerModule } from './node-mailer/node-mailer.module'
+import { EnvModule } from '../env/env.module'
+import { EnvService } from '../env/env.service'
 
 @Module({
-  imports: [DatabaseModule],
-  providers: [
-    {
-      provide: MailNotificationPublisher,
-      useClass: ResendMailNotificationPublisher,
-    },
+  imports: [
+    NodeMailerModule.forRootAsync({
+      imports: [EnvModule],
+      inject: [EnvService],
+      useFactory: (env: EnvService) => ({
+        options: {
+          host: env.get('SMTP_HOST'),
+          port: env.get('SMTP_PORT'),
+          auth: {
+            user: env.get('SMTP_AUTH_USER'),
+            pass: env.get('SMTP_AUTH_PASS'),
+          },
+        },
+      }),
+    }),
   ],
-  exports: [MailNotificationPublisher],
+  exports: [NodeMailerModule],
 })
 export class NotificationModule {}

@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "email dev"
+    "dev:mail": "email dev",
+    "export": "email export"
   },
   "keywords": [],
   "author": "",

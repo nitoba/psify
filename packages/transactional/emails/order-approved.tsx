@@ -10,22 +10,14 @@ import {
 } from '@react-email/components'
 import * as React from 'react'
 
-interface Props {
-  userName: string
-  linkToRedirectToPlatform: string
-}
-
-export const OrderApproved = ({
-  userName = 'John Doe',
-  linkToRedirectToPlatform = 'https://google.com',
-}: Props) => (
+export const OrderApproved = () => (
   <Html>
     <Head />
     <Preview>Order approved</Preview>
     <Body style={main}>
       <Container style={container}>
         {/* <Heading>New Appointment Requested</Heading> */}
-        <Text style={paragraph}>Hi {userName},</Text>
+        <Text style={paragraph}>Hi @username,</Text>
         <Text style={paragraph}>
           Your order was approved. Your appointment was scheduled with
           successfully!
@@ -34,7 +26,7 @@ export const OrderApproved = ({
           click on the button bellow to view details
         </Text>
         <Section style={btnContainer}>
-          <Button style={button} href={linkToRedirectToPlatform}>
+          <Button style={button} href="@linkToRedirect">
             View Details
           </Button>
         </Section>

@@ -2,12 +2,15 @@ import { Injectable } from '@nestjs/common'
 
 import { Email } from '@/domain/core/enterprise/value-objects/email'
 
-import { Notification, SubjectType } from '../../enterprise/entities/notification'
+import {
+  Notification,
+  SubjectType,
+} from '../../enterprise/entities/notification'
 import { NotificationPublisher } from '../notification-publisher/publisher'
 import { NotificationRepository } from '../repositories/notification-repository'
 
 type SendNotificationUseCaseRequest = {
-  subjectType: SubjectType,
+  subjectType: SubjectType
   subject: string
   content: string
   to: string

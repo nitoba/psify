@@ -10,32 +10,24 @@ import {
 } from '@react-email/components'
 import * as React from 'react'
 
-interface Props {
-  userName: string
-  linkToRedirectToPlatform: string
-}
-
-export const NewAppointmentRequested = ({
-  userName = 'John Doe',
-  linkToRedirectToPlatform = 'https://google.com',
-}: Props) => (
+export const NewAppointmentRequested = () => (
   <Html>
     <Head />
     <Preview>
-      New Appointment Requested! Hi {userName}, You received a new appointment
+      New Appointment Requested! Hi @username, You received a new appointment
       requested. go to the platform to approve or reject this solicitation
     </Preview>
     <Body style={main}>
       <Container style={container}>
         {/* <Heading>New Appointment Requested</Heading> */}
-        <Text style={paragraph}>Hi {userName},</Text>
+        <Text style={paragraph}>Hi @username,</Text>
         <Text style={paragraph}>You received a new appointment requested.</Text>
         <Text style={paragraph}>
           click on the button bellow go to the platform to approve or reject
           this solicitation
         </Text>
         <Section style={btnContainer}>
-          <Button style={button} href={linkToRedirectToPlatform}>
+          <Button style={button} href="@linkToRedirect">
             Go to platform
           </Button>
         </Section>

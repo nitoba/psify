@@ -10,6 +10,10 @@ export const envSchema = z.object({
   JTW_PRIVATE_KEY: z.string(),
   STRIPE_SECRET_KEY: z.string(),
   STRIPE_ENDPOINT_SECRET: z.string(),
+  SMTP_HOST: z.string(),
+  SMTP_PORT: z.coerce.number(),
+  SMTP_AUTH_USER: z.string(),
+  SMTP_AUTH_PASS: z.string(),
 })
 
 export type Env = z.infer<typeof envSchema>

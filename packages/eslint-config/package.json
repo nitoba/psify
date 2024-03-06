@@ -9,8 +9,8 @@
   "private": true,
   "devDependencies": {
     "@rocketseat/eslint-config": "2.2.2",
-    "eslint-config-next": "^14.1.0",
-    "eslint-plugin-simple-import-sort": "^10.0.0"
+    "eslint-plugin-simple-import-sort": "^10.0.0",
+    "@psyfi/prettier": "workspace:*"
   },
   "overrides": {
     "@typescript-eslint/eslint-plugin": "^6.21.0",

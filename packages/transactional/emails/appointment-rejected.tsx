@@ -8,21 +8,17 @@ import {
 } from '@react-email/components'
 import * as React from 'react'
 
-interface Props {
-  userName: string
-}
-
-export const AppointmentRejected = ({ userName = 'John Doe' }: Props) => (
+export const AppointmentRejected = () => (
   <Html>
     <Head />
     <Preview>
-      Appointment Rejected! Hi {userName}, Unfortunately your appointment
+      Appointment Rejected! Hi @username, Unfortunately your appointment
       requested was rejected, you can try again!
     </Preview>
     <Body style={main}>
       <Container style={container}>
         {/* <Heading>New Appointment Requested</Heading> */}
-        <Text style={paragraph}>Hi {userName},</Text>
+        <Text style={paragraph}>Hi @username,</Text>
         <Text style={paragraph}>
           Unfortunately your appointment requested was rejected, you can try
           again!
