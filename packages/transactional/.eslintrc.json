@@ -1,0 +1,3 @@
+{
+  "extends": ["@psyfi/eslint-config/react"]
+}
