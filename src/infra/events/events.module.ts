@@ -7,6 +7,7 @@ import { SendNotificationUseCase } from '@/domain/notification/application/use-c
 import { OnAppointmentApprovedHandler } from '@/domain/payment/application/subscribers/on-appointment-approved'
 import { ApproveOrderUseCase } from '@/domain/payment/application/use-cases/approve-order'
 import { CreateIntentOrderUseCase } from '@/domain/payment/application/use-cases/create-intent-order'
+import { MarkAppointmentAsScheduledUseCase } from '@/domain/schedules/application/use-cases/mark-appointment-as-scheduled'
 
 import { DatabaseModule } from '../database/database.module'
 import { NotificationModule } from '../notification/notification.module'
@@ -23,6 +24,7 @@ import { NotificationModule } from '../notification/notification.module'
     CreateIntentOrderUseCase,
     ApproveOrderUseCase,
     SendNotificationUseCase,
+    MarkAppointmentAsScheduledUseCase,
   ],
 })
 export class EventsModule {}

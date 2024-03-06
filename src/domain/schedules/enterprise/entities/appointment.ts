@@ -8,6 +8,7 @@ import { AppointmentApproved } from '../events/appointment-approved'
 import { AppointmentCancelled } from '../events/appointment-cancelled'
 import { AppointmentRejected } from '../events/appointment-rejected'
 import { AppointmentRequested } from '../events/appointment-requested'
+import { AppointmentScheduled } from '../events/appointment-scheduled'
 
 export type AppointmentStatuses =
   | 'pending' // pending to approbation
@@ -108,8 +109,7 @@ export class Appointment extends AggregateRoot<AppointmentProps> {
 
     this.props.status = 'scheduled'
 
-    // TODO: add domain event that this appointment was scheduled
-
+    this.addDomainEvent(new AppointmentScheduled(this))
     return right(undefined)
   }
 

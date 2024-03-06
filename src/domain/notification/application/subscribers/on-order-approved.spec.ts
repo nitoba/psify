@@ -12,15 +12,17 @@ import { waitFor } from 'test/utils/wait-for'
 
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { OrderItem } from '@/domain/payment/enterprise/entities/order-item'
+import { MarkAppointmentAsScheduledUseCase } from '@/domain/schedules/application/use-cases/mark-appointment-as-scheduled'
 
 import { SendNotificationUseCase } from '../use-cases/send-mail-notification'
 import { OnOrderApproved } from './on-order-approved'
 let orderRepository: InMemoryOrderRepository
-let useCase: SendNotificationUseCase
+let sendNotificationUseCase: SendNotificationUseCase
 let fakeMailPublisher: FakeMailPublisher
 let appointmentsRepository: InMemoryAppointmentsRepository
 let patientRepository: InMemoryAuthPatientRepository
 let notificationRepository: InMemoryNotificationRepository
+let markAsScheduledUseCase: MarkAppointmentAsScheduledUseCase
 describe('On Order Approved', () => {
   beforeEach(() => {
     patientRepository = new InMemoryAuthPatientRepository()
@@ -28,21 +30,35 @@ describe('On Order Approved', () => {
     orderRepository = new InMemoryOrderRepository()
     fakeMailPublisher = new FakeMailPublisher()
     notificationRepository = new InMemoryNotificationRepository()
-    useCase = new SendNotificationUseCase(
+    sendNotificationUseCase = new SendNotificationUseCase(
       fakeMailPublisher,
       notificationRepository,
     )
-    new OnOrderApproved(useCase, patientRepository)
+    markAsScheduledUseCase = new MarkAppointmentAsScheduledUseCase(
+      appointmentsRepository,
+    )
+    new OnOrderApproved(
+      sendNotificationUseCase,
+      patientRepository,
+      markAsScheduledUseCase,
+    )
   })
 
   it('should send mail notification to patient when order is approved', async () => {
-    const useCaseSpy = vi.spyOn(useCase, 'execute')
+    const sendNotificationUseCaseSpy = vi.spyOn(
+      sendNotificationUseCase,
+      'execute',
+    )
+    const markAsScheduledUseCaseSpy = vi.spyOn(
+      markAsScheduledUseCase,
+      'execute',
+    )
     const psychologist = makePsychologist()
     const patient = makeAuthPatient()
     const appointment = makeAppointment({
       patientId: patient.id,
       psychologistId: psychologist.id,
-      status: 'pending',
+      status: 'approved',
     })
     patientRepository.patients.push(patient)
     appointmentsRepository.appointments.push(appointment)
@@ -71,9 +87,10 @@ describe('On Order Approved', () => {
     orderRepository.save(order)
 
     await waitFor(() => {
-      expect(useCaseSpy).toHaveBeenCalled()
+      expect(sendNotificationUseCaseSpy).toHaveBeenCalled()
+      expect(markAsScheduledUseCaseSpy).toHaveBeenCalled()
     })
     expect(fakeMailPublisher.notifications[0].to).toEqual(patient.email)
-    expect(appointmentsRepository.appointments[0].status).toEqual('pending')
+    expect(appointmentsRepository.appointments[0].status).toEqual('scheduled')
   })
 })

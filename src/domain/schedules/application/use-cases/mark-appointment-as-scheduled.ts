@@ -1,3 +1,5 @@
+import { Injectable } from '@nestjs/common'
+
 import { Either, left, right } from '@/core/either'
 import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
 
@@ -9,6 +11,7 @@ type MarkAppointmentAsScheduledUseCaseRequest = {
 
 type MarkAppointmentAsScheduledUseCaseResponse = Either<ResourceNotFound, void>
 
+@Injectable()
 export class MarkAppointmentAsScheduledUseCase {
   constructor(
     private readonly appointmentsRepository: AppointmentsRepository,
