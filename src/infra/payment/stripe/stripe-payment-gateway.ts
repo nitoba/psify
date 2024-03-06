@@ -28,10 +28,12 @@ export class StripePaymentGateway implements PaymentGateway {
       currency: 'BRL',
       success_url: `https://google.com`,
       mode: 'payment',
-      metadata: {
-        sellerId: order.sellerId.toString(),
-        costumerId: order.costumerId.toString(),
-        orderId: order.id.toString(),
+      payment_intent_data: {
+        metadata: {
+          sellerId: order.sellerId.toString(),
+          costumerId: order.costumerId.toString(),
+          orderId: order.id.toString(),
+        },
       },
       payment_method_types: [order.paymentMethod.value],
       line_items: order.orderItems.map((orderItem) => ({
@@ -48,11 +50,6 @@ export class StripePaymentGateway implements PaymentGateway {
     })
 
     return checkoutSession.url
-  }
-
-  async pay(order: Order): Promise<void> {
-    console.log('StripePaymentGateway.pay', order)
-    throw new Error('Method not implemented.')
   }
 
   private async findCostumerById(costumerId: string) {

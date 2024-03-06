@@ -1,5 +1,6 @@
-import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { InMemoryOrderRepository } from 'test/repositories/payment/in-memory-order-repository'
+
+import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 
 import { PaymentMethod } from '../../enterprise/value-objects/payment-method'
 import { CreateIntentOrderUseCase } from './create-intent-order'
@@ -25,7 +26,7 @@ describe('CreateIntentOrderUseCase', () => {
     await useCase.execute({
       costumerId: '123',
       sellerId: '456',
-      paymentMethod: 'credit_card',
+      paymentMethod: 'card',
       orderItems,
     })
 

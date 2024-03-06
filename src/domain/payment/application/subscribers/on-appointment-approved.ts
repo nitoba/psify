@@ -44,7 +44,7 @@ export class OnAppointmentApprovedHandler implements EventHandler {
     const result = await this.createOrderUseCase.execute({
       costumerId: appointment.patientId.toString(),
       sellerId: appointment.psychologistId.toString(),
-      paymentMethod: 'credit_card',
+      paymentMethod: 'card',
       orderItems: [
         {
           itemId: appointment.id.toString(),

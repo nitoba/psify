@@ -34,7 +34,7 @@ export class CreateIntentOrderUseCase {
       costumerId: new UniqueEntityID(costumerId),
       sellerId: new UniqueEntityID(sellerId),
       paymentMethod: PaymentMethod.create({
-        value: 'credit_card',
+        value: 'card',
       }),
     })
 

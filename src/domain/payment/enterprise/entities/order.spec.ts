@@ -15,7 +15,7 @@ describe('Order', () => {
       {
         costumerId: new UniqueEntityID(),
         sellerId: new UniqueEntityID(),
-        paymentMethod: PaymentMethod.create({ value: 'credit_card' }),
+        paymentMethod: PaymentMethod.create({ value: 'card' }),
         orderItems: [
           OrderItem.create({
             itemId: new UniqueEntityID(),

@@ -17,7 +17,7 @@ export function makeOrder(
       status: 'pending',
       orderItems: [],
       paymentMethod: PaymentMethod.create({
-        value: 'credit_card',
+        value: 'card',
       }),
       createdAt: new Date(),
       updatedAt: new Date(),

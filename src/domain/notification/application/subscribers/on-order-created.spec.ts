@@ -55,7 +55,7 @@ describe('On Order Approved', () => {
       costumerId: patient.id,
       sellerId: psychologist.id,
       paymentMethod: PaymentMethod.create({
-        value: 'credit_card',
+        value: 'card',
       }),
     })
 
