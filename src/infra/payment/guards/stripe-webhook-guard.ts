@@ -38,13 +38,8 @@ export class StripeWebhookGuard implements CanActivate {
         hasStripeSig,
         endpointSecret,
       )
-      if (isPublic && hasStripeSig) {
-        return true
-      }
-
       request.body = event
-
-      return true
+      return isPublic
     } catch (error) {
       console.log('Error Stripe WebHook GUARD:', error)
       return false
