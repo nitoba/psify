@@ -15,28 +15,27 @@ interface Props {
   linkToRedirectToPlatform: string
 }
 
-export const NewAppointmentRequested = ({
+export const OrderApproved = ({
   userName = 'John Doe',
   linkToRedirectToPlatform = 'https://google.com',
 }: Props) => (
   <Html>
     <Head />
-    <Preview>
-      New Appointment Requested! Hi {userName}, You received a new appointment
-      requested. go to the platform to approve or reject this solicitation
-    </Preview>
+    <Preview>Order approved</Preview>
     <Body style={main}>
       <Container style={container}>
         {/* <Heading>New Appointment Requested</Heading> */}
         <Text style={paragraph}>Hi {userName},</Text>
-        <Text style={paragraph}>You received a new appointment requested.</Text>
         <Text style={paragraph}>
-          click on the button bellow go to the platform to approve or reject
-          this solicitation
+          Your order was approved. Your appointment was scheduled with
+          successfully!
+        </Text>
+        <Text style={paragraph}>
+          click on the button bellow to view details
         </Text>
         <Section style={btnContainer}>
           <Button style={button} href={linkToRedirectToPlatform}>
-            Go to platform
+            View Details
           </Button>
         </Section>
         <Text style={footer}>Psyfi @ {new Date().getFullYear()}</Text>
@@ -44,7 +43,7 @@ export const NewAppointmentRequested = ({
     </Body>
   </Html>
 )
-export default NewAppointmentRequested
+export default OrderApproved
 
 const main = {
   backgroundColor: '#ffffff',
