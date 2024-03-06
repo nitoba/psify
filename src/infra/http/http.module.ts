@@ -29,6 +29,7 @@ import { RequestScheduleAppointmentUseCase } from '@/domain/schedules/applicatio
 import { AuthModule } from '../auth/auth.module'
 import { CryptographyModule } from '../cryptography/cryptography.module'
 import { DatabaseModule } from '../database/database.module'
+import { EnvModule } from '../env/env.module'
 import { PaymentModule } from '../payment/payment.module'
 import { AuthenticatePatientController } from './controllers/auth/authenticate-patient.controller'
 import { AuthenticatePsychologistController } from './controllers/auth/authenticate-psychologist.controller'
@@ -54,7 +55,13 @@ import { RejectAppointmentController } from './controllers/schedules/reject-appo
 import { RequestScheduleAppointmentController } from './controllers/schedules/request-schedule-appointment.controller'
 
 @Module({
-  imports: [DatabaseModule, CryptographyModule, AuthModule, PaymentModule],
+  imports: [
+    DatabaseModule,
+    CryptographyModule,
+    AuthModule,
+    PaymentModule,
+    EnvModule,
+  ],
   controllers: [
     // Auth Controllers
     RegisterPatientController,

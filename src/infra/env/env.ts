@@ -9,6 +9,7 @@ export const envSchema = z.object({
   JTW_PUBLIC_KEY: z.string(),
   JTW_PRIVATE_KEY: z.string(),
   STRIPE_SECRET_KEY: z.string(),
+  STRIPE_ENDPOINT_SECRET: z.string(),
 })
 
 export type Env = z.infer<typeof envSchema>
