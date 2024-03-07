@@ -22,10 +22,10 @@ beforeAll(async () => {
 
   process.env = {
     ...process.env,
-    DATABASE_URL: process.env.DATABASE_URL?.replace('psify_test', dbName),
+    DATABASE_URL: process.env.DATABASE_URL?.replace('psyfi_test', dbName),
   }
 
-  exec('npm run migrate')
+  exec('npm run db:migrate')
 })
 
 afterAll(async () => {

@@ -7,6 +7,7 @@ import { Test } from '@nestjs/testing'
 import { RawServerDefault } from 'fastify'
 import request from 'supertest'
 import { AuthPsychologistFactory } from 'test/factories/auth/make-auth-psychologist'
+import { AuthPatientFactory } from 'test/factories/auth/make-auth-patient'
 import { AvailableTimesFactory } from 'test/factories/psychologist/make-available-times'
 
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
@@ -20,6 +21,7 @@ import { DrizzleService } from '@/infra/database/drizzle/drizzle.service'
 describe('Fetch Available Times To Schedules To Psychologists (E2E)', () => {
   let app: NestFastifyApplication<RawServerDefault>
   let authPsychologistFactory: AuthPsychologistFactory
+  let authPatientFactory: AuthPatientFactory
   let availableTimesFactory: AvailableTimesFactory
   let encrypter: Encrypter
   let drizzleService: DrizzleService
@@ -27,7 +29,12 @@ describe('Fetch Available Times To Schedules To Psychologists (E2E)', () => {
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       imports: [AppModule, DatabaseModule, CryptographyModule],
-      providers: [AuthPsychologistFactory, AvailableTimesFactory],
+      providers: [
+        AuthPsychologistFactory,
+        AuthPatientFactory,
+        AvailableTimesFactory,
+        AuthPatientFactory,
+      ],
     }).compile()
 
     app = moduleRef.createNestApplication<NestFastifyApplication>(
@@ -36,6 +43,7 @@ describe('Fetch Available Times To Schedules To Psychologists (E2E)', () => {
 
     app.register(fastifyCookie)
     authPsychologistFactory = moduleRef.get(AuthPsychologistFactory)
+    authPatientFactory = moduleRef.get(AuthPatientFactory)
     availableTimesFactory = moduleRef.get(AvailableTimesFactory)
     encrypter = moduleRef.get(Encrypter)
     drizzleService = moduleRef.get(DrizzleService)
@@ -51,6 +59,7 @@ describe('Fetch Available Times To Schedules To Psychologists (E2E)', () => {
 
   test('[GET] /schedules/psychologists/:psychologistId/available-times', async () => {
     vi.useFakeTimers().setSystemTime(new Date(2024, 1, 25, 8))
+    const patient = await authPatientFactory.makeDbPatient()
     const psychologist = await authPsychologistFactory.makeDbPsychologist()
     await availableTimesFactory.makeDbAvailableTime(
       {
@@ -71,8 +80,8 @@ describe('Fetch Available Times To Schedules To Psychologists (E2E)', () => {
     expect(availableTimeDB).toBeDefined()
 
     const token = await encrypter.encrypt({
-      sub: psychologist.id,
-      role: 'psychologist',
+      sub: patient.id,
+      role: 'patient',
     })
 
     const response = await request(app.getHttpServer())
