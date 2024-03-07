@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common'
 
 import { OnAppointmentRejectedHandler } from '@/domain/notification/application/subscribers/on-appointment-rejected'
 import { OnAppointmentRequestedHandler } from '@/domain/notification/application/subscribers/on-appointment-requested'
+import { OnAppointmentApprovedHandler as OnAppointmentApprovedNotification } from '@/domain/notification/application/subscribers/on-appointment-approved'
 import { OnOrderApproved } from '@/domain/notification/application/subscribers/on-order-approved'
 import { SendNotificationUseCase } from '@/domain/notification/application/use-cases/send-mail-notification'
 import { OnAppointmentApprovedHandler } from '@/domain/payment/application/subscribers/on-appointment-approved'
@@ -19,6 +20,7 @@ import { NotificationModule } from '../notification/notification.module'
     OnAppointmentRequestedHandler,
     OnAppointmentApprovedHandler,
     OnAppointmentRejectedHandler,
+    OnAppointmentApprovedNotification,
     OnOrderApproved,
     // UseCases executed by handlers
     CreateIntentOrderUseCase,
