@@ -41,7 +41,7 @@ describe('Fetch Available Times To Schedules To Psychologists (E2E)', () => {
       new FastifyAdapter(),
     )
 
-    app.register(fastifyCookie)
+    app.register(fastifyCookie as never)
     authPsychologistFactory = moduleRef.get(AuthPsychologistFactory)
     authPatientFactory = moduleRef.get(AuthPatientFactory)
     availableTimesFactory = moduleRef.get(AvailableTimesFactory)

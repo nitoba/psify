@@ -15,7 +15,8 @@ async function bootstrap() {
     new FastifyAdapter(),
     { rawBody: true },
   )
-  await app.register(fastifyCookie)
+
+  await app.register(fastifyCookie as never)
 
   app.useGlobalFilters(new ZodFilter())
 
