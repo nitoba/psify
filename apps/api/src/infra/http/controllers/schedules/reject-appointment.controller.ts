@@ -5,6 +5,7 @@ import {
   HttpStatus,
   Param,
   Put,
+  UseGuards,
 } from '@nestjs/common'
 import { z } from 'zod'
 
@@ -15,6 +16,7 @@ import { Roles } from '@/infra/auth/decorators/roles-decorator'
 import { Role } from '@/infra/auth/roles'
 
 import { ZodValidationPipe } from '../../pipes/zod-validation-pipe'
+import { RolesGuard } from '@/infra/auth/guards/roles-guard'
 
 const approveAppointmentParamsSchema = z
   .string({ required_error: 'appointmentId is required!' })
@@ -31,6 +33,7 @@ export class RejectAppointmentController {
   @Put()
   @HttpCode(HttpStatus.OK)
   @Roles(Role.Psychologist)
+  @UseGuards(RolesGuard)
   async handle(
     @Param('appointmentId', appointmentIdValidator)
     appointmentId: string,

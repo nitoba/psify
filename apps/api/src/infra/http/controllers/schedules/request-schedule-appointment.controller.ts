@@ -5,6 +5,7 @@ import {
   HttpCode,
   HttpStatus,
   Post,
+  UseGuards,
 } from '@nestjs/common'
 import { z } from 'zod'
 
@@ -15,6 +16,9 @@ import { CurrentUser } from '@/infra/auth/decorators/current-user-decorator'
 import { PayloadUser } from '@/infra/auth/strategies/jwt.strategy'
 
 import { AppointmentPresenter } from '../../presenters/appointment-presenter'
+import { Roles } from '@/infra/auth/decorators/roles-decorator'
+import { RolesGuard } from '@/infra/auth/guards/roles-guard'
+import { Role } from '@/infra/auth/roles'
 
 const requestScheduleAppointmentBodySchema = z.object({
   psychologistId: z.string().uuid(),
@@ -31,6 +35,8 @@ export class RequestScheduleAppointmentController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
+  @Roles(Role.Patient)
+  @UseGuards(RolesGuard)
   async handle(
     @CurrentUser() patient: PayloadUser,
     @Body() { psychologistId, scheduledTo }: RequestScheduleAppointmentBody,
