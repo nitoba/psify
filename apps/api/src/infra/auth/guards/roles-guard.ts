@@ -21,7 +21,9 @@ export class RolesGuard implements CanActivate {
 
     const user = req.user as PayloadUser
 
-    return this.matchRoles(requiredRoles, user.role as Role)
+    const matchRoles = this.matchRoles(requiredRoles, user.role as Role)
+
+    return matchRoles
   }
 
   private matchRoles(requiredRoles: Role[], userRole: Role) {
