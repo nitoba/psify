@@ -1,4 +1,10 @@
-import { BadRequestException, Controller, Param, Put } from '@nestjs/common'
+import {
+  BadRequestException,
+  Controller,
+  Param,
+  Put,
+  UseGuards,
+} from '@nestjs/common'
 import { z } from 'zod'
 
 import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
@@ -6,6 +12,9 @@ import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resourc
 import { CancelScheduledAppointmentUseCase } from '@/domain/schedules/application/use-cases/cancel-scheduled-appointment'
 
 import { ZodValidationPipe } from '../../pipes/zod-validation-pipe'
+import { RolesGuard } from '@/infra/auth/guards/roles-guard'
+import { Roles } from '@/infra/auth/decorators/roles-decorator'
+import { Role } from '@/infra/auth/roles'
 
 const cancelScheduledAppointmentParamsSchema = z
   .string({ required_error: 'scheduledAppointmentId is required!' })
@@ -20,6 +29,8 @@ export class CancelScheduledAppointmentController {
   constructor(private readonly useCase: CancelScheduledAppointmentUseCase) {}
 
   @Put()
+  @Roles(Role.Patient, Role.Psychologist)
+  @UseGuards(RolesGuard)
   async handle(
     @Param('scheduledAppointmentId', zodValidator)
     scheduledAppointmentId: string,

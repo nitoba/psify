@@ -5,6 +5,7 @@ import {
   text,
   timestamp,
   uuid,
+  varchar,
 } from 'drizzle-orm/pg-core'
 
 export const users = pgTable('users', {
@@ -13,6 +14,7 @@ export const users = pgTable('users', {
   email: text('email').notNull(),
   emailVerified: timestamp('email_verified', { mode: 'date' }),
   image: text('image'),
+  roleId: uuid('role_id').references(() => roles.id),
 })
 
 type AccountType = 'email' | 'oidc' | 'oauth' | 'webauthn'
@@ -37,3 +39,9 @@ export const accounts = pgTable(
     }),
   }),
 )
+
+export const roles = pgTable('roles', {
+  id: uuid('id').primaryKey().notNull().defaultRandom(),
+  title: varchar('title', { length: 256 }).notNull(),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+})

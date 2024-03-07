@@ -6,6 +6,7 @@ import {
   HttpStatus,
   NotFoundException,
   Param,
+  UseGuards,
 } from '@nestjs/common'
 import { z } from 'zod'
 
@@ -16,6 +17,9 @@ import { CurrentUser } from '@/infra/auth/decorators/current-user-decorator'
 import { PayloadUser } from '@/infra/auth/strategies/jwt.strategy'
 
 import { ZodValidationPipe } from '../../pipes/zod-validation-pipe'
+import { Roles } from '@/infra/auth/decorators/roles-decorator'
+import { Role } from '@/infra/auth/roles'
+import { RolesGuard } from '@/infra/auth/guards/roles-guard'
 
 const removeAvailableTimesParamsSchema = z.string().uuid()
 
@@ -31,6 +35,8 @@ export class RemoveAvailableTimesController {
 
   @Delete(':availableTimeId')
   @HttpCode(HttpStatus.NO_CONTENT)
+  @Roles(Role.Psychologist)
+  @UseGuards(RolesGuard)
   async handle(
     @CurrentUser() user: PayloadUser,
     @Param('availableTimeId', zodValidationPipe)

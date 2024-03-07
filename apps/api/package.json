@@ -55,6 +55,7 @@
     "@nestjs/testing": "^10.0.0",
     "@psyfi/eslint-config": "workspace:*",
     "@psyfi/prettier": "workspace:*",
+    "@psyfi/transactional": "workspace:*",
     "@rocketseat/eslint-config": "2.2.2",
     "@swc/cli": "^0.3.10",
     "@swc/core": "^1.4.2",

@@ -4,6 +4,7 @@ import {
   Get,
   ParseIntPipe,
   Query,
+  UseGuards,
 } from '@nestjs/common'
 import { z } from 'zod'
 
@@ -15,6 +16,9 @@ import { PayloadUser } from '@/infra/auth/strategies/jwt.strategy'
 
 import { ZodValidationPipe } from '../../pipes/zod-validation-pipe'
 import { AppointmentPresenter } from '../../presenters/appointment-presenter'
+import { Roles } from '@/infra/auth/decorators/roles-decorator'
+import { RolesGuard } from '@/infra/auth/guards/roles-guard'
+import { Role } from '@/infra/auth/roles'
 
 const appointmentStatusesSchema = z
   .enum(['pending', 'canceled', 'finished', 'scheduled'])
@@ -35,6 +39,8 @@ export class FetchScheduledAppointmentsFromPatientController {
   ) {}
 
   @Get()
+  @Roles(Role.Patient)
+  @UseGuards(RolesGuard)
   async handle(
     @CurrentUser() { sub: patientId }: PayloadUser,
     @Query('page', new ParseIntPipe({ optional: true })) page: number = 1,

@@ -7,6 +7,7 @@ import {
   NotFoundException,
   Param,
   Put,
+  UseGuards,
 } from '@nestjs/common'
 import { z } from 'zod'
 
@@ -17,6 +18,9 @@ import { CurrentUser } from '@/infra/auth/decorators/current-user-decorator'
 import { PayloadUser } from '@/infra/auth/strategies/jwt.strategy'
 
 import { ZodValidationPipe } from '../../pipes/zod-validation-pipe'
+import { Roles } from '@/infra/auth/decorators/roles-decorator'
+import { RolesGuard } from '@/infra/auth/guards/roles-guard'
+import { Role } from '@/infra/auth/roles'
 
 const updateAvailableTimesParamsSchema = z.string().uuid()
 const updateAvailableTimesBodySchema = z.object({
@@ -42,6 +46,8 @@ export class UpdateAvailableTimesController {
 
   @Put(':availableTimeId')
   @HttpCode(HttpStatus.NO_CONTENT)
+  @Roles(Role.Psychologist)
+  @UseGuards(RolesGuard)
   async handle(
     @CurrentUser() user: PayloadUser,
     @Param('availableTimeId', zodValidationPipe)

@@ -34,7 +34,7 @@ describe('Cancel Scheduled Appointment (E2E)', () => {
       new FastifyAdapter(),
     )
 
-    app.register(fastifyCookie)
+    app.register(fastifyCookie as never)
     authPsychologistFactory = moduleRef.get(AuthPsychologistFactory)
     authPatientFactory = moduleRef.get(AuthPatientFactory)
     encrypter = moduleRef.get(Encrypter)

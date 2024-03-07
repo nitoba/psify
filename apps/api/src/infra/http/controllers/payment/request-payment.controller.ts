@@ -1,4 +1,10 @@
-import { BadRequestException, Controller, Param, Post } from '@nestjs/common'
+import {
+  BadRequestException,
+  Controller,
+  Param,
+  Post,
+  UseGuards,
+} from '@nestjs/common'
 import { z } from 'zod'
 
 import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
@@ -6,6 +12,9 @@ import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resourc
 import { RequestPaymentUseCase } from '@/domain/payment/application/use-cases/request-payment'
 
 import { ZodValidationPipe } from '../../pipes/zod-validation-pipe'
+import { Roles } from '@/infra/auth/decorators/roles-decorator'
+import { RolesGuard } from '@/infra/auth/guards/roles-guard'
+import { Role } from '@/infra/auth/roles'
 
 const cancelScheduledAppointmentParamsSchema = z
   .string({ required_error: 'orderID is required!' })
@@ -20,6 +29,8 @@ export class RequestOrderPaymentController {
   constructor(private readonly useCase: RequestPaymentUseCase) {}
 
   @Post()
+  @Roles(Role.Patient)
+  @UseGuards(RolesGuard)
   async handle(@Param('orderId', orderIdValidator) orderId: string) {
     const result = await this.useCase.execute({
       orderId,
