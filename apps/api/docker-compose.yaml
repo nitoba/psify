@@ -3,26 +3,26 @@ version: "3.8"
 services:
   mongodb:
     image: mongo:latest
-    container_name: "psify_mongodb"
+    container_name: "psyfi_mongodb"
     environment:
       - MONGO_INITDB_ROOT_USERNAME=docker
       - MONGO_INITDB_ROOT_PASSWORD=docker
     ports:
       - "27017:27017"
     volumes:
-      - psify_mongodb_data:/data/db
+      - psyfi_mongodb_data:/data/db
   postgres:
-    container_name: psify_pg
+    container_name: psyfi_pg
     image: bitnami/postgresql:latest
     ports:
       - 5432:5432
     environment:
       POSTGRES_USER: docker
       POSTGRES_PASSWORD: docker
-      POSTGRES_DB: psify
+      POSTGRES_DB: psyfi
     volumes:
-      - psify_pg_data:/bitnami/postgresql
+      - psyfi_pg_data:/bitnami/postgresql
 
 volumes:
-  psify_pg_data:
-  psify_mongodb_data:
+  psyfi_pg_data:
+  psyfi_mongodb_data:

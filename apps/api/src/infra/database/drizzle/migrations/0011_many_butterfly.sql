@@ -1,0 +1,1 @@
+ALTER TABLE "mail_templates" RENAME COLUMN "name" TO "title";

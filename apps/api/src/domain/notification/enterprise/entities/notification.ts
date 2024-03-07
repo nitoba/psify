@@ -6,6 +6,7 @@ import { Email } from '@/domain/core/enterprise/value-objects/email'
 export type SubjectType =
   | 'appointment_requested'
   | 'appointment_rejected'
+  | 'appointment_approved'
   | 'order_approved'
 
 export type NotificationProps = {

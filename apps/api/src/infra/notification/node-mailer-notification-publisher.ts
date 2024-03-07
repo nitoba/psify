@@ -74,6 +74,31 @@ export class NodeMailerNotificationPublisher implements NotificationPublisher {
         break
       }
 
+      case 'appointment_approved': {
+        const patient = await this.authPatientRepository.findByEmail(
+          notification.to,
+        )
+
+        if (!patient) return
+
+        const template = await this.mailTemplateRepository.findByTitle(
+          'appointment_approved',
+        )
+
+        if (!template) return
+        const emailHtml = template.content
+          .replaceAll('@username', patient.name)
+          .replaceAll('@linkToRedirect', 'https://www.google.com')
+
+        await this.transporter.sendMail({
+          from: 'contant@psyfi.com.br',
+          to: notification.to,
+          subject: notification.subject,
+          html: emailHtml,
+        })
+        break
+      }
+
       case 'order_approved': {
         const patient = await this.authPatientRepository.findByEmail(
           notification.to,
