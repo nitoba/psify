@@ -16,6 +16,10 @@ async function bootstrap() {
     { rawBody: true },
   )
 
+  app.enableCors({
+    credentials: true,
+  })
+
   await app.register(fastifyCookie as never)
 
   app.useGlobalFilters(new ZodFilter())
