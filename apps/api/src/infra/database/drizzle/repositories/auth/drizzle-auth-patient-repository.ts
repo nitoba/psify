@@ -34,30 +34,31 @@ export class DrizzleAuthPatientRepository implements AuthPatientRepository {
   }
 
   async create(entity: Patient): Promise<void> {
-    // TODO: execute with transactions
-    const [user] = await this.db.client
-      .insert(users)
-      .values({
-        email: entity.email,
-        name: entity.name,
+    await this.db.client.transaction(async (tx) => {
+      const [user] = await tx
+        .insert(users)
+        .values({
+          email: entity.email,
+          name: entity.name,
+        })
+        .returning()
+
+      await tx.insert(accounts).values({
+        provider: 'credentials',
+        type: 'email',
+        userId: user.id,
+        providerAccountId: randomUUID(),
       })
-      .returning()
 
-    await this.db.client.insert(accounts).values({
-      provider: 'credentials',
-      type: 'email',
-      userId: user.id,
-      providerAccountId: randomUUID(),
-    })
-
-    await this.db.client.insert(patient).values({
-      id: entity.id.toString(),
-      name: entity.name,
-      email: entity.email,
-      password: entity.password,
-      phone: entity.phone,
-      createdAt: entity.createdAt,
-      authUserId: user.id,
+      await tx.insert(patient).values({
+        id: entity.id.toString(),
+        name: entity.name,
+        email: entity.email,
+        password: entity.password,
+        phone: entity.phone,
+        createdAt: entity.createdAt,
+        authUserId: user.id,
+      })
     })
   }
 

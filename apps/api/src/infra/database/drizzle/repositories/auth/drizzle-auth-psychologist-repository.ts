@@ -50,32 +50,33 @@ export class DrizzleAuthPsychologistRepository
   }
 
   async create(entity: Psychologist): Promise<void> {
-    // TODO: execute with transactions
-    const [user] = await this.db.client
-      .insert(users)
-      .values({
-        email: entity.email,
-        name: entity.name,
+    await this.db.client.transaction(async (tx) => {
+      const [user] = await tx
+        .insert(users)
+        .values({
+          email: entity.email,
+          name: entity.name,
+        })
+        .returning()
+
+      await tx.insert(accounts).values({
+        provider: 'credentials',
+        type: 'email',
+        userId: user.id,
+        providerAccountId: randomUUID(),
       })
-      .returning()
 
-    await this.db.client.insert(accounts).values({
-      provider: 'credentials',
-      type: 'email',
-      userId: user.id,
-      providerAccountId: randomUUID(),
-    })
-
-    await this.db.client.insert(psychologist).values({
-      id: entity.id.toString(),
-      name: entity.name,
-      email: entity.email,
-      phone: entity.phone,
-      crp: entity.crp.value,
-      password: entity.password,
-      authUserId: user.id,
-      specialties: [],
-      consultationPriceInCents: 0,
+      await tx.insert(psychologist).values({
+        id: entity.id.toString(),
+        name: entity.name,
+        email: entity.email,
+        phone: entity.phone,
+        crp: entity.crp.value,
+        password: entity.password,
+        authUserId: user.id,
+        specialties: [],
+        consultationPriceInCents: 0,
+      })
     })
   }
 
