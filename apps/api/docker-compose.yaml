@@ -21,7 +21,26 @@ services:
       POSTGRES_PASSWORD: docker
       POSTGRES_DB: psyfi
     volumes:
-      - psyfi_pg_data:/bitnami/postgresql
+      - psyfi_pg_data:/bitnami/
+      - ./scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
+  keycloak:
+    container_name: psyfi_keycloak
+    image: bitnami/keycloak
+    ports:
+      - 8080:8080
+      - 8443:8443
+    environment:
+      KEYCLOAK_ADMIN: docker
+      KEYCLOAK_ADMIN_PASSWORD: docker
+      KEYCLOAK_DATABASE_VENDOR: postgresql
+      KEYCLOAK_DATABASE_HOST: postgres
+      KEYCLOAK_DATABASE_PORT: 5432
+      KEYCLOAK_DATABASE_USER: docker
+      KEYCLOAK_DATABASE_NAME: psyfi
+      KEYCLOAK_DATABASE_PASSWORD: docker
+      KEYCLOAK_DATABASE_SCHEMA: auth
+    depends_on:
+      - postgres
 
 volumes:
   psyfi_pg_data:
