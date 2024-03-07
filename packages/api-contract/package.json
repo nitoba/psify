@@ -1,0 +1,22 @@
+{
+  "name": "@psyfi/api-contract",
+  "version": "1.0.0",
+  "private": true,
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsup index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@ts-rest/core": "^3.33.0",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@rocketseat/eslint-config": "2.2.2",
+    "@types/node": "^20.11.20",
+    "eslint": "^8.57.0",
+    "tsup": "^8.0.2"
+  }
+}
