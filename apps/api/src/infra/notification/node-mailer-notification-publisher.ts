@@ -6,8 +6,12 @@ import { NodeMailerModuleOptions } from './node-mailer/node-mailer-options'
 import nodemailer, { Transporter } from 'nodemailer'
 import { AuthPatientRepository } from '@/domain/auth/application/repositories/auth-patient-repository'
 import { AuthPsychologistRepository } from '@/domain/auth/application/repositories/auth-psychologist-repository'
-
-import { DrizzleMailTemplateRepository } from '../database/drizzle/repositories/mail-templates-repository'
+import {
+  orderApprovedEmail,
+  appointmentApprovedEmail,
+  appointmentRejectedEmail,
+  appointmentRequestedEmail,
+} from '@psyfi/transactional'
 
 @Injectable()
 export class NodeMailerNotificationPublisher implements NotificationPublisher {
@@ -16,7 +20,6 @@ export class NodeMailerNotificationPublisher implements NotificationPublisher {
     @Inject(MODULE_OPTIONS_TOKEN) private config: NodeMailerModuleOptions,
     private readonly authPatientRepository: AuthPatientRepository,
     private readonly authPsychologistRepository: AuthPsychologistRepository,
-    private readonly mailTemplateRepository: DrizzleMailTemplateRepository,
   ) {
     this.transporter = nodemailer.createTransport({
       ...this.config.options,
@@ -32,15 +35,10 @@ export class NodeMailerNotificationPublisher implements NotificationPublisher {
 
         if (!psychologist) return
 
-        const template = await this.mailTemplateRepository.findByTitle(
-          notification.subjectType,
-        )
-
-        if (!template) break
-
-        const emailHtml = template.content
-          .replaceAll('@username', psychologist.name)
-          .replaceAll('@linkToRedirect', 'https://www.google.com')
+        const emailHtml = appointmentRequestedEmail({
+          username: psychologist.name,
+          linkToRedirect: 'https://www.google.com',
+        })
 
         await this.transporter.sendMail({
           from: 'contant@psyfi.com.br',
@@ -58,12 +56,9 @@ export class NodeMailerNotificationPublisher implements NotificationPublisher {
 
         if (!patient) return
 
-        const template = await this.mailTemplateRepository.findByTitle(
-          'appointment_rejected',
-        )
-
-        if (!template) return
-        const emailHtml = template.content.replaceAll('@username', patient.name)
+        const emailHtml = appointmentRejectedEmail({
+          username: patient.name,
+        })
 
         await this.transporter.sendMail({
           from: 'contant@psyfi.com.br',
@@ -81,14 +76,10 @@ export class NodeMailerNotificationPublisher implements NotificationPublisher {
 
         if (!patient) return
 
-        const template = await this.mailTemplateRepository.findByTitle(
-          'appointment_approved',
-        )
-
-        if (!template) return
-        const emailHtml = template.content
-          .replaceAll('@username', patient.name)
-          .replaceAll('@linkToRedirect', 'https://www.google.com')
+        const emailHtml = appointmentApprovedEmail({
+          username: patient.name,
+          linkToRedirect: 'https://www.google.com',
+        })
 
         await this.transporter.sendMail({
           from: 'contant@psyfi.com.br',
@@ -106,14 +97,10 @@ export class NodeMailerNotificationPublisher implements NotificationPublisher {
 
         if (!patient) return
 
-        const template =
-          await this.mailTemplateRepository.findByTitle('order_approved')
-
-        if (!template) return
-
-        const emailHtml = template.content
-          .replaceAll('@username', patient.name)
-          .replaceAll('@linkToRedirect', 'https://www.google.com')
+        const emailHtml = orderApprovedEmail({
+          username: patient.name,
+          linkToRedirect: 'https://google.com',
+        })
 
         await this.transporter.sendMail({
           from: 'contant@psyfi.com.br',

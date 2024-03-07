@@ -22,7 +22,6 @@ import { DrizzlePatientRepository } from './drizzle/repositories/patient-reposit
 import { DrizzlePsychologistRepository } from './drizzle/repositories/psychologist-repository'
 import * as schema from './drizzle/schemas'
 import { MongoNotificationRepository } from './mongoose/repositories/mongo-notification-repository'
-import { DrizzleMailTemplateRepository } from './drizzle/repositories/mail-templates-repository'
 @Module({
   imports: [
     EnvModule,
@@ -88,7 +87,6 @@ import { DrizzleMailTemplateRepository } from './drizzle/repositories/mail-templ
       provide: NotificationRepository,
       useClass: MongoNotificationRepository,
     },
-    DrizzleMailTemplateRepository,
   ],
   exports: [
     DrizzleService,
@@ -99,7 +97,6 @@ import { DrizzleMailTemplateRepository } from './drizzle/repositories/mail-templ
     AppointmentsRepository,
     OrderRepository,
     NotificationRepository,
-    DrizzleMailTemplateRepository,
   ],
 })
 export class DatabaseModule {}
