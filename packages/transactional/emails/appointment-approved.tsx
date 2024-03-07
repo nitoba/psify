@@ -28,7 +28,7 @@ export const NewAppointmentRequested = () => (
           click on the button bellow go to the platform to proceed with payment
         </Text>
         <Section style={btnContainer}>
-          <Button style={button} href="@linkToRedirect">
+          <Button style={button} href="@linkToRedirect" target="_blank">
             Go to platform
           </Button>
         </Section>

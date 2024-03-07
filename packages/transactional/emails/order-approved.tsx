@@ -26,7 +26,7 @@ export const OrderApproved = () => (
           click on the button bellow to view details
         </Text>
         <Section style={btnContainer}>
-          <Button style={button} href="@linkToRedirect">
+          <Button style={button} href="@linkToRedirect" target="_blank">
             View Details
           </Button>
         </Section>

@@ -27,7 +27,7 @@ export const NewAppointmentRequested = () => (
           this solicitation
         </Text>
         <Section style={btnContainer}>
-          <Button style={button} href="@linkToRedirect">
+          <Button style={button} href="@linkToRedirect" target="_blank">
             Go to platform
           </Button>
         </Section>
