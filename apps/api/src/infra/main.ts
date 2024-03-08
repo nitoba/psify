@@ -18,6 +18,7 @@ async function bootstrap() {
 
   app.enableCors({
     credentials: true,
+    origin: ['http://localhost:3000', 'http://localhost:3001'],
   })
 
   await app.register(fastifyCookie as never)

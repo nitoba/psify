@@ -6,7 +6,7 @@ const c = initContract()
 export const auth = c.router({
   registerPatient: {
     method: 'POST',
-    path: '/auth/psychologist/register',
+    path: '/auth/psychologists/register',
     responses: {
       201: null,
       400: z.object({
@@ -34,7 +34,7 @@ export const auth = c.router({
   },
   registerPsychologist: {
     method: 'POST',
-    path: '/auth/psychologist/register',
+    path: '/auth/psychologists/register',
     responses: {
       201: null,
       400: z.object({
@@ -67,6 +67,7 @@ export const auth = c.router({
     responses: {
       200: z.object({
         access_token: z.string(),
+        refresh_token: z.string(),
       }),
       400: z.object({
         statusCode: z.number(),
@@ -84,10 +85,11 @@ export const auth = c.router({
   },
   authenticatePsychologist: {
     method: 'POST',
-    path: 'auth/psychologist/authenticate',
+    path: '/auth/psychologists/authenticate',
     responses: {
       200: z.object({
         access_token: z.string(),
+        refresh_token: z.string(),
       }),
       400: z.object({
         statusCode: z.number(),

@@ -58,6 +58,7 @@ export class AuthenticatePatientController {
           return {
             status: 200,
             body: {
+              refresh_token: result.value.refreshToken,
               access_token: result.value.accessToken,
             },
           }

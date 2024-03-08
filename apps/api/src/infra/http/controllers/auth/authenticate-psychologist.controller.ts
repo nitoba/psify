@@ -58,6 +58,7 @@ export class AuthenticatePsychologistController {
           return {
             status: HttpStatus.OK,
             body: {
+              refresh_token: result.value.refreshToken,
               access_token: result.value.accessToken,
             },
           }
