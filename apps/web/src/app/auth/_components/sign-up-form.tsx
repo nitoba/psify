@@ -23,6 +23,7 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
 import { Checkbox } from '@/components/ui/checkbox'
+import { InputPassword } from '@/components/ui/input-password'
 
 const signUpSchema = z
   .object({
@@ -147,7 +148,7 @@ export function SignUpForm() {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input id="password" type="password" {...field} />
+                    <InputPassword {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -160,7 +161,7 @@ export function SignUpForm() {
                 <FormItem>
                   <FormLabel>Confirm Password</FormLabel>
                   <FormControl>
-                    <Input type="password" {...field} />
+                    <InputPassword {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

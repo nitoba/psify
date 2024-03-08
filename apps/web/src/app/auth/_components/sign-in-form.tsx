@@ -23,6 +23,7 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
 import { Checkbox } from '@/components/ui/checkbox'
+import { InputPassword } from '@/components/ui/input-password'
 const signInSchema = z.object({
   email: z.string().email(),
   password: z.string().min(6),
@@ -79,7 +80,7 @@ export function SignInForm() {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input id="password" type="password" {...field} />
+                    <InputPassword {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
