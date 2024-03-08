@@ -14,7 +14,7 @@ import { Role } from '@/infra/auth/roles'
 import { PayloadUser } from '@/infra/auth/strategies/jwt.strategy'
 
 import { TsRestHandler, tsRestHandler } from '@ts-rest/nest'
-import { mainContract } from '@psyfi/api-contract'
+import { appRouter } from '@psyfi/api-contract'
 
 @Controller('/auth/change-password')
 export class ChangePasswordController {
@@ -25,10 +25,10 @@ export class ChangePasswordController {
 
   @Post()
   @HttpCode(HttpStatus.OK)
-  @TsRestHandler(mainContract.authContract.changePassword)
+  @TsRestHandler(appRouter.auth.changePassword)
   async handle(@CurrentUser() { sub: userId, role }: PayloadUser) {
     return tsRestHandler(
-      mainContract.authContract.changePassword,
+      appRouter.auth.changePassword,
       async ({ body: { newPassword, oldPassword } }) => {
         if (role === Role.Patient) {
           const result = await this.changePasswordFromPatientUseCase.execute({

@@ -10,7 +10,7 @@ import { FastifyReply } from 'fastify'
 import { InvalidCredentials } from '@/core/errors/use-cases/invalid-credentials'
 import { AuthenticatePatientUseCase } from '@/domain/auth/application/use-cases/authenticate-patient'
 import { Public } from '@/infra/auth/decorators/public'
-import { mainContract } from '@psyfi/api-contract'
+import { appRouter } from '@psyfi/api-contract'
 import { TsRestHandler, tsRestHandler } from '@ts-rest/nest'
 
 @Controller('/auth/patients/authenticate')
@@ -21,10 +21,10 @@ export class AuthenticatePatientController {
 
   @Public()
   @Post()
-  @TsRestHandler(mainContract.authContract.authenticatePatient)
+  @TsRestHandler(appRouter.auth.authenticatePatient)
   async handle(@Res({ passthrough: true }) res: FastifyReply) {
     return tsRestHandler(
-      mainContract.authContract.authenticatePatient,
+      appRouter.auth.authenticatePatient,
       async ({ body: { email, password } }) => {
         const result = await this.authenticatePatientUseCase.execute({
           email,

@@ -3,7 +3,7 @@ import { z } from 'zod'
 
 const c = initContract()
 
-export const authContract = c.router({
+export const auth = c.router({
   registerPatient: {
     method: 'POST',
     path: '/auth/psychologist/register',

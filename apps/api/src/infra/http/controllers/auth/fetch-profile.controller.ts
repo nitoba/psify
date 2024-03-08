@@ -10,7 +10,7 @@ import { PayloadUser } from '@/infra/auth/strategies/jwt.strategy'
 import { PatientPresenter } from '../../presenters/patient-presenter'
 import { PsychologistPresenter } from '../../presenters/psychologists-presenter'
 import { TsRestHandler, tsRestHandler } from '@ts-rest/nest'
-import { mainContract } from '@psyfi/api-contract'
+import { appRouter } from '@psyfi/api-contract'
 
 @Controller('/me')
 export class FetchProfileController {
@@ -20,9 +20,9 @@ export class FetchProfileController {
   ) {}
 
   @Get()
-  @TsRestHandler(mainContract.authContract.profile)
+  @TsRestHandler(appRouter.auth.profile)
   async handle(@CurrentUser() { sub: userId, role }: PayloadUser) {
-    return tsRestHandler(mainContract.authContract.profile, async () => {
+    return tsRestHandler(appRouter.auth.profile, async () => {
       if (role === Role.Patient) {
         const result = await this.patientProfileUseCase.execute({
           patientId: userId,

@@ -12,7 +12,7 @@ import { RegisterPsychologistUseCase } from '@/domain/auth/application/use-cases
 import { InvalidResource } from '@/domain/core/enterprise/errors/invalid-resource'
 import { Public } from '@/infra/auth/decorators/public'
 import { TsRestHandler, tsRestHandler } from '@ts-rest/nest'
-import { mainContract } from '@psyfi/api-contract'
+import { appRouter } from '@psyfi/api-contract'
 
 @Controller('/auth/psychologists/register')
 export class RegisterPsychologistController {
@@ -23,10 +23,10 @@ export class RegisterPsychologistController {
   @Public()
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  @TsRestHandler(mainContract.authContract.registerPsychologist)
+  @TsRestHandler(appRouter.auth.registerPsychologist)
   async handle() {
     return tsRestHandler(
-      mainContract.authContract.registerPsychologist,
+      appRouter.auth.registerPsychologist,
       async ({ body: { name, email, phone, crp, password } }) => {
         const result = await this.registerPsychologistUseCase.execute({
           name,

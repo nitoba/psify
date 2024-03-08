@@ -11,7 +11,7 @@ import { InvalidCredentials } from '@/core/errors/use-cases/invalid-credentials'
 import { AuthenticatePsychologistUseCase } from '@/domain/auth/application/use-cases/authenticate-psychologist'
 import { Public } from '@/infra/auth/decorators/public'
 import { TsRestHandler, tsRestHandler } from '@ts-rest/nest'
-import { mainContract } from '@psyfi/api-contract'
+import { appRouter } from '@psyfi/api-contract'
 
 @Controller('/auth/psychologists/authenticate')
 export class AuthenticatePsychologistController {
@@ -21,10 +21,10 @@ export class AuthenticatePsychologistController {
 
   @Public()
   @Post()
-  @TsRestHandler(mainContract.authContract.authenticatePsychologist)
+  @TsRestHandler(appRouter.auth.authenticatePsychologist)
   async handle(@Res({ passthrough: true }) res: FastifyReply) {
     return tsRestHandler(
-      mainContract.authContract.authenticatePsychologist,
+      appRouter.auth.authenticatePsychologist,
       async ({ body: { email, password } }) => {
         const result = await this.authenticatePsychologistUseCase.execute({
           email,

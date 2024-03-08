@@ -1,11 +1,11 @@
 import { initContract } from '@ts-rest/core'
-import { authContract } from './contracts/auth-contract'
+import { auth } from './contracts/auth'
 
 const c = initContract()
 
-export const mainContract = c.router(
+export const appRouter = c.router(
   {
-    authContract,
+    auth,
   },
   {
     strictStatusCodes: true,
