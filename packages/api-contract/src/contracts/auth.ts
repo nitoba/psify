@@ -6,7 +6,7 @@ const c = initContract()
 export const auth = c.router({
   registerPatient: {
     method: 'POST',
-    path: '/auth/psychologists/register',
+    path: '/auth/patients/register',
     responses: {
       201: null,
       400: z.object({

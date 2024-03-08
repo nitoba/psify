@@ -19,7 +19,7 @@
     "test:e2e:watch": "NODE_ENV=test vitest --config ./vitest.config.e2e.ts",
     "db:generate": "drizzle-kit generate:pg",
     "db:migrate": "tsx ./src/infra/database/drizzle/migrate.ts",
-    "db:studio": "drizzle-kit studio --port 3000",
+    "db:studio": "drizzle-kit studio --port 3001",
     "listen-webhooks": "stripe listen --forward-to localhost:3333/orders/webhooks"
   },
   "dependencies": {

@@ -24,6 +24,9 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
 import { Checkbox } from '@/components/ui/checkbox'
 import { InputPassword } from '@/components/ui/input-password'
+import { api } from '@/lib/api'
+import { toast } from 'sonner'
+import { Loader2 } from 'lucide-react'
 
 const signUpSchema = z
   .object({
@@ -65,8 +68,63 @@ export function SignUpForm() {
     },
   })
 
-  function onSubmit(values: SignUpFormValues) {
-    console.log(values)
+  async function onSubmit({
+    name,
+    email,
+    phone,
+    password,
+    crp,
+  }: SignUpFormValues) {
+    if (crp) {
+      const data = await api.auth.registerPsychologist.mutation({
+        body: {
+          crp,
+          email,
+          name,
+          password,
+          phone,
+        },
+      })
+
+      if (data.status !== 201) {
+        toast.error(data.body.message)
+      } else {
+        toast.success('Account created!')
+        form.reset({
+          confirmPassword: undefined,
+          crp: undefined,
+          email: undefined,
+          name: undefined,
+          password: undefined,
+          phone: undefined,
+          type: 'patient',
+        })
+      }
+    } else {
+      const data = await api.auth.registerPatient.mutation({
+        body: {
+          email,
+          name,
+          password,
+          phone,
+        },
+      })
+
+      if (data.status !== 201) {
+        toast.error(data.body.message)
+      } else {
+        toast.success('Account created!')
+        form.reset({
+          confirmPassword: undefined,
+          crp: undefined,
+          email: undefined,
+          name: undefined,
+          password: undefined,
+          phone: undefined,
+          type: 'patient',
+        })
+      }
+    }
   }
 
   const type = form.watch('type')
@@ -190,14 +248,27 @@ export function SignUpForm() {
             />
           </CardContent>
           <CardFooter className="flex-col gap-3">
-            <Button className="w-full" type="submit">
+            <Button
+              className="w-full gap-2"
+              type="submit"
+              disabled={form.formState.isSubmitting}
+            >
               Sign up
+              {form.formState.isSubmitting && (
+                <Loader2 className="size-4 animate-spin" />
+              )}
             </Button>
             <div className="flex items-center gap-1">
               <span className="text-muted-foreground text-sm">
                 Already have a account?
               </span>
-              <Button variant="link" className="px-0" type="button" asChild>
+              <Button
+                variant="link"
+                className="px-0"
+                type="button"
+                asChild
+                disabled={form.formState.isSubmitting}
+              >
                 <Link href="/auth/sign-in">Sign in</Link>
               </Button>
             </div>

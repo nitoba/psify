@@ -22,26 +22,36 @@ import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
-import { Checkbox } from '@/components/ui/checkbox'
 import { InputPassword } from '@/components/ui/input-password'
+import { Loader2 } from 'lucide-react'
+import { signIn } from 'next-auth/react'
+import { toast } from 'sonner'
+import { useRouter } from 'next/navigation'
 const signInSchema = z.object({
   email: z.string().email(),
   password: z.string().min(6),
-  type: z.enum(['patient', 'psychologist']).default('patient'),
 })
 
 type SignInFormValues = z.infer<typeof signInSchema>
 
 export function SignInForm() {
+  const { replace } = useRouter()
   const form = useForm<SignInFormValues>({
     resolver: zodResolver(signInSchema),
-    defaultValues: {
-      type: 'patient',
-    },
   })
 
-  function onSubmit(values: SignInFormValues) {
-    console.log(values)
+  async function onSubmit({ email, password }: SignInFormValues) {
+    const res = await signIn('credentials', {
+      redirect: false,
+      email,
+      password,
+    })
+
+    if (res?.error) {
+      return toast.error('Email or password are incorrect, try again!')
+    }
+
+    replace('/')
   }
 
   return (
@@ -86,27 +96,6 @@ export function SignInForm() {
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="type"
-              render={({ field }) => (
-                <FormItem className="flex items-center gap-1.5 space-y-0">
-                  <FormLabel>I'm a psychologist</FormLabel>
-                  <FormControl>
-                    <Checkbox
-                      {...field}
-                      onCheckedChange={(checked) => {
-                        form.setValue(
-                          'type',
-                          checked ? 'psychologist' : 'patient',
-                        )
-                      }}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
           </CardContent>
           <CardFooter className="flex-col gap-3">
             <Button
@@ -114,14 +103,27 @@ export function SignInForm() {
               size="sm"
               className="text-muted-foreground px-0 ml-auto"
               asChild
+              disabled={form.formState.isSubmitting}
             >
               <Link href="/auth/forgot-password">Forgot password?</Link>
             </Button>
 
-            <Button className="w-full" type="submit">
+            <Button
+              className="w-full gap-2"
+              type="submit"
+              disabled={form.formState.isSubmitting}
+            >
               Sign in
+              {form.formState.isSubmitting && (
+                <Loader2 className="size-4 animate-spin" />
+              )}
             </Button>
-            <Button className="w-full" variant="ghost" asChild>
+            <Button
+              className="w-full"
+              variant="ghost"
+              asChild
+              disabled={form.formState.isSubmitting}
+            >
               <Link href="/auth/sign-up">Create an account</Link>
             </Button>
           </CardFooter>
