@@ -53,6 +53,8 @@ import { FetchAvailableTimesToSchedulesController } from './controllers/schedule
 import { FinishScheduledAppointmentController } from './controllers/schedules/finish-scheduled-appointment.controller'
 import { RejectAppointmentController } from './controllers/schedules/reject-appointment.controller'
 import { RequestScheduleAppointmentController } from './controllers/schedules/request-schedule-appointment.controller'
+import { ReauthenticateUseCase } from '@/domain/auth/application/use-cases/reauthenticate'
+import { RefreshTokenController } from './controllers/auth/refresh-token.controller'
 
 @Module({
   imports: [
@@ -70,6 +72,7 @@ import { RequestScheduleAppointmentController } from './controllers/schedules/re
     AuthenticatePsychologistController,
     FetchProfileController,
     ChangePasswordController,
+    RefreshTokenController,
     // Psychologists Controllers
     UpdateSpecialtiesController,
     AddAvailableTimesController,
@@ -98,6 +101,7 @@ import { RequestScheduleAppointmentController } from './controllers/schedules/re
     AuthenticatePsychologistUseCase,
     ChangePasswordFromPatientUseCase,
     ChangePasswordFromPsychologistUseCase,
+    ReauthenticateUseCase,
     // Psychologists UseCases
     UpdateSpecialtyUseCase,
     AddAvailableTimeUseCase,

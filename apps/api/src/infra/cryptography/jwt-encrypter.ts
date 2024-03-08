@@ -7,6 +7,10 @@ import { Encrypter } from '@/domain/auth/application/cryptography/encrypter'
 export class JwtEncrypter implements Encrypter {
   constructor(private readonly jwtService: JwtService) {}
 
+  async decrypt<T>(token: string): Promise<T> {
+    return this.jwtService.decode<T>(token)
+  }
+
   async verify(token: string): Promise<boolean> {
     return !!this.jwtService.verifyAsync(token)
   }

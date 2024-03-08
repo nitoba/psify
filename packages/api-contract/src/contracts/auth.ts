@@ -143,4 +143,20 @@ export const auth = c.router({
       }),
     },
   },
+  refreshToken: {
+    method: 'POST',
+    path: '/auth/refresh-token',
+    responses: {
+      200: z.object({
+        access_token: z.string(),
+        refresh_token: z.string(),
+      }),
+      400: z.object({
+        statusCode: z.number(),
+        error: z.string(),
+        message: z.string(),
+      }),
+    },
+    body: null,
+  },
 })

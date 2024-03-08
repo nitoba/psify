@@ -16,6 +16,7 @@ type AuthenticatePatientUseCaseResponse = Either<
   InvalidCredentials,
   {
     accessToken: string
+    refreshToken: string
   }
 >
 
@@ -46,12 +47,28 @@ export class AuthenticatePatientUseCase {
       return left(new InvalidCredentials())
     }
 
-    const accessToken = await this.encrypter.encrypt({
-      sub: patient.id.toString(),
-      email: patient.email,
-      role: 'patient',
-    })
+    const accessToken = await this.encrypter.encrypt(
+      {
+        sub: patient.id.toString(),
+        email: patient.email,
+        role: 'patient',
+      },
+      {
+        expiresIn: '1m',
+      },
+    )
 
-    return right({ accessToken })
+    const refreshToken = await this.encrypter.encrypt(
+      {
+        sub: patient.id.toString(),
+        email: patient.email,
+        role: 'patient',
+      },
+      {
+        expiresIn: '7d',
+      },
+    )
+
+    return right({ accessToken, refreshToken })
   }
 }

@@ -5,4 +5,5 @@ export abstract class Encrypter {
   ): Promise<string>
 
   abstract verify(token: string): Promise<boolean>
+  abstract decrypt<T>(token: string): Promise<T>
 }

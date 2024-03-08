@@ -50,6 +50,11 @@ export class AuthenticatePatientController {
             httpOnly: true,
           })
 
+          res.setCookie('psify@refresh_token', result.value.refreshToken, {
+            path: '/',
+            httpOnly: true,
+          })
+
           return {
             status: 200,
             body: {

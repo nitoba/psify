@@ -16,6 +16,7 @@ type AuthenticatePsychologistUseCaseResponse = Either<
   InvalidCredentials,
   {
     accessToken: string
+    refreshToken: string
   }
 >
 
@@ -47,12 +48,28 @@ export class AuthenticatePsychologistUseCase {
       return left(new InvalidCredentials())
     }
 
-    const accessToken = await this.encrypter.encrypt({
-      sub: psychologist.id.toString(),
-      email: psychologist.email,
-      role: 'psychologist',
-    })
+    const accessToken = await this.encrypter.encrypt(
+      {
+        sub: psychologist.id.toString(),
+        email: psychologist.email,
+        role: 'psychologist',
+      },
+      {
+        expiresIn: '1m',
+      },
+    )
 
-    return right({ accessToken })
+    const refreshToken = await this.encrypter.encrypt(
+      {
+        sub: psychologist.id.toString(),
+        email: psychologist.email,
+        role: 'psychologist',
+      },
+      {
+        expiresIn: '7d',
+      },
+    )
+
+    return right({ accessToken, refreshToken })
   }
 }
