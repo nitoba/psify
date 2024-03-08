@@ -24,9 +24,9 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
 import { InputPassword } from '@/components/ui/input-password'
 import { Loader2 } from 'lucide-react'
-import { signIn } from 'next-auth/react'
 import { toast } from 'sonner'
 import { useRouter } from 'next/navigation'
+import { api } from '@/lib/api'
 const signInSchema = z.object({
   email: z.string().email(),
   password: z.string().min(6),
@@ -41,14 +41,15 @@ export function SignInForm() {
   })
 
   async function onSubmit({ email, password }: SignInFormValues) {
-    const res = await signIn('credentials', {
-      redirect: false,
-      email,
-      password,
+    const res = await api.auth.authenticate.mutation({
+      body: {
+        email,
+        password,
+      },
     })
 
-    if (res?.error) {
-      return toast.error('Email or password are incorrect, try again!')
+    if (res.status !== 200) {
+      return toast.error(res.body.message)
     }
 
     replace('/')

@@ -1,6 +1,5 @@
 import Credentials from 'next-auth/providers/credentials'
 import { api } from '../api'
-import { cookies } from 'next/headers'
 import { jwtDecode } from 'jwt-decode'
 
 export const credentials = Credentials({
@@ -21,12 +20,13 @@ export const credentials = Credentials({
       return null
     }
 
-    ;(['access_token', 'refresh_token'] as const).forEach((token) => {
-      cookies().set(`psify@${token}`, body[token], {
-        path: '/',
-        httpOnly: true,
-      })
-    })
+    // ;(['access_token', 'refresh_token'] as const).forEach((token) => {
+    //   cookies().set(`psify@${token}`, body[token], {
+    //     path: '/',
+    //     domain: 'localhost',
+    //     httpOnly: true,
+    //   })
+    // })
 
     const tokenPayload = jwtDecode<{
       sub: string

@@ -1,20 +1,9 @@
-import { auth } from '@/auth'
-import { LoginButton } from './login'
+import { Header } from '@/components/header'
 
-export default async function Page() {
-  const session = await auth()
-
-  if (!session) {
-    return (
-      <div>
-        <LoginButton />
-      </div>
-    )
-  }
-
+export default function Page() {
   return (
-    <main>
-      <pre>{JSON.stringify(session.user, null, 2)}</pre>
-    </main>
+    <div>
+      <Header />
+    </div>
   )
 }

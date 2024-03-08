@@ -20,6 +20,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     super({
       jwtFromRequest: ExtractJwt.fromExtractors([
         JwtStrategy.extractJWTFromCookie,
+        ExtractJwt.fromAuthHeaderAsBearerToken(),
       ]),
       secretOrKey: Buffer.from(publicKey, 'base64'),
       algorithms: ['RS256'],
@@ -31,6 +32,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   private static extractJWTFromCookie(req: FastifyRequest) {
+    console.log(req.cookies)
     if (!req.cookies) return null
     return req.cookies['psify@access_token'] ?? null
   }

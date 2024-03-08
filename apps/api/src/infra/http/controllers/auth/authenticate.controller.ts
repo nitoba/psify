@@ -44,11 +44,13 @@ export class AuthenticateController {
         if (result.isRight()) {
           res.setCookie('psify@access_token', result.value.accessToken, {
             path: '/',
+            sameSite: 'lax',
             httpOnly: true,
           })
 
           res.setCookie('psify@refresh_token', result.value.refreshToken, {
             path: '/',
+            sameSite: 'lax',
             httpOnly: true,
           })
 

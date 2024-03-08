@@ -18,6 +18,7 @@ async function bootstrap() {
 
   app.enableCors({
     credentials: true,
+    exposedHeaders: ['set-cookie'],
     origin: ['http://localhost:3000', 'http://localhost:3001'],
   })
 
