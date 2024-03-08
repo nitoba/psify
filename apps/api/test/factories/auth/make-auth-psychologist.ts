@@ -1,5 +1,3 @@
-import { randomUUID } from 'node:crypto'
-
 import { faker } from '@faker-js/faker'
 import { Injectable } from '@nestjs/common'
 import { randomNumbers } from 'test/utils/random-numbers'
@@ -17,6 +15,7 @@ import { PsychologistProps } from '@/domain/psychologist/enterprise/entities/psy
 import { CRP } from '@/domain/psychologist/enterprise/value-objects/crp'
 import { DrizzleService } from '@/infra/database/drizzle/drizzle.service'
 import { psychologist } from '@/infra/database/drizzle/schemas/psychologist'
+import { users } from '@/infra/database/drizzle/schemas/auth'
 
 export function makeAuthPsychologist(
   override: Partial<AuthProps> = {},
@@ -48,6 +47,15 @@ export class AuthPsychologistFactory {
   ) {
     const p = makeAuthPsychologist(override)
 
+    const [user] = await this.drizzle.client
+      .insert(users)
+      .values({
+        email: p.email,
+        name: p.name,
+        role: 'psychologist',
+      })
+      .returning()
+
     const [psychologistDB] = await this.drizzle.client
       .insert(psychologist)
       .values({
@@ -56,7 +64,7 @@ export class AuthPsychologistFactory {
         email: p.email,
         password: await this.hasher.hash(p.password),
         phone: p.phone,
-        authUserId: randomUUID(),
+        authUserId: user.id,
         crp: p.crp.value,
         consultationPriceInCents:
           override.consultationPriceInCents ?? 100 * 100, // 100 moneys

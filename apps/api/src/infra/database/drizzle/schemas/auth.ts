@@ -1,12 +1,14 @@
 import {
   integer,
+  pgEnum,
   pgTable,
   primaryKey,
   text,
   timestamp,
   uuid,
-  varchar,
 } from 'drizzle-orm/pg-core'
+
+export const userRolesEnum = pgEnum('user_roles', ['patient', 'psychologist'])
 
 export const users = pgTable('users', {
   id: uuid('id').notNull().primaryKey().defaultRandom(),
@@ -14,7 +16,7 @@ export const users = pgTable('users', {
   email: text('email').notNull(),
   emailVerified: timestamp('email_verified', { mode: 'date' }),
   image: text('image'),
-  roleId: uuid('role_id').references(() => roles.id),
+  role: userRolesEnum('role').notNull(),
 })
 
 type AccountType = 'email' | 'oidc' | 'oauth' | 'webauthn'
@@ -39,9 +41,3 @@ export const accounts = pgTable(
     }),
   }),
 )
-
-export const roles = pgTable('roles', {
-  id: uuid('id').primaryKey().notNull().defaultRandom(),
-  title: varchar('title', { length: 256 }).notNull(),
-  createdAt: timestamp('created_at').notNull().defaultNow(),
-})

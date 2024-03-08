@@ -1,3 +1,6 @@
+import { InvalidCredentials } from '@/core/errors/use-cases/invalid-credentials'
+import { AuthenticateUseCase } from '@/domain/auth/application/use-cases/authenticate'
+import { Public } from '@/infra/auth/decorators/public'
 import {
   BadRequestException,
   Controller,
@@ -5,28 +8,22 @@ import {
   Post,
   Res,
 } from '@nestjs/common'
+import { appRouter } from '@psyfi/api-contract'
+import { TsRestHandler, tsRestHandler } from '@ts-rest/nest'
 import { FastifyReply } from 'fastify'
 
-import { InvalidCredentials } from '@/core/errors/use-cases/invalid-credentials'
-import { AuthenticatePsychologistUseCase } from '@/domain/auth/application/use-cases/authenticate-psychologist'
-import { Public } from '@/infra/auth/decorators/public'
-import { TsRestHandler, tsRestHandler } from '@ts-rest/nest'
-import { appRouter } from '@psyfi/api-contract'
-
-@Controller('/auth/psychologists/authenticate')
-export class AuthenticatePsychologistController {
-  constructor(
-    private readonly authenticatePsychologistUseCase: AuthenticatePsychologistUseCase,
-  ) {}
+@Controller('/auth/authenticate')
+export class AuthenticateController {
+  constructor(private useCase: AuthenticateUseCase) {}
 
   @Public()
   @Post()
-  @TsRestHandler(appRouter.auth.authenticatePsychologist)
+  @TsRestHandler(appRouter.auth.authenticate)
   async handle(@Res({ passthrough: true }) res: FastifyReply) {
     return tsRestHandler(
-      appRouter.auth.authenticatePsychologist,
+      appRouter.auth.authenticate,
       async ({ body: { email, password } }) => {
-        const result = await this.authenticatePsychologistUseCase.execute({
+        const result = await this.useCase.execute({
           email,
           password,
         })

@@ -61,31 +61,9 @@ export const auth = c.router({
       password: z.string().min(6),
     }),
   },
-  authenticatePatient: {
+  authenticate: {
     method: 'POST',
-    path: '/auth/patients/authenticate',
-    responses: {
-      200: z.object({
-        access_token: z.string(),
-        refresh_token: z.string(),
-      }),
-      400: z.object({
-        statusCode: z.number(),
-        error: z.string(),
-        message: z.string(),
-      }),
-      500: z.object({
-        message: z.string(),
-      }),
-    },
-    body: z.object({
-      email: z.string().email(),
-      password: z.string().min(6),
-    }),
-  },
-  authenticatePsychologist: {
-    method: 'POST',
-    path: '/auth/psychologists/authenticate',
+    path: '/auth/authenticate',
     responses: {
       200: z.object({
         access_token: z.string(),

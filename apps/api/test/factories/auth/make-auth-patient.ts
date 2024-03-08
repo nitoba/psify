@@ -1,5 +1,3 @@
-import { randomUUID } from 'node:crypto'
-
 import { faker } from '@faker-js/faker'
 import { Injectable } from '@nestjs/common'
 
@@ -14,6 +12,7 @@ import { Name } from '@/domain/core/enterprise/value-objects/name'
 import { Phone } from '@/domain/core/enterprise/value-objects/phone'
 import { DrizzleService } from '@/infra/database/drizzle/drizzle.service'
 import { patient } from '@/infra/database/drizzle/schemas/patient'
+import { users } from '@/infra/database/drizzle/schemas/auth'
 
 export function makeAuthPatient(
   override: Partial<PatientProps> = {},
@@ -42,6 +41,15 @@ export class AuthPatientFactory {
   async makeDbPatient(override: Partial<PatientProps> = {}) {
     const p = makeAuthPatient(override)
 
+    const [user] = await this.drizzle.client
+      .insert(users)
+      .values({
+        email: p.email,
+        name: p.name,
+        role: 'patient',
+      })
+      .returning()
+
     const [patientDB] = await this.drizzle.client
       .insert(patient)
       .values({
@@ -50,7 +58,7 @@ export class AuthPatientFactory {
         email: p.email,
         password: await this.hasher.hash(p.password),
         phone: p.phone,
-        authUserId: randomUUID(),
+        authUserId: user.id,
       })
       .returning()
 

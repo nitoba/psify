@@ -22,6 +22,8 @@ import { DrizzlePatientRepository } from './drizzle/repositories/patient-reposit
 import { DrizzlePsychologistRepository } from './drizzle/repositories/psychologist-repository'
 import * as schema from './drizzle/schemas'
 import { MongoNotificationRepository } from './mongoose/repositories/mongo-notification-repository'
+import { AuthUserRepository } from '@/domain/auth/application/repositories/auth-user-repository'
+import { DrizzleAuthUserRepository } from './drizzle/repositories/auth/drizzle-auth-user-repository'
 @Module({
   imports: [
     EnvModule,
@@ -60,6 +62,10 @@ import { MongoNotificationRepository } from './mongoose/repositories/mongo-notif
   providers: [
     DrizzleService,
     {
+      provide: AuthUserRepository,
+      useClass: DrizzleAuthUserRepository,
+    },
+    {
       provide: AuthPatientRepository,
       useClass: DrizzleAuthPatientRepository,
     },
@@ -97,6 +103,7 @@ import { MongoNotificationRepository } from './mongoose/repositories/mongo-notif
     AppointmentsRepository,
     OrderRepository,
     NotificationRepository,
+    AuthUserRepository,
   ],
 })
 export class DatabaseModule {}

@@ -40,6 +40,7 @@ export class DrizzleAuthPatientRepository implements AuthPatientRepository {
         .values({
           email: entity.email,
           name: entity.name,
+          role: 'patient',
         })
         .returning()
 

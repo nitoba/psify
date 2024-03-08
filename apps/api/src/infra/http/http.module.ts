@@ -1,7 +1,5 @@
 import { Module } from '@nestjs/common'
 
-import { AuthenticatePatientUseCase } from '@/domain/auth/application/use-cases/authenticate-patient'
-import { AuthenticatePsychologistUseCase } from '@/domain/auth/application/use-cases/authenticate-psychologist'
 import { ChangePasswordFromPatientUseCase } from '@/domain/auth/application/use-cases/change-patient-password'
 import { ChangePasswordFromPsychologistUseCase } from '@/domain/auth/application/use-cases/change-psychologist-password'
 import { RegisterPatientUseCase } from '@/domain/auth/application/use-cases/register-patient'
@@ -31,8 +29,6 @@ import { CryptographyModule } from '../cryptography/cryptography.module'
 import { DatabaseModule } from '../database/database.module'
 import { EnvModule } from '../env/env.module'
 import { PaymentModule } from '../payment/payment.module'
-import { AuthenticatePatientController } from './controllers/auth/authenticate-patient.controller'
-import { AuthenticatePsychologistController } from './controllers/auth/authenticate-psychologist.controller'
 import { ChangePasswordController } from './controllers/auth/change-password.controller'
 import { FetchProfileController } from './controllers/auth/fetch-profile.controller'
 import { RegisterPatientController } from './controllers/auth/register-patient.controller'
@@ -55,6 +51,8 @@ import { RejectAppointmentController } from './controllers/schedules/reject-appo
 import { RequestScheduleAppointmentController } from './controllers/schedules/request-schedule-appointment.controller'
 import { ReauthenticateUseCase } from '@/domain/auth/application/use-cases/reauthenticate'
 import { RefreshTokenController } from './controllers/auth/refresh-token.controller'
+import { AuthenticateController } from './controllers/auth/authenticate.controller'
+import { AuthenticateUseCase } from '@/domain/auth/application/use-cases/authenticate'
 
 @Module({
   imports: [
@@ -66,10 +64,9 @@ import { RefreshTokenController } from './controllers/auth/refresh-token.control
   ],
   controllers: [
     // Auth Controllers
+    AuthenticateController,
     RegisterPatientController,
     RegisterPsychologistController,
-    AuthenticatePatientController,
-    AuthenticatePsychologistController,
     FetchProfileController,
     ChangePasswordController,
     RefreshTokenController,
@@ -95,10 +92,9 @@ import { RefreshTokenController } from './controllers/auth/refresh-token.control
   ],
   providers: [
     // Auth UseCases
+    AuthenticateUseCase,
     RegisterPatientUseCase,
     RegisterPsychologistUseCase,
-    AuthenticatePatientUseCase,
-    AuthenticatePsychologistUseCase,
     ChangePasswordFromPatientUseCase,
     ChangePasswordFromPsychologistUseCase,
     ReauthenticateUseCase,

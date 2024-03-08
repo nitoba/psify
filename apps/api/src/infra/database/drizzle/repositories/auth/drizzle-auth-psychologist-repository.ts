@@ -56,6 +56,7 @@ export class DrizzleAuthPsychologistRepository
         .values({
           email: entity.email,
           name: entity.name,
+          role: 'psychologist',
         })
         .returning()
 

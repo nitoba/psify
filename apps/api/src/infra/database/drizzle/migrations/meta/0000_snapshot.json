@@ -1,5 +1,5 @@
 {
-  "id": "907fe8d7-1242-403b-84a1-ec2e6c6843fd",
+  "id": "b272e6e1-ac87-4701-9877-3928c7d976d5",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
@@ -35,7 +35,7 @@
         },
         "cost_in_cents": {
           "name": "cost_in_cents",
-          "type": "numeric",
+          "type": "real",
           "primaryKey": false,
           "notNull": true
         },
@@ -180,7 +180,8 @@
           "name": "id",
           "type": "uuid",
           "primaryKey": true,
-          "notNull": true
+          "notNull": true,
+          "default": "gen_random_uuid()"
         },
         "name": {
           "name": "name",
@@ -205,6 +206,12 @@
           "type": "text",
           "primaryKey": false,
           "notNull": false
+        },
+        "role": {
+          "name": "role",
+          "type": "user_roles",
+          "primaryKey": false,
+          "notNull": true
         }
       },
       "indexes": {},
@@ -296,15 +303,15 @@
           "primaryKey": false,
           "notNull": true
         },
-        "crm": {
-          "name": "crm",
+        "crp": {
+          "name": "crp",
           "type": "text",
           "primaryKey": false,
           "notNull": true
         },
         "consultation_price_in_cents": {
           "name": "consultation_price_in_cents",
-          "type": "numeric",
+          "type": "real",
           "primaryKey": false,
           "notNull": false
         },
@@ -324,7 +331,7 @@
           "name": "created_at",
           "type": "timestamp",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "default": "now()"
         },
         "updated_at": {
@@ -346,11 +353,11 @@
             "email"
           ]
         },
-        "psychologists_crm_unique": {
-          "name": "psychologists_crm_unique",
+        "psychologists_crp_unique": {
+          "name": "psychologists_crp_unique",
           "nullsNotDistinct": false,
           "columns": [
-            "crm"
+            "crp"
           ]
         },
         "psychologists_auth_user_id_unique": {
@@ -407,14 +414,14 @@
           "name": "created_at",
           "type": "timestamp",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "default": "now()"
         },
         "updated_at": {
           "name": "updated_at",
           "type": "timestamp",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "default": "now()"
         }
       },
@@ -437,6 +444,130 @@
           ]
         }
       }
+    },
+    "orders_items": {
+      "name": "orders_items",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "item_id": {
+          "name": "item_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "order_id": {
+          "name": "order_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "quantity": {
+          "name": "quantity",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "price_in_cents": {
+          "name": "price_in_cents",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "orders_items_order_id_orders_id_fk": {
+          "name": "orders_items_order_id_orders_id_fk",
+          "tableFrom": "orders_items",
+          "tableTo": "orders",
+          "columnsFrom": [
+            "order_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "orders": {
+      "name": "orders",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "costumer_id": {
+          "name": "costumer_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "seller_id": {
+          "name": "seller_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "status": {
+          "name": "status",
+          "type": "order_status",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'pending'"
+        },
+        "payment_method": {
+          "name": "payment_method",
+          "type": "varchar(256)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
     }
   },
   "enums": {
@@ -445,9 +576,27 @@
       "values": {
         "pending": "pending",
         "scheduled": "scheduled",
+        "approved": "approved",
         "finished": "finished",
+        "rejected": "rejected",
         "inactive": "inactive",
         "canceled": "canceled"
+      }
+    },
+    "user_roles": {
+      "name": "user_roles",
+      "values": {
+        "patient": "patient",
+        "psychologist": "psychologist"
+      }
+    },
+    "order_status": {
+      "name": "order_status",
+      "values": {
+        "pending": "pending",
+        "approved": "approved",
+        "canceled": "canceled",
+        "paid": "paid"
       }
     }
   },
