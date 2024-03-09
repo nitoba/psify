@@ -137,6 +137,8 @@ export const auth = c.router({
         message: z.string(),
       }),
     },
-    body: null,
+    body: z.object({
+      refresh_token: z.string(),
+    }),
   },
 })

@@ -34,6 +34,8 @@ export class ReauthenticateUseCase {
       return left(new InvalidCredentials())
     }
 
+    console.log(refreshToken)
+
     const { email, role, sub } =
       await this.encrypter.decrypt<TokenPayload>(refreshToken)
 

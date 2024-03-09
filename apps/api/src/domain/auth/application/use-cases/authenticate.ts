@@ -59,7 +59,7 @@ export class AuthenticateUseCase {
         role,
       },
       {
-        expiresIn: '1h',
+        expiresIn: '1m',
       },
     )
 

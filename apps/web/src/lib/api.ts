@@ -20,6 +20,23 @@ export const api = initQueryClient(appRouter, {
       args.headers.Authorization = `Bearer ${token}`
     }
 
-    return tsRestFetchApi(args)
+    const res = await tsRestFetchApi(args)
+
+    if (res.status === 401) {
+      const c = cookies()
+
+      const refreshToken = c.get('psify@refresh_token')?.value ?? ``
+
+      const res = await api.auth.refreshToken.mutation({
+        body: { refresh_token: refreshToken },
+      })
+
+      if (res.status === 200) {
+        args.headers.Authorization = `Bearer ${res.body.access_token}`
+        return tsRestFetchApi(args)
+      }
+    }
+
+    return res
   },
 })
