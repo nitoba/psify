@@ -1,6 +1,6 @@
 import { Header } from '@/components/header'
 
-export default function Page() {
+export default async function Page() {
   return (
     <div>
       <Header />
