@@ -20,3 +20,17 @@ export async function getSession() {
     },
   }
 }
+
+export async function sessionIsExpired() {
+  const c = cookies()
+
+  const refreshToken = c.get('psify@refresh_token')?.value
+
+  if (!refreshToken) {
+    return true
+  }
+
+  const decoded = jwtDecode<{ exp: number }>(refreshToken)
+
+  return decoded.exp < Date.now() / 1000
+}

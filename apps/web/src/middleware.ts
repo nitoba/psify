@@ -1,15 +1,21 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-import { getSession } from './lib/auth/get-session'
+import { getSession, sessionIsExpired } from './lib/auth/manage-session'
 
 const authRoutes = ['/auth/sign-in', '/auth/sign-up', '/auth/forgot-password']
-// This function can be marked `async` if using `await` inside
 export async function middleware(request: NextRequest) {
-  const session = await getSession()
-
   const isAuthRoute = authRoutes.some((path) =>
     request.nextUrl.pathname.includes(path),
   )
+  const isExpired = await sessionIsExpired()
+
+  if (isExpired && !isAuthRoute) {
+    return NextResponse.redirect(
+      new URL('/auth/sign-in', request.nextUrl.origin),
+    )
+  }
+
+  const session = await getSession()
 
   if (isAuthRoute) {
     return session

@@ -1,7 +1,8 @@
 import { appRouter } from '@psyfi/api-contract'
-import { tsRestFetchApi } from '@ts-rest/core'
+import { ApiFetcherArgs, tsRestFetchApi } from '@ts-rest/core'
 import { initQueryClient } from '@ts-rest/react-query'
 import { cookies } from 'next/dist/client/components/headers'
+import { redirect } from 'next/navigation'
 
 const authRoutes = [
   '/auth/authenticate',
@@ -23,20 +24,26 @@ export const api = initQueryClient(appRouter, {
     const res = await tsRestFetchApi(args)
 
     if (res.status === 401) {
-      const c = cookies()
-
-      const refreshToken = c.get('psify@refresh_token')?.value ?? ``
-
-      const res = await api.auth.refreshToken.mutation({
-        body: { refresh_token: refreshToken },
-      })
-
-      if (res.status === 200) {
-        args.headers.Authorization = `Bearer ${res.body.access_token}`
-        return tsRestFetchApi(args)
-      }
+      return refreshToken(args)
     }
 
     return res
   },
 })
+
+async function refreshToken(args: ApiFetcherArgs) {
+  const c = cookies()
+
+  const refreshToken = c.get('psify@refresh_token')?.value ?? ``
+
+  const res = await api.auth.refreshToken.mutation({
+    body: { refresh_token: refreshToken },
+  })
+
+  if (res.status !== 200) {
+    redirect('/auth/sign-in')
+  }
+
+  args.headers.Authorization = `Bearer ${res.body.access_token}`
+  return tsRestFetchApi(args)
+}
