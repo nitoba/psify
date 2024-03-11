@@ -56,13 +56,13 @@ export async function UserNav() {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem asChild>
-            <Link href="/profile">Profile</Link>
+            <Link href="/profile">Perfil</Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <Link href="/schedules">My Schedules</Link>
+            <Link href="/schedules">Agendamentos</Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <Link href="/billing">Billing</Link>
+            <Link href="/billing">Assinaturas</Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />

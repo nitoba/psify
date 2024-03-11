@@ -21,8 +21,8 @@ export function Header() {
         <Separator orientation="vertical" className="h-5" />
 
         <nav className="flex items-center space-x-6">
-          <NavLink href="/psychologists">Psychologists</NavLink>
-          <NavLink href="/schedules">Schedules</NavLink>
+          <NavLink href="/psychologists">Psicólogos</NavLink>
+          <NavLink href="/schedules">Agendamentos</NavLink>
         </nav>
       </div>
 
@@ -38,7 +38,7 @@ export function Header() {
             Changelog
           </NavLink>
           <NavLink className="text-xs font-normal" href="/help">
-            Help
+            Ajuda
           </NavLink>
           <NavLink className="text-xs font-normal" href="/faq">
             FAQ

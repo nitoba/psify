@@ -9,7 +9,7 @@ type Props = {
 export function LogoutButton({ handleClick }: Props) {
   return (
     <DropdownMenuItem onClick={() => handleClick()}>
-      Log out
+      Sair
       <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
     </DropdownMenuItem>
   )
