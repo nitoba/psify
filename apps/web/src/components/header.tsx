@@ -16,17 +16,13 @@ export function Header() {
           <LogoIcon className="h-8 w-8" />
         </Link>
 
-        <Separator orientation="vertical" className="h-5" />
-
         {/* <TeamSwitcher /> */}
 
         <Separator orientation="vertical" className="h-5" />
 
         <nav className="flex items-center space-x-6">
-          <NavLink href="/services">Services</NavLink>
-          <NavLink href="/events">Events</NavLink>
-          <NavLink href="/monitoring">Monitoring</NavLink>
-          <NavLink href="/settings">Settings</NavLink>
+          <NavLink href="/psychologists">Psychologists</NavLink>
+          <NavLink href="/schedules">Schedules</NavLink>
         </nav>
       </div>
 
@@ -38,14 +34,14 @@ export function Header() {
         <Separator orientation="vertical" className="h-5" />
 
         <nav className="flex items-center space-x-6">
-          <NavLink className="text-xs font-normal" href="/examples/dashboard">
+          <NavLink className="text-xs font-normal" href="/changelog">
             Changelog
           </NavLink>
-          <NavLink className="text-xs font-normal" href="/examples/dashboard">
+          <NavLink className="text-xs font-normal" href="/help">
             Help
           </NavLink>
-          <NavLink className="text-xs font-normal" href="/examples/dashboard">
-            Docs
+          <NavLink className="text-xs font-normal" href="/faq">
+            FAQ
           </NavLink>
         </nav>
 
