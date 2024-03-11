@@ -5,6 +5,7 @@ import { Providers } from '@/providers/providers'
 import { Toaster } from '@/components/ui/sonner'
 import { Header } from '@/components/header'
 import { getSession } from '@/lib/auth/manage-session'
+import { cn } from '@/lib/utils'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -24,7 +25,13 @@ export default async function RootLayout({
       <body className={inter.className}>
         <Providers>
           {session && <Header />}
-          <main className="pt-8 mb-8">{children}</main>
+          <main
+            className={cn({
+              'pt-8 mb-8': session,
+            })}
+          >
+            {children}
+          </main>
         </Providers>
         <Toaster />
       </body>

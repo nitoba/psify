@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
   Card,
   CardHeader,
@@ -17,7 +18,10 @@ export function PsychologistCard({ avatar, description, name }: Props) {
     <Card className="cursor-pointer ring-1 ring-transparent hover:ring-gray-300 transition-all duration-300">
       <CardHeader>
         <div className="flex flex-col items-center gap-3">
-          <img src={avatar} className="size-16 rounded-full" />
+          <Avatar className="size-16 rounded-full">
+            <AvatarImage src={avatar} />
+            <AvatarFallback>{name.slice(0, 2).toUpperCase()}</AvatarFallback>
+          </Avatar>
           <CardTitle>{name}</CardTitle>
           <CardDescription className="line-clamp-4">
             {description}
