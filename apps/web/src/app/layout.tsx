@@ -24,7 +24,7 @@ export default async function RootLayout({
       <body className={inter.className}>
         <Providers>
           {session && <Header />}
-          <main className="py-8">{children}</main>
+          <main className="pt-8 mb-8">{children}</main>
         </Providers>
         <Toaster />
       </body>

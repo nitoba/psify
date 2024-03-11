@@ -11,7 +11,7 @@ export function PsychologistsListFilter() {
           <Input placeholder="Nome" className="h-8 w-auto" />
           <Input placeholder="Especialidades" className="h-8 w-auto" />
         </div>
-        <Button type="submit" variant="secondary">
+        <Button type="submit" variant="outline">
           <Search className="mr-2 size-4" />
           Filtrar resultados
         </Button>

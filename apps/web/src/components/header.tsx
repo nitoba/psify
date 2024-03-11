@@ -7,6 +7,7 @@ import { UserNav } from './user-nav'
 import { Suspense } from 'react'
 import { Skeleton } from './ui/skeleton'
 import { NavLink } from './nav-link'
+import { ModeToggle } from './theme-switcher'
 
 export function Header() {
   return (
@@ -15,8 +16,6 @@ export function Header() {
         <Link href="/">
           <LogoIcon className="h-8 w-8" />
         </Link>
-
-        {/* <TeamSwitcher /> */}
 
         <Separator orientation="vertical" className="h-5" />
 
@@ -47,7 +46,7 @@ export function Header() {
 
         <Separator orientation="vertical" className="h-5" />
 
-        {/* <Notifications /> */}
+        <ModeToggle />
 
         <Suspense fallback={<Skeleton className="h-8 w-8 rounded-full" />}>
           <UserNav />
