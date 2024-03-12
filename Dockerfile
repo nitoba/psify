@@ -8,19 +8,13 @@ COPY . /usr/src/app
 WORKDIR /usr/src/app
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 RUN pnpm run --filter api... -r build
-RUN pnpm deploy --filter=api --prod /prod/api
+RUN mkdir -p /prod/api
+RUN pnpm --filter=api --prod deploy /prod/api/
 
 FROM base AS api
-COPY --from=build /dist /app
-# COPY --from=build /prod/api/dist /prod/dist
-# COPY --from=build /prod/api/node_modules /prod/node_modules/
-# WORKDIR /prod/api
-# EXPOSE 3333
-# CMD [ "pnpm", "start:prod" ]  
-CMD [ "tail", "-f", "/dev/null" ]  
-
-# FROM base AS app2
-# COPY --from=build /prod/app2 /prod/app2
-# WORKDIR /prod/app2
-# EXPOSE 8001
-# CMD [ "pnpm", "start" ]
+COPY --from=build /usr/src/app/apps/api/dist /app/dist
+COPY --from=build /prod/api/node_modules /app/node_modules
+WORKDIR /app
+EXPOSE 3333
+CMD [ "node", "dist/infra/main.js" ]  
+# CMD [ "tail", "-f", "/dev/null" ]  
