@@ -10,7 +10,7 @@ import postgres from 'postgres'
 import * as schema from '@/infra/database/drizzle/schemas'
 import { envSchema } from '@/infra/env/env'
 
-async function runMigrations() {
+export async function runMigrations() {
   const env = envSchema.parse(process.env)
 
   const connection = postgres(env.DATABASE_URL, { max: 1 })
