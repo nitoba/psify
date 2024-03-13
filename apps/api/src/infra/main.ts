@@ -8,7 +8,6 @@ import {
 import { AppModule } from './app.module'
 import { EnvService } from './env/env.service'
 import { ZodFilter } from './http/filters/zod-error-filter'
-import { runMigrations } from './database/drizzle/migrate'
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -26,9 +25,6 @@ async function bootstrap() {
   await app.register(fastifyCookie as never)
 
   app.useGlobalFilters(new ZodFilter())
-
-
-  await runMigrations()
 
   const configService = app.get(EnvService)
   const port = configService.get('PORT')

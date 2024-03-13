@@ -9,7 +9,6 @@ WORKDIR /usr/src/app
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 RUN pnpm run --filter api... -r build
 RUN mkdir -p /prod/api
-RUN pnpm run db:migrate
 RUN pnpm --filter=api --prod deploy /prod/api/
 
 FROM base AS api
