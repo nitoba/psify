@@ -16,5 +16,5 @@ COPY --from=build /usr/src/app/apps/api/dist /app/dist
 COPY --from=build /prod/api/node_modules /app/node_modules
 WORKDIR /app
 EXPOSE 3333
-CMD [ "node", "dist/infra/main.js" ]  
+CMD [ "node", "--env-file=.env", "dist/infra/main.js" ]  
 # CMD [ "tail", "-f", "/dev/null" ]  

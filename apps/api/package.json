@@ -11,7 +11,7 @@
     "start": "pnpm db:migrate && nest start -b swc",
     "dev": "pnpm db:migrate && nest start -b swc -w",
     "start:debug": "nest start --debug --watch",
-    "start:prod": "pnpm db:migrate && node dist/infra/main.js",
+    "start:prod": "node --env-file=.env dist/infra/main.js",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "vitest run",
     "test:watch": "vitest",
@@ -50,7 +50,8 @@
     "rxjs": "^7.8.1",
     "stripe": "^14.19.0",
     "zod": "^3.22.4",
-    "@psyfi/transactional": "workspace:*"
+    "@psyfi/transactional": "workspace:*",
+    "dotenv": "^16.4.5"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
@@ -69,7 +70,6 @@
     "@types/shelljs": "^0.8.15",
     "@types/supertest": "^6.0.0",
     "chalk": "^5.3.0",
-    "dotenv": "^16.4.5",
     "eslint": "^8.57.0",
     "prettier": "^3.2.5",
     "shelljs": "^0.8.5",
