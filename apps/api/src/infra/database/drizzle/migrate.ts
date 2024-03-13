@@ -2,7 +2,6 @@ import 'dotenv/config'
 
 import path from 'node:path'
 
-import chalk from 'chalk'
 import { drizzle } from 'drizzle-orm/postgres-js'
 import { migrate } from 'drizzle-orm/postgres-js/migrator'
 import postgres from 'postgres'
@@ -27,5 +26,5 @@ export async function runMigrations() {
 }
 
 runMigrations().then(() =>
-  console.log(chalk.greenBright('Migrations applied successfully!')),
+  console.log('Migrations applied successfully!')
 )

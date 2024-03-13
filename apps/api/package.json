@@ -51,8 +51,7 @@
     "stripe": "^14.19.0",
     "zod": "^3.22.4",
     "@psyfi/transactional": "workspace:*",
-    "dotenv": "^16.4.5",
-    "chalk": "^5.3.0"
+    "dotenv": "^16.4.5"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
