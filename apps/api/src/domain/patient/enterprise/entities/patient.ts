@@ -10,6 +10,7 @@ export type PatientProps = {
   name: Name
   email: Email
   phone: Phone
+  avatarUrl?: string | null,
   scheduledAppointments: Appointment[]
   createdAt: Date
 }
@@ -25,6 +26,10 @@ export class Patient extends Entity<PatientProps> {
 
   get phone() {
     return this.props.phone.getValue
+  }
+
+  get avatarUrl() {
+    return this.props.avatarUrl
   }
 
   static create(

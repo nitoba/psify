@@ -18,6 +18,8 @@ export type PsychologistProps = {
   email: Email
   phone: Phone
   crp: CRP
+  bio?: string | null,
+  avatarUrl?: string | null,
   specialties: SpecialtyList
   consultationPriceInCents: number
   availableTimes: AvailableTimesList
@@ -44,6 +46,14 @@ export class Psychologist extends AggregateRoot<PsychologistProps> {
 
   get specialties(): SpecialtyList {
     return this.props.specialties
+  }
+
+  get bio() {
+    return this.props.bio
+  }
+
+  get avatarUrl() {
+    return this.props.avatarUrl
   }
 
   get availableTimes(): AvailableTimesList {

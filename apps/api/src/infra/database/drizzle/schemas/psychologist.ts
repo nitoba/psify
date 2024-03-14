@@ -16,6 +16,8 @@ export const psychologist = pgTable('psychologists', {
   name: varchar('name', { length: 256 }).notNull(),
   email: varchar('email', { length: 256 }).notNull().unique(),
   phone: varchar('phone', { length: 256 }).notNull(),
+  bio: text('bio'),
+  avatarUrl: varchar('avatar_url', { length: 256 }),
   password: text('password').notNull(),
   crp: text('crp').notNull().unique(),
   consultationPriceInCents: real('consultation_price_in_cents'),
