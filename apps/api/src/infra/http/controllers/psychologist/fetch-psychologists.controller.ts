@@ -1,18 +1,11 @@
-import {
-  Controller,
-  Get,
-  NotFoundException,
-  Query,
-  UseGuards,
-} from '@nestjs/common'
-
-import { ResourceNotFound } from '@/core/errors/use-cases/resource-not-found'
+import { Controller, Get, UseGuards } from '@nestjs/common'
 import { FetchPsychologistsUseCase } from '@/domain/psychologist/application/use-cases/fetch-psychologists'
-
 import { PsychologistPresenter } from '../../presenters/psychologists-presenter'
 import { RolesGuard } from '@/infra/auth/guards/roles-guard'
 import { Role } from '@/infra/auth/roles'
 import { Roles } from '@/infra/auth/decorators/roles-decorator'
+import { TsRestHandler, tsRestHandler } from '@ts-rest/nest'
+import { appRouter } from '@psyfi/api-contract'
 
 @Controller('/psychologists')
 export class FetchPsychologistsController {
@@ -21,29 +14,53 @@ export class FetchPsychologistsController {
   @Get()
   @Roles(Role.Psychologist, Role.Patient)
   @UseGuards(RolesGuard)
-  async handle(
-    @Query('page') page: number = 1,
-    @Query('name') name?: string,
-    @Query('specialties') specialties?: string,
-  ) {
-    const specialtiesArray = specialties ? specialties.split(',') : undefined
+  @TsRestHandler(appRouter.psychologists.fetchPsychologists)
+  handle() {
+    return tsRestHandler(
+      appRouter.psychologists.fetchPsychologists,
+      async ({ query: { page, name, specialties } }) => {
+        const specialtiesArray = specialties
+          ? specialties.split(',')
+          : undefined
 
-    const result = await this.useCase.execute({
-      page,
-      name,
-      specialties: specialtiesArray,
-    })
+        console.log(page, name, specialtiesArray)
 
-    if (result.isLeft() && result.value instanceof ResourceNotFound) {
-      throw new NotFoundException(result.value)
-    }
+        const result = await this.useCase.execute({
+          page,
+          name,
+          specialties: specialtiesArray,
+        })
 
-    if (result.isRight()) {
-      return {
-        psychologists: result.value.psychologists.map(
-          PsychologistPresenter.toHttp,
-        ),
-      }
-    }
+        if (result.isLeft()) {
+          return {
+            status: 200,
+            body: {
+              psychologists: [],
+              total: 0,
+            },
+          }
+        }
+
+        if (result.isRight()) {
+          return {
+            status: 200,
+            body: {
+              total: result.value.total,
+              psychologists: result.value.psychologists.map(
+                PsychologistPresenter.toHttp,
+              ),
+            },
+          }
+        }
+
+        return {
+          status: 200,
+          body: {
+            psychologists: [],
+            total: 0,
+          },
+        }
+      },
+    )
   }
 }

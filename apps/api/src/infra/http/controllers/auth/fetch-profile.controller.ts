@@ -22,7 +22,6 @@ export class FetchProfileController {
   @Get()
   @TsRestHandler(appRouter.auth.profile)
   async handle(@CurrentUser() { sub: userId, role }: PayloadUser) {
-    console.log({ userId })
     return tsRestHandler(appRouter.auth.profile, async () => {
       if (role === Role.Patient) {
         const result = await this.patientProfileUseCase.execute({

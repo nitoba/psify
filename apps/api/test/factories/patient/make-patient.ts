@@ -18,6 +18,7 @@ export function makePatient(
       name: Name.create(faker.person.fullName()).value as Name,
       email: Email.create(faker.internet.email()).value as Email,
       phone: Phone.create('(88) 987654321').value as Phone,
+      avatarUrl: faker.image.avatar(),
       scheduledAppointments: [],
       ...override,
     },

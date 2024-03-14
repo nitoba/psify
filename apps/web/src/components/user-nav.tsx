@@ -1,4 +1,4 @@
-import { Avatar, AvatarFallback } from './ui/avatar'
+import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import { Button } from './ui/button'
 import {
   DropdownMenu,
@@ -40,7 +40,7 @@ export async function UserNav() {
             <AvatarFallback>
               {user.name.toUpperCase().slice(0, 2)}
             </AvatarFallback>
-            {/* <AvatarImage src={user} alt="" /> */}
+            <AvatarImage src={user.avatarUrl} alt={`${user.name}'s avatar`} />
           </Avatar>
         </Button>
       </DropdownMenuTrigger>

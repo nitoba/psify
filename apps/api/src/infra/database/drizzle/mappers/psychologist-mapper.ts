@@ -84,6 +84,8 @@ export function toDomain(model: PsychologistModel): Psychologist {
       availableTimes: new AvailableTimesList(availableTimes),
       consultationPriceInCents: model.consultationPriceInCents ?? 0,
       specialties: new SpecialtyList(specialties),
+      avatarUrl: model.avatarUrl,
+      bio: model.bio,
       scheduledAppointments,
     },
     new UniqueEntityID(model.id),

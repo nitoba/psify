@@ -1,33 +1,38 @@
 'use client'
 
-import { faker } from '@faker-js/faker'
 import { PsychologistCard } from './psychologist-card'
 import { Pagination } from '../../../components/pagination'
 import { PsychologistsListFilter } from './psychologist-filters'
+import { api } from '@/lib/api'
+import { PsychologistsListSkeleton } from './loading-list'
 
 export function PsychologistsList() {
-  const psychologists = Array.from({ length: 50 }).map(() => ({
-    name: faker.person.fullName(),
-    avatar: faker.image.avatar(),
-    description: faker.lorem.sentences(),
-  }))
+  const { data, isLoading } = api.psychologists.fetchPsychologists.useQuery([
+    'psychologists',
+  ])
+
+  console.log(data)
+
+  if (!data || isLoading) {
+    return <PsychologistsListSkeleton />
+  }
+
+  const {
+    body: { psychologists, total },
+  } = data
+
   return (
     <div className="container flex flex-col gap-6">
       <PsychologistsListFilter />
       <div className="grid grid-cols-4 gap-5 auto-rows-[1fr]">
-        {psychologists.slice(0, 12).map((psychologist, index) => (
-          <PsychologistCard
-            key={index}
-            name={psychologist.name}
-            avatar={psychologist.avatar}
-            description={psychologist.description}
-          />
+        {psychologists.map((psychologist, index) => (
+          <PsychologistCard key={index} psychologist={psychologist} />
         ))}
       </div>
 
       <Pagination
         pageIndex={0}
-        totalCount={psychologists.length}
+        totalCount={total}
         perPage={10}
         onPageChange={() => {}}
       />

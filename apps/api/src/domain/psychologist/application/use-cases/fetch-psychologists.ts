@@ -15,6 +15,8 @@ type FetchPsychologistsUseCaseRequest = {
 type FetchPsychologistsUseCaseResponse = Either<
   ResourceNotFound,
   {
+    total: number
+    page: number
     psychologists: Psychologist[]
   }
 >
@@ -36,6 +38,6 @@ export class FetchPsychologistsUseCase {
       { page },
     )
 
-    return right({ psychologists })
+    return right({ psychologists, total: 0, page })
   }
 }

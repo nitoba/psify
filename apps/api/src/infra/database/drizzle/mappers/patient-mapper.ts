@@ -55,6 +55,7 @@ export function toDomain(model: PatientModel): Patient {
       name: Name.create(model.name).value as Name,
       phone: Phone.create(model.phone).value as Phone,
       createdAt: model.createdAt,
+      avatarUrl: model.avatarUrl,
       scheduledAppointments,
     },
     new UniqueEntityID(model.id),

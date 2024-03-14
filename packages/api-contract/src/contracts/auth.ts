@@ -118,6 +118,8 @@ export const auth = c.router({
         name: z.string(),
         email: z.string().email(),
         phone: z.string(),
+        avatarUrl: z.string().optional(),
+        bio: z.string().optional(),
         specialties: z.string().array().optional(),
         consultationPriceInCents: z.number().optional(),
       }),

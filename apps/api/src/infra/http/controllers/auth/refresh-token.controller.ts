@@ -25,8 +25,6 @@ export class RefreshTokenController {
     return tsRestHandler(
       appRouter.auth.refreshToken,
       async ({ body: { refresh_token } }) => {
-        console.log(refresh_token)
-
         const result = await this.reauthenticateUseCase.execute({
           refreshToken: refresh_token,
         })

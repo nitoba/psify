@@ -1,5 +1,9 @@
 import { appRouter } from '@psyfi/api-contract'
-import { ApiFetcherArgs, tsRestFetchApi } from '@ts-rest/core'
+import {
+  ApiFetcherArgs,
+  ServerInferResponses,
+  tsRestFetchApi,
+} from '@ts-rest/core'
 import { initQueryClient } from '@ts-rest/react-query'
 import { cookies } from 'next/dist/client/components/headers'
 import { redirect } from 'next/navigation'
@@ -9,6 +13,8 @@ const authRoutes = [
   '/auth/psychologists/register',
   '/auth/patients/register',
 ]
+
+export type ResponseShapes = ServerInferResponses<typeof appRouter>
 
 export const api = initQueryClient(appRouter, {
   baseUrl: 'http://localhost:3333',
@@ -20,6 +26,8 @@ export const api = initQueryClient(appRouter, {
       const token = c.get('psify@access_token')?.value
       args.headers.Authorization = `Bearer ${token}`
     }
+
+    console.log(args.path)
 
     const res = await tsRestFetchApi(args)
 

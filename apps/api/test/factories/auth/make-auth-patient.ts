@@ -1,4 +1,4 @@
-import { faker } from '@faker-js/faker'
+import { fa, faker } from '@faker-js/faker'
 import { Injectable } from '@nestjs/common'
 
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
@@ -58,6 +58,7 @@ export class AuthPatientFactory {
         email: p.email,
         password: await this.hasher.hash(p.password),
         phone: p.phone,
+        avatarUrl: faker.image.avatar(),
         authUserId: user.id,
       })
       .returning()

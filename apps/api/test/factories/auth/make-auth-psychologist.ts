@@ -66,6 +66,8 @@ export class AuthPsychologistFactory {
         phone: p.phone,
         authUserId: user.id,
         crp: p.crp.value,
+        avatarUrl: faker.image.avatar(),
+        bio: faker.lorem.sentence(20),
         consultationPriceInCents:
           override.consultationPriceInCents ?? 100 * 100, // 100 moneys
         specialties:
